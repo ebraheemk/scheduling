@@ -2,9 +2,8 @@
 class Node
 {
 public:
-	Node();
+	Node(int value):time(value){}
 	~Node();
-private:
 	int time;
 
 };

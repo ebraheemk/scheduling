@@ -4,11 +4,11 @@
 class machin
 {
 public:
-	machin();
+	machin(int val):TasksTime(0),speed(val){}
 	~machin();
+ 	int speed;
 private:
 	int TasksTime;
-	int speed;
 	std::vector<Node> Tasks;
 
 };
