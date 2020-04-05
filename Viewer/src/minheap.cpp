@@ -20,10 +20,28 @@ minheap::minheap(int value, int index)
 	else if (t->leftCount == 0) {
 		t->left = newn;
 		newn->father = t;
+
+		if (newn->value < newn->father->value) {
+			tempix = newn->index;
+			tempval = newn->value;
+			newn->index = newn->father->index;
+			newn->value = newn->father->value;
+			newn->father->index = tempix;
+			newn->father->value = tempval;
+		}
 	}
 	else {
 		t->right = newn;
 		newn->father = t;
+
+		if (newn->value < newn->father->value) {
+			tempix = newn->index;
+			tempval = newn->value;
+			newn->index = newn->father->index;
+			newn->value = newn->father->value;
+			newn->father->index = tempix;
+			newn->father->value = tempval;
+		}
 	}
 	if (t->value < t->father->value) {
 		tempix = t->index;
