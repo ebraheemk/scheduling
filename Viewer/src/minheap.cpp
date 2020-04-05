@@ -1,10 +1,48 @@
 #include "minheap.h"
 
 
+using namespace std;
+void minheap::afterpop(minheap * t ){
+	if (t->rightCount > 0 && t->leftCount > 0) {
+		if (t->right->value > t->left->value) {
+			t->value = t->left->value;
+			t->index = t->left->index;
+			afterpop(t->left);
+		}
+		else
+		{
+			t->value = t->right->value;
+			t->index = t->right->index;
+			afterpop(t->right);
+		}
+	}
+	else if (t->rightCount>0) {
+		t->value = t->right->value;
+		t->index = t->right->index;
+		afterpop(t->right);
+	}
+	else if (t->leftCount > 0) {
+		t->value = t->left->value;
+		t->index = t->left->index;
+		afterpop(t->left);
+	}
+	else {
+		t->value = -1;
+		t = t->father;
+		if (t->right->value == -1)
+			t->right = NULL;
+		else
+			t -> left = NULL;
+	}
+}
+std::pair <int, int> minheap::pop(minheap * t) {
+	//int tval, tindx;
+	pair<int, int> result;
+	result.first = t->value;
+	result.second = t->index;
+	afterpop(t);
 
-minheap::minheap(int value, int index)
-{
-	
+	return result;
 }
  void minheap::insert(minheap * t, minheap * newn) {
 	//minheap t = minheap(v, ix);
@@ -43,6 +81,7 @@ minheap::minheap(int value, int index)
 			newn->father->value = tempval;
 		}
 	}
+	if(t->father!=NULL)
 	if (t->value < t->father->value) {
 		tempix = t->index;
 		tempval = t->value;

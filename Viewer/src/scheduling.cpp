@@ -17,6 +17,11 @@ void init_machines() {
 
 
 	//}
+	minheap tasks = minheap(J.at(0).time, 0);
+	for (int i = 1; i < J.size(); i++) {
+		minheap temp = minheap(J.at(i).time, i);
+		tasks.insert(&tasks, &temp);
+	}
 
 }
  void init_data() {
@@ -52,6 +57,7 @@ int main()
 {
 	//std:://qDebug() << "printing value: " << std::QString(MY_VAR);
 	init_data();
+	init_machines();
     std::cout << "Hello World!\n "; 
 	system("pwd");
 	for (int i = 0; i < M.size(); i++)

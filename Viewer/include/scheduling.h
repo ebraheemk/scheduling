@@ -2,6 +2,7 @@
 #include <vector>
 #include "Node.h"
 #include "machin.h"
+#include "minheap.h"
 #include <iostream>
 #include <ctime>
 #include <fstream>
