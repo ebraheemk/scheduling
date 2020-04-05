@@ -13,3 +13,5 @@ int speeds [3] = { 1,2,4 };
 std::vector<Node> J;
 std::vector<machin> M;
 void init_data();
+void init_machines(); 
+int MinMachineTime, MaxMachineTime;

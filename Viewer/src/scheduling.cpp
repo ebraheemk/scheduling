@@ -7,6 +7,18 @@
 #include <fstream>
 #include <string>
 #define getcwd _getcwd
+void init_machines() {
+
+	//heap insert log(n) and sorted array insert log(n) so i go in sorted array 
+	//first we add one task for each machine
+	//for (int i = 0; i < M.size(); i++) {
+ 	//	M.at(i).Tasks.push_back(J.back);
+	//	J.pop_back();
+
+
+	//}
+
+}
  void init_data() {
 	 std::string line;
 	 std::ifstream myfile("tasks.txt");
