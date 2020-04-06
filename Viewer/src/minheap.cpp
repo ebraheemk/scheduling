@@ -3,7 +3,7 @@
 
 using namespace std;
 void minheap::afterpop(minheap * t ){
-	if (t->rightCount > 0 && t->leftCount > 0) {
+	if (t->right!=NULL && t->left != NULL) {
 		if (t->right->value > t->left->value) {
 			t->value = t->left->value;
 			t->index = t->left->index;
@@ -16,12 +16,12 @@ void minheap::afterpop(minheap * t ){
 			afterpop(t->right);
 		}
 	}
-	else if (t->rightCount>0) {
+	else if (t->right != NULL) {
 		t->value = t->right->value;
 		t->index = t->right->index;
 		afterpop(t->right);
 	}
-	else if (t->leftCount > 0) {
+	else if (t->left != NULL) {
 		t->value = t->left->value;
 		t->index = t->left->index;
 		afterpop(t->left);
@@ -29,10 +29,14 @@ void minheap::afterpop(minheap * t ){
 	else {
 		t->value = -1;
 		t = t->father;
-		if (t->right->value == -1)
-			t->right = NULL;
-		else
-			t -> left = NULL;
+
+		if(t->right!=NULL)
+			if (t->right->value == -1)
+				t->right = NULL;
+
+		if (t->left != NULL)
+			if (t->left->value == -1)
+				t -> left = NULL;
 	}
 }
 std::pair <int, int> minheap::pop(minheap * t) {

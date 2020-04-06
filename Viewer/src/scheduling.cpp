@@ -24,18 +24,16 @@ void init_machines() {
 	minheap tasks = minheap(J.at(0).time, 0);
 	for (int i = 1; i < J.size(); i++) {
 		minheap* copy = (minheap*)&tasks;
-		//printf("%d\n", tasks.size());
-		  
-	//	 printf("%f\n", *temp[i - 1]);
 		tasks.insert(copy, (minheap*)&temp[i-1]);
 	}
-	printf("ئئئئזzszz");
+	printf("ئئئئזzszz\n");
 	std::pair<int, int> p;
 	while (tasks.right != NULL || tasks.left!=NULL ) {
 	minheap* copy = &tasks;
 		p = tasks.pop(copy);
 		printf("%d \n", p.first);
 	}
+	printf("%d \n",tasks.value);
 
 }
  void init_data() {
