@@ -17,10 +17,24 @@ void init_machines() {
 
 
 	//}
+	std::vector<minheap> temp;
+	for (int i = 1; i < J.size(); i++) 
+		temp.push_back(minheap(J.at(i).time, i));
+
 	minheap tasks = minheap(J.at(0).time, 0);
 	for (int i = 1; i < J.size(); i++) {
-		minheap temp = minheap(J.at(i).time, i);
-		tasks.insert(&tasks, &temp);
+		minheap* copy = (minheap*)&tasks;
+		//printf("%d\n", tasks.size());
+		  
+	//	 printf("%f\n", *temp[i - 1]);
+		tasks.insert(copy, (minheap*)&temp[i-1]);
+	}
+	printf("ئئئئזzszz");
+	std::pair<int, int> p;
+	while (tasks.right != NULL || tasks.left!=NULL ) {
+	minheap* copy = &tasks;
+		p = tasks.pop(copy);
+		printf("%d \n", p.first);
 	}
 
 }
@@ -58,11 +72,11 @@ int main()
 	//std:://qDebug() << "printing value: " << std::QString(MY_VAR);
 	init_data();
 	init_machines();
-    std::cout << "Hello World!\n "; 
+    /*std::cout << "Hello World!\n "; 
 	system("pwd");
 	for (int i = 0; i < M.size(); i++)
 		printf(" machin:%d  speed:%d", i, M.at(i).speed);
 	printf("\n Tasks :\n");
 	for (int i = 0; i < J.size(); i++)
-		printf(" %d ,",  J.at(i).time);
+		printf(" %d ,",  J.at(i).time);*/
 }
