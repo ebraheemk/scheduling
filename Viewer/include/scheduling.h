@@ -16,3 +16,6 @@ std::vector<machin> M;
 void init_data();
 void init_machines(); 
 int MinMachineTime, MaxMachineTime;
+ 
+std::vector<minheap> tasksHV;
+std::vector<minheap> machinesHV;
