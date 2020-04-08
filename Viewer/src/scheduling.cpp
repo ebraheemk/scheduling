@@ -28,46 +28,55 @@ void init_machines() {
 		tasks.insert(copy, (minheap*)&tasksHV[i]);
 	}
 
-	for (  i = 1; i < M.size(); i++)
-		machinesHV.push_back(minheap(M.at(i).TasksTime, i));
 
-	minheap machines = minheap(M.at(0).TasksTime, 0);
-	for(  i=1;i<M.size();i++) {
-		minheap* copy = (minheap*)&machines;
-		machines.insert(copy, (minheap*)&machinesHV[i]);
-	}
 
 
 	//init machines with initial soulution
 
-	int j = 0;
+	int j = 0,k=0;
 	std::pair<int, int> p;
 
 	for (i = 0; i < J.size(); i++) {
 		if (j == M.size())
 			j = 0;
 
-		minheap* copy = &tasks;
-		if(i!= J.size()-1)
-		p = tasks.pop(copy);
-		else {
-			p.first = tasks.value;
-			p.second = tasks.index;
-		}
+		for(k=0;k<M.at(j).speed && i < J.size();k++, i++){
+			minheap* copy = &tasks;
+			if(i!= J.size()-1)
+			p = tasks.pop(copy);
+			else {
+				p.first = tasks.value;
+				p.second = tasks.index;
+			}
 			
-		M.at(j).TasksTime += p.first;
-		M.at(j).Tasks.push_back(Node(p.first));
+			M.at(j).TasksTime += p.first/ M.at(j).speed;
+			M.at(j).Tasks.push_back(Node(p.first));
+			 
+		}
 		j++;
 	}
-	/*
-	printf("ئئئئזzszz\n");
-	std::pair<int, int> p;
-	while (tasks.right != NULL || tasks.left!=NULL ) {
-	minheap* copy = &tasks;
-		p = tasks.pop(copy);
-		printf("%d \n", p.first);
+
+
+	//INIT MACHIN MINHEAP
+
+	for (i = 0; i < M.size(); i++)
+		machinesHV.push_back(minheap(M.at(i).TasksTime, i));
+
+	minheap machines = minheap(M.at(0).TasksTime, 0);
+	for (i = 1; i < M.size(); i++) {
+		minheap* copy = (minheap*)&machines;
+		machines.insert(copy, (minheap*)&machinesHV[i]);
 	}
-	printf("%d \n",tasks.value);*/
+
+	//test
+	printf("ئئئئזzszz\n");
+	std::pair<int, int> p1;
+	while (machines.right != NULL || machines.left!=NULL ) {
+	minheap* copy = &machines;
+		p1 = machines.pop(copy);
+		printf("%d \n", p1.first);
+	}
+	printf("%d \n", machines.value); 
 
 }
  void init_data() {
