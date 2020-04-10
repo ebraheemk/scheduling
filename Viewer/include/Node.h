@@ -2,9 +2,10 @@
 class Node
 {
 public:
-	Node(int value):time(value){}
+	Node(int value,int idx):time(value),index(idx){}
 	~Node();
 	int time;
+	int index;
  
 };
 

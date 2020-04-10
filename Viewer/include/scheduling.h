@@ -15,6 +15,7 @@ std::vector<Node> J;
 std::vector<machin> M;
 void init_data();
 void init_machines(); 
+void print_report();
 int MinMachineTime, MaxMachineTime;
  
 std::vector<minheap> tasksHV;

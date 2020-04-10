@@ -20,9 +20,9 @@ void init_machines() {
 
 	//}
  	for (i = 0; i < J.size(); i++) 
-		tasksHV.push_back(minheap(J.at(i).time, i));
+		tasksHV.push_back(minheap(J.at(i).time*4, i));
 
-	minheap tasks = minheap(J.at(0).time, 0);
+	minheap tasks = minheap(J.at(0).time*4, 0);
 	for (  i = 1; i < J.size(); i++) {
 		minheap* copy = (minheap*)&tasks;
 		tasks.insert(copy, (minheap*)&tasksHV[i]);
@@ -33,10 +33,10 @@ void init_machines() {
 
 	//init machines with initial soulution
 
-	int j = 0,k=0;
+	int j = 0,k=0,z=0;
 	std::pair<int, int> p;
 
-	for (i = 0; i < J.size(); i++) {
+	for (i = 0; i < J.size(); ) {
 		if (j == M.size())
 			j = 0;
 
@@ -50,13 +50,14 @@ void init_machines() {
 			}
 			
 			M.at(j).TasksTime += p.first/ M.at(j).speed;
-			M.at(j).Tasks.push_back(Node(p.first));
+			M.at(j).Tasks.push_back(Node(p.first, p.second));
+			z++;
 			 
 		}
 		j++;
 	}
 
-
+	printf("Tasks num=%d\n",z);
 	//INIT MACHIN MINHEAP
 
 	for (i = 0; i < M.size(); i++)
@@ -74,19 +75,21 @@ void init_machines() {
 	while (machines.right != NULL || machines.left!=NULL ) {
 	minheap* copy = &machines;
 		p1 = machines.pop(copy);
-		printf("%d \n", p1.first);
+		printf("%d \n", p1.first/4);
 	}
-	printf("%d \n", machines.value); 
+	printf("%d \n", machines.value/4); 
 
 }
  void init_data() {
 	 std::string line;
 	 std::ifstream myfile("tasks.txt");
+	 int i = 0;
 	 if (myfile.is_open())
 	 {
 		 while (std::getline(myfile, line))
 		 {
- 			 J.push_back(Node(std::stoi(line)));
+ 			 J.push_back(Node(std::stoi(line),i));
+			 i++;
 		 }
 		 myfile.close();
 	 }
@@ -108,11 +111,24 @@ void init_machines() {
 
 
 }
+ void print_report() {
+	 std::ofstream myfile("../output/report.txt");
+	 myfile.close();
+ }
 int main()
 {
 	auto start = high_resolution_clock::now();
 	//std:://qDebug() << "printing value: " << std::QString(MY_VAR);
+	int sum = 0;
+ 
 	init_data();
+	for (int i = 0; i < J.size(); i++)
+		sum += J.at(i).time;
+	printf("Task time avg %d\n", sum / J.size());
+	sum = 0;
+	for (int i = 0; i < M.size(); i++)
+		sum += M.at(i).speed;
+	printf("speed avg %f\n", sum / 30.0);
 	init_machines();
     /*std::cout << "Hello World!\n "; 
 	system("pwd");
