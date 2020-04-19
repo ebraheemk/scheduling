@@ -50,7 +50,7 @@ void init_machines() {
 			}
 			
 			M.at(j).TasksTime += p.first/ M.at(j).speed;
-			M.at(j).Tasks.push_back(Node(p.first, p.second));
+			M.at(j).Tasks.push_back(Node(p.first /4, p.second));
 			z++;
 			 
 		}
@@ -95,12 +95,13 @@ void init_machines() {
 	 }
 
 	 std::ifstream myfile2("machines.txt");
-
+	  i = 0;
 	 if (myfile2.is_open())
 	 {
 		 while (std::getline(myfile2, line))
 		 {
-			 M.push_back(machin(std::stoi(line)));
+			 M.push_back(machin(std::stoi(line),i));
+			 i++;
 		 }
 		 myfile2.close();
 	 }
@@ -113,6 +114,26 @@ void init_machines() {
 }
  void print_report() {
 	 std::ofstream myfile("../output/report.txt");
+	 myfile << "Report\n";
+	 myfile << "______________________________________________________________________________________________________________________\n";
+	 int j = 0;
+	 for(int i=0;i<M.size();i++){ 
+	 myfile << "______________________________________________________________________________________________________________________\n";
+	 myfile << "##########################\n";
+	 myfile << "machine SPEED : ";  myfile << M.at(i).speed; myfile << '\n';
+	 myfile << "machine no : "; myfile << i; myfile << '\n';
+	 myfile << "tasks total time: "; myfile << M.at(i).TasksTime/4; myfile << '\n';
+	 myfile << "##########################\n";
+	 for (int k = 0; k < M.at(i).Tasks.size(); k++) {
+		 if (j == 3) {
+			 myfile << '\n';
+			 j = 0;
+		 }
+		 myfile << "| task index: "; myfile << M.at(i).Tasks.at(k).index; myfile << " \\ task time: "; myfile << M.at(i).Tasks.at(k).time; myfile << " |";
+		 j++;
+	 }
+	 myfile << '\n';
+	 }
 	 myfile.close();
  }
 int main()
@@ -130,13 +151,9 @@ int main()
 		sum += M.at(i).speed;
 	printf("speed avg %f\n", sum / 30.0);
 	init_machines();
-    /*std::cout << "Hello World!\n "; 
-	system("pwd");
-	for (int i = 0; i < M.size(); i++)
-		printf(" machin:%d  speed:%d", i, M.at(i).speed);
-	printf("\n Tasks :\n");
-	for (int i = 0; i < J.size(); i++)
-		printf(" %d ,",  J.at(i).time);*/
+
+
+	print_report();
 	auto stop = high_resolution_clock::now();
 	auto duration = duration_cast<microseconds>(stop - start);
 	std::cout << duration.count()/1000000.0 << std::endl;
