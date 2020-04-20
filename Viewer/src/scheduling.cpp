@@ -50,7 +50,7 @@ void init_machines() {
 			}
 			
 			M.at(j).TasksTime += p.first/ M.at(j).speed;
-			M.at(j).Tasks.push_back(Node(p.first /4, p.second));
+			M.at(j).Tasks.insert(std::pair<int,Node>(p.second,Node(p.first /4, p.second)));
 			z++;
 			 
 		}
@@ -124,12 +124,14 @@ void init_machines() {
 	 myfile << "machine no : "; myfile << i; myfile << '\n';
 	 myfile << "tasks total time: "; myfile << M.at(i).TasksTime/4; myfile << '\n';
 	 myfile << "##########################\n";
-	 for (int k = 0; k < M.at(i).Tasks.size(); k++) {
+	 std::map<int, Node>::iterator it;
+	 for (it = M.at(i).Tasks.begin(); it != M.at(i).Tasks.end(); ++it){
+	 //for (int k = 0; k < M.at(i).Tasks.size(); k++) {
 		 if (j == 3) {
 			 myfile << '\n';
 			 j = 0;
 		 }
-		 myfile << "| task index: "; myfile << M.at(i).Tasks.at(k).index; myfile << " \\ task time: "; myfile << M.at(i).Tasks.at(k).time; myfile << " |";
+		 myfile << "| task index: "; myfile << it->second.index; myfile << " \\ task time: "; myfile << it->second.time; myfile << " |";
 		 j++;
 	 }
 	 myfile << '\n';

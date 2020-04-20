@@ -7,6 +7,7 @@
 #include <ctime>
 #include <fstream>
 #include <string>
+#include <maxheap.h>
 #define MachineNum 5
 #define taskNum 20
 #define maxJopTime 50

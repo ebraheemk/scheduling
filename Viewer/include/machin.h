@@ -1,6 +1,7 @@
 #pragma once
 #include "Node.h"
 #include <vector>
+#include <map>
 class machin
 {
 public:
@@ -9,7 +10,9 @@ public:
  	int speed;
 	int TasksTime;
 	int index;
-	std::vector<Node> Tasks;
+	std::map<int,Node> Tasks;
+
+	
 private:
 	int later;
 
