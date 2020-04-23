@@ -14,9 +14,11 @@ public:
 
 
 	minheap(int v, int ix):value(v),index(ix), right(NULL), left(NULL), father(NULL), rightCount(0),leftCount(0){}
+	minheap( minheap&);
 	void insert(minheap* t,  minheap * newn);
 	std::pair <int, int> pop(minheap * t);
 	void afterpop(minheap * t);
+	void copy_heap(minheap* old, minheap* current);
 	~minheap();
 
 };

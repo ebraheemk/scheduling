@@ -18,6 +18,7 @@ void init_data();
 void init_machines(); 
 void print_report();
 int MinMachineTime, MaxMachineTime;
- 
+void SwapTasks(int task1, int machine1, int task2, int machine2);
 std::vector<minheap> tasksHV;
 std::vector<minheap> machinesHV;
+minheap* machinesROOT;

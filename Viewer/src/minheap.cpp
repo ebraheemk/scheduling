@@ -2,6 +2,22 @@
 
 
 using namespace std;
+void minheap::copy_heap( minheap* old, minheap* current) {
+	if (old->right != NULL) {
+		  
+		current->right = (minheap *) &minheap(old->right->value, old->right->index);
+		current->right->father = current;
+		copy_heap( old->right, current->right);
+	}
+	if (old->left != NULL) {
+		current->left = (minheap *)&minheap(old->left->value, old->left->index);
+		copy_heap(old->left, current->left);
+	}
+}
+minheap::minheap( minheap& old) :value(old.value), index(old.index), right(NULL), left(NULL), father(NULL), rightCount(old.rightCount), leftCount(old.leftCount) {
+	copy_heap((minheap*)&old,this);
+}//copy constructure
+ 
 void minheap::afterpop(minheap * t ){
 	if (t->right!=NULL && t->left != NULL) {
 		if (t->right->value > t->left->value) {
