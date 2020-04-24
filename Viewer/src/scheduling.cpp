@@ -74,14 +74,14 @@ void init_machines() {
 	printf("ئئئئזzszz\n");
 	std::pair<int, int> p1;
 	minheap copym = machines;
-	while (machines.right != NULL || machines.left!=NULL ) {
+	while (machines.GetRight() != NULL || machines.GetLeft()!=NULL ) {
 	minheap* copy = &machines;
 		p1 = machines.pop(copy);
 		printf("%d \n", p1.first/4);
 	}
 	printf("%d \n", machines.value/4); 
 	///copy
-	while (copym.right != NULL || copym.left != NULL) {
+	while (copym.GetRight() != NULL || copym.GetLeft() != NULL) {
 		minheap* copy = &copym;
 		p1 = copym.pop(copy);
 		printf("jjj %d \n", p1.first / 4);
@@ -156,6 +156,10 @@ int main()
 	s.insert(&s, &v);
 	minheap v2 = minheap(1, 1);
 	s.insert(&s, &v2);
+	minheap v3 = minheap(21, 12);
+	s.insert(&s, &v3);
+	minheap v4 = minheap(13, 13);
+	s.insert(&s, &v4);
 	minheap k = s;
 	/*int sum = 0;
  

@@ -3,14 +3,20 @@
 
 using namespace std;
 void minheap::copy_heap( minheap* old, minheap* current) {
-	if (old->right != NULL) {
-		  
-		current->right = (minheap *) &minheap(old->right->value, old->right->index);
+	//if we dont allocate and use malloc when we return from recursion we free the value from the
+	//stack and lose it
+	minheap* temp= (minheap*) malloc(sizeof(minheap));
+  	if (old->right != NULL) {
+		temp = new minheap(old->right->value, old->right->index);
+		  current->right =  temp;
 		current->right->father = current;
 		copy_heap( old->right, current->right);
 	}
 	if (old->left != NULL) {
-		current->left = (minheap *)&minheap(old->left->value, old->left->index);
+		temp = new minheap(old->left->value, old->left->index);
+		current->left =temp;
+		current->left->father = current;
+
 		copy_heap(old->left, current->left);
 	}
 }

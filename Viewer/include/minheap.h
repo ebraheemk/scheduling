@@ -6,9 +6,6 @@ class minheap
 public:
 	int value;
 	int index;//index in array
-	minheap* right;
-	minheap* left;
-	minheap* father;
 	int rightCount;
 	int leftCount;
 
@@ -19,7 +16,15 @@ public:
 	std::pair <int, int> pop(minheap * t);
 	void afterpop(minheap * t);
 	void copy_heap(minheap* old, minheap* current);
+	minheap * GetRight() { return this->right; }
+	minheap * GetLeft() { return this->left; }
+	minheap * GetFather() { return this->father; }
+
 	~minheap();
+private:
+	minheap* right;
+	minheap* left;
+	minheap* father;
 
 };
 
