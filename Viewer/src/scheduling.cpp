@@ -19,13 +19,16 @@ void init_machines() {
 
 
 	//}
- 	for (i = 0; i < J.size(); i++) 
-		tasksHV.push_back(minheap(J.at(i).time*4, i));
+	for (i = 0; i < J.size(); i++) {
+		minheap* temp = new minheap(J.at(i).time * 4, i);
+		tasksHV.push_back(temp );
+	}
 
 	minheap tasks = minheap(J.at(0).time*4, 0);
+	minheap* copy = &tasks;
 	for (  i = 1; i < J.size(); i++) {
-		minheap* copy = (minheap*)&tasks;
-		tasks.insert(copy, (minheap*)&tasksHV[i]);
+		 // = (minheap*)&tasks;
+		tasks.insert(copy, tasksHV[i]);
 	}
 
 
@@ -60,14 +63,18 @@ void init_machines() {
 	printf("Tasks num=%d\n",z);
 	//INIT MACHIN MINHEAP
 
-	for (i = 0; i < M.size(); i++)
-		machinesHV.push_back(minheap(M.at(i).TasksTime, i));
+	for (i = 0; i < M.size(); i++) {
+		minheap* temp = new minheap(minheap(M.at(i).TasksTime, i));
+		machinesHV.push_back(temp);
 
+	}
+ 
 	minheap machines = minheap(M.at(0).TasksTime, 0);
 	machinesROOT = (minheap*)&machines;
+	 copy = (minheap*)&machines;
+
 	for (i = 1; i < M.size(); i++) {
-		minheap* copy = (minheap*)&machines;
-		machines.insert(copy, (minheap*)&machinesHV[i]);
+ 		machines.insert(copy, machinesHV[i]);
 	}
 
 	//test
@@ -151,7 +158,7 @@ int main()
 {
 	auto start = high_resolution_clock::now();
 	//std:://qDebug() << "printing value: " << std::QString(MY_VAR);
-	minheap s = minheap(2, 5);
+	/*minheap s = minheap(2, 5);
 	minheap v= minheap(3, 4);
 	s.insert(&s, &v);
 	minheap v2 = minheap(1, 1);
@@ -160,8 +167,8 @@ int main()
 	s.insert(&s, &v3);
 	minheap v4 = minheap(13, 13);
 	s.insert(&s, &v4);
-	minheap k = s;
-	/*int sum = 0;
+	minheap k = s;*/
+	int sum = 0;
  
 	init_data();
 	for (int i = 0; i < J.size(); i++)
@@ -174,7 +181,7 @@ int main()
 	init_machines();
 
 
-	print_report();*/
+	print_report();
 	auto stop = high_resolution_clock::now();
 	auto duration = duration_cast<microseconds>(stop - start);
 	std::cout << duration.count()/1000000.0 << std::endl;
