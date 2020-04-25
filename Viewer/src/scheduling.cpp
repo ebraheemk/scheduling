@@ -9,6 +9,13 @@
 #include <chrono> 
 using namespace std::chrono;
 #define getcwd _getcwd
+void SwapTasks(int task1, int machine1, int task2, int machine2) {
+	 std::map<int, Node>::iterator it1,it2;
+	it1= M.at(machine1).Tasks.find(task1);
+	std::pair<int, Node> temp= std::pair<int, Node>(it1->first,it1->second);
+	M.at(machine1).TasksTime -= it1->second.time;
+	M.at(machine1).Tasks.erase(it1);
+}
 void init_machines() {
 	int i;
 	//heap insert log(n) and sorted array insert log(n) so i go in sorted array 
@@ -19,16 +26,16 @@ void init_machines() {
 
 
 	//}
-	for (i = 0; i < J.size(); i++) {
+	/*for (i = 0; i < J.size(); i++) {
 		minheap* temp = new minheap(J.at(i).time * 4, i);
 		tasksHV.push_back(temp );
-	}
+	}*/
 
 	minheap tasks = minheap(J.at(0).time*4, 0);
 	minheap* copy = &tasks;
 	for (  i = 1; i < J.size(); i++) {
 		 // = (minheap*)&tasks;
-		tasks.insert(copy, tasksHV[i]);
+		tasks.insert(copy, new minheap(J.at(i).time * 4, i));
 	}
 
 
@@ -63,18 +70,19 @@ void init_machines() {
 	printf("Tasks num=%d\n",z);
 	//INIT MACHIN MINHEAP
 
-	for (i = 0; i < M.size(); i++) {
-		minheap* temp = new minheap(minheap(M.at(i).TasksTime, i));
+	/*for (i = 0; i < M.size(); i++) {
+		minheap* temp = new minheap(M.at(i).TasksTime, i);
 		machinesHV.push_back(temp);
 
-	}
+	}*/
  
 	minheap machines = minheap(M.at(0).TasksTime, 0);
-	machinesROOT = (minheap*)&machines;
+	//machinesROOT = (minheap*)&machines;
 	 copy = (minheap*)&machines;
+	// std::vector<minheap*> machinesHVcopy= machinesHV;
 
 	for (i = 1; i < M.size(); i++) {
- 		machines.insert(copy, machinesHV[i]);
+ 		machines.insert(copy, new minheap(M.at(i).TasksTime, i));
 	}
 
 	//test
@@ -122,7 +130,8 @@ void init_machines() {
 		 myfile2.close();
 	 }
 
- 		 
+	 machinesHV = (minheap**)malloc(sizeof(minheap*) * M.size());
+	 tasksHV= (minheap**)malloc(sizeof(minheap*) * J.size());
 
 	
 
@@ -169,7 +178,7 @@ int main()
 	s.insert(&s, &v4);
 	minheap k = s;*/
 	int sum = 0;
- 
+	
 	init_data();
 	for (int i = 0; i < J.size(); i++)
 		sum += J.at(i).time;
