@@ -11,10 +11,24 @@ using namespace std::chrono;
 #define getcwd _getcwd
 void SwapTasks(int task1, int machine1, int task2, int machine2) {
 	 std::map<int, Node>::iterator it1,it2;
+
 	it1= M.at(machine1).Tasks.find(task1);
-	std::pair<int, Node> temp= std::pair<int, Node>(it1->first,it1->second);
-	M.at(machine1).TasksTime -= it1->second.time;
+	std::pair<int, Node> temp1= std::pair<int, Node>(it1->first,it1->second);
+	M.at(machine1).TasksTime -= (it1->second.time*4) / M.at(machine1).speed;
 	M.at(machine1).Tasks.erase(it1);
+
+	it2 = M.at(machine2).Tasks.find(task2);
+	std::pair<int, Node> temp2 = std::pair<int, Node>(it2->first, it2->second);
+	M.at(machine2).TasksTime -= (it2->second.time*4)/ M.at(machine2).speed;
+	M.at(machine2).Tasks.erase(it2);
+
+	M.at(machine1).Tasks.insert(temp2);
+	M.at(machine1).TasksTime += (temp2.second.time*4) / M.at(machine1).speed;
+	M.at(machine2).Tasks.insert(temp1);
+	M.at(machine2).TasksTime += (temp1.second.time*4)/ M.at(machine2).speed;
+
+
+
 }
 void init_machines() {
 	int i;
@@ -189,7 +203,7 @@ int main()
 	printf("speed avg %f\n", sum / 30.0);
 	init_machines();
 
-
+	SwapTasks(28, 0, 3, 1);
 	print_report();
 	auto stop = high_resolution_clock::now();
 	auto duration = duration_cast<microseconds>(stop - start);
