@@ -30,25 +30,46 @@ void SwapTasks(int task1, int machine1, int task2, int machine2) {
 
 
 }
+std::pair<int, int> GetBestSolOfTwo(int machine1, int  machine2) {
+	int segma = abs(M.at(machine1).TasksTime - M.at(machine2).TasksTime);
+	int m1s = M.at(machine1).speed;
+	int m2s = M.at(machine2).speed;
+	int a, b;
+	int t1 = -1,t2=-1;
+	std::map<int, Node>::iterator i;
+	std::map<int, Node>::iterator j;
+	for (i = M.at(machine1).Tasks.begin(); i != M.at(machine1).Tasks.end(); ++i) {
+		for (j = M.at(machine2).Tasks.begin(); j != M.at(machine2).Tasks.end(); ++j) {
+			a = M.at(machine1).TasksTime - (i->second.time * 4) / m1s;
+			a = a + (j->second.time * 4) / m1s;
+			b = M.at(machine2).TasksTime - (j->second.time * 4) / m2s;
+			b = b + (i->second.time * 4) / m2s;
+			if (abs(a - b) < segma) {
+				segma = abs(a - b);
+				t1 = i->second.index;
+				t2 = j->second.index;
+			}
+
+		}
+
+	}
+
+	return std::pair<int, int>(t1, t2); 
+}
+void TwoMachineLocalSearch(int machine1, int  machine2) {
+	std::pair<int, int>best = GetBestSolOfTwo(machine1, machine2);
+	while (best.first != -1 && best.second != -1) {
+		SwapTasks(best.first, machine1, best.second, machine2);
+		best = GetBestSolOfTwo(machine1, machine2);
+	}
+}
 void init_machines() {
 	int i;
-	//heap insert log(n) and sorted array insert log(n) so i go in sorted array 
-	//first we add one task for each machine
-	//for (int i = 0; i < M.size(); i++) {
- 	//	M.at(i).Tasks.push_back(J.back);
-	//	J.pop_back();
-
-
-	//}
-	/*for (i = 0; i < J.size(); i++) {
-		minheap* temp = new minheap(J.at(i).time * 4, i);
-		tasksHV.push_back(temp );
-	}*/
+	 
 
 	minheap tasks = minheap(J.at(0).time*4, 0);
 	minheap* copy = &tasks;
 	for (  i = 1; i < J.size(); i++) {
-		 // = (minheap*)&tasks;
 		tasks.insert(copy, new minheap(J.at(i).time * 4, i));
 	}
 
@@ -82,18 +103,10 @@ void init_machines() {
 	}
 
 	printf("Tasks num=%d\n",z);
-	//INIT MACHIN MINHEAP
 
-	/*for (i = 0; i < M.size(); i++) {
-		minheap* temp = new minheap(M.at(i).TasksTime, i);
-		machinesHV.push_back(temp);
-
-	}*/
  
 	minheap machines = minheap(M.at(0).TasksTime, 0);
-	//machinesROOT = (minheap*)&machines;
 	 copy = (minheap*)&machines;
-	// std::vector<minheap*> machinesHVcopy= machinesHV;
 
 	for (i = 1; i < M.size(); i++) {
  		machines.insert(copy, new minheap(M.at(i).TasksTime, i));
@@ -203,7 +216,9 @@ int main()
 	printf("speed avg %f\n", sum / 30.0);
 	init_machines();
 
-	SwapTasks(28, 0, 3, 1);
+	TwoMachineLocalSearch(0, 1);
+	TwoMachineLocalSearch(12, 1);
+
 	print_report();
 	auto stop = high_resolution_clock::now();
 	auto duration = duration_cast<microseconds>(stop - start);
