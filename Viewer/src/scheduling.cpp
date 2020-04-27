@@ -190,6 +190,13 @@ void init_machines() {
 	 }
 	 myfile.close();
  }
+ void LevelOne() {
+		 for (int offset = 1; offset < M.size(); offset++) {
+		 for (int i = 0; i < M.size() / 2; i++) {
+			 TwoMachineLocalSearch(i * 2, (i * 2 + offset) % M.size());
+		 }
+	 }
+ }
 int main()
 {
 	auto start = high_resolution_clock::now();
@@ -216,8 +223,7 @@ int main()
 	printf("speed avg %f\n", sum / 30.0);
 	init_machines();
 
-	TwoMachineLocalSearch(0, 1);
-	TwoMachineLocalSearch(12, 1);
+	LevelOne();
 
 	print_report();
 	auto stop = high_resolution_clock::now();
