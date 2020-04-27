@@ -20,7 +20,7 @@ void print_report();
 int MinMachineTime, MaxMachineTime;
 void SwapTasks(int task1, int machine1, int task2, int machine2);
 minheap** tasksHV;
-void TwoMachineLocalSearch(int machine1, int  machine2);
+bool TwoMachineLocalSearch(int machine1, int  machine2);
 std::pair<int,int> GetBestSolOfTwo(int machine1, int  machine2);
 void LevelOne();
 //std::vector<minheap*> machinesHV;

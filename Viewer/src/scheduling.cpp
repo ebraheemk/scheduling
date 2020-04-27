@@ -56,12 +56,15 @@ std::pair<int, int> GetBestSolOfTwo(int machine1, int  machine2) {
 
 	return std::pair<int, int>(t1, t2); 
 }
-void TwoMachineLocalSearch(int machine1, int  machine2) {
+bool TwoMachineLocalSearch(int machine1, int  machine2) {
+	bool result = true;
 	std::pair<int, int>best = GetBestSolOfTwo(machine1, machine2);
 	while (best.first != -1 && best.second != -1) {
-		SwapTasks(best.first, machine1, best.second, machine2);
+		result = false;
+		SwapTasks(best.first, machine1, best.second, machine2); 
 		best = GetBestSolOfTwo(machine1, machine2);
 	}
+	return result;
 }
 void init_machines() {
 	int i;
@@ -174,7 +177,7 @@ void init_machines() {
 	 myfile << "##########################\n";
 	 myfile << "machine SPEED : ";  myfile << M.at(i).speed; myfile << '\n';
 	 myfile << "machine no : "; myfile << i; myfile << '\n';
-	 myfile << "tasks total time: "; myfile << M.at(i).TasksTime/4; myfile << '\n';
+	 myfile << "tasks total time: "; myfile << (float)M.at(i).TasksTime/4; myfile << '\n';
 	 myfile << "##########################\n";
 	 std::map<int, Node>::iterator it;
 	 for (it = M.at(i).Tasks.begin(); it != M.at(i).Tasks.end(); ++it){
@@ -191,10 +194,20 @@ void init_machines() {
 	 myfile.close();
  }
  void LevelOne() {
+	 bool flag = true;
+	 /*TODO later we dont need to check all pairs of machines only pairs that one one machine
+	 of them have changed  so we can hold type of ReadyQueue that hold all the machines that
+	 was changed and check them with other machines and stop we we have empty ready queue that mean
+	 we pass over all compantion of two machines and there no two machine that we can optimize his time
+	 */
+	 while(flag){
 		 for (int offset = 1; offset < M.size(); offset++) {
-		 for (int i = 0; i < M.size() / 2; i++) {
-			 TwoMachineLocalSearch(i * 2, (i * 2 + offset) % M.size());
+			 for (int i = 0; i < M.size() / 2; i++) {
+				flag=flag && TwoMachineLocalSearch(i * 2, (i * 2 + offset) % M.size());
+			 }
 		 }
+		flag = !flag;
+
 	 }
  }
 int main()
