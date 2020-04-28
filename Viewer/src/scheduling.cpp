@@ -9,6 +9,17 @@
 #include <chrono> 
 using namespace std::chrono;
 #define getcwd _getcwd
+void PassTask(int task, int machine1, int machine2) {
+	std::map<int, Node>::iterator it1;
+	it1 = M.at(machine1).Tasks.find(task);
+
+	std::pair<int, Node> temp1 = std::pair<int, Node>(it1->first, it1->second);
+	M.at(machine1).TasksTime -= (it1->second.time * 4) / M.at(machine1).speed;
+	M.at(machine1).Tasks.erase(it1);
+
+	M.at(machine2).Tasks.insert(temp1);
+	M.at(machine2).TasksTime += (temp1.second.time * 4) / M.at(machine2).speed;
+}
 void SwapTasks(int task1, int machine1, int task2, int machine2) {
 	 std::map<int, Node>::iterator it1,it2;
 
@@ -30,8 +41,32 @@ void SwapTasks(int task1, int machine1, int task2, int machine2) {
 
 
 }
+int GetBestThrow(int machine1, int  machine2) {
+	//best throw from machine1 to machine2
+	//int segma = abs(M.at(machine1).TasksTime - M.at(machine2).TasksTime);
+	int max = std::fmax(M.at(machine1).TasksTime, M.at(machine2).TasksTime);
+	int m1s = M.at(machine1).speed;
+	int m2s = M.at(machine2).speed;
+	int a, b;
+	int t1 = -1;
+	std::map<int, Node>::iterator i;
+	for (i = M.at(machine1).Tasks.begin(); i != M.at(machine1).Tasks.end(); ++i) {
+			a = M.at(machine1).TasksTime - (i->second.time * 4) / m1s;
+			b = M.at(machine2).TasksTime + (i->second.time * 4) / m2s;
+			if (std::fmax(a ,b) < max) {
+				max = std::fmax(a, b);
+				t1 = i->second.index;
+		}
+
+	}
+
+	return t1;
+
+}
+
 std::pair<int, int> GetBestSolOfTwo(int machine1, int  machine2) {
-	int segma = abs(M.at(machine1).TasksTime - M.at(machine2).TasksTime);
+	//int segma = abs(M.at(machine1).TasksTime - M.at(machine2).TasksTime);
+	int max = std::fmax(M.at(machine1).TasksTime, M.at(machine2).TasksTime);
 	int m1s = M.at(machine1).speed;
 	int m2s = M.at(machine2).speed;
 	int a, b;
@@ -44,8 +79,10 @@ std::pair<int, int> GetBestSolOfTwo(int machine1, int  machine2) {
 			a = a + (j->second.time * 4) / m1s;
 			b = M.at(machine2).TasksTime - (j->second.time * 4) / m2s;
 			b = b + (i->second.time * 4) / m2s;
-			if (abs(a - b) < segma) {
-				segma = abs(a - b);
+			//if (abs(a - b) < max) {
+			//	segma = abs(a - b);
+			if(std::fmax(a,b)<max){
+				max = std::fmax(a, b);
 				t1 = i->second.index;
 				t2 = j->second.index;
 			}
@@ -55,6 +92,17 @@ std::pair<int, int> GetBestSolOfTwo(int machine1, int  machine2) {
 	}
 
 	return std::pair<int, int>(t1, t2); 
+}
+bool M1ToM2Throw(int machine1, int  machine2) {
+	bool result = true;
+	int best = GetBestThrow(machine1, machine2);
+	while (best != -1 ) {
+		result = false;
+		PassTask(best, machine1, machine2);
+		best = GetBestThrow(machine1, machine2);
+	}
+	return result;
+
 }
 bool TwoMachineLocalSearch(int machine1, int  machine2) {
 	bool result = true;
@@ -193,8 +241,35 @@ void init_machines() {
 	 }
 	 myfile.close();
  }
- void LevelOne() {
+ bool LevelZero() {
+	 /*TODO :to optimize we can use any sort of nlogn so each time we check two machine by
+	 o(1) instide of o(n) bcz we only need maximum
+	 and also we can change the waywe give initial slolothion */
+	 bool flag=true;
+	 bool result = true;
+	 while (flag) {
+		 for (int offset = 1; offset < M.size(); offset++) {
+			 for (int i = 0; i < M.size() / 2; i++) {
+				 flag = flag && M1ToM2Throw(i * 2, (i * 2 + offset) % M.size());
+
+			 }
+		 }
+		 for (int offset = 0; offset < M.size(); offset++) {
+			 for (int i = 0; i < M.size(); i++) {
+				 flag = flag && M1ToM2Throw(i ,offset);
+
+			 }
+
+		 }
+		 result = result && flag;
+		 flag = !flag;
+
+	 }
+	 return result;
+ }
+ bool LevelOne() {
 	 bool flag = true;
+	 bool result=true;
 	 /*TODO later we dont need to check all pairs of machines only pairs that one one machine
 	 of them have changed  so we can hold type of ReadyQueue that hold all the machines that
 	 was changed and check them with other machines and stop we we have empty ready queue that mean
@@ -206,7 +281,18 @@ void init_machines() {
 				flag=flag && TwoMachineLocalSearch(i * 2, (i * 2 + offset) % M.size());
 			 }
 		 }
+		 result = result && flag;
 		flag = !flag;
+
+	 }
+	 return result;
+ }
+ void LocalSearch() {
+	 bool flag = true;
+	 while (flag) {
+		 flag = flag && LevelZero();
+		 flag = flag && LevelOne();
+		 flag = !flag;
 
 	 }
  }
@@ -235,8 +321,7 @@ int main()
 		sum += M.at(i).speed;
 	printf("speed avg %f\n", sum / 30.0);
 	init_machines();
-
-	LevelOne();
+	LocalSearch();
 
 	print_report();
 	auto stop = high_resolution_clock::now();
