@@ -29,6 +29,7 @@ int GetBestThrow(int machine1, int  machine2);
 bool LevelOne();
 bool LevelZero();
 void LocalSearch();
+void SwapmTasks(std::vector<int> t1, int m1, std::vector<int>t2, int m2);
 //std::vector<minheap*> machinesHV;
 minheap** machinesHV;
 //minheap* machinesROOT;

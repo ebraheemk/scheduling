@@ -41,6 +41,40 @@ void SwapTasks(int task1, int machine1, int task2, int machine2) {
 
 
 }
+void SwapmTasks(std::vector<int> t1, int m1, std::vector<int>t2, int m2) {
+	std::map<int, Node>::iterator it1, it2;
+	std::vector<std::pair<int, Node>>temp1;
+	std::vector<std::pair<int, Node>>temp2;
+
+	int task,i;
+	for ( i = 0; i < t1.size(); i++) {
+		task = t1.at(i);
+		it1 = M.at(m1).Tasks.find(task);
+		std::pair<int, Node> temp1 = std::pair<int, Node>(it1->first, it1->second);
+		M.at(m1).TasksTime -= (it1->second.time * 4) / M.at(m1).speed;
+		M.at(m1).Tasks.erase(it1);
+	}
+
+
+	for (i = 0; i < t2.size(); i++) {
+		task = t2.at(i); 
+		it2 = M.at(m2).Tasks.find(task);
+		std::pair<int, Node> temp2 = std::pair<int, Node>(it2->first, it2->second);
+		M.at(m2).TasksTime -= (it2->second.time * 4) / M.at(m2).speed;
+		M.at(m2).Tasks.erase(it2);
+	}
+
+	for (i = 0; i < temp2.size(); i++) {
+		M.at(m1).Tasks.insert(temp2.at(i));
+		M.at(m1).TasksTime += (temp2.at(i).second.time * 4) / M.at(m1).speed;
+	}
+
+	for (i = 0; i < temp1.size(); i++) {
+		M.at(m2).Tasks.insert(temp1.at(i));
+		M.at(m2).TasksTime += (temp1.at(i).second.time * 4) / M.at(m2).speed;
+	}
+ 
+}
 int GetBestThrow(int machine1, int  machine2) {
 	//best throw from machine1 to machine2
 	//int segma = abs(M.at(machine1).TasksTime - M.at(machine2).TasksTime);
