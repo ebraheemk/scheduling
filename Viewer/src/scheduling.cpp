@@ -330,6 +330,32 @@ void init_machines() {
 
 	 }
  }
+ std::pair<int, std::vector<int>> GetBestOf1xM(int m1Comp[], int m1, int m2, int m2tasksNo) {
+	 std::pair<int, std::vector<int>> r;
+	 return r;
+ }
+ void GetBestOfNxM( int m1, int m1tasksNo, int m2, int m2tasksNo, int index, int comb[], int i,bool firsttime) {
+	 if (firsttime) {
+		  MaxNxM= std::fmax(M.at(m1).TasksTime, M.at(m2).TasksTime);
+	  }
+	 if (index == m1tasksNo) {
+		// std::vector<int> m1c(&comb,)
+		 std::pair<int, std::vector<int>> re= GetBestOf1xM(comb, m1, m2, m2tasksNo);
+		 if (re.first < MaxNxM) {
+			 MaxNxM = re.first;
+			 NxMcom1Best = std::vector<int>(comb, comb + sizeof(comb) / sizeof(comb[0]));
+			 NxMcom2Best = re.second;
+
+		 }
+		 return;
+	 }
+	 if (i >= M.at(m1).Tasks.size())
+		 return;
+	 comb[index] = M.at(m1).Tasks.at(i).index;
+	 GetBestOfNxM(m1, m1tasksNo,m2, m2tasksNo, index + 1, comb, i + 1,false);
+	 GetBestOfNxM(m1, m1tasksNo, m2, m2tasksNo, index , comb, i + 1, false);
+
+ }
 int main()
 {
 	auto start = high_resolution_clock::now();
