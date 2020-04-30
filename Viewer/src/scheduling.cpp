@@ -330,7 +330,10 @@ void init_machines() {
 
 	 }
  }
- std::pair<int, std::vector<int>> GetBestOf1xM(int m1Comp[], int m1, int m2, int m2tasksNo, int index, int comb[], int i) {
+ std::pair<int, std::vector<int>> GetBestOf1xM(int m1Comp[], int m1, int m2, int m2tasksNo, int index, int comb[], int i,bool firsttime ) {
+	 if (firsttime) {
+		 Max1xM=std::fmax(M.at(m1).TasksTime, M.at(m2).TasksTime);//TODO later we can optimize uzing MaxNxM
+	 }
 	 if (index == m2tasksNo) {
 		 std::map<int, Node>::iterator it1, it2;
 		 int a = M.at(m1).TasksTime;
@@ -345,13 +348,27 @@ void init_machines() {
 			 b = b - it2->second.time * 4 / M.at(m2).speed;
 			 a = a + it2->second.time * 4 / M.at(m1).speed;
 		 }
-		 if(max(a,b)<MaxNxM)
+		 if (std::fmax(a, b) < Max1xM) {
+			 Max1xM = fmax(a, b);
+			 com2Best1xM= std::vector<int>(comb, comb + sizeof(comb) / sizeof(comb[0]));
+		 }
+		/* if(max(a,b)<MaxNxM)
 			 WE HAVE an better sol save it and continue....
-			 //ToDo Later
+			 //ToDo Later*/
+
+
+		 return;
 	 }
+	 if (i >= M.at(m2).Tasks.size())
+		 return;
+	 comb[index] = M.at(m2).Tasks.at(i).index;
+	 GetBestOf1xM(m1Comp, m1, m2, m2tasksNo, index + 1, comb, i + 1, false);
+	 GetBestOf1xM(m1Comp, m1, m2, m2tasksNo, index, comb, i + 1, false);
 
  }
- void GetBestOfNxM( int m1, int m1tasksNo, int m2, int m2tasksNo, int index, int comb[], int i,bool firsttime) {
+ bool GetBestOfNxM( int m1, int m1tasksNo, int m2, int m2tasksNo, int index, int comb[], int i,bool firsttime) {
+	 if (M.at(m1).Tasks.size() > m1tasksNo || M.at(m2).Tasks.size() > m2tasksNo)
+		 return false;
 	 if (firsttime) {
 		  MaxNxM= std::fmax(M.at(m1).TasksTime, M.at(m2).TasksTime);
 	  }

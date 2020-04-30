@@ -29,10 +29,10 @@ int GetBestThrow(int machine1, int  machine2);
 bool LevelOne();
 bool LevelZero();
 void LocalSearch();
-void SwapmTasks(std::vector<int> t1, int m1, std::vector<int>t2, int m2,int index, int comb[], int i);
-std::pair<int,std::vector<int>> GetBestOf1xM(int m1Comp[],int m1,int m2,int m2tasksNo);/*given compination of machine1 finde the bes compination of M tasks that
+void SwapmTasks(std::vector<int> t1, int m1, std::vector<int>t2, int m2);
+std::pair<int,std::vector<int>> GetBestOf1xM(int m1Comp[],int m1,int m2,int m2tasksNo, int index, int comb[], int i, bool firsttime);/*given compination of machine1 finde the bes compination of M tasks that
 give best solution if we swap given compinatin from machine1 and the M tasks from machine2  */
-void GetBestOfNxM(int m1,int m1tasksNo ,int m2,int m2tasksNo,int index,int comb[],int i,bool firsttime);/*we want to do local search NxM first we go over N compenation of machine1
+bool GetBestOfNxM(int m1,int m1tasksNo ,int m2,int m2tasksNo,int index,int comb[],int i,bool firsttime);/*we want to do local search NxM first we go over N compenation of machine1
 and for each compination we call getbest1xm wich take compenation from machine 1 and find best
 compination from machine2 
 */
@@ -40,5 +40,7 @@ compination from machine2
 minheap** machinesHV;
 //minheap* machinesROOT;
 int MaxNxM;
+int Max1xM;
 std::vector<int> NxMcom1Best;
 std::vector<int> NxMcom2Best;
+std::vector<int> com2Best1xM;
