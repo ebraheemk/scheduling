@@ -32,10 +32,11 @@ void LocalSearch();
 void SwapmTasks(std::vector<int> t1, int m1, std::vector<int>t2, int m2);
 void GetBestOf1xM(int m1Comp[],int m1,int m2,int m2tasksNo, int index, int comb[], int i, bool firsttime);/*given compination of machine1 finde the bes compination of M tasks that
 give best solution if we swap given compinatin from machine1 and the M tasks from machine2  */
-void GetBestOfNxM(int m1,int m1tasksNo ,int m2,int m2tasksNo,int index,int comb[],int i,bool firsttime);/*we want to do local search NxM first we go over N compenation of machine1
+void GetBestOfNxM(int m1,int m1tasksNo ,int m2,int m2tasksNo,int index,int * comb,int i,bool firsttime);/*we want to do local search NxM first we go over N compenation of machine1
 and for each compination we call getbest1xm wich take compenation from machine 1 and find best
 compination from machine2 
 */
+void init_TasksTable();
 //std::vector<minheap*> machinesHV;
 minheap** machinesHV;
 //minheap* machinesROOT;
@@ -46,3 +47,4 @@ std::vector<int> NxMcom2Best;
 std::vector<int> com2Best1xM;
 bool GetBestOfNxMbool;
 bool GetBestOf1xMbool;
+int ** TasksTable;//we have on map index as key but on GetBestOfNxM we need elment on place i not with key i so we make array hold task key in place i for each machine

@@ -368,7 +368,7 @@ void init_machines() {
 	 GetBestOf1xM(m1Comp, m1, m2, m2tasksNo, index, comb, i + 1, false);
 
  }
- void GetBestOfNxM( int m1, int m1tasksNo, int m2, int m2tasksNo, int index, int comb[], int i,bool firsttime) {
+ void GetBestOfNxM( int m1, int m1tasksNo, int m2, int m2tasksNo, int index, int* comb, int i,bool firsttime) {
 	 if (M.at(m1).Tasks.size() < m1tasksNo || M.at(m2).Tasks.size() < m2tasksNo) {
 		 GetBestOfNxMbool = false;
 		 return;
@@ -376,6 +376,9 @@ void init_machines() {
 	 if (firsttime) {
 		  MaxNxM= std::fmax(M.at(m1).TasksTime, M.at(m2).TasksTime);
 		  GetBestOfNxMbool = true;
+
+		  
+
 	  }
 	 if (index == m1tasksNo) {
 		// std::vector<int> m1c(&comb,)
@@ -392,10 +395,24 @@ void init_machines() {
 	 }
 	 if (i >= M.at(m1).Tasks.size())
 		 return;
-	 comb[index] = M.at(m1).Tasks.at(i).index;
+	 //int xx = M.at(m1).Tasks;
+	// comb[index] = M.at(m1).Tasks[i].index;
 	 GetBestOfNxM(m1, m1tasksNo,m2, m2tasksNo, index + 1, comb, i + 1,false);
 	 GetBestOfNxM(m1, m1tasksNo, m2, m2tasksNo, index , comb, i + 1, false);
 
+ }
+ void init_TasksTable() {
+	 std::map<int, Node>::iterator j;
+	 TasksTable = (int **)malloc(sizeof(int*)*M.size());
+	 for (int i = 0; i < M.size(); i++) {
+		 TasksTable[i] = (int*)malloc(M.at(i).Tasks.size() * sizeof(int));
+
+		 int k = 0;
+		 for (j = M.at(i).Tasks.begin(); j != M.at(i).Tasks.end(); ++j, k++) {
+			 TasksTable[i][k] = j->first;
+			 printf("%d,%d|", i, TasksTable[i][k]);
+		 }
+	 }
  }
 int main()
 {
@@ -422,7 +439,9 @@ int main()
 		sum += M.at(i).speed;
 	printf("speed avg %f\n", sum / 30.0);
 	init_machines();
-	int temp[2];
+	int * temp = new int[2];
+	temp[1] = 5;
+	init_TasksTable();
 	GetBestOfNxM(3, 1, 1, 2, 0, temp, 0, true);
 	SwapmTasks(NxMcom1Best, 3, NxMcom2Best, 1);
 	LocalSearch();
