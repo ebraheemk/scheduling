@@ -330,9 +330,10 @@ void init_machines() {
 
 	 }
  }
- std::pair<int, std::vector<int>> GetBestOf1xM(int m1Comp[], int m1, int m2, int m2tasksNo, int index, int comb[], int i,bool firsttime ) {
+ void GetBestOf1xM(int m1Comp[], int m1, int m2, int m2tasksNo, int index, int comb[], int i,bool firsttime ) {
 	 if (firsttime) {
 		 Max1xM=std::fmax(M.at(m1).TasksTime, M.at(m2).TasksTime);//TODO later we can optimize uzing MaxNxM
+		 GetBestOf1xMbool = true;
 	 }
 	 if (index == m2tasksNo) {
 		 std::map<int, Node>::iterator it1, it2;
@@ -349,6 +350,7 @@ void init_machines() {
 			 a = a + it2->second.time * 4 / M.at(m1).speed;
 		 }
 		 if (std::fmax(a, b) < Max1xM) {
+			 GetBestOf1xMbool = false;
 			 Max1xM = fmax(a, b);
 			 com2Best1xM= std::vector<int>(comb, comb + sizeof(comb) / sizeof(comb[0]));
 		 }
@@ -366,20 +368,24 @@ void init_machines() {
 	 GetBestOf1xM(m1Comp, m1, m2, m2tasksNo, index, comb, i + 1, false);
 
  }
- bool GetBestOfNxM( int m1, int m1tasksNo, int m2, int m2tasksNo, int index, int comb[], int i,bool firsttime) {
-	 if (M.at(m1).Tasks.size() > m1tasksNo || M.at(m2).Tasks.size() > m2tasksNo)
-		 return false;
+ void GetBestOfNxM( int m1, int m1tasksNo, int m2, int m2tasksNo, int index, int comb[], int i,bool firsttime) {
+	 if (M.at(m1).Tasks.size() < m1tasksNo || M.at(m2).Tasks.size() < m2tasksNo) {
+		 GetBestOfNxMbool = false;
+		 return;
+	 }
 	 if (firsttime) {
 		  MaxNxM= std::fmax(M.at(m1).TasksTime, M.at(m2).TasksTime);
+		  GetBestOfNxMbool = true;
 	  }
 	 if (index == m1tasksNo) {
 		// std::vector<int> m1c(&comb,)
 		 int* d = new int[m2];
-		 std::pair<int, std::vector<int>> re= GetBestOf1xM(comb, m1, m2, m2tasksNo,0,d,0);
-		 if (re.first < MaxNxM) {
-			 MaxNxM = re.first;
+		 GetBestOf1xM(comb, m1, m2, m2tasksNo,0,d,0,true);
+		 if (Max1xM < MaxNxM) {
+			 MaxNxM = Max1xM;
 			 NxMcom1Best = std::vector<int>(comb, comb + sizeof(comb) / sizeof(comb[0]));
-			 NxMcom2Best = re.second;
+			 NxMcom2Best = com2Best1xM;
+			 GetBestOfNxMbool = false;
 
 		 }
 		 return;
@@ -416,8 +422,12 @@ int main()
 		sum += M.at(i).speed;
 	printf("speed avg %f\n", sum / 30.0);
 	init_machines();
+	int temp[2];
+	GetBestOfNxM(3, 1, 1, 2, 0, temp, 0, true);
+	SwapmTasks(NxMcom1Best, 3, NxMcom2Best, 1);
 	LocalSearch();
-
+	 
+	 
 	print_report();
 	auto stop = high_resolution_clock::now();
 	auto duration = duration_cast<microseconds>(stop - start);
