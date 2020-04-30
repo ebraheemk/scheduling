@@ -340,19 +340,19 @@ void init_machines() {
 		 int a = M.at(m1).TasksTime;
 		 int b = M.at(m2).TasksTime;
 		 for (int j = 0; j < sizeof(m1Comp) / sizeof(m1Comp[0]); j++) {
-			 it1 = M.at(m1).Tasks.find(m1Comp[i]);
+			 it1 = M.at(m1).Tasks.find(m1Comp[j]);
 			 a = a - it1->second.time*4/ M.at(m1).speed;
 			 b = b + it1->second.time * 4 / M.at(m2).speed;
 		 }
 		 for (int j = 0; j < m2tasksNo; j++) {
-			 it2 = M.at(m2).Tasks.find(comb[i]);
+			 it2 = M.at(m2).Tasks.find(comb[j]);
 			 b = b - it2->second.time * 4 / M.at(m2).speed;
 			 a = a + it2->second.time * 4 / M.at(m1).speed;
 		 }
 		 if (std::fmax(a, b) < Max1xM) {
 			 GetBestOf1xMbool = false;
 			 Max1xM = fmax(a, b);
-			 com2Best1xM= std::vector<int>(comb, comb + sizeof(comb) / sizeof(comb[0]));
+			 com2Best1xM= std::vector<int>(comb, comb + 2);we have error here 
 		 }
 		/* if(max(a,b)<MaxNxM)
 			 WE HAVE an better sol save it and continue....
@@ -363,7 +363,7 @@ void init_machines() {
 	 }
 	 if (i >= M.at(m2).Tasks.size())
 		 return;
-	 comb[index] = M.at(m2).Tasks.at(i).index;
+	 comb[index] = TasksTable[m2][i];
 	 GetBestOf1xM(m1Comp, m1, m2, m2tasksNo, index + 1, comb, i + 1, false);
 	 GetBestOf1xM(m1Comp, m1, m2, m2tasksNo, index, comb, i + 1, false);
 
@@ -386,7 +386,7 @@ void init_machines() {
 		 GetBestOf1xM(comb, m1, m2, m2tasksNo,0,d,0,true);
 		 if (Max1xM < MaxNxM) {
 			 MaxNxM = Max1xM;
-			 NxMcom1Best = std::vector<int>(comb, comb + sizeof(comb) / sizeof(comb[0]));
+			 NxMcom1Best = std::vector<int>(comb, comb + sizeof(comb) / sizeof(comb[0]));we have error here also 
 			 NxMcom2Best = com2Best1xM;
 			 GetBestOfNxMbool = false;
 
@@ -397,6 +397,7 @@ void init_machines() {
 		 return;
 	 //int xx = M.at(m1).Tasks;
 	// comb[index] = M.at(m1).Tasks[i].index;
+	 comb[index] = TasksTable[m1][i];
 	 GetBestOfNxM(m1, m1tasksNo,m2, m2tasksNo, index + 1, comb, i + 1,false);
 	 GetBestOfNxM(m1, m1tasksNo, m2, m2tasksNo, index , comb, i + 1, false);
 
@@ -443,7 +444,7 @@ int main()
 	temp[1] = 5;
 	init_TasksTable();
 	GetBestOfNxM(3, 1, 1, 2, 0, temp, 0, true);
-	SwapmTasks(NxMcom1Best, 3, NxMcom2Best, 1);
+	SwapmTasks(NxMcom1Best, 3, NxMcom2Best, 1);//have error should chose two tasks 
 	LocalSearch();
 	 
 	 
