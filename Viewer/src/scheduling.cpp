@@ -50,7 +50,7 @@ void SwapmTasks(std::vector<int> t1, int m1, std::vector<int>t2, int m2) {
 	for ( i = 0; i < t1.size(); i++) {
 		task = t1.at(i);
 		it1 = M.at(m1).Tasks.find(task);
-		std::pair<int, Node> temp1 = std::pair<int, Node>(it1->first, it1->second);
+		temp1.push_back(std::pair<int, Node>(it1->first, it1->second));
 		M.at(m1).TasksTime -= (it1->second.time * 4) / M.at(m1).speed;
 		M.at(m1).Tasks.erase(it1);
 	}
@@ -59,7 +59,7 @@ void SwapmTasks(std::vector<int> t1, int m1, std::vector<int>t2, int m2) {
 	for (i = 0; i < t2.size(); i++) {
 		task = t2.at(i); 
 		it2 = M.at(m2).Tasks.find(task);
-		std::pair<int, Node> temp2 = std::pair<int, Node>(it2->first, it2->second);
+		temp2.push_back(std::pair<int, Node>(it2->first, it2->second));
 		M.at(m2).TasksTime -= (it2->second.time * 4) / M.at(m2).speed;
 		M.at(m2).Tasks.erase(it2);
 	}
@@ -73,7 +73,9 @@ void SwapmTasks(std::vector<int> t1, int m1, std::vector<int>t2, int m2) {
 		M.at(m2).Tasks.insert(temp1.at(i));
 		M.at(m2).TasksTime += (temp1.at(i).second.time * 4) / M.at(m2).speed;
 	}
- 
+	update_TasksTable(m1);
+	update_TasksTable(m2);
+
 }
 int GetBestThrow(int machine1, int  machine2) {
 	//best throw from machine1 to machine2
@@ -352,7 +354,7 @@ void init_machines() {
 		 if (std::fmax(a, b) < Max1xM) {
 			 GetBestOf1xMbool = false;
 			 Max1xM = fmax(a, b);
-			 com2Best1xM= std::vector<int>(comb, comb + 2);we have error here 
+			 com2Best1xM= std::vector<int>(comb, comb + m2tasksNo);//we have error here 
 		 }
 		/* if(max(a,b)<MaxNxM)
 			 WE HAVE an better sol save it and continue....
@@ -382,11 +384,11 @@ void init_machines() {
 	  }
 	 if (index == m1tasksNo) {
 		// std::vector<int> m1c(&comb,)
-		 int* d = new int[m2];
+		 int* d = new int[m2tasksNo];
 		 GetBestOf1xM(comb, m1, m2, m2tasksNo,0,d,0,true);
 		 if (Max1xM < MaxNxM) {
 			 MaxNxM = Max1xM;
-			 NxMcom1Best = std::vector<int>(comb, comb + sizeof(comb) / sizeof(comb[0]));we have error here also 
+			 NxMcom1Best = std::vector<int>(comb, comb + m1tasksNo);//we have error here also 
 			 NxMcom2Best = com2Best1xM;
 			 GetBestOfNxMbool = false;
 
@@ -402,6 +404,14 @@ void init_machines() {
 	 GetBestOfNxM(m1, m1tasksNo, m2, m2tasksNo, index , comb, i + 1, false);
 
  }
+ void update_TasksTable(int machine_index){
+	 std::map<int, Node>::iterator j;
+	 int k = 0;
+	 for (j = M.at(machine_index).Tasks.begin(); j != M.at(machine_index).Tasks.end(); ++j, k++)
+		 TasksTable[machine_index][k] = j->first;
+
+ }
+
  void init_TasksTable() {
 	 std::map<int, Node>::iterator j;
 	 TasksTable = (int **)malloc(sizeof(int*)*M.size());
@@ -445,7 +455,7 @@ int main()
 	init_TasksTable();
 	GetBestOfNxM(3, 1, 1, 2, 0, temp, 0, true);
 	SwapmTasks(NxMcom1Best, 3, NxMcom2Best, 1);//have error should chose two tasks 
-	LocalSearch();
+	//LocalSearch();
 	 
 	 
 	print_report();

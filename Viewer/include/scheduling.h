@@ -37,6 +37,7 @@ and for each compination we call getbest1xm wich take compenation from machine 1
 compination from machine2 
 */
 void init_TasksTable();
+void update_TasksTable(int machine_index);
 //std::vector<minheap*> machinesHV;
 minheap** machinesHV;
 //minheap* machinesROOT;
