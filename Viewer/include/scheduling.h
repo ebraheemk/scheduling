@@ -38,6 +38,7 @@ compination from machine2
 */
 void init_TasksTable();
 void update_TasksTable(int machine_index);
+bool LocalSearchNxM(int N, int M);
 //std::vector<minheap*> machinesHV;
 minheap** machinesHV;
 //minheap* machinesROOT;

@@ -19,6 +19,9 @@ void PassTask(int task, int machine1, int machine2) {
 
 	M.at(machine2).Tasks.insert(temp1);
 	M.at(machine2).TasksTime += (temp1.second.time * 4) / M.at(machine2).speed;
+
+	update_TasksTable(machine1);
+	update_TasksTable(machine2);
 }
 void SwapTasks(int task1, int machine1, int task2, int machine2) {
 	 std::map<int, Node>::iterator it1,it2;
@@ -39,7 +42,8 @@ void SwapTasks(int task1, int machine1, int task2, int machine2) {
 	M.at(machine2).TasksTime += (temp1.second.time*4)/ M.at(machine2).speed;
 
 
-
+	update_TasksTable(machine1);
+	update_TasksTable(machine2);
 }
 void SwapmTasks(std::vector<int> t1, int m1, std::vector<int>t2, int m2) {
 	std::map<int, Node>::iterator it1, it2;
@@ -254,6 +258,26 @@ void init_machines() {
  void print_report() {
 	 std::ofstream myfile("../output/report.txt");
 	 myfile << "Report\n";
+	 int sum = 0;
+	 for (int i = 0; i < J.size(); i++)
+		 sum += J.at(i).time;
+	 myfile << "Task time avg "; myfile << sum / J.size(); myfile << "\n";
+	 sum = 0;
+	 for (int i = 0; i < M.size(); i++)
+		 sum += M.at(i).speed;
+	 myfile << "speed avg \n"; myfile << sum / M.size(); myfile << '/n';
+	 myfile << "______________________________________________________________________________________________________________________\n";
+	 myfile << "______________________________________________________________________________________________________________________\n";
+	 myfile << "tasks:\n";
+	/* int k = 0;
+	 for (int i = 0; i < J.size(); i++) {
+		 myfile << "| task index: "; myfile <<J.at(i).index; myfile << " \\ task time: "; myfile << J.at(i).time; myfile << " |";
+		 if (k % 5 == 0)
+			 myfile << '/n';
+		 k++;
+	 }*/
+
+
 	 myfile << "______________________________________________________________________________________________________________________\n";
 	 int j = 0;
 	 for(int i=0;i<M.size();i++){ 
@@ -303,6 +327,24 @@ void init_machines() {
 	 }
 	 return result;
  }
+ bool LocalSearchNxM(int n, int m) {
+	 bool flag = true;
+	 bool result = true;
+	 while (flag) {
+		 for (int offset = 1; offset < M.size(); offset++) {
+			 for (int i = 0; i < M.size() / 2; i++) {
+				 int* d = new int[n];
+				 GetBestOfNxM(i * 2, n, (i * 2 + offset) % M.size(), m, 0, d, 0, true);
+				 if(!GetBestOfNxMbool)
+				 SwapmTasks(NxMcom1Best, i * 2, NxMcom2Best, (i * 2 + offset) % M.size());
+				 flag = flag && GetBestOfNxMbool;
+			 }
+		 }
+		 result = result && flag;
+		 flag = !flag;
+	 }
+	 return result;
+ }
  bool LevelOne() {
 	 bool flag = true;
 	 bool result=true;
@@ -328,7 +370,13 @@ void init_machines() {
 	 while (flag) {
 		 flag = flag && LevelZero();
 		 flag = flag && LevelOne();
-		 flag = !flag;
+		 //flag = flag && LocalSearchNxM(1, 2);
+		// flag = flag && LocalSearchNxM(2, 1);
+		// flag = flag && LocalSearchNxM(1, 3);
+		// flag = flag && LocalSearchNxM(3, 1);
+		// flag = flag && LocalSearchNxM(2, 3);
+		// flag = flag && LocalSearchNxM(3, 2);
+ 		 flag = !flag;
 
 	 }
  }
@@ -372,7 +420,8 @@ void init_machines() {
  }
  void GetBestOfNxM( int m1, int m1tasksNo, int m2, int m2tasksNo, int index, int* comb, int i,bool firsttime) {
 	 if (M.at(m1).Tasks.size() < m1tasksNo || M.at(m2).Tasks.size() < m2tasksNo) {
-		 GetBestOfNxMbool = false;
+		 GetBestOfNxMbool = true;
+		 GetBestOf1xMbool = true;
 		 return;
 	 }
 	 if (firsttime) {
@@ -386,12 +435,14 @@ void init_machines() {
 		// std::vector<int> m1c(&comb,)
 		 int* d = new int[m2tasksNo];
 		 GetBestOf1xM(comb, m1, m2, m2tasksNo,0,d,0,true);
-		 if (Max1xM < MaxNxM) {
-			 MaxNxM = Max1xM;
-			 NxMcom1Best = std::vector<int>(comb, comb + m1tasksNo);//we have error here also 
-			 NxMcom2Best = com2Best1xM;
-			 GetBestOfNxMbool = false;
+		 if (!GetBestOf1xMbool) {
+			 if (Max1xM < MaxNxM) {
+				 MaxNxM = Max1xM;
+				 NxMcom1Best = std::vector<int>(comb, comb + m1tasksNo);//we have error here also 
+				 NxMcom2Best = com2Best1xM;
+				 GetBestOfNxMbool = false;
 
+			 }
 		 }
 		 return;
 	 }
@@ -442,20 +493,14 @@ int main()
 	int sum = 0;
 	
 	init_data();
-	for (int i = 0; i < J.size(); i++)
-		sum += J.at(i).time;
-	printf("Task time avg %d\n", sum / J.size());
-	sum = 0;
-	for (int i = 0; i < M.size(); i++)
-		sum += M.at(i).speed;
-	printf("speed avg %f\n", sum / 30.0);
+	 
 	init_machines();
 	int * temp = new int[2];
 	temp[1] = 5;
 	init_TasksTable();
-	GetBestOfNxM(3, 1, 1, 2, 0, temp, 0, true);
-	SwapmTasks(NxMcom1Best, 3, NxMcom2Best, 1);//have error should chose two tasks 
-	//LocalSearch();
+	//GetBestOfNxM(3, 1, 1, 1, 0, temp, 0, true);
+	//SwapmTasks(NxMcom1Best, 3, NxMcom2Best, 1);//have error should chose two tasks 
+	LocalSearch();
 	 
 	 
 	print_report();
