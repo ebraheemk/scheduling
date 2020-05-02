@@ -51,3 +51,5 @@ std::vector<int> com2Best1xM;
 bool GetBestOfNxMbool;
 bool GetBestOf1xMbool;
 int ** TasksTable;//we have on map index as key but on GetBestOfNxM we need elment on place i not with key i so we make array hold task key in place i for each machine
+//for report
+ 

@@ -258,36 +258,45 @@ void init_machines() {
  void print_summary() {
 	 int sum = 0;
 	 std::ofstream myfile("../output/summary.txt");
-	 myfile << "summary/n";
+	 myfile << "summary\n";
+	 myfile << "Tasks Count : "; myfile << J.size(); myfile << "\n";
+
 	 for (int i = 0; i < J.size(); i++)
 		 sum += J.at(i).time;
 	 myfile << "Total tasks time : "; myfile << sum; myfile << "\n";
-	 myfile << "Task avrge time : "; myfile << sum / J.size(); myfile << "\n";
+	 myfile << "Task time avrge   : "; myfile << sum / (float)J.size(); myfile << "\n";
+	 myfile << "machines count  :"; myfile << M.size(); myfile << "\n";
+	 sum = 0;
+	 for (int i = 0; i < M.size(); i++)
+		 sum += M.at(i).speed;
+	 myfile << "machines speed avg "; myfile << sum /(float) M.size(); myfile << '\n';
+	 float worst = (float)M.at(0).TasksTime / 4;
+	 for (int i = 1; i < M.size(); i++)
+	 {
+		 if (((float)M.at(i).TasksTime / 4) > worst)
+			 worst = (float)M.at(i).TasksTime / 4;
+	 }
+	 myfile << "Worst Machine Timing "; myfile << worst; myfile << '\n';
+	 myfile << "______________________________________________________________________________________________________________________\n";
+	 myfile << "______________________________________________________________________________________________________________________\n";
+	 myfile << "tasks:\n"; 
+	 int k = 0;
+	 for (int i = 0; i < J.size(); i++) {
+		 if (k == 3) {
+			 k = 0;
+			 myfile << "\n";
 
-
-
+		 }
+		 myfile << "| task index: "; myfile << J.at(i).index; myfile << " \\ task time: "; myfile << J.at(i).time; myfile << " |";
+		 
+		  
+		 k++;
+	 }
+	 
  }
  void print_report() {
 	 std::ofstream myfile("../output/report.txt");
 	 myfile << "Report\n";
-	 /*int sum = 0;
-	 for (int i = 0; i < J.size(); i++)
-		 sum += J.at(i).time;
-	 myfile << "Task time avg "; myfile << sum / J.size(); myfile << "\n";
-	 sum = 0;
-	 for (int i = 0; i < M.size(); i++)
-		 sum += M.at(i).speed;
-	 myfile << "speed avg "; myfile << sum / M.size(); myfile << '/n';
-	 myfile << "______________________________________________________________________________________________________________________\n";
-	 myfile << "______________________________________________________________________________________________________________________\n";
-	 myfile << "tasks:\n";*/
-	/* int k = 0;
-	 for (int i = 0; i < J.size(); i++) {
-		 myfile << "| task index: "; myfile <<J.at(i).index; myfile << " \\ task time: "; myfile << J.at(i).time; myfile << " |";
-		 if (k % 5 == 0)
-			 myfile << '/n';
-		 k++;
-	 }*/
 
 
 	 myfile << "______________________________________________________________________________________________________________________\n";
@@ -296,7 +305,7 @@ void init_machines() {
 	 myfile << "______________________________________________________________________________________________________________________\n";
 	 myfile << "##########################\n";
 	 myfile << "machine SPEED : ";  myfile << M.at(i).speed; myfile << '\n';
-	 myfile << "machine no : "; myfile << i; myfile << '\n';
+	 myfile << "machine index : "; myfile << M.at(i).index; myfile << '\n';
 	 myfile << "tasks total time: "; myfile << (float)M.at(i).TasksTime/4; myfile << '\n';
 	 myfile << "##########################\n";
 	 std::map<int, Node>::iterator it;
@@ -352,6 +361,17 @@ void init_machines() {
 				 flag = flag && GetBestOfNxMbool;
 			 }
 		 }
+
+		 for (int offset = 0; offset < M.size(); offset++) {
+			 for (int i = 0; i < M.size() ; i++) {
+				 int* d = new int[n];
+				 GetBestOfNxM(offset, n, i, m, 0, d, 0, true);
+				 if (!GetBestOfNxMbool)
+					 SwapmTasks(NxMcom1Best, offset, NxMcom2Best, i );
+				 flag = flag && GetBestOfNxMbool;
+			 }
+		 }
+
 		 result = result && flag;
 		 flag = !flag;
 	 }
@@ -381,9 +401,15 @@ void init_machines() {
 	 bool flag = true;
 	 while (flag) {
 		 flag = flag && LevelZero();
-		 flag = flag && LevelOne();
-		// flag = flag && LocalSearchNxM(1, 2);
-		// flag = flag && LocalSearchNxM(2, 1);
+		 //flag = flag && LevelOne();
+		// flag = flag && LocalSearchNxM(0, 1);
+
+		 flag = flag && LocalSearchNxM(1, 1);
+
+		 flag = flag && LocalSearchNxM(1, 2);
+		// flag = flag && LocalSearchNxM(1, 3);
+		
+
  		 flag = !flag;
 
 	 }
@@ -466,7 +492,7 @@ void init_machines() {
  void update_TasksTable(int machine_index){
 	 std::map<int, Node>::iterator j;
 	 int k = 0;
-	 TasksTable[machine_index] = (int*)malloc(M.at(machine_index).Tasks.size() * sizeof(int));
+	 TasksTable[machine_index] = (int*)realloc(TasksTable[machine_index],M.at(machine_index).Tasks.size() * sizeof(int));
 
 	 for (j = M.at(machine_index).Tasks.begin(); j != M.at(machine_index).Tasks.end(); ++j, k++)
 		 TasksTable[machine_index][k] = j->first;
