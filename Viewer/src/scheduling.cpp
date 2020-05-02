@@ -255,20 +255,32 @@ void init_machines() {
 
 
 }
+ void print_summary() {
+	 int sum = 0;
+	 std::ofstream myfile("../output/summary.txt");
+	 myfile << "summary/n";
+	 for (int i = 0; i < J.size(); i++)
+		 sum += J.at(i).time;
+	 myfile << "Total tasks time : "; myfile << sum; myfile << "\n";
+	 myfile << "Task avrge time : "; myfile << sum / J.size(); myfile << "\n";
+
+
+
+ }
  void print_report() {
 	 std::ofstream myfile("../output/report.txt");
 	 myfile << "Report\n";
-	 int sum = 0;
+	 /*int sum = 0;
 	 for (int i = 0; i < J.size(); i++)
 		 sum += J.at(i).time;
 	 myfile << "Task time avg "; myfile << sum / J.size(); myfile << "\n";
 	 sum = 0;
 	 for (int i = 0; i < M.size(); i++)
 		 sum += M.at(i).speed;
-	 myfile << "speed avg \n"; myfile << sum / M.size(); myfile << '/n';
+	 myfile << "speed avg "; myfile << sum / M.size(); myfile << '/n';
 	 myfile << "______________________________________________________________________________________________________________________\n";
 	 myfile << "______________________________________________________________________________________________________________________\n";
-	 myfile << "tasks:\n";
+	 myfile << "tasks:\n";*/
 	/* int k = 0;
 	 for (int i = 0; i < J.size(); i++) {
 		 myfile << "| task index: "; myfile <<J.at(i).index; myfile << " \\ task time: "; myfile << J.at(i).time; myfile << " |";
@@ -370,12 +382,8 @@ void init_machines() {
 	 while (flag) {
 		 flag = flag && LevelZero();
 		 flag = flag && LevelOne();
-		 //flag = flag && LocalSearchNxM(1, 2);
+		// flag = flag && LocalSearchNxM(1, 2);
 		// flag = flag && LocalSearchNxM(2, 1);
-		// flag = flag && LocalSearchNxM(1, 3);
-		// flag = flag && LocalSearchNxM(3, 1);
-		// flag = flag && LocalSearchNxM(2, 3);
-		// flag = flag && LocalSearchNxM(3, 2);
  		 flag = !flag;
 
 	 }
@@ -458,6 +466,8 @@ void init_machines() {
  void update_TasksTable(int machine_index){
 	 std::map<int, Node>::iterator j;
 	 int k = 0;
+	 TasksTable[machine_index] = (int*)malloc(M.at(machine_index).Tasks.size() * sizeof(int));
+
 	 for (j = M.at(machine_index).Tasks.begin(); j != M.at(machine_index).Tasks.end(); ++j, k++)
 		 TasksTable[machine_index][k] = j->first;
 
@@ -490,13 +500,12 @@ int main()
 	minheap v4 = minheap(13, 13);
 	s.insert(&s, &v4);
 	minheap k = s;*/
-	int sum = 0;
+	//int sum = 0;
 	
 	init_data();
 	 
 	init_machines();
-	int * temp = new int[2];
-	temp[1] = 5;
+	
 	init_TasksTable();
 	//GetBestOfNxM(3, 1, 1, 1, 0, temp, 0, true);
 	//SwapmTasks(NxMcom1Best, 3, NxMcom2Best, 1);//have error should chose two tasks 
@@ -504,6 +513,7 @@ int main()
 	 
 	 
 	print_report();
+	print_summary();
 	auto stop = high_resolution_clock::now();
 	auto duration = duration_cast<microseconds>(stop - start);
 	std::cout << duration.count()/1000000.0 << std::endl;
