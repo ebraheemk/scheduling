@@ -19,7 +19,7 @@ void PassTask(int task, int machine1, int machine2) {
 
 	M.at(machine2).Tasks.insert(temp1);
 	M.at(machine2).TasksTime += (temp1.second.time * 4) / M.at(machine2).speed;
-
+	swapCount[1][0]++;
 	update_TasksTable(machine1);
 	update_TasksTable(machine2);
 }
@@ -40,7 +40,7 @@ void SwapTasks(int task1, int machine1, int task2, int machine2) {
 	M.at(machine1).TasksTime += (temp2.second.time*4) / M.at(machine1).speed;
 	M.at(machine2).Tasks.insert(temp1);
 	M.at(machine2).TasksTime += (temp1.second.time*4)/ M.at(machine2).speed;
-
+	swapCount[1][1]++;
 
 	update_TasksTable(machine1);
 	update_TasksTable(machine2);
@@ -49,7 +49,7 @@ void SwapmTasks(std::vector<int> t1, int m1, std::vector<int>t2, int m2) {
 	std::map<int, Node>::iterator it1, it2;
 	std::vector<std::pair<int, Node>>temp1;
 	std::vector<std::pair<int, Node>>temp2;
-
+	swapCount[t1.size()][t2.size()]++;
 	int task,i;
 	for ( i = 0; i < t1.size(); i++) {
 		task = t1.at(i);
@@ -264,7 +264,7 @@ void init_machines() {
 	 for (int i = 0; i < J.size(); i++)
 		 sum += J.at(i).time;
 	 myfile << "Total tasks time : "; myfile << sum; myfile << "\n";
-	 myfile << "Task time avrge   : "; myfile << sum / (float)J.size(); myfile << "\n";
+	 myfile << "Task time average    : "; myfile << sum / (float)J.size(); myfile << "\n";
 	 myfile << "machines count  :"; myfile << M.size(); myfile << "\n";
 	 sum = 0;
 	 for (int i = 0; i < M.size(); i++)
@@ -277,6 +277,12 @@ void init_machines() {
 			 worst = (float)M.at(i).TasksTime / 4;
 	 }
 	 myfile << "Worst Machine Timing "; myfile << worst; myfile << '\n';
+	 for (int i = 0; i < 4; i++) {
+		 for (int j = 0; j < 4; j++) {
+			 myfile << "swap "; myfile << i; myfile << "->"; myfile << j; myfile << "Count "; myfile << swapCount[i][j]; myfile << '\n';
+
+		 }
+	 }
 	 myfile << "______________________________________________________________________________________________________________________\n";
 	 myfile << "______________________________________________________________________________________________________________________\n";
 	 myfile << "tasks:\n"; 
@@ -400,14 +406,16 @@ void init_machines() {
  void LocalSearch() {
 	 bool flag = true;
 	 while (flag) {
+		  
 		 flag = flag && LevelZero();
 		 //flag = flag && LevelOne();
 		// flag = flag && LocalSearchNxM(0, 1);
 
 		 flag = flag && LocalSearchNxM(1, 1);
-
 		 flag = flag && LocalSearchNxM(1, 2);
-		// flag = flag && LocalSearchNxM(1, 3);
+
+		  
+		//  
 		
 
  		 flag = !flag;
@@ -533,6 +541,13 @@ int main()
 	init_machines();
 	
 	init_TasksTable();
+	swapCount = (int**)malloc(4 * sizeof(int*));
+	for(int i=0;i<4;i++)
+		swapCount[i]= (int*)malloc(4 * sizeof(int));
+	for (int i = 0; i < 4; i++)
+		for (int j = 0; j < 4; j++)
+			swapCount[i][j] = 0;
+
 	//GetBestOfNxM(3, 1, 1, 1, 0, temp, 0, true);
 	//SwapmTasks(NxMcom1Best, 3, NxMcom2Best, 1);//have error should chose two tasks 
 	LocalSearch();
