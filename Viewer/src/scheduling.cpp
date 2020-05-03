@@ -425,8 +425,7 @@ void init_machines() {
 		  
 		 flag = flag && LevelZero();
 		 //flag = flag && LevelOne();
-		// flag = flag && LocalSearchNxM(0, 1);
-
+		 //Todo we should update the way we calc level for example 2->2 take time more time than 1->3 
 		 for (int i = 1; i <= maxLevelSearch; i++) {
 			 for (int j = i; j <= maxLevelSearch; j++) {
 				 if (j == 1 && i == 1) {
@@ -437,6 +436,7 @@ void init_machines() {
 					 flag = flag && temp;
 				 }
 				 else {
+
 					 if (j == 1) {
 						 if(TasksTable[i-1][maxLevelSearch]>0)
 							 temp = LocalSearchNxM(i, j);
