@@ -257,26 +257,40 @@ void init_machines() {
 }
  void print_summary() {
 	 int sum = 0;
+	 int minTask=J.at(0).time, maxTask= J.at(0).time;
 	 std::ofstream myfile("../output/summary.txt");
 	 myfile << "summary\n";
 	 myfile << "Tasks Count : "; myfile << J.size(); myfile << "\n";
 
-	 for (int i = 0; i < J.size(); i++)
+	 for (int i = 0; i < J.size(); i++) {
 		 sum += J.at(i).time;
+		 if (J.at(i).time > maxTask)
+			 maxTask = J.at(i).time;
+		 if (J.at(i).time < minTask)
+			 minTask = J.at(i).time;
+	 }
 	 myfile << "Total tasks time : "; myfile << sum; myfile << "\n";
 	 myfile << "Task time average    : "; myfile << sum / (float)J.size(); myfile << "\n";
 	 myfile << "machines count  :"; myfile << M.size(); myfile << "\n";
+	 float taskssum = sum;
 	 sum = 0;
 	 for (int i = 0; i < M.size(); i++)
 		 sum += M.at(i).speed;
 	 myfile << "machines speed avg "; myfile << sum /(float) M.size(); myfile << '\n';
+
+	 myfile << "max task time : "; myfile << maxTask; myfile << "\n";
+	 myfile << "min task time : "; myfile << minTask; myfile << "\n";
+	 float optimal = taskssum / (float)sum;
+	 myfile << "optimal timing if tasks count > 4xmachine count :  "; myfile << fmax(optimal, minTask); myfile << "\n";
+
+
 	 float worst = (float)M.at(0).TasksTime / 4;
 	 for (int i = 1; i < M.size(); i++)
 	 {
 		 if (((float)M.at(i).TasksTime / 4) > worst)
 			 worst = (float)M.at(i).TasksTime / 4;
 	 }
-	 myfile << "Worst Machine Timing "; myfile << worst; myfile << '\n';
+	 myfile << "Worst Machine Timing result  :  "; myfile << worst; myfile << '\n';
 	 for (int i = 0; i < 4; i++) {
 		 for (int j = 0; j < 4; j++) {
 			 myfile << "swap "; myfile << i; myfile << "->"; myfile << j; myfile << "Count "; myfile << swapCount[i][j]; myfile << '\n';
@@ -405,14 +419,49 @@ void init_machines() {
  }
  void LocalSearch() {
 	 bool flag = true;
+	 bool temp;
 	 while (flag) {
 		  
 		 flag = flag && LevelZero();
 		 //flag = flag && LevelOne();
 		// flag = flag && LocalSearchNxM(0, 1);
 
-		 flag = flag && LocalSearchNxM(1, 1);
-		 flag = flag && LocalSearchNxM(1, 2);
+		 for (int i = 1; i < 4; i++) {
+			 for (int j = i; j < 4; j++) {
+				 if (j == 1 && i == 1) {
+					 temp = LocalSearchNxM(i, j);
+					 if (temp) {
+						 i = 4; j = 4;
+					 }
+					 flag = flag && temp;
+				 }
+				 else {
+					 if (j == 1) {
+						 if(TasksTable[i-1][3]>0)
+							 temp = LocalSearchNxM(i, j);
+						 if (temp) {
+							 i = 4; j = 4;
+						 }
+						 flag = flag && temp;
+					 }
+					 else {
+						 if (TasksTable[i][j-1] > 0)
+							 temp = LocalSearchNxM(i, j);
+						 if (temp) {
+							 i = 4; j = 4;
+						 }
+						 flag = flag && temp;
+					 }
+				 }
+
+
+
+
+				 
+			 }
+		 }
+		// flag = flag && LocalSearchNxM(1, 1);
+		// flag = flag && LocalSearchNxM(1, 2);
 
 		  
 		//  
@@ -461,7 +510,7 @@ void init_machines() {
 
  }
  void GetBestOfNxM( int m1, int m1tasksNo, int m2, int m2tasksNo, int index, int* comb, int i,bool firsttime) {
-	 if (M.at(m1).Tasks.size() < m1tasksNo || M.at(m2).Tasks.size() < m2tasksNo) {
+	 if ((M.at(m1).Tasks.size() < m1tasksNo || M.at(m2).Tasks.size() < m2tasksNo)||(m1==m2)) {
 		 GetBestOfNxMbool = true;
 		 GetBestOf1xMbool = true;
 		 return;
