@@ -291,8 +291,8 @@ void init_machines() {
 			 worst = (float)M.at(i).TasksTime / 4;
 	 }
 	 myfile << "Worst Machine Timing result  :  "; myfile << worst; myfile << '\n';
-	 for (int i = 0; i < 4; i++) {
-		 for (int j = 0; j < 4; j++) {
+	 for (int i = 0; i < (maxLevelSearch + 1); i++) {
+		 for (int j = i; j < (maxLevelSearch + 1); j++) {
 			 myfile << "swap "; myfile << i; myfile << "->"; myfile << j; myfile << "Count "; myfile << swapCount[i][j]; myfile << '\n';
 
 		 }
@@ -427,8 +427,8 @@ void init_machines() {
 		 //flag = flag && LevelOne();
 		// flag = flag && LocalSearchNxM(0, 1);
 
-		 for (int i = 1; i < 4; i++) {
-			 for (int j = i; j < 4; j++) {
+		 for (int i = 1; i <= maxLevelSearch; i++) {
+			 for (int j = i; j <= maxLevelSearch; j++) {
 				 if (j == 1 && i == 1) {
 					 temp = LocalSearchNxM(i, j);
 					 if (temp) {
@@ -438,7 +438,7 @@ void init_machines() {
 				 }
 				 else {
 					 if (j == 1) {
-						 if(TasksTable[i-1][3]>0)
+						 if(TasksTable[i-1][maxLevelSearch]>0)
 							 temp = LocalSearchNxM(i, j);
 						 if (temp) {
 							 i = 4; j = 4;
@@ -592,11 +592,11 @@ int main()
 	init_machines();
 	
 	init_TasksTable();
-	swapCount = (int**)malloc(4 * sizeof(int*));
-	for(int i=0;i<4;i++)
-		swapCount[i]= (int*)malloc(4 * sizeof(int));
-	for (int i = 0; i < 4; i++)
-		for (int j = 0; j < 4; j++)
+	swapCount = (int**)malloc((maxLevelSearch+1) * sizeof(int*));
+	for(int i=0;i< (maxLevelSearch + 1);i++)
+		swapCount[i]= (int*)malloc((maxLevelSearch + 1) * sizeof(int));
+	for (int i = 0; i < (maxLevelSearch + 1); i++)
+		for (int j = 0; j < (maxLevelSearch + 1); j++)
 			swapCount[i][j] = 0;
 
 	//GetBestOfNxM(3, 1, 1, 1, 0, temp, 0, true);

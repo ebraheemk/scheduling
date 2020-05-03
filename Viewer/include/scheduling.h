@@ -8,9 +8,9 @@
 #include <fstream>
 #include <string>
 #include <maxheap.h>
-#define MachineNum 5
-#define taskNum 20
-#define maxJopTime 50
+
+
+#define maxLevelSearch 2
 int speeds [3] = { 1,2,4 };
 std::vector<Node> J;
 std::vector<machin> M;
