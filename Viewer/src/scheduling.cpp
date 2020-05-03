@@ -371,10 +371,11 @@ void init_machines() {
  bool LocalSearchNxM(int n, int m) {
 	 bool flag = true;
 	 bool result = true;
+	 int* d = new int[n];
 	 while (flag) {
 		 for (int offset = 1; offset < M.size(); offset++) {
 			 for (int i = 0; i < M.size() / 2; i++) {
-				 int* d = new int[n];
+				  
 				 GetBestOfNxM(i * 2, n, (i * 2 + offset) % M.size(), m, 0, d, 0, true);
 				 if(!GetBestOfNxMbool)
 				 SwapmTasks(NxMcom1Best, i * 2, NxMcom2Best, (i * 2 + offset) % M.size());
@@ -384,7 +385,7 @@ void init_machines() {
 
 		 for (int offset = 0; offset < M.size(); offset++) {
 			 for (int i = 0; i < M.size() ; i++) {
-				 int* d = new int[n];
+				
 				 GetBestOfNxM(offset, n, i, m, 0, d, 0, true);
 				 if (!GetBestOfNxMbool)
 					 SwapmTasks(NxMcom1Best, offset, NxMcom2Best, i );
@@ -460,7 +461,7 @@ void init_machines() {
 				 
 			 }
 		 }
-		// flag = flag && LocalSearchNxM(1, 1);
+		// flag = flag && LocalSearchNxM(1, 1); 
 		// flag = flag && LocalSearchNxM(1, 2);
 
 		  
@@ -518,14 +519,15 @@ void init_machines() {
 	 if (firsttime) {
 		  MaxNxM= std::fmax(M.at(m1).TasksTime, M.at(m2).TasksTime);
 		  GetBestOfNxMbool = true;
-
+		  free(d_nm);
+		  d_nm = new int[m2tasksNo];
 		  
 
 	  }
 	 if (index == m1tasksNo) {
 		// std::vector<int> m1c(&comb,)
-		 int* d = new int[m2tasksNo];
-		 GetBestOf1xM(comb, m1, m2, m2tasksNo,0,d,0,true);
+		 
+		 GetBestOf1xM(comb, m1, m2, m2tasksNo,0, d_nm,0,true);
 		 if (!GetBestOf1xMbool) {
 			 if (Max1xM < MaxNxM) {
 				 MaxNxM = Max1xM;
@@ -601,7 +603,7 @@ int main()
 	//SwapmTasks(NxMcom1Best, 3, NxMcom2Best, 1);//have error should chose two tasks 
 	LocalSearch();
 	 
-	 
+	printf("local search done write report\n");
 	print_report();
 	print_summary();
 	auto stop = high_resolution_clock::now();
