@@ -292,7 +292,7 @@ void init_machines() {
 	 }
 	 myfile << "Worst Machine Timing result  :  "; myfile << worst; myfile << '\n';
 	 for (int i = 0; i < (maxLevelSearch + 1); i++) {
-		 for (int j = i; j < (maxLevelSearch + 1); j++) {
+		 for (int j = 0; j < (maxLevelSearch + 1); j++) {
 			 myfile << "swap "; myfile << i; myfile << "->"; myfile << j; myfile << "Count "; myfile << swapCount[i][j]; myfile << '\n';
 
 		 }
