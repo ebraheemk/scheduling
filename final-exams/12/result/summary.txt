@@ -1,0 +1,25 @@
+summary
+Tasks Count : 9
+Total tasks time : 48
+Task time average    : 5.33333
+machines count  :4
+machines speed avg 1.5
+max task time : 8
+min task time : 3
+optimal timing if tasks count > 4xmachine count :  8
+Worst Machine Timing result  :  9
+swap 0->0Count 0
+swap 0->1Count 0
+swap 0->2Count 0
+swap 1->0Count 3
+swap 1->1Count 0
+swap 1->2Count 0
+swap 2->0Count 0
+swap 2->1Count 0
+swap 2->2Count 0
+______________________________________________________________________________________________________________________
+______________________________________________________________________________________________________________________
+tasks:
+| task index: 0 \ task time: 4 || task index: 1 \ task time: 4 || task index: 2 \ task time: 3 |
+| task index: 3 \ task time: 3 || task index: 4 \ task time: 6 || task index: 5 \ task time: 6 |
+| task index: 6 \ task time: 6 || task index: 7 \ task time: 8 || task index: 8 \ task time: 8 |
