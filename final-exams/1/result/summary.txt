@@ -1,0 +1,32 @@
+summary
+Tasks Count : 30
+Total tasks time : 924
+Task time average    : 30.8
+machines count  :6
+machines speed avg 2.33333
+max task time : 100
+min task time : 4
+optimal timing if tasks count > 4xmachine count :  66
+Worst Machine Timing result  :  66.5
+swap 0->0Count 0
+swap 0->1Count 0
+swap 0->2Count 0
+swap 1->0Count 53
+swap 1->1Count 5
+swap 1->2Count 0
+swap 2->0Count 0
+swap 2->1Count 0
+swap 2->2Count 0
+______________________________________________________________________________________________________________________
+______________________________________________________________________________________________________________________
+tasks:
+| task index: 0 \ task time: 100 || task index: 1 \ task time: 100 || task index: 2 \ task time: 100 |
+| task index: 3 \ task time: 100 || task index: 4 \ task time: 30 || task index: 5 \ task time: 30 |
+| task index: 6 \ task time: 30 || task index: 7 \ task time: 30 || task index: 8 \ task time: 30 |
+| task index: 9 \ task time: 30 || task index: 10 \ task time: 30 || task index: 11 \ task time: 30 |
+| task index: 12 \ task time: 30 || task index: 13 \ task time: 30 || task index: 14 \ task time: 30 |
+| task index: 15 \ task time: 30 || task index: 16 \ task time: 30 || task index: 17 \ task time: 30 |
+| task index: 18 \ task time: 12 || task index: 19 \ task time: 12 || task index: 20 \ task time: 12 |
+| task index: 21 \ task time: 12 || task index: 22 \ task time: 12 || task index: 23 \ task time: 12 |
+| task index: 24 \ task time: 6 || task index: 25 \ task time: 6 || task index: 26 \ task time: 6 |
+| task index: 27 \ task time: 6 || task index: 28 \ task time: 4 || task index: 29 \ task time: 4 |

@@ -93,7 +93,9 @@ int GetBestThrow(int machine1, int  machine2) {
 	for (i = M.at(machine1).Tasks.begin(); i != M.at(machine1).Tasks.end(); ++i) {
 			a = M.at(machine1).TasksTime - (i->second.time * 4) / m1s;
 			b = M.at(machine2).TasksTime + (i->second.time * 4) / m2s;
-			if (std::fmax(a ,b) < max) {
+			//if (std::fmax(a ,b) < max) {
+			if ((std::fmax(a, b) < max) || ((std::fmax(a, b) == max) && ((a + b) < (M.at(machine1).TasksTime + M.at(machine2).TasksTime)))) {
+
 				max = std::fmax(a, b);
 				t1 = i->second.index;
 		}
@@ -380,6 +382,13 @@ void init_machines() {
 				 if(!GetBestOfNxMbool)
 				 SwapmTasks(NxMcom1Best, i * 2, NxMcom2Best, (i * 2 + offset) % M.size());
 				 flag = flag && GetBestOfNxMbool;
+
+				 /*
+			 GetBestOfNxM((i * 2 + offset) % M.size() , n, i * 2, m, 0, d, 0, true);
+			 if (!GetBestOfNxMbool)
+				 SwapmTasks(NxMcom1Best, (i * 2 + offset) % M.size()  , NxMcom2Best, i * 2);
+			 flag = flag && GetBestOfNxMbool;*/
+
 			 }
 		 }
 
@@ -390,6 +399,11 @@ void init_machines() {
 				 if (!GetBestOfNxMbool)
 					 SwapmTasks(NxMcom1Best, offset, NxMcom2Best, i );
 				 flag = flag && GetBestOfNxMbool;
+
+				 /* GetBestOfNxM(i, n, offset, m, 0, d, 0, true);
+				 if (!GetBestOfNxMbool)
+					 SwapmTasks(NxMcom1Best, i, NxMcom2Best, offset);
+				 flag = flag && GetBestOfNxMbool;*/
 			 }
 		 }
 
@@ -491,7 +505,9 @@ void init_machines() {
 			 b = b - it2->second.time * 4 / M.at(m2).speed;
 			 a = a + it2->second.time * 4 / M.at(m1).speed;
 		 }
-		 if (std::fmax(a, b) < Max1xM) {
+		 //if (std::fmax(a, b) < Max1xM) {
+		 if ((std::fmax(a, b) < Max1xM) || ((std::fmax(a, b) == Max1xM) && ((a + b) < (M.at(m1).TasksTime + M.at(m2).TasksTime)))) {
+
 			 GetBestOf1xMbool = false;
 			 Max1xM = fmax(a, b);
 			 com2Best1xM= std::vector<int>(comb, comb + m2tasksNo);//we have error here 
