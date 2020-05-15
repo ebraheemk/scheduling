@@ -1,0 +1,39 @@
+Report
+______________________________________________________________________________________________________________________
+______________________________________________________________________________________________________________________
+##########################
+machine SPEED : 2
+machine index : 0
+tasks total time: 935.5
+##########################
+| task index: 1 \ task time: 153 || task index: 2 \ task time: 101 || task index: 20 \ task time: 136 |
+| task index: 21 \ task time: 149 || task index: 27 \ task time: 170 || task index: 28 \ task time: 180 |
+| task index: 34 \ task time: 198 || task index: 35 \ task time: 182 || task index: 39 \ task time: 111 |
+| task index: 44 \ task time: 196 || task index: 45 \ task time: 111 || task index: 49 \ task time: 184 |
+______________________________________________________________________________________________________________________
+##########################
+machine SPEED : 2
+machine index : 1
+tasks total time: 935.5
+##########################
+
+| task index: 0 \ task time: 138 || task index: 3 \ task time: 175 || task index: 4 \ task time: 120 |
+| task index: 9 \ task time: 170 || task index: 10 \ task time: 160 || task index: 22 \ task time: 112 |
+| task index: 24 \ task time: 161 || task index: 25 \ task time: 181 || task index: 26 \ task time: 104 |
+| task index: 31 \ task time: 105 || task index: 32 \ task time: 135 || task index: 43 \ task time: 136 |
+| task index: 48 \ task time: 174 |
+______________________________________________________________________________________________________________________
+##########################
+machine SPEED : 4
+machine index : 2
+tasks total time: 935.75
+##########################
+| task index: 5 \ task time: 103 || task index: 6 \ task time: 128 |
+| task index: 7 \ task time: 191 || task index: 8 \ task time: 138 || task index: 11 \ task time: 127 |
+| task index: 12 \ task time: 163 || task index: 13 \ task time: 131 || task index: 14 \ task time: 192 |
+| task index: 15 \ task time: 175 || task index: 16 \ task time: 126 || task index: 17 \ task time: 145 |
+| task index: 18 \ task time: 144 || task index: 19 \ task time: 176 || task index: 23 \ task time: 168 |
+| task index: 29 \ task time: 140 || task index: 30 \ task time: 108 || task index: 33 \ task time: 185 |
+| task index: 36 \ task time: 109 || task index: 37 \ task time: 163 || task index: 38 \ task time: 176 |
+| task index: 40 \ task time: 178 || task index: 41 \ task time: 108 || task index: 42 \ task time: 193 |
+| task index: 46 \ task time: 108 || task index: 47 \ task time: 168 |

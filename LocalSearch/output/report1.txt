@@ -1,0 +1,611 @@
+Report
+______________________________________________________________________________________________________________________
+______________________________________________________________________________________________________________________
+##########################
+machine SPEED : 2
+machine no : 0
+tasks total time: 82816
+##########################
+| task index: 2 \ task time: 1087 || task index: 46 \ task time: 1756 || task index: 69 \ task time: 9269 |
+| task index: 82 \ task time: 6040 || task index: 93 \ task time: 9592 || task index: 110 \ task time: 8357 |
+| task index: 112 \ task time: 2707 || task index: 130 \ task time: 1248 || task index: 146 \ task time: 4125 |
+| task index: 194 \ task time: 8646 || task index: 241 \ task time: 7308 || task index: 247 \ task time: 2388 |
+| task index: 254 \ task time: 4717 || task index: 257 \ task time: 7803 || task index: 268 \ task time: 2720 |
+| task index: 299 \ task time: 2823 || task index: 341 \ task time: 7809 || task index: 382 \ task time: 7833 |
+| task index: 393 \ task time: 4643 || task index: 439 \ task time: 3504 || task index: 445 \ task time: 3513 |
+| task index: 495 \ task time: 4 || task index: 509 \ task time: 5338 || task index: 557 \ task time: 2922 |
+| task index: 676 \ task time: 5736 || task index: 777 \ task time: 7704 || task index: 802 \ task time: 593 |
+| task index: 873 \ task time: 597 || task index: 933 \ task time: 4821 || task index: 1060 \ task time: 525 |
+| task index: 1065 \ task time: 4105 || task index: 1088 \ task time: 9522 || task index: 1103 \ task time: 8951 |
+| task index: 1109 \ task time: 6926 |
+______________________________________________________________________________________________________________________
+##########################
+machine SPEED : 4
+machine no : 1
+tasks total time: 82814
+##########################
+| task index: 38 \ task time: 4753 || task index: 41 \ task time: 9480 |
+| task index: 45 \ task time: 7319 || task index: 64 \ task time: 8996 || task index: 79 \ task time: 8363 |
+| task index: 108 \ task time: 4752 || task index: 117 \ task time: 4127 || task index: 124 \ task time: 9544 |
+| task index: 135 \ task time: 1248 || task index: 167 \ task time: 8519 || task index: 177 \ task time: 5328 |
+| task index: 181 \ task time: 2412 || task index: 193 \ task time: 7343 || task index: 208 \ task time: 6700 |
+| task index: 269 \ task time: 1831 || task index: 275 \ task time: 9558 || task index: 284 \ task time: 7313 |
+| task index: 302 \ task time: 1831 || task index: 369 \ task time: 8371 || task index: 388 \ task time: 7 |
+| task index: 390 \ task time: 7346 || task index: 391 \ task time: 518 || task index: 398 \ task time: 6082 |
+| task index: 413 \ task time: 2958 || task index: 430 \ task time: 10 || task index: 451 \ task time: 4665 |
+| task index: 462 \ task time: 1836 || task index: 466 \ task time: 1259 || task index: 526 \ task time: 8991 |
+| task index: 548 \ task time: 9557 || task index: 565 \ task time: 6061 || task index: 571 \ task time: 2424 |
+| task index: 572 \ task time: 1838 || task index: 596 \ task time: 4731 || task index: 616 \ task time: 8382 |
+| task index: 625 \ task time: 3616 || task index: 643 \ task time: 475 || task index: 645 \ task time: 6725 |
+| task index: 707 \ task time: 8996 || task index: 714 \ task time: 2972 || task index: 721 \ task time: 5331 |
+| task index: 731 \ task time: 7812 || task index: 788 \ task time: 278 || task index: 805 \ task time: 3539 |
+| task index: 806 \ task time: 2443 || task index: 824 \ task time: 6743 || task index: 834 \ task time: 1202 |
+| task index: 896 \ task time: 4125 || task index: 920 \ task time: 1264 || task index: 931 \ task time: 2947 |
+| task index: 955 \ task time: 2406 || task index: 971 \ task time: 6047 || task index: 973 \ task time: 6711 |
+| task index: 981 \ task time: 5329 || task index: 984 \ task time: 2931 || task index: 1007 \ task time: 1249 |
+| task index: 1054 \ task time: 9363 || task index: 1076 \ task time: 9555 || task index: 1105 \ task time: 4136 |
+| task index: 1108 \ task time: 9006 || task index: 1112 \ task time: 5353 || task index: 1115 \ task time: 4704 |
+| task index: 1126 \ task time: 12 || task index: 1129 \ task time: 506 || task index: 1136 \ task time: 6048 |
+| task index: 1164 \ task time: 3521 || task index: 1171 \ task time: 7324 || task index: 1181 \ task time: 4137 |
+______________________________________________________________________________________________________________________
+##########################
+machine SPEED : 4
+machine no : 2
+tasks total time: 82814
+##########################
+
+| task index: 49 \ task time: 2098 || task index: 59 \ task time: 7343 || task index: 62 \ task time: 4808 |
+| task index: 67 \ task time: 7342 || task index: 70 \ task time: 4780 || task index: 81 \ task time: 7853 |
+| task index: 87 \ task time: 6107 || task index: 89 \ task time: 8390 || task index: 101 \ task time: 9575 |
+| task index: 127 \ task time: 3557 || task index: 185 \ task time: 3463 || task index: 212 \ task time: 1867 |
+| task index: 216 \ task time: 5565 || task index: 220 \ task time: 2584 || task index: 221 \ task time: 3035 |
+| task index: 297 \ task time: 3680 || task index: 308 \ task time: 2490 || task index: 331 \ task time: 4793 |
+| task index: 338 \ task time: 4843 || task index: 340 \ task time: 6088 || task index: 346 \ task time: 5359 |
+| task index: 359 \ task time: 3555 || task index: 389 \ task time: 9012 || task index: 411 \ task time: 214 |
+| task index: 412 \ task time: 1302 || task index: 418 \ task time: 3558 || task index: 427 \ task time: 3004 |
+| task index: 474 \ task time: 1280 || task index: 478 \ task time: 5371 || task index: 488 \ task time: 9007 |
+| task index: 511 \ task time: 42 || task index: 541 \ task time: 4011 || task index: 568 \ task time: 34 |
+| task index: 570 \ task time: 5363 || task index: 579 \ task time: 2205 || task index: 598 \ task time: 6711 |
+| task index: 626 \ task time: 1298 || task index: 647 \ task time: 6744 || task index: 673 \ task time: 7845 |
+| task index: 680 \ task time: 6750 || task index: 685 \ task time: 1669 || task index: 686 \ task time: 46 |
+| task index: 700 \ task time: 9047 || task index: 718 \ task time: 7353 || task index: 719 \ task time: 8406 |
+| task index: 742 \ task time: 2455 || task index: 756 \ task time: 2073 || task index: 760 \ task time: 4163 |
+| task index: 831 \ task time: 4991 || task index: 837 \ task time: 9588 || task index: 863 \ task time: 6231 |
+| task index: 880 \ task time: 6099 || task index: 885 \ task time: 2973 || task index: 902 \ task time: 532 |
+| task index: 911 \ task time: 9060 || task index: 918 \ task time: 5632 || task index: 919 \ task time: 7841 |
+| task index: 964 \ task time: 4165 || task index: 1002 \ task time: 4175 || task index: 1018 \ task time: 7864 |
+| task index: 1101 \ task time: 5385 || task index: 1107 \ task time: 8390 || task index: 1118 \ task time: 7277 |
+| task index: 1130 \ task time: 562 || task index: 1142 \ task time: 2472 || task index: 1165 \ task time: 7833 |
+| task index: 1172 \ task time: 2470 || task index: 1177 \ task time: 9580 |
+______________________________________________________________________________________________________________________
+##########################
+machine SPEED : 1
+machine no : 3
+tasks total time: 82812
+##########################
+| task index: 19 \ task time: 470 |
+| task index: 25 \ task time: 8848 || task index: 60 \ task time: 4192 || task index: 200 \ task time: 1886 |
+| task index: 347 \ task time: 6026 || task index: 428 \ task time: 5 || task index: 437 \ task time: 7355 |
+| task index: 518 \ task time: 3569 || task index: 563 \ task time: 6042 || task index: 653 \ task time: 7409 |
+| task index: 667 \ task time: 4930 || task index: 717 \ task time: 6756 || task index: 733 \ task time: 1307 |
+| task index: 872 \ task time: 2373 || task index: 1084 \ task time: 9048 || task index: 1095 \ task time: 9586 |
+| task index: 1117 \ task time: 3010 |
+______________________________________________________________________________________________________________________
+##########################
+machine SPEED : 4
+machine no : 4
+tasks total time: 82812
+##########################
+| task index: 7 \ task time: 9291 || task index: 9 \ task time: 6542 |
+| task index: 13 \ task time: 4234 || task index: 66 \ task time: 8483 || task index: 106 \ task time: 9611 |
+| task index: 179 \ task time: 3826 || task index: 180 \ task time: 6217 || task index: 182 \ task time: 3581 |
+| task index: 196 \ task time: 1343 || task index: 210 \ task time: 7441 || task index: 215 \ task time: 1362 |
+| task index: 225 \ task time: 1383 || task index: 262 \ task time: 1927 || task index: 266 \ task time: 8675 |
+| task index: 267 \ task time: 2503 || task index: 282 \ task time: 4824 || task index: 296 \ task time: 1923 |
+| task index: 313 \ task time: 9055 || task index: 321 \ task time: 3581 || task index: 327 \ task time: 5436 |
+| task index: 361 \ task time: 4208 || task index: 362 \ task time: 8292 || task index: 376 \ task time: 8432 |
+| task index: 406 \ task time: 6149 || task index: 410 \ task time: 100 || task index: 435 \ task time: 6807 |
+| task index: 449 \ task time: 7885 || task index: 457 \ task time: 6145 || task index: 459 \ task time: 7892 |
+| task index: 498 \ task time: 1323 || task index: 512 \ task time: 4227 || task index: 538 \ task time: 179 |
+| task index: 543 \ task time: 6548 || task index: 581 \ task time: 104 || task index: 591 \ task time: 3037 |
+| task index: 595 \ task time: 3020 || task index: 601 \ task time: 7424 || task index: 606 \ task time: 6120 |
+| task index: 630 \ task time: 6802 || task index: 633 \ task time: 1915 || task index: 651 \ task time: 9624 |
+| task index: 671 \ task time: 6223 || task index: 722 \ task time: 2594 || task index: 734 \ task time: 5765 |
+| task index: 735 \ task time: 9072 || task index: 736 \ task time: 5423 || task index: 775 \ task time: 8481 |
+| task index: 808 \ task time: 244 || task index: 810 \ task time: 2510 || task index: 833 \ task time: 7882 |
+| task index: 839 \ task time: 9629 || task index: 891 \ task time: 3112 || task index: 925 \ task time: 3574 |
+| task index: 934 \ task time: 2508 || task index: 958 \ task time: 384 || task index: 991 \ task time: 586 |
+| task index: 992 \ task time: 6787 || task index: 995 \ task time: 1559 || task index: 1029 \ task time: 6806 |
+| task index: 1032 \ task time: 5421 || task index: 1034 \ task time: 616 || task index: 1063 \ task time: 4214 |
+| task index: 1072 \ task time: 2273 || task index: 1132 \ task time: 8487 || task index: 1138 \ task time: 1929 |
+| task index: 1148 \ task time: 5450 || task index: 1160 \ task time: 4825 || task index: 1183 \ task time: 7426 |
+______________________________________________________________________________________________________________________
+##########################
+machine SPEED : 1
+machine no : 5
+tasks total time: 82813
+##########################
+
+| task index: 6 \ task time: 5414 || task index: 23 \ task time: 4816 || task index: 31 \ task time: 2529 |
+| task index: 84 \ task time: 6153 || task index: 151 \ task time: 1074 || task index: 157 \ task time: 112 |
+| task index: 276 \ task time: 7894 || task index: 328 \ task time: 9429 || task index: 407 \ task time: 7433 |
+| task index: 441 \ task time: 9084 || task index: 460 \ task time: 6762 || task index: 510 \ task time: 2846 |
+| task index: 611 \ task time: 4100 || task index: 620 \ task time: 1930 || task index: 670 \ task time: 8393 |
+| task index: 843 \ task time: 1237 || task index: 894 \ task time: 3607 |
+______________________________________________________________________________________________________________________
+##########################
+machine SPEED : 4
+machine no : 6
+tasks total time: 82813
+##########################
+| task index: 11 \ task time: 7907 |
+| task index: 28 \ task time: 4295 || task index: 37 \ task time: 7710 || task index: 91 \ task time: 1407 |
+| task index: 122 \ task time: 63 || task index: 162 \ task time: 6884 || task index: 174 \ task time: 9125 |
+| task index: 175 \ task time: 4813 || task index: 176 \ task time: 1988 || task index: 203 \ task time: 9121 |
+| task index: 205 \ task time: 9098 || task index: 251 \ task time: 7463 || task index: 273 \ task time: 9102 |
+| task index: 323 \ task time: 9706 || task index: 329 \ task time: 3046 || task index: 350 \ task time: 4270 |
+| task index: 364 \ task time: 4853 || task index: 377 \ task time: 1967 || task index: 394 \ task time: 2551 |
+| task index: 417 \ task time: 8511 || task index: 442 \ task time: 8493 || task index: 446 \ task time: 3621 |
+| task index: 471 \ task time: 4828 || task index: 480 \ task time: 9679 || task index: 483 \ task time: 1383 |
+| task index: 491 \ task time: 4068 || task index: 502 \ task time: 3098 || task index: 515 \ task time: 1984 |
+| task index: 516 \ task time: 119 || task index: 529 \ task time: 2138 || task index: 545 \ task time: 2549 |
+| task index: 573 \ task time: 2600 || task index: 584 \ task time: 2192 || task index: 592 \ task time: 5732 |
+| task index: 622 \ task time: 2630 || task index: 638 \ task time: 6178 || task index: 666 \ task time: 9742 |
+| task index: 677 \ task time: 1392 || task index: 684 \ task time: 145 || task index: 713 \ task time: 3056 |
+| task index: 723 \ task time: 1401 || task index: 729 \ task time: 885 || task index: 739 \ task time: 139 |
+| task index: 776 \ task time: 1032 || task index: 798 \ task time: 6935 || task index: 817 \ task time: 8110 |
+| task index: 829 \ task time: 6496 || task index: 830 \ task time: 2715 || task index: 841 \ task time: 7774 |
+| task index: 851 \ task time: 4289 || task index: 900 \ task time: 4302 || task index: 907 \ task time: 1475 |
+| task index: 945 \ task time: 3605 || task index: 946 \ task time: 9779 || task index: 947 \ task time: 7450 |
+| task index: 953 \ task time: 6874 || task index: 965 \ task time: 6609 || task index: 1011 \ task time: 7618 |
+| task index: 1048 \ task time: 1442 || task index: 1057 \ task time: 3051 || task index: 1085 \ task time: 5460 |
+| task index: 1091 \ task time: 111 || task index: 1097 \ task time: 7921 || task index: 1116 \ task time: 6186 |
+| task index: 1128 \ task time: 8510 || task index: 1161 \ task time: 5724 || task index: 1176 \ task time: 6185 |
+| task index: 1184 \ task time: 9670 |
+______________________________________________________________________________________________________________________
+##########################
+machine SPEED : 2
+machine no : 7
+tasks total time: 82816
+##########################
+| task index: 20 \ task time: 6209 || task index: 142 \ task time: 6885 |
+| task index: 144 \ task time: 8518 || task index: 161 \ task time: 2578 || task index: 286 \ task time: 2000 |
+| task index: 298 \ task time: 658 || task index: 319 \ task time: 8518 || task index: 345 \ task time: 76 |
+| task index: 358 \ task time: 149 || task index: 405 \ task time: 4857 || task index: 482 \ task time: 3640 |
+| task index: 506 \ task time: 6889 || task index: 519 \ task time: 642 || task index: 589 \ task time: 9056 |
+| task index: 590 \ task time: 7450 || task index: 599 \ task time: 2578 || task index: 663 \ task time: 5500 |
+| task index: 695 \ task time: 9718 || task index: 737 \ task time: 7815 || task index: 784 \ task time: 7511 |
+| task index: 823 \ task time: 9147 || task index: 853 \ task time: 7948 || task index: 876 \ task time: 6210 |
+| task index: 960 \ task time: 2361 || task index: 966 \ task time: 4865 || task index: 970 \ task time: 4244 |
+| task index: 978 \ task time: 3617 || task index: 1016 \ task time: 3083 || task index: 1028 \ task time: 1244 |
+| task index: 1040 \ task time: 9710 || task index: 1080 \ task time: 1990 || task index: 1122 \ task time: 174 |
+| task index: 1159 \ task time: 5493 || task index: 1175 \ task time: 4299 |
+______________________________________________________________________________________________________________________
+##########################
+machine SPEED : 1
+machine no : 8
+tasks total time: 82814
+##########################
+| task index: 83 \ task time: 8596 |
+| task index: 121 \ task time: 1076 || task index: 156 \ task time: 5871 || task index: 375 \ task time: 5118 |
+| task index: 385 \ task time: 4654 || task index: 395 \ task time: 5604 || task index: 486 \ task time: 907 |
+| task index: 555 \ task time: 9806 || task index: 655 \ task time: 9797 || task index: 779 \ task time: 1782 |
+| task index: 812 \ task time: 1949 || task index: 858 \ task time: 7172 || task index: 908 \ task time: 2497 |
+| task index: 932 \ task time: 9135 || task index: 1073 \ task time: 2009 || task index: 1147 \ task time: 3104 |
+| task index: 1197 \ task time: 3737 |
+______________________________________________________________________________________________________________________
+##########################
+machine SPEED : 1
+machine no : 9
+tasks total time: 82826
+##########################
+| task index: 0 \ task time: 391 || task index: 48 \ task time: 7953 |
+| task index: 224 \ task time: 7459 || task index: 235 \ task time: 9150 || task index: 291 \ task time: 5462 |
+| task index: 301 \ task time: 9761 || task index: 464 \ task time: 4867 || task index: 761 \ task time: 3086 |
+| task index: 769 \ task time: 1443 || task index: 976 \ task time: 2092 || task index: 1006 \ task time: 2759 |
+| task index: 1008 \ task time: 619 || task index: 1013 \ task time: 3650 || task index: 1046 \ task time: 5479 |
+| task index: 1121 \ task time: 6939 || task index: 1169 \ task time: 7419 || task index: 1182 \ task time: 4297 |
+______________________________________________________________________________________________________________________
+##########################
+machine SPEED : 2
+machine no : 10
+tasks total time: 82820
+##########################
+
+| task index: 12 \ task time: 5553 || task index: 27 \ task time: 7488 || task index: 139 \ task time: 622 |
+| task index: 154 \ task time: 6196 || task index: 160 \ task time: 184 || task index: 186 \ task time: 2046 |
+| task index: 189 \ task time: 3094 || task index: 360 \ task time: 633 || task index: 372 \ task time: 2738 |
+| task index: 392 \ task time: 9165 || task index: 396 \ task time: 1468 || task index: 404 \ task time: 7972 |
+| task index: 432 \ task time: 6602 || task index: 477 \ task time: 8873 || task index: 481 \ task time: 6245 |
+| task index: 540 \ task time: 1805 || task index: 558 \ task time: 9803 || task index: 576 \ task time: 4331 |
+| task index: 580 \ task time: 7592 || task index: 658 \ task time: 1511 || task index: 687 \ task time: 3534 |
+| task index: 716 \ task time: 3675 || task index: 771 \ task time: 5503 || task index: 781 \ task time: 965 |
+| task index: 807 \ task time: 9536 || task index: 883 \ task time: 9168 || task index: 905 \ task time: 6928 |
+| task index: 967 \ task time: 4323 || task index: 1031 \ task time: 2594 || task index: 1033 \ task time: 322 |
+| task index: 1075 \ task time: 182 || task index: 1193 \ task time: 8960 || task index: 1194 \ task time: 8555 |
+| task index: 1195 \ task time: 7474 |
+______________________________________________________________________________________________________________________
+##########################
+machine SPEED : 2
+machine no : 11
+tasks total time: 82824
+##########################
+| task index: 53 \ task time: 4346 || task index: 55 \ task time: 4809 |
+| task index: 58 \ task time: 1795 || task index: 166 \ task time: 662 || task index: 213 \ task time: 3108 |
+| task index: 223 \ task time: 7412 || task index: 236 \ task time: 3607 || task index: 245 \ task time: 7983 |
+| task index: 260 \ task time: 622 || task index: 264 \ task time: 4349 || task index: 300 \ task time: 6813 |
+| task index: 422 \ task time: 2613 || task index: 508 \ task time: 6236 || task index: 523 \ task time: 195 |
+| task index: 527 \ task time: 8555 || task index: 550 \ task time: 9526 || task index: 583 \ task time: 5502 |
+| task index: 609 \ task time: 2021 || task index: 613 \ task time: 694 || task index: 615 \ task time: 7481 |
+| task index: 641 \ task time: 6935 || task index: 694 \ task time: 9180 || task index: 712 \ task time: 4874 |
+| task index: 773 \ task time: 5509 || task index: 780 \ task time: 3644 || task index: 800 \ task time: 7463 |
+| task index: 822 \ task time: 9169 || task index: 827 \ task time: 2608 || task index: 910 \ task time: 9632 |
+| task index: 962 \ task time: 312 || task index: 1050 \ task time: 4873 || task index: 1056 \ task time: 1448 |
+| task index: 1066 \ task time: 8565 || task index: 1145 \ task time: 3108 |
+______________________________________________________________________________________________________________________
+##########################
+machine SPEED : 2
+machine no : 12
+tasks total time: 82823
+##########################
+| task index: 1 \ task time: 9898 |
+| task index: 33 \ task time: 4406 || task index: 39 \ task time: 3699 || task index: 192 \ task time: 3114 |
+| task index: 199 \ task time: 211 || task index: 231 \ task time: 8027 || task index: 233 \ task time: 712 |
+| task index: 365 \ task time: 8571 || task index: 380 \ task time: 5572 || task index: 431 \ task time: 6258 |
+| task index: 468 \ task time: 1491 || task index: 490 \ task time: 3687 || task index: 499 \ task time: 944 |
+| task index: 507 \ task time: 4352 || task index: 559 \ task time: 2619 || task index: 588 \ task time: 8026 |
+| task index: 600 \ task time: 4355 || task index: 632 \ task time: 6757 || task index: 652 \ task time: 3424 |
+| task index: 656 \ task time: 4968 || task index: 662 \ task time: 7584 || task index: 753 \ task time: 715 |
+| task index: 791 \ task time: 312 || task index: 867 \ task time: 6240 || task index: 903 \ task time: 2070 |
+| task index: 904 \ task time: 4751 || task index: 913 \ task time: 8416 || task index: 930 \ task time: 2047 |
+| task index: 1004 \ task time: 7207 || task index: 1047 \ task time: 4415 || task index: 1055 \ task time: 9350 |
+| task index: 1061 \ task time: 3058 || task index: 1077 \ task time: 8567 || task index: 1102 \ task time: 9824 |
+______________________________________________________________________________________________________________________
+##########################
+machine SPEED : 4
+machine no : 13
+tasks total time: 82835
+##########################
+
+| task index: 10 \ task time: 6948 || task index: 14 \ task time: 3703 || task index: 44 \ task time: 4855 |
+| task index: 98 \ task time: 3559 || task index: 103 \ task time: 8048 || task index: 113 \ task time: 2644 |
+| task index: 114 \ task time: 2079 || task index: 131 \ task time: 4984 || task index: 145 \ task time: 1512 |
+| task index: 149 \ task time: 6279 || task index: 178 \ task time: 3127 || task index: 183 \ task time: 9252 |
+| task index: 209 \ task time: 7591 || task index: 237 \ task time: 216 || task index: 238 \ task time: 6997 |
+| task index: 256 \ task time: 3165 || task index: 261 \ task time: 8355 || task index: 265 \ task time: 9828 |
+| task index: 287 \ task time: 4359 || task index: 305 \ task time: 6261 || task index: 333 \ task time: 4972 |
+| task index: 335 \ task time: 7573 || task index: 336 \ task time: 224 || task index: 351 \ task time: 470 |
+| task index: 399 \ task time: 2089 || task index: 414 \ task time: 6969 || task index: 415 \ task time: 3131 |
+| task index: 416 \ task time: 2082 || task index: 419 \ task time: 9213 || task index: 421 \ task time: 8493 |
+| task index: 433 \ task time: 772 || task index: 505 \ task time: 1520 || task index: 536 \ task time: 9219 |
+| task index: 539 \ task time: 8045 || task index: 569 \ task time: 6978 || task index: 586 \ task time: 5592 |
+| task index: 593 \ task time: 5587 || task index: 631 \ task time: 6957 || task index: 634 \ task time: 9842 |
+| task index: 649 \ task time: 3131 || task index: 669 \ task time: 7576 || task index: 708 \ task time: 4391 |
+| task index: 758 \ task time: 4371 || task index: 797 \ task time: 77 || task index: 813 \ task time: 792 |
+| task index: 864 \ task time: 8065 || task index: 889 \ task time: 1524 || task index: 892 \ task time: 1604 |
+| task index: 909 \ task time: 9834 || task index: 951 \ task time: 8577 || task index: 957 \ task time: 1417 |
+| task index: 977 \ task time: 9884 || task index: 1000 \ task time: 4387 || task index: 1027 \ task time: 2670 |
+| task index: 1035 \ task time: 9236 || task index: 1062 \ task time: 232 || task index: 1069 \ task time: 5576 |
+| task index: 1070 \ task time: 8575 || task index: 1079 \ task time: 8073 || task index: 1090 \ task time: 4988 |
+| task index: 1113 \ task time: 725 || task index: 1119 \ task time: 3710 || task index: 1133 \ task time: 3724 |
+| task index: 1134 \ task time: 226 || task index: 1143 \ task time: 6294 || task index: 1149 \ task time: 718 |
+| task index: 1157 \ task time: 1879 || task index: 1187 \ task time: 5596 |
+______________________________________________________________________________________________________________________
+##########################
+machine SPEED : 2
+machine no : 14
+tasks total time: 82833
+##########################
+| task index: 100 \ task time: 4551 |
+| task index: 137 \ task time: 8081 || task index: 152 \ task time: 233 || task index: 159 \ task time: 1550 |
+| task index: 171 \ task time: 170 || task index: 288 \ task time: 8084 || task index: 310 \ task time: 7006 |
+| task index: 354 \ task time: 4409 || task index: 381 \ task time: 4543 || task index: 429 \ task time: 6311 |
+| task index: 438 \ task time: 6330 || task index: 440 \ task time: 8618 || task index: 522 \ task time: 3888 |
+| task index: 534 \ task time: 2732 || task index: 544 \ task time: 9887 || task index: 610 \ task time: 847 |
+| task index: 726 \ task time: 933 || task index: 740 \ task time: 821 || task index: 757 \ task time: 367 |
+| task index: 786 \ task time: 6997 || task index: 854 \ task time: 8888 || task index: 857 \ task time: 7642 |
+| task index: 886 \ task time: 6230 || task index: 924 \ task time: 3224 || task index: 939 \ task time: 4585 |
+| task index: 972 \ task time: 5634 || task index: 979 \ task time: 8610 || task index: 1003 \ task time: 9751 |
+| task index: 1014 \ task time: 3426 || task index: 1020 \ task time: 6122 || task index: 1038 \ task time: 3202 |
+| task index: 1087 \ task time: 2013 || task index: 1150 \ task time: 4991 || task index: 1174 \ task time: 4991 |
+______________________________________________________________________________________________________________________
+##########################
+machine SPEED : 2
+machine no : 15
+tasks total time: 82833
+##########################
+
+| task index: 77 \ task time: 8086 || task index: 97 \ task time: 817 || task index: 105 \ task time: 8624 |
+| task index: 141 \ task time: 616 || task index: 190 \ task time: 2101 || task index: 202 \ task time: 711 |
+| task index: 228 \ task time: 4396 || task index: 263 \ task time: 9907 || task index: 271 \ task time: 7609 |
+| task index: 272 \ task time: 2018 || task index: 285 \ task time: 7009 || task index: 315 \ task time: 7008 |
+| task index: 374 \ task time: 3187 || task index: 425 \ task time: 252 || task index: 444 \ task time: 1574 |
+| task index: 485 \ task time: 5001 || task index: 528 \ task time: 4719 || task index: 549 \ task time: 3761 |
+| task index: 629 \ task time: 246 || task index: 683 \ task time: 7603 || task index: 688 \ task time: 1283 |
+| task index: 693 \ task time: 4400 || task index: 698 \ task time: 4996 || task index: 732 \ task time: 8588 |
+| task index: 766 \ task time: 9279 || task index: 809 \ task time: 3743 || task index: 814 \ task time: 9206 |
+| task index: 901 \ task time: 5607 || task index: 968 \ task time: 6304 || task index: 1017 \ task time: 6313 |
+| task index: 1051 \ task time: 9172 || task index: 1064 \ task time: 3206 || task index: 1141 \ task time: 7932 |
+| task index: 1151 \ task time: 392 |
+______________________________________________________________________________________________________________________
+##########################
+machine SPEED : 4
+machine no : 16
+tasks total time: 82834
+##########################
+| task index: 50 \ task time: 270 || task index: 52 \ task time: 3247 |
+| task index: 57 \ task time: 8113 || task index: 76 \ task time: 6339 || task index: 88 \ task time: 5685 |
+| task index: 96 \ task time: 8654 || task index: 104 \ task time: 6372 || task index: 148 \ task time: 9071 |
+| task index: 155 \ task time: 9303 || task index: 163 \ task time: 3778 || task index: 195 \ task time: 7036 |
+| task index: 229 \ task time: 7820 || task index: 230 \ task time: 7043 || task index: 240 \ task time: 8169 |
+| task index: 249 \ task time: 1586 || task index: 258 \ task time: 3767 || task index: 290 \ task time: 1595 |
+| task index: 292 \ task time: 5659 || task index: 324 \ task time: 7467 || task index: 330 \ task time: 1721 |
+| task index: 353 \ task time: 2668 || task index: 386 \ task time: 8292 || task index: 403 \ task time: 320 |
+| task index: 424 \ task time: 1613 || task index: 454 \ task time: 5063 || task index: 456 \ task time: 1598 |
+| task index: 496 \ task time: 7183 || task index: 547 \ task time: 4414 || task index: 554 \ task time: 261 |
+| task index: 578 \ task time: 8112 || task index: 587 \ task time: 3780 || task index: 605 \ task time: 9962 |
+| task index: 639 \ task time: 1627 || task index: 682 \ task time: 7043 || task index: 704 \ task time: 7623 |
+| task index: 738 \ task time: 9304 || task index: 741 \ task time: 392 || task index: 751 \ task time: 3424 |
+| task index: 754 \ task time: 2153 || task index: 759 \ task time: 5200 || task index: 767 \ task time: 3780 |
+| task index: 787 \ task time: 1817 || task index: 789 \ task time: 830 || task index: 794 \ task time: 3796 |
+| task index: 804 \ task time: 3246 || task index: 820 \ task time: 265 || task index: 826 \ task time: 6334 |
+| task index: 828 \ task time: 8981 || task index: 838 \ task time: 4396 || task index: 848 \ task time: 2813 |
+| task index: 850 \ task time: 5059 || task index: 860 \ task time: 2928 || task index: 866 \ task time: 9946 |
+| task index: 914 \ task time: 2725 || task index: 922 \ task time: 1807 || task index: 926 \ task time: 5051 |
+| task index: 936 \ task time: 7600 || task index: 993 \ task time: 1643 || task index: 1009 \ task time: 2166 |
+| task index: 1026 \ task time: 5708 || task index: 1052 \ task time: 9963 || task index: 1104 \ task time: 6353 |
+| task index: 1110 \ task time: 9319 || task index: 1131 \ task time: 5041 || task index: 1156 \ task time: 2998 |
+| task index: 1167 \ task time: 3244 || task index: 1180 \ task time: 3765 || task index: 1192 \ task time: 7036 |
+______________________________________________________________________________________________________________________
+##########################
+machine SPEED : 1
+machine no : 17
+tasks total time: 82827
+##########################
+
+| task index: 107 \ task time: 6396 || task index: 118 \ task time: 9336 || task index: 147 \ task time: 3710 |
+| task index: 219 \ task time: 884 || task index: 248 \ task time: 277 || task index: 289 \ task time: 2323 |
+| task index: 373 \ task time: 5068 || task index: 470 \ task time: 5603 || task index: 497 \ task time: 673 |
+| task index: 640 \ task time: 676 || task index: 664 \ task time: 8646 || task index: 893 \ task time: 6881 |
+| task index: 897 \ task time: 2706 || task index: 929 \ task time: 7617 || task index: 941 \ task time: 9969 |
+| task index: 1135 \ task time: 4424 || task index: 1173 \ task time: 7638 |
+______________________________________________________________________________________________________________________
+##########################
+machine SPEED : 2
+machine no : 18
+tasks total time: 82823
+##########################
+| task index: 5 \ task time: 9187 |
+| task index: 30 \ task time: 6597 || task index: 75 \ task time: 6389 || task index: 90 \ task time: 2246 |
+| task index: 128 \ task time: 826 || task index: 150 \ task time: 8147 || task index: 172 \ task time: 7267 |
+| task index: 188 \ task time: 5075 || task index: 227 \ task time: 4456 || task index: 243 \ task time: 8230 |
+| task index: 252 \ task time: 290 || task index: 270 \ task time: 3229 || task index: 280 \ task time: 45 |
+| task index: 281 \ task time: 2162 || task index: 307 \ task time: 547 || task index: 426 \ task time: 7746 |
+| task index: 443 \ task time: 6398 || task index: 453 \ task time: 6449 || task index: 517 \ task time: 2984 |
+| task index: 520 \ task time: 2489 || task index: 564 \ task time: 5487 || task index: 603 \ task time: 8245 |
+| task index: 614 \ task time: 5776 || task index: 654 \ task time: 3275 || task index: 730 \ task time: 1615 |
+| task index: 765 \ task time: 9392 || task index: 793 \ task time: 7059 || task index: 874 \ task time: 1685 |
+| task index: 887 \ task time: 3311 || task index: 923 \ task time: 8146 || task index: 1039 \ task time: 3323 |
+| task index: 1078 \ task time: 5082 || task index: 1082 \ task time: 3794 || task index: 1096 \ task time: 8697 |
+______________________________________________________________________________________________________________________
+##########################
+machine SPEED : 2
+machine no : 19
+tasks total time: 82823
+##########################
+
+| task index: 18 \ task time: 930 || task index: 51 \ task time: 8743 || task index: 63 \ task time: 2244 |
+| task index: 72 \ task time: 3868 || task index: 109 \ task time: 2749 || task index: 119 \ task time: 90 |
+| task index: 198 \ task time: 2752 || task index: 214 \ task time: 7098 || task index: 366 \ task time: 3252 |
+| task index: 370 \ task time: 7099 || task index: 400 \ task time: 2216 || task index: 420 \ task time: 7643 |
+| task index: 469 \ task time: 6408 || task index: 476 \ task time: 8689 || task index: 531 \ task time: 6950 |
+| task index: 552 \ task time: 927 || task index: 594 \ task time: 1641 || task index: 628 \ task time: 3858 |
+| task index: 678 \ task time: 5105 || task index: 746 \ task time: 9992 || task index: 778 \ task time: 6442 |
+| task index: 844 \ task time: 260 || task index: 862 \ task time: 315 || task index: 899 \ task time: 7053 |
+| task index: 928 \ task time: 5748 || task index: 963 \ task time: 5750 || task index: 986 \ task time: 4462 |
+| task index: 1001 \ task time: 9999 || task index: 1015 \ task time: 296 || task index: 1093 \ task time: 5095 |
+| task index: 1162 \ task time: 9377 || task index: 1190 \ task time: 3318 || task index: 1191 \ task time: 7630 |
+| task index: 1198 \ task time: 7648 |
+______________________________________________________________________________________________________________________
+##########################
+machine SPEED : 4
+machine no : 20
+tasks total time: 82823
+##########################
+| task index: 8 \ task time: 7658 || task index: 16 \ task time: 5795 |
+| task index: 71 \ task time: 5138 || task index: 140 \ task time: 1741 || task index: 153 \ task time: 8792 |
+| task index: 165 \ task time: 3693 || task index: 217 \ task time: 2857 || task index: 226 \ task time: 8757 |
+| task index: 253 \ task time: 3891 || task index: 277 \ task time: 3998 || task index: 279 \ task time: 6751 |
+| task index: 295 \ task time: 9965 || task index: 309 \ task time: 8185 || task index: 316 \ task time: 199 |
+| task index: 326 \ task time: 2233 || task index: 343 \ task time: 1658 || task index: 363 \ task time: 6454 |
+| task index: 384 \ task time: 2013 || task index: 387 \ task time: 2758 || task index: 402 \ task time: 4492 |
+| task index: 434 \ task time: 5130 || task index: 448 \ task time: 6472 || task index: 479 \ task time: 8130 |
+| task index: 484 \ task time: 8740 || task index: 489 \ task time: 1662 || task index: 514 \ task time: 3329 |
+| task index: 532 \ task time: 6668 || task index: 535 \ task time: 10000 || task index: 542 \ task time: 1726 |
+| task index: 551 \ task time: 5401 || task index: 604 \ task time: 9969 || task index: 608 \ task time: 8378 |
+| task index: 624 \ task time: 6462 || task index: 635 \ task time: 8164 || task index: 642 \ task time: 8769 |
+| task index: 644 \ task time: 7111 || task index: 660 \ task time: 1457 || task index: 674 \ task time: 7678 |
+| task index: 690 \ task time: 4503 || task index: 699 \ task time: 7099 || task index: 709 \ task time: 8180 |
+| task index: 727 \ task time: 2733 || task index: 748 \ task time: 7671 || task index: 764 \ task time: 3876 |
+| task index: 768 \ task time: 4487 || task index: 785 \ task time: 9391 || task index: 836 \ task time: 1664 |
+| task index: 840 \ task time: 9385 || task index: 875 \ task time: 9399 || task index: 938 \ task time: 2739 |
+| task index: 943 \ task time: 1147 || task index: 952 \ task time: 3338 || task index: 989 \ task time: 7660 |
+| task index: 1042 \ task time: 635 || task index: 1044 \ task time: 5132 || task index: 1045 \ task time: 939 |
+| task index: 1083 \ task time: 2230 || task index: 1086 \ task time: 2762 || task index: 1111 \ task time: 2209 |
+| task index: 1123 \ task time: 4881 || task index: 1139 \ task time: 934 || task index: 1178 \ task time: 2244 |
+| task index: 1185 \ task time: 3901 || task index: 1186 \ task time: 7117 || task index: 1189 \ task time: 2763 |
+______________________________________________________________________________________________________________________
+##########################
+machine SPEED : 4
+machine no : 21
+tasks total time: 82818
+##########################
+
+| task index: 3 \ task time: 8793 || task index: 40 \ task time: 9424 || task index: 54 \ task time: 9427 |
+| task index: 68 \ task time: 1667 || task index: 74 \ task time: 2765 || task index: 78 \ task time: 3933 |
+| task index: 111 \ task time: 5144 || task index: 116 \ task time: 3355 || task index: 125 \ task time: 6492 |
+| task index: 129 \ task time: 8098 || task index: 132 \ task time: 9404 || task index: 164 \ task time: 2249 |
+| task index: 169 \ task time: 5858 || task index: 222 \ task time: 1647 || task index: 259 \ task time: 3942 |
+| task index: 294 \ task time: 4640 || task index: 306 \ task time: 3370 || task index: 317 \ task time: 7971 |
+| task index: 342 \ task time: 2777 || task index: 357 \ task time: 8818 || task index: 408 \ task time: 8199 |
+| task index: 409 \ task time: 3376 || task index: 423 \ task time: 2809 || task index: 475 \ task time: 337 |
+| task index: 533 \ task time: 5139 || task index: 574 \ task time: 5762 || task index: 618 \ task time: 5846 |
+| task index: 619 \ task time: 7688 || task index: 657 \ task time: 8795 || task index: 659 \ task time: 7151 |
+| task index: 675 \ task time: 1623 || task index: 681 \ task time: 7168 || task index: 702 \ task time: 2243 |
+| task index: 705 \ task time: 330 || task index: 710 \ task time: 8805 || task index: 744 \ task time: 967 |
+| task index: 762 \ task time: 3939 || task index: 770 \ task time: 1671 || task index: 799 \ task time: 411 |
+| task index: 803 \ task time: 4568 || task index: 815 \ task time: 8223 || task index: 821 \ task time: 9417 |
+| task index: 825 \ task time: 4560 || task index: 861 \ task time: 2786 || task index: 869 \ task time: 5864 |
+| task index: 895 \ task time: 3358 || task index: 912 \ task time: 5146 || task index: 915 \ task time: 5134 |
+| task index: 927 \ task time: 8215 || task index: 937 \ task time: 8216 || task index: 961 \ task time: 1866 |
+| task index: 985 \ task time: 7140 || task index: 988 \ task time: 5848 || task index: 1022 \ task time: 6519 |
+| task index: 1030 \ task time: 7075 || task index: 1041 \ task time: 4567 || task index: 1067 \ task time: 7678 |
+| task index: 1089 \ task time: 2744 || task index: 1120 \ task time: 7688 || task index: 1124 \ task time: 6489 |
+| task index: 1152 \ task time: 7691 || task index: 1154 \ task time: 966 || task index: 1168 \ task time: 7144 |
+| task index: 1179 \ task time: 340 |
+______________________________________________________________________________________________________________________
+##########################
+machine SPEED : 1
+machine no : 22
+tasks total time: 82818
+##########################
+| task index: 61 \ task time: 5275 || task index: 80 \ task time: 1352 |
+| task index: 115 \ task time: 5559 || task index: 191 \ task time: 7973 || task index: 232 \ task time: 8549 |
+| task index: 352 \ task time: 3446 || task index: 436 \ task time: 9453 || task index: 452 \ task time: 5156 |
+| task index: 467 \ task time: 4305 || task index: 546 \ task time: 841 || task index: 577 \ task time: 8621 |
+| task index: 650 \ task time: 5545 || task index: 691 \ task time: 3468 || task index: 819 \ task time: 9976 |
+| task index: 835 \ task time: 2892 || task index: 1019 \ task time: 407 |
+______________________________________________________________________________________________________________________
+##########################
+machine SPEED : 4
+machine no : 23
+tasks total time: 82803
+##########################
+| task index: 4 \ task time: 2261 |
+| task index: 15 \ task time: 8844 || task index: 47 \ task time: 8879 || task index: 73 \ task time: 1047 |
+| task index: 120 \ task time: 2828 || task index: 136 \ task time: 3990 || task index: 138 \ task time: 6929 |
+| task index: 173 \ task time: 2912 || task index: 184 \ task time: 7478 || task index: 187 \ task time: 5190 |
+| task index: 234 \ task time: 392 || task index: 246 \ task time: 2725 || task index: 304 \ task time: 6523 |
+| task index: 312 \ task time: 3382 || task index: 314 \ task time: 5868 || task index: 318 \ task time: 4612 |
+| task index: 320 \ task time: 7192 || task index: 337 \ task time: 8347 || task index: 344 \ task time: 6530 |
+| task index: 356 \ task time: 7718 || task index: 371 \ task time: 370 || task index: 378 \ task time: 1506 |
+| task index: 383 \ task time: 6501 || task index: 401 \ task time: 4615 || task index: 458 \ task time: 345 |
+| task index: 461 \ task time: 2823 || task index: 494 \ task time: 5168 || task index: 501 \ task time: 8826 |
+| task index: 503 \ task time: 9444 || task index: 525 \ task time: 9432 || task index: 537 \ task time: 4610 |
+| task index: 567 \ task time: 2277 || task index: 575 \ task time: 5899 || task index: 585 \ task time: 4151 |
+| task index: 612 \ task time: 5883 || task index: 623 \ task time: 3948 || task index: 627 \ task time: 8226 |
+| task index: 636 \ task time: 5192 || task index: 661 \ task time: 9439 || task index: 679 \ task time: 8235 |
+| task index: 689 \ task time: 5159 || task index: 703 \ task time: 7187 || task index: 711 \ task time: 4596 |
+| task index: 783 \ task time: 8226 || task index: 796 \ task time: 3382 || task index: 811 \ task time: 2815 |
+| task index: 846 \ task time: 3378 || task index: 870 \ task time: 8239 || task index: 881 \ task time: 9365 |
+| task index: 906 \ task time: 3459 || task index: 948 \ task time: 5886 || task index: 950 \ task time: 1690 |
+| task index: 959 \ task time: 8834 || task index: 983 \ task time: 1707 || task index: 990 \ task time: 6154 |
+| task index: 994 \ task time: 2272 || task index: 996 \ task time: 3970 || task index: 998 \ task time: 4442 |
+| task index: 1005 \ task time: 1698 || task index: 1025 \ task time: 1042 || task index: 1058 \ task time: 9453 |
+| task index: 1099 \ task time: 7719 || task index: 1100 \ task time: 7719 || task index: 1158 \ task time: 2286 |
+______________________________________________________________________________________________________________________
+##########################
+machine SPEED : 4
+machine no : 24
+tasks total time: 82803
+##########################
+
+| task index: 17 \ task time: 2841 || task index: 56 \ task time: 1854 || task index: 65 \ task time: 7211 |
+| task index: 85 \ task time: 8842 || task index: 92 \ task time: 3691 || task index: 94 \ task time: 7221 |
+| task index: 99 \ task time: 5209 || task index: 133 \ task time: 504 || task index: 158 \ task time: 2323 |
+| task index: 168 \ task time: 9572 || task index: 197 \ task time: 6667 || task index: 211 \ task time: 7893 |
+| task index: 218 \ task time: 2627 || task index: 239 \ task time: 1733 || task index: 242 \ task time: 1163 |
+| task index: 244 \ task time: 2842 || task index: 274 \ task time: 2277 || task index: 278 \ task time: 5974 |
+| task index: 293 \ task time: 7733 || task index: 334 \ task time: 7730 || task index: 355 \ task time: 4584 |
+| task index: 367 \ task time: 8255 || task index: 397 \ task time: 1733 || task index: 465 \ task time: 3618 |
+| task index: 492 \ task time: 5210 || task index: 504 \ task time: 5988 || task index: 530 \ task time: 8886 |
+| task index: 553 \ task time: 4038 || task index: 560 \ task time: 4039 || task index: 597 \ task time: 7225 |
+| task index: 617 \ task time: 8263 || task index: 672 \ task time: 5924 || task index: 692 \ task time: 1726 |
+| task index: 749 \ task time: 7737 || task index: 763 \ task time: 7778 || task index: 790 \ task time: 6567 |
+| task index: 792 \ task time: 9474 || task index: 795 \ task time: 9475 || task index: 818 \ task time: 442 |
+| task index: 845 \ task time: 405 || task index: 856 \ task time: 3444 || task index: 865 \ task time: 4650 |
+| task index: 868 \ task time: 4644 || task index: 878 \ task time: 3320 || task index: 884 \ task time: 2311 |
+| task index: 888 \ task time: 6271 || task index: 890 \ task time: 5219 || task index: 921 \ task time: 9492 |
+| task index: 940 \ task time: 7207 || task index: 954 \ task time: 7138 || task index: 969 \ task time: 5908 |
+| task index: 974 \ task time: 2238 || task index: 982 \ task time: 1476 || task index: 997 \ task time: 8150 |
+| task index: 999 \ task time: 9926 || task index: 1012 \ task time: 4062 || task index: 1036 \ task time: 2312 |
+| task index: 1043 \ task time: 8263 || task index: 1081 \ task time: 7739 || task index: 1094 \ task time: 5263 |
+| task index: 1098 \ task time: 1153 || task index: 1125 \ task time: 2833 || task index: 1155 \ task time: 2834 |
+| task index: 1170 \ task time: 8087 |
+______________________________________________________________________________________________________________________
+##########################
+machine SPEED : 1
+machine no : 25
+tasks total time: 82817
+##########################
+| task index: 26 \ task time: 3086 || task index: 32 \ task time: 7741 |
+| task index: 34 \ task time: 6586 || task index: 35 \ task time: 3457 || task index: 206 \ task time: 291 |
+| task index: 207 \ task time: 3994 || task index: 463 \ task time: 7443 || task index: 697 \ task time: 5230 |
+| task index: 849 \ task time: 3347 || task index: 916 \ task time: 2278 || task index: 917 \ task time: 4651 |
+| task index: 1068 \ task time: 9491 || task index: 1106 \ task time: 5900 || task index: 1137 \ task time: 1100 |
+| task index: 1146 \ task time: 9334 || task index: 1163 \ task time: 8888 |
+______________________________________________________________________________________________________________________
+##########################
+machine SPEED : 1
+machine no : 26
+tasks total time: 82816
+##########################
+| task index: 22 \ task time: 3442 |
+| task index: 42 \ task time: 3032 || task index: 123 \ task time: 2359 || task index: 170 \ task time: 6501 |
+| task index: 450 \ task time: 7677 || task index: 455 \ task time: 4850 || task index: 472 \ task time: 4081 |
+| task index: 513 \ task time: 810 || task index: 720 \ task time: 7248 || task index: 847 \ task time: 7930 |
+| task index: 898 \ task time: 8421 || task index: 975 \ task time: 792 || task index: 980 \ task time: 7467 |
+| task index: 1059 \ task time: 9559 || task index: 1140 \ task time: 2533 || task index: 1199 \ task time: 6114 |
+______________________________________________________________________________________________________________________
+##########################
+machine SPEED : 4
+machine no : 27
+tasks total time: 82813
+##########################
+
+| task index: 24 \ task time: 6009 || task index: 29 \ task time: 2336 || task index: 36 \ task time: 1168 |
+| task index: 43 \ task time: 8301 || task index: 86 \ task time: 3457 || task index: 134 \ task time: 4322 |
+| task index: 204 \ task time: 7300 || task index: 255 \ task time: 3454 || task index: 283 \ task time: 7763 |
+| task index: 303 \ task time: 4088 || task index: 325 \ task time: 2324 || task index: 348 \ task time: 7760 |
+| task index: 379 \ task time: 6594 || task index: 447 \ task time: 2852 || task index: 493 \ task time: 7313 |
+| task index: 500 \ task time: 4099 || task index: 521 \ task time: 9502 || task index: 556 \ task time: 7763 |
+| task index: 566 \ task time: 4683 || task index: 602 \ task time: 1173 || task index: 607 \ task time: 9491 |
+| task index: 621 \ task time: 6602 || task index: 637 \ task time: 6573 || task index: 646 \ task time: 5302 |
+| task index: 648 \ task time: 2879 || task index: 665 \ task time: 5988 || task index: 668 \ task time: 1759 |
+| task index: 696 \ task time: 7298 || task index: 701 \ task time: 6018 || task index: 706 \ task time: 8918 |
+| task index: 725 \ task time: 4666 || task index: 743 \ task time: 1688 || task index: 745 \ task time: 5282 |
+| task index: 750 \ task time: 1762 || task index: 752 \ task time: 2336 || task index: 772 \ task time: 8914 |
+| task index: 774 \ task time: 5991 || task index: 801 \ task time: 4086 || task index: 842 \ task time: 8927 |
+| task index: 852 \ task time: 421 || task index: 855 \ task time: 8132 || task index: 859 \ task time: 4392 |
+| task index: 871 \ task time: 9491 || task index: 877 \ task time: 9491 || task index: 879 \ task time: 7295 |
+| task index: 882 \ task time: 431 || task index: 942 \ task time: 8929 || task index: 944 \ task time: 5293 |
+| task index: 949 \ task time: 8322 || task index: 956 \ task time: 4866 || task index: 987 \ task time: 426 |
+| task index: 1021 \ task time: 8322 || task index: 1024 \ task time: 419 || task index: 1037 \ task time: 8292 |
+| task index: 1053 \ task time: 4942 || task index: 1071 \ task time: 3458 || task index: 1092 \ task time: 2859 |
+| task index: 1114 \ task time: 4083 || task index: 1127 \ task time: 1794 || task index: 1144 \ task time: 1174 |
+| task index: 1153 \ task time: 1177 || task index: 1166 \ task time: 7899 || task index: 1188 \ task time: 5995 |
+| task index: 1196 \ task time: 6609 |
+______________________________________________________________________________________________________________________
+##########################
+machine SPEED : 1
+machine no : 28
+tasks total time: 82811
+##########################
+| task index: 21 \ task time: 5309 || task index: 126 \ task time: 2536 |
+| task index: 250 \ task time: 3409 || task index: 311 \ task time: 4697 || task index: 332 \ task time: 2991 |
+| task index: 349 \ task time: 8003 || task index: 473 \ task time: 5317 || task index: 562 \ task time: 9276 |
+| task index: 582 \ task time: 8348 || task index: 728 \ task time: 443 || task index: 747 \ task time: 8554 |
+| task index: 755 \ task time: 2106 || task index: 782 \ task time: 667 || task index: 935 \ task time: 3445 |
+| task index: 1049 \ task time: 8955 || task index: 1074 \ task time: 8755 |
+______________________________________________________________________________________________________________________
+##########################
+machine SPEED : 1
+machine no : 29
+tasks total time: 82816
+##########################
+| task index: 95 \ task time: 6639 |
+| task index: 102 \ task time: 2268 || task index: 143 \ task time: 1220 || task index: 201 \ task time: 4107 |
+| task index: 322 \ task time: 1165 || task index: 339 \ task time: 5310 || task index: 368 \ task time: 4707 |
+| task index: 487 \ task time: 8900 || task index: 524 \ task time: 3927 || task index: 561 \ task time: 7801 |
+| task index: 715 \ task time: 9517 || task index: 724 \ task time: 2362 || task index: 816 \ task time: 2847 |
+| task index: 832 \ task time: 7301 || task index: 1010 \ task time: 8716 || task index: 1023 \ task time: 6029 |

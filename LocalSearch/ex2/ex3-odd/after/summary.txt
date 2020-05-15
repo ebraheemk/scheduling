@@ -1,0 +1,89 @@
+summary
+Tasks Count : 200
+Total tasks time : 39014
+Task time average    : 195.07
+machines count  :40
+machines speed avg 2.325
+max task time : 397
+min task time : 3
+optimal timing if tasks count > 4xmachine count :  419.505
+Worst Machine Timing result  :  419.75
+swap 0->0Count 0
+swap 0->1Count 0
+swap 0->2Count 0
+swap 1->0Count 316
+swap 1->1Count 204
+swap 1->2Count 67
+swap 2->0Count 0
+swap 2->1Count 0
+swap 2->2Count 0
+______________________________________________________________________________________________________________________
+______________________________________________________________________________________________________________________
+tasks:
+| task index: 0 \ task time: 363 || task index: 1 \ task time: 365 || task index: 2 \ task time: 75 |
+| task index: 3 \ task time: 361 || task index: 4 \ task time: 241 || task index: 5 \ task time: 15 |
+| task index: 6 \ task time: 129 || task index: 7 \ task time: 123 || task index: 8 \ task time: 19 |
+| task index: 9 \ task time: 149 || task index: 10 \ task time: 189 || task index: 11 \ task time: 251 |
+| task index: 12 \ task time: 379 || task index: 13 \ task time: 143 || task index: 14 \ task time: 153 |
+| task index: 15 \ task time: 227 || task index: 16 \ task time: 331 || task index: 17 \ task time: 195 |
+| task index: 18 \ task time: 271 || task index: 19 \ task time: 323 || task index: 20 \ task time: 25 |
+| task index: 21 \ task time: 83 || task index: 22 \ task time: 153 || task index: 23 \ task time: 319 |
+| task index: 24 \ task time: 253 || task index: 25 \ task time: 151 || task index: 26 \ task time: 343 |
+| task index: 27 \ task time: 93 || task index: 28 \ task time: 167 || task index: 29 \ task time: 197 |
+| task index: 30 \ task time: 383 || task index: 31 \ task time: 385 || task index: 32 \ task time: 341 |
+| task index: 33 \ task time: 167 || task index: 34 \ task time: 331 || task index: 35 \ task time: 81 |
+| task index: 36 \ task time: 333 || task index: 37 \ task time: 187 || task index: 38 \ task time: 7 |
+| task index: 39 \ task time: 17 || task index: 40 \ task time: 277 || task index: 41 \ task time: 319 |
+| task index: 42 \ task time: 35 || task index: 43 \ task time: 211 || task index: 44 \ task time: 217 |
+| task index: 45 \ task time: 113 || task index: 46 \ task time: 207 || task index: 47 \ task time: 133 |
+| task index: 48 \ task time: 207 || task index: 49 \ task time: 91 || task index: 50 \ task time: 175 |
+| task index: 51 \ task time: 165 || task index: 52 \ task time: 199 || task index: 53 \ task time: 285 |
+| task index: 54 \ task time: 269 || task index: 55 \ task time: 143 || task index: 56 \ task time: 197 |
+| task index: 57 \ task time: 129 || task index: 58 \ task time: 227 || task index: 59 \ task time: 115 |
+| task index: 60 \ task time: 351 || task index: 61 \ task time: 323 || task index: 62 \ task time: 75 |
+| task index: 63 \ task time: 139 || task index: 64 \ task time: 81 || task index: 65 \ task time: 259 |
+| task index: 66 \ task time: 77 || task index: 67 \ task time: 65 || task index: 68 \ task time: 35 |
+| task index: 69 \ task time: 301 || task index: 70 \ task time: 375 || task index: 71 \ task time: 341 |
+| task index: 72 \ task time: 59 || task index: 73 \ task time: 307 || task index: 74 \ task time: 109 |
+| task index: 75 \ task time: 175 || task index: 76 \ task time: 35 || task index: 77 \ task time: 157 |
+| task index: 78 \ task time: 381 || task index: 79 \ task time: 375 || task index: 80 \ task time: 387 |
+| task index: 81 \ task time: 205 || task index: 82 \ task time: 27 || task index: 83 \ task time: 311 |
+| task index: 84 \ task time: 325 || task index: 85 \ task time: 87 || task index: 86 \ task time: 107 |
+| task index: 87 \ task time: 31 || task index: 88 \ task time: 141 || task index: 89 \ task time: 25 |
+| task index: 90 \ task time: 49 || task index: 91 \ task time: 71 || task index: 92 \ task time: 219 |
+| task index: 93 \ task time: 261 || task index: 94 \ task time: 385 || task index: 95 \ task time: 231 |
+| task index: 96 \ task time: 165 || task index: 97 \ task time: 65 || task index: 98 \ task time: 343 |
+| task index: 99 \ task time: 261 || task index: 100 \ task time: 265 || task index: 101 \ task time: 241 |
+| task index: 102 \ task time: 119 || task index: 103 \ task time: 131 || task index: 104 \ task time: 297 |
+| task index: 105 \ task time: 35 || task index: 106 \ task time: 137 || task index: 107 \ task time: 377 |
+| task index: 108 \ task time: 271 || task index: 109 \ task time: 121 || task index: 110 \ task time: 137 |
+| task index: 111 \ task time: 363 || task index: 112 \ task time: 113 || task index: 113 \ task time: 325 |
+| task index: 114 \ task time: 71 || task index: 115 \ task time: 241 || task index: 116 \ task time: 159 |
+| task index: 117 \ task time: 101 || task index: 118 \ task time: 85 || task index: 119 \ task time: 127 |
+| task index: 120 \ task time: 129 || task index: 121 \ task time: 397 || task index: 122 \ task time: 327 |
+| task index: 123 \ task time: 369 || task index: 124 \ task time: 3 || task index: 125 \ task time: 325 |
+| task index: 126 \ task time: 31 || task index: 127 \ task time: 339 || task index: 128 \ task time: 69 |
+| task index: 129 \ task time: 195 || task index: 130 \ task time: 203 || task index: 131 \ task time: 141 |
+| task index: 132 \ task time: 157 || task index: 133 \ task time: 63 || task index: 134 \ task time: 39 |
+| task index: 135 \ task time: 187 || task index: 136 \ task time: 335 || task index: 137 \ task time: 283 |
+| task index: 138 \ task time: 81 || task index: 139 \ task time: 239 || task index: 140 \ task time: 147 |
+| task index: 141 \ task time: 115 || task index: 142 \ task time: 249 || task index: 143 \ task time: 379 |
+| task index: 144 \ task time: 253 || task index: 145 \ task time: 251 || task index: 146 \ task time: 5 |
+| task index: 147 \ task time: 367 || task index: 148 \ task time: 179 || task index: 149 \ task time: 119 |
+| task index: 150 \ task time: 323 || task index: 151 \ task time: 337 || task index: 152 \ task time: 225 |
+| task index: 153 \ task time: 111 || task index: 154 \ task time: 373 || task index: 155 \ task time: 157 |
+| task index: 156 \ task time: 41 || task index: 157 \ task time: 209 || task index: 158 \ task time: 77 |
+| task index: 159 \ task time: 289 || task index: 160 \ task time: 379 || task index: 161 \ task time: 223 |
+| task index: 162 \ task time: 65 || task index: 163 \ task time: 65 || task index: 164 \ task time: 81 |
+| task index: 165 \ task time: 53 || task index: 166 \ task time: 373 || task index: 167 \ task time: 47 |
+| task index: 168 \ task time: 83 || task index: 169 \ task time: 95 || task index: 170 \ task time: 151 |
+| task index: 171 \ task time: 205 || task index: 172 \ task time: 33 || task index: 173 \ task time: 35 |
+| task index: 174 \ task time: 105 || task index: 175 \ task time: 141 || task index: 176 \ task time: 219 |
+| task index: 177 \ task time: 281 || task index: 178 \ task time: 329 || task index: 179 \ task time: 141 |
+| task index: 180 \ task time: 315 || task index: 181 \ task time: 347 || task index: 182 \ task time: 289 |
+| task index: 183 \ task time: 247 || task index: 184 \ task time: 5 || task index: 185 \ task time: 283 |
+| task index: 186 \ task time: 181 || task index: 187 \ task time: 215 || task index: 188 \ task time: 235 |
+| task index: 189 \ task time: 351 || task index: 190 \ task time: 33 || task index: 191 \ task time: 335 |
+| task index: 192 \ task time: 69 || task index: 193 \ task time: 265 || task index: 194 \ task time: 185 |
+| task index: 195 \ task time: 167 || task index: 196 \ task time: 147 || task index: 197 \ task time: 151 |
+| task index: 198 \ task time: 279 || task index: 199 \ task time: 229 |
