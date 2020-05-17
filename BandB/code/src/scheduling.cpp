@@ -587,39 +587,21 @@ void init_machines() {
 		 }
 	 }
  }
+ void Branch_and_Bound() {
+
+ }
+
 int main()
 {
 	auto start = high_resolution_clock::now();
-	//std:://qDebug() << "printing value: " << std::QString(MY_VAR);
-	/*minheap s = minheap(2, 5);
-	minheap v= minheap(3, 4);
-	s.insert(&s, &v);
-	minheap v2 = minheap(1, 1);
-	s.insert(&s, &v2);
-	minheap v3 = minheap(21, 12);
-	s.insert(&s, &v3);
-	minheap v4 = minheap(13, 13);
-	s.insert(&s, &v4);
-	minheap k = s;*/
+	
 	//int sum = 0;
 	
 	init_data();
 	 
-	init_machines();
 	
-	init_TasksTable();
-	swapCount = (int**)malloc((maxLevelSearch+1) * sizeof(int*));
-	for(int i=0;i< (maxLevelSearch + 1);i++)
-		swapCount[i]= (int*)malloc((maxLevelSearch + 1) * sizeof(int));
-	for (int i = 0; i < (maxLevelSearch + 1); i++)
-		for (int j = 0; j < (maxLevelSearch + 1); j++)
-			swapCount[i][j] = 0;
-
-	//GetBestOfNxM(3, 1, 1, 1, 0, temp, 0, true);
-	//SwapmTasks(NxMcom1Best, 3, NxMcom2Best, 1);//have error should chose two tasks 
-	LocalSearch();
+	Branch_and_Bound();
 	 
-	printf("local search done write report\n");
 	print_report();
 	print_summary();
 	auto stop = high_resolution_clock::now();
