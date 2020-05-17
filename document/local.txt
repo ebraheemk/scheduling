@@ -1,0 +1,48 @@
+ void LocalSearch() {
+	 bool flag = true;
+	 bool temp;
+	 while (flag) {
+		  
+		 flag = flag && LevelZero();
+		 for (int i = 1; i <= maxLevelSearch; i++) {
+			 for (int j = i; j <= maxLevelSearch; j++) {
+				 if (j == 1 && i == 1) {
+					 temp = LocalSearchNxM(i, j);
+					 if (temp) {
+						 i = 4; j = 4;
+					 }
+					 flag = flag && temp;
+				 }
+				 else {
+
+					 if (j == 1) {
+						 if(TasksTable[i-1][maxLevelSearch]>0)
+							 temp = LocalSearchNxM(i, j);
+						 if (temp) {
+							 i = 4; j = 4;
+						 }
+						 flag = flag && temp;
+					 }
+					 else {
+						 if (TasksTable[i][j-1] > 0)
+							 temp = LocalSearchNxM(i, j);
+						 if (temp) {
+							 i = 4; j = 4;
+						 }
+						 flag = flag && temp;
+					 }
+				 }
+
+
+
+
+				 
+			 }
+		 }
+	
+		
+
+ 		 flag = !flag;
+
+	 }
+ }

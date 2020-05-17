@@ -1,0 +1,21 @@
+for (int offset = 1; offset < M.size(); offset++) {
+			 for (int i = 0; i < M.size() / 2; i++) {
+				  
+				 GetBestOfNxM(i * 2, n, (i * 2 + offset) % M.size(), m, 0, d, 0, true);
+				 if(!GetBestOfNxMbool)
+				 SwapmTasks(NxMcom1Best, i * 2, NxMcom2Best, (i * 2 + offset) % M.size());
+				 flag = flag && GetBestOfNxMbool;
+
+
+			 }
+		 }
+
+		 for (int offset = 0; offset < M.size(); offset++) {
+			 for (int i = 0; i < M.size() ; i++) {
+				
+				 GetBestOfNxM(offset, n, i, m, 0, d, 0, true);
+				 if (!GetBestOfNxMbool)
+					 SwapmTasks(NxMcom1Best, offset, NxMcom2Best, i );
+				 flag = flag && GetBestOfNxMbool;
+			 }
+		 }

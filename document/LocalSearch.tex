@@ -4,6 +4,35 @@
 \usepackage{amsmath}
 \usepackage{mathtools}
 
+\usepackage[utf8]{inputenc}
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=2pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=1
+}
+ 
+\lstset{style=mystyle}
 \begin{document}  
   \title{Local Search for scheduling }
 \author{Ebraheem Kashkoush}
@@ -48,8 +77,31 @@ we chose $k$ task from all posible compination to chose $k$ tasks from $m1$ and 
 that mean we go throw the compination sequentially if the new  $r,k$ give us maximum machine timing less than the best soloution  for $m1,m2$ or the same maximum but the sum of A+B$<$X+Y we chose the new $r,k$ as the best soloution for now and save $r,k$ and check the other $k,r$   compinition with the new best solution.\newline
 Note: the    ( max\{A,B\}=max\{X,Y\}  and (A+B)$<$(X+Y))  equation help us to give high priority to machines with high speed.\newline
 Above we describe one iteration but we repeat the iteration untill we can not find $r,k$ that give us best soloution if we swap  them. and then we stop the Local search bettwen $m1$ and $m2$\newline
-\subsection{All posible combination } 
-
-
+\subsection{All posible combination of r,k}
+ as we said above we have a 2D array ,where  each row $i$ we hold the tasks in $mashine_i$ ,that mean we have $m$ rows wehre $m$ is machines count ,and each cell on $row_i$ hold $machine_i$ task index.\newline
+we start first solve the problem of choosing $k$ tasks from machine. given array we want to get all the different combination to reorder the array as we know in math its $\binom{n}{k}$ problem where $n$ is the tasks count and $k$ is the number of tasks that we want swap with the
+ other machine ,  that mean we wan to chose $k$ tasks from $n$ tasks.\newline 
+given array hold machine index tasks that problem can done verey easly using recursion \newline
+if we creat array with size $k$ we want to relaod to it one combination each time  and once the array full we have new combinition , and we have index that point to the next empty cell we can done the problem with this two recursive recall \newline
+    
+ // current is included, put next at next location  \newline
+    data[index] = arr[i];  \newline
+    combination(arr, n, k, index + 1, data, i + 1);  \newline
+  
+    // current is excluded, replace it with next (Note that  \newline
+    // i+1 is passed, but index is not changed)  \newline
+    combinationUtil(arr, n, k, index, data, i+1);   \newline
+on other word we have two option to satisfy and set arr[i] in data[index] or to try to give him another i' so we find $j=i+c,c>0$ to set data[index]=arr[j]; \newline
+ \subsection{combination of two machines} 
+i go throw all posible cobinations of two machines twice on deferent order the code is so easy so writing the code more sample than to dscribe it :\newline 
+\lstinputlisting[language=c]{e.txt}
+\subsection{all togther} 
+above we see how we chose pair of two machines and how we applay LocalSearch on this two machines ,weher we see how we chose k tasks from n and we check each combilition of $m1(first machine chose k)$ with all the cobination of $m2(machine2 chosing r tasks)$.\newline
+so we can write one function $LocalSearchNxM(r,k)$ and applied LocalSearch that swap $r$ tasks from first machine with $k$ from machine 2 and we go throw all compinition of two machine like we said above \newline
+and this is the main LocalSearch Function:\newline
+Where: \newline
+LevelZero(): is function implement local search that only pass one task each time from machine1 to machine2 with the same rolles above.\newline
+ LocalSearchNxM(r,k): function implement localsearch where we want swap each time $r$ tasks from $m1$ with $k$ tasks from $m2$ 
+ \lstinputlisting[language=c]{Local.txt}
 \end{document}
  
