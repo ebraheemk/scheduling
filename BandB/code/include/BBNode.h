@@ -10,6 +10,8 @@ public:
 	int machine_index;
 	BBNode* father;
 	BBNode(std::vector<Node> J, std::vector<machin> M);
+	BBNode(std::vector<Node> J, std::vector<machin> M,int i);
+
 	~BBNode();
 private:
 	BBNode** machines;
