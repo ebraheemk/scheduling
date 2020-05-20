@@ -588,7 +588,7 @@ void init_machines() {
 	 }
  }
  void Branch_and_Bound() {
-
+	 BBNode A= BBNode(J,M);
  }
 
 int main()
@@ -602,8 +602,8 @@ int main()
 	
 	Branch_and_Bound();
 	 
-	print_report();
-	print_summary();
+//	print_report();
+	//print_summary();
 	auto stop = high_resolution_clock::now();
 	auto duration = duration_cast<microseconds>(stop - start);
 	std::cout << duration.count()/1000000.0 << std::endl;

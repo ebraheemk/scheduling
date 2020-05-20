@@ -8,8 +8,8 @@
 #include <fstream>
 #include <string>
 #include <maxheap.h>
-
-
+#include "BBNode.h"
+ 
 #define maxLevelSearch 2
 int speeds [3] = { 1,2,4 };
 std::vector<Node> J;
@@ -56,3 +56,5 @@ int * d_nm;
 int ** TasksTable;//we have on map index as key but on GetBestOfNxM we need elment on place i not with key i so we make array hold task key in place i for each machine
 //for report
 int ** swapCount;
+
+std::vector<BBNode*> leafs;
