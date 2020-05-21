@@ -3,6 +3,30 @@ using namespace std;
 /*#########################!!
 ###########################!!!!!!!!	SHOULD BE TESTED
 ###########################!!!*/
+
+void maxheap::copy_heap(maxheap* old, maxheap* current) {
+	//if we dont allocate and use malloc when we return from recursion we free the value from the
+	//stack and lose it
+	maxheap* temp = (maxheap*)malloc(sizeof(maxheap));
+	if (old->right != NULL) {
+		temp = new maxheap(old->right->value, old->right->index);
+		current->right = temp;
+		current->right->father = current;
+		copy_heap(old->right, current->right);
+	}
+	if (old->left != NULL) {
+		temp = new maxheap(old->left->value, old->left->index);
+		current->left = temp;
+		current->left->father = current;
+
+		copy_heap(old->left, current->left);
+	}
+}
+maxheap::maxheap(maxheap& old) :value(old.value), index(old.index), right(NULL), left(NULL), father(NULL), rightCount(old.rightCount), leftCount(old.leftCount) {
+	copy_heap((maxheap*)&old, this);
+}//copy constructure
+
+
 void maxheap::afterpop(maxheap * t) {
 	if (t->right != NULL && t->left != NULL) {
 		if (t->right->value < t->left->value) {
