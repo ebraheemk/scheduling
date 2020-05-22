@@ -250,8 +250,7 @@ void init_machines() {
 		 myfile2.close();
 	 }
 
-	 machinesHV = (minheap**)malloc(sizeof(minheap*) * M.size());
-	 tasksHV= (minheap**)malloc(sizeof(minheap*) * J.size());
+ 
 
 	
 
