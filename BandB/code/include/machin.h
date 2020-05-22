@@ -10,11 +10,11 @@ public:
  	int speed;
 	int TasksTime;
 	int index;
-	std::map<int,Node> Tasks;
+	//std::map<int,Node> Tasks;
 
 	
-private:
-	int later;
+
+
 
 };
 

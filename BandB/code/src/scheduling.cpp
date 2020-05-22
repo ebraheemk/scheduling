@@ -9,6 +9,7 @@
 #include <chrono> 
 using namespace std::chrono;
 #define getcwd _getcwd
+/*
 void PassTask(int task, int machine1, int machine2) {
 	std::map<int, Node>::iterator it1;
 	it1 = M.at(machine1).Tasks.find(task);
@@ -80,7 +81,7 @@ void SwapmTasks(std::vector<int> t1, int m1, std::vector<int>t2, int m2) {
 	update_TasksTable(m1);
 	update_TasksTable(m2);
 
-}
+} 
 int GetBestThrow(int machine1, int  machine2) {
 	//best throw from machine1 to machine2
 	//int segma = abs(M.at(machine1).TasksTime - M.at(machine2).TasksTime);
@@ -223,7 +224,7 @@ void init_machines() {
 	}
 	printf("jjjj %d \n", copym.value / 4);
 	
-}
+}*/
  void init_data() {
 	 std::string line;
 	 std::ifstream myfile("tasks.txt");
@@ -255,7 +256,7 @@ void init_machines() {
 	
 
 
-}
+}/*
  void print_summary() {
 	 int sum = 0;
 	 int minTask=J.at(0).time, maxTask= J.at(0).time;
@@ -346,7 +347,7 @@ void init_machines() {
  bool LevelZero() {
 	 /*TODO :to optimize we can use any sort of nlogn so each time we check two machine by
 	 o(1) instide of o(n) bcz we only need maximum
-	 and also we can change the waywe give initial slolothion */
+	 and also we can change the waywe give initial slolothion *//*
 	 bool flag=true;
 	 bool result = true;
 	 while (flag) {
@@ -387,7 +388,7 @@ void init_machines() {
 			 if (!GetBestOfNxMbool)
 				 SwapmTasks(NxMcom1Best, (i * 2 + offset) % M.size()  , NxMcom2Best, i * 2);
 			 flag = flag && GetBestOfNxMbool;*/
-
+/*
 			 }
 		 }
 
@@ -402,7 +403,7 @@ void init_machines() {
 				 /* GetBestOfNxM(i, n, offset, m, 0, d, 0, true);
 				 if (!GetBestOfNxMbool)
 					 SwapmTasks(NxMcom1Best, i, NxMcom2Best, offset);
-				 flag = flag && GetBestOfNxMbool;*/
+				 flag = flag && GetBestOfNxMbool;*//*
 			 }
 		 }
 
@@ -418,7 +419,7 @@ void init_machines() {
 	 of them have changed  so we can hold type of ReadyQueue that hold all the machines that
 	 was changed and check them with other machines and stop we we have empty ready queue that mean
 	 we pass over all compantion of two machines and there no two machine that we can optimize his time
-	 */
+	 *//*
 	 while(flag){
 		 for (int offset = 1; offset < M.size(); offset++) {
 			 for (int i = 0; i < M.size() / 2; i++) {
@@ -514,7 +515,7 @@ void init_machines() {
 		/* if(max(a,b)<MaxNxM)
 			 WE HAVE an better sol save it and continue....
 			 //ToDo Later*/
-
+/*
 
 		 return;
 	 }
@@ -585,9 +586,10 @@ void init_machines() {
 			 printf("%d,%d|", i, TasksTable[i][k]);
 		 }
 	 }
- }
+ }*/
  void Branch_and_Bound() {
-	 BBNode A= BBNode(J,M);
+	// std::vector<Node> M = J;
+	 BBNode A= BBNode(J, M);
  }
 
 int main()
