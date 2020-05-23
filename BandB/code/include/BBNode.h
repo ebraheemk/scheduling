@@ -12,6 +12,10 @@ public:
 	int machine_speed;
 	int worstTiming;
 	int BestTiming;
+	int Tsum;
+	int Msum;
+	int MinTask;
+	int mms;
 	BBNode* father;
 	BBNode(std::vector<Node> J,  std::vector<machin> M);
 	BBNode(std::vector<std::pair<int, int> > tasks, std::vector<machin> M, int i, BBNode* cbn, BBNode* root);
