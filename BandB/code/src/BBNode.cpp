@@ -20,7 +20,7 @@ BBNode::BBNode(std::vector<std::pair<int, int> > tasks, std::vector<machin> M, i
 			cbn->machines[k]->Msum = cbn->Msum;
 			cbn->machines[k]->MinTask = cbn->MinTask;//TASKS sorted from the bigest to the smallest so the minumum will did not changed
 		//	cbn->machines[k]->machines[k]->mms=root->mms;
-			cbn->machines[k]->BestTiming = taskstime+fmax((cbn->machines[k]->Tsum / cbn->machines[k]->Msum), cbn->machines[k]->MinTask);
+			cbn->machines[k]->BestTiming = cbn->machines[k]->taskstime+fmax((cbn->machines[k]->Tsum / cbn->machines[k]->Msum), cbn->machines[k]->MinTask/4/*should add div max machine speed*/); 
 			cbn->machines[k]->worstTiming = cbn->machines[k]->Tsum / root->mms;
 			//BBNode(tasks, M, i + 1, cbn->machines[k],root);
 			if (cbn->machines[k]->worstTiming < root->MinWorst)
@@ -52,20 +52,28 @@ BBNode::BBNode(std::vector<Node> J,  std::vector<machin> M)
 	}
 
 	mmspeed = M.at(0).speed;
+	int tempmax = M.at(0).speed;
 	Msum = M.at(0).speed;
 	for (int i = 1; i < M.size(); i++) {
 		Msum = Msum + M.at(i).speed;
 		if (M.at(i).speed < mmspeed)
 			mmspeed = M.at(i).speed;
+		if (M.at(i).speed > tempmax)
+			tempmax = M.at(i).speed;
 	}
 	this->father = NULL;
 	this ->machine_index =-1;
 	this->machine_speed =-1;
 	this->taskstime = 0;
+	int temp = (int)(J.size() / M.size());
+	if (temp > 4* tempmax)
+		temp = 4* tempmax;
+	temp = temp / tempmax;to start from here
+	this->taskMachineRatio = fmax(4 - temp,1)/tempmax;
 	this->BestTiming = fmax((Tsum/Msum), minTask);
 	this->worstTiming = Tsum/ mmspeed;
-	this->MinTask = minTask;
-	this->Tsum = Tsum;
+	this->MinTask = minTask*4;
+	this->Tsum = Tsum*4;
 	this->Msum = Msum;
 	this->mms = mmspeed;
 	this->MinWorst = worstTiming;
