@@ -16,6 +16,7 @@ public:
 	int Msum;
 	int MinTask;
 	int mms;
+	int MinWorst;
 	BBNode* father;
 	BBNode(std::vector<Node> J,  std::vector<machin> M);
 	BBNode(std::vector<std::pair<int, int> > tasks, std::vector<machin> M, int i, BBNode* cbn, BBNode* root);

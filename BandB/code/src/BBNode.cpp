@@ -23,7 +23,13 @@ BBNode::BBNode(std::vector<std::pair<int, int> > tasks, std::vector<machin> M, i
 			cbn->machines[k]->BestTiming = fmax((cbn->machines[k]->Tsum / cbn->machines[k]->Msum), cbn->machines[k]->MinTask);
 			cbn->machines[k]->worstTiming = cbn->machines[k]->Tsum / cbn->machines[k]->mms;
 			//BBNode(tasks, M, i + 1, cbn->machines[k],root);
+			if (cbn->machines[k]->worstTiming < root->MinWorst)
+				root->MinWorst = cbn->machines[k]->worstTiming;
 		}
+		for (int k = 0; k < M.size(); k++)//we need to check all brother befor start new level for this reson we have two loops
+		{
+		}
+
 		 
 	}
 
@@ -60,6 +66,7 @@ BBNode::BBNode(std::vector<Node> J,  std::vector<machin> M)
 	this->Tsum = Tsum;
 	this->Msum = Msum;
 	this->mms = mmspeed;
+	this->MinWorst = worstTiming;
 	 
 	//init maxheap
 	
