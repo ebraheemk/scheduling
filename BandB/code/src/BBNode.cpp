@@ -19,15 +19,17 @@ BBNode::BBNode(std::vector<std::pair<int, int> > tasks, std::vector<machin> M, i
 			cbn->machines[k]->Tsum = cbn->Tsum - tasks.at(i).first;
 			cbn->machines[k]->Msum = cbn->Msum;
 			cbn->machines[k]->MinTask = cbn->MinTask;//TASKS sorted from the bigest to the smallest so the minumum will did not changed
-			cbn->machines[k]->machines[k]->mms=cbn->mms;
-			cbn->machines[k]->BestTiming = fmax((cbn->machines[k]->Tsum / cbn->machines[k]->Msum), cbn->machines[k]->MinTask);
-			cbn->machines[k]->worstTiming = cbn->machines[k]->Tsum / cbn->machines[k]->mms;
+		//	cbn->machines[k]->machines[k]->mms=root->mms;
+			cbn->machines[k]->BestTiming = taskstime+fmax((cbn->machines[k]->Tsum / cbn->machines[k]->Msum), cbn->machines[k]->MinTask);
+			cbn->machines[k]->worstTiming = cbn->machines[k]->Tsum / root->mms;
 			//BBNode(tasks, M, i + 1, cbn->machines[k],root);
 			if (cbn->machines[k]->worstTiming < root->MinWorst)
 				root->MinWorst = cbn->machines[k]->worstTiming;
 		}
 		for (int k = 0; k < M.size(); k++)//we need to check all brother befor start new level for this reson we have two loops
 		{
+			if(cbn->machines[k]->BestTiming< root->MinWorst)
+				BBNode(tasks, M, i + 1, cbn->machines[k], root);
 		}
 
 		 
