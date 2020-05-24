@@ -20,15 +20,15 @@ BBNode::BBNode(std::vector<std::pair<int, int> > tasks, std::vector<machin> M, i
 			cbn->machines[k]->Msum = cbn->Msum;
 			cbn->machines[k]->MinTask = cbn->MinTask;//TASKS sorted from the bigest to the smallest so the minumum will did not changed
 		//	cbn->machines[k]->machines[k]->mms=root->mms;
-			cbn->machines[k]->BestTiming = cbn->machines[k]->taskstime+fmax((cbn->machines[k]->Tsum / cbn->machines[k]->Msum), cbn->machines[k]->MinTask/4/*should add div max machine speed*/); 
-			cbn->machines[k]->worstTiming = cbn->machines[k]->Tsum / root->mms;
+			cbn->machines[k]->BestTiming = cbn->machines[k]->taskstime+(int)fmax((cbn->machines[k]->Tsum / cbn->machines[k]->Msum), (cbn->machines[k]->MinTask*root->taskMachineRatio)/*should add div max machine speed*/);
+			cbn->machines[k]->worstTiming = cbn->machines[k]->taskstime+(cbn->machines[k]->Tsum / root->mms);
 			//BBNode(tasks, M, i + 1, cbn->machines[k],root);
 			if (cbn->machines[k]->worstTiming < root->MinWorst)
 				root->MinWorst = cbn->machines[k]->worstTiming;
 		}
 		for (int k = 0; k < M.size(); k++)//we need to check all brother befor start new level for this reson we have two loops
 		{
-			if(cbn->machines[k]->BestTiming< root->MinWorst)
+			if(cbn->machines[k]->BestTiming < root->MinWorst)
 				BBNode(tasks, M, i + 1, cbn->machines[k], root);
 		}
 
@@ -50,7 +50,7 @@ BBNode::BBNode(std::vector<Node> J,  std::vector<machin> M)
 		if (J.at(i).time < minTask)
 			minTask = J.at(i).time;
 	}
-
+	Tsum = Tsum * 4;
 	mmspeed = M.at(0).speed;
 	int tempmax = M.at(0).speed;
 	Msum = M.at(0).speed;
@@ -66,14 +66,13 @@ BBNode::BBNode(std::vector<Node> J,  std::vector<machin> M)
 	this->machine_speed =-1;
 	this->taskstime = 0;
 	int temp = (int)(J.size() / M.size());
-	if (temp > 4* tempmax)
-		temp = 4* tempmax;
-	temp = temp / tempmax;to start from here
-	this->taskMachineRatio = fmax(4 - temp,1)/tempmax;
+	if (temp < 1)
+		temp = 1;
+ 	this->taskMachineRatio =(double) temp / tempmax;
 	this->BestTiming = fmax((Tsum/Msum), minTask);
 	this->worstTiming = Tsum/ mmspeed;
-	this->MinTask = minTask*4;
-	this->Tsum = Tsum*4;
+	this->MinTask = minTask;
+	this->Tsum = Tsum;
 	this->Msum = Msum;
 	this->mms = mmspeed;
 	this->MinWorst = worstTiming;
