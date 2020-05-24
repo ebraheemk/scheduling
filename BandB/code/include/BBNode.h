@@ -17,6 +17,8 @@ public:
 	int MinTask;
 	int mms;
 	int MinWorst;
+	int mxms;
+	int * machinesTime;
 	double taskMachineRatio;
 	BBNode* father;
 	BBNode(std::vector<Node> J,  std::vector<machin> M);
