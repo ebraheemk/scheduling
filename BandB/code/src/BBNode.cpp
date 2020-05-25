@@ -114,8 +114,10 @@ BBNode::BBNode(std::vector<Node> J,  std::vector<machin> M)
 	 int mmtime;
 	 for (int i = 0; i < leafs.size(); i++) {
 		 for (int j = 0; j < M.size(); j++)
-			 if (leafs.at(i)->machines[j]->taskstime < min)
+			 if (leafs.at(i)->machines[j]->taskstime < min) {
 				 min = leafs.at(i)->machines[j]->taskstime;
+				 ServiverPath = leafs.at(i)->machines[j];
+			 }
 	 }
 	 min = min + 0;
 

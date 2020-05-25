@@ -590,7 +590,8 @@ void init_machines() {
  void Branch_and_Bound() {
 	// std::vector<Node> M = J;
 	 BBNode A= BBNode(J, M);
- }
+	 next go from leaf to root on servivel path and insert tasks into machines 
+  }
 
 int main()
 {
