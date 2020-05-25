@@ -21,7 +21,7 @@ BBNode::BBNode(std::vector<std::pair<int, int> > tasks, std::vector<machin> M, i
 				cbn->machines[k]->machinesTime[i] = cbn->machinesTime[i];
 			cbn->machines[k]->machinesTime[k] = cbn->machinesTime[k]+(tasks.at(i).first) / M.at(k).speed;
 
-			cbn->machines[k]->taskstime = fmax(cbn->machines[k]->machinesTime[k], cbn->machines[k]->taskstime);
+			cbn->machines[k]->taskstime = fmax(cbn->machines[k]->machinesTime[k], cbn->taskstime);
 			 temp = (int)((tasks.size() - i - 1) / M.size());
 			if (temp < 1)
 				temp = 1;
@@ -33,14 +33,15 @@ BBNode::BBNode(std::vector<std::pair<int, int> > tasks, std::vector<machin> M, i
 			if (cbn->machines[k]->worstTiming < root->MinWorst)
 				root->MinWorst = cbn->machines[k]->worstTiming;
 		}
-		for (int k = 0; k < M.size(); k++)//we need to check all brother befor start new level for this reson we have two loops
-		{
-			if(cbn->machines[k]->BestTiming <= root->MinWorst)
-				BBNode(tasks, M, i + 1, cbn->machines[k], root);
-		}
 		if (i == tasks.size() - 1) {
 			root->leafs.push_back(cbn);
 		}
+		for (int k = 0; k < M.size(); k++)//we need to check all brother befor start new level for this reson we have two loops
+		{
+			if (cbn->machines[k]->BestTiming <= fmin(root->MinWorst, root->BestTiming*2))
+				BBNode(tasks, M, i + 1, cbn->machines[k], root);
+		}
+		 
 		 
 	}
 
@@ -59,6 +60,8 @@ BBNode::BBNode(std::vector<Node> J,  std::vector<machin> M)
 		if (J.at(i).time < minTask)
 			minTask = J.at(i).time;
 	}
+	minTask = minTask * 4;
+	maxTask = maxTask * 4;
 	Tsum = Tsum * 4;
 	mmspeed = M.at(0).speed;
 	int tempmax = M.at(0).speed;
@@ -78,7 +81,7 @@ BBNode::BBNode(std::vector<Node> J,  std::vector<machin> M)
 	if (temp < 1)
 		temp = 1;
  	this->taskMachineRatio =(double) temp / tempmax;
-	this->BestTiming = fmax((Tsum/Msum), minTask);
+	this->BestTiming = fmax((Tsum/Msum), minTask*this->taskMachineRatio);
 	this->worstTiming = Tsum/ mmspeed;
 	this->MinTask = minTask;
 	this->Tsum = Tsum;
@@ -107,10 +110,13 @@ BBNode::BBNode(std::vector<Node> J,  std::vector<machin> M)
 	tasks.push_back(std::pair<int, int>(mxhp.value,mxhp.index));
 
 	 BBNode(tasks, M, 0,this,this);
-	 int min = leafs.at(0)->taskstime;
-	 for (int i = 0; i < leafs.size(); i++)
-		 if (leafs.at(i)->taskstime < min)
-			 min = leafs.at(i)->taskstime;
+	 int min = leafs.at(0)->machines[0]->taskstime;
+	 int mmtime;
+	 for (int i = 0; i < leafs.size(); i++) {
+		 for (int j = 0; j < M.size(); j++)
+			 if (leafs.at(i)->machines[j]->taskstime < min)
+				 min = leafs.at(i)->machines[j]->taskstime;
+	 }
 	 min = min + 0;
 
 	
