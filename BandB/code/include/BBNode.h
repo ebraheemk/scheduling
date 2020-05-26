@@ -18,6 +18,7 @@ public:
 	int mms;
 	int MinWorst;
 	int mxms;
+	int ntaskidx;
 	int * machinesTime;
 	double taskMachineRatio;
 	BBNode* ServiverPath;

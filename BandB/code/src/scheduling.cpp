@@ -618,7 +618,11 @@ void print_report() {
 void insert_soulution(BBNode* survival) {
 	int i = J.size() - 1;
 	while (i>=0) {
-		M.at(survival->machine_index).Tasks.insert(std::pair<int,Node>(i, J.at(i)));
+
+		M.at(survival->machine_index).Tasks.insert(std::pair<int,Node>(survival->father->ntaskidx, J.at(survival->father->ntaskidx)));
+		//we multiplay with 4 becouse in print report we divide by 4
+		//worng J.at(i) not sorted 
+		M.at(survival->machine_index).TasksTime = M.at(survival->machine_index).TasksTime + ((J.at(survival->father->ntaskidx).time*4) / M.at(survival->machine_index).speed);
 		i--;
 		survival = survival->father;
 	}

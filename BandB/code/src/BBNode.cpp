@@ -6,7 +6,7 @@ BBNode::BBNode(std::vector<std::pair<int, int> > tasks, std::vector<machin> M, i
 		
 
 		cbn->machines = (BBNode**)malloc(sizeof(BBNode*)*M.size());
-		 
+		cbn->ntaskidx = tasks.at(i).second;
 		for (int k = 0; k < M.size(); k++)
 		{ 
 			cbn->machines[k] = (BBNode*)malloc(sizeof(BBNode));
@@ -38,7 +38,7 @@ BBNode::BBNode(std::vector<std::pair<int, int> > tasks, std::vector<machin> M, i
 		}
 		for (int k = 0; k < M.size(); k++)//we need to check all brother befor start new level for this reson we have two loops
 		{
-			if (cbn->machines[k]->BestTiming <= fmin(root->MinWorst, root->BestTiming*2))
+			if (cbn->machines[k]->BestTiming <= fmin(root->MinWorst, root->BestTiming*1.5))
 				BBNode(tasks, M, i + 1, cbn->machines[k], root);
 		}
 		 
@@ -111,13 +111,15 @@ BBNode::BBNode(std::vector<Node> J,  std::vector<machin> M)
 
 	 BBNode(tasks, M, 0,this,this);
 	 int min = leafs.at(0)->machines[0]->taskstime;
+	 ServiverPath = leafs.at(0)->machines[0];
 	 int mmtime;
 	 for (int i = 0; i < leafs.size(); i++) {
-		 for (int j = 0; j < M.size(); j++)
+		 for (int j = 0; j < M.size(); j++) {
 			 if (leafs.at(i)->machines[j]->taskstime < min) {
 				 min = leafs.at(i)->machines[j]->taskstime;
 				 ServiverPath = leafs.at(i)->machines[j];
 			 }
+		 }
 	 }
 	 min = min + 0;
 
