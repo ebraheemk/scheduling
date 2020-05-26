@@ -9,7 +9,6 @@
 #include <chrono> 
 using namespace std::chrono;
 #define getcwd _getcwd
-/*
 void PassTask(int task, int machine1, int machine2) {
 	std::map<int, Node>::iterator it1;
 	it1 = M.at(machine1).Tasks.find(task);
@@ -81,7 +80,7 @@ void SwapmTasks(std::vector<int> t1, int m1, std::vector<int>t2, int m2) {
 	update_TasksTable(m1);
 	update_TasksTable(m2);
 
-} 
+}
 int GetBestThrow(int machine1, int  machine2) {
 	//best throw from machine1 to machine2
 	//int segma = abs(M.at(machine1).TasksTime - M.at(machine2).TasksTime);
@@ -224,7 +223,7 @@ void init_machines() {
 	}
 	printf("jjjj %d \n", copym.value / 4);
 	
-}*/
+}
  void init_data() {
 	 std::string line;
 	 std::ifstream myfile("tasks.txt");
@@ -251,12 +250,13 @@ void init_machines() {
 		 myfile2.close();
 	 }
 
- 
+	 machinesHV = (minheap**)malloc(sizeof(minheap*) * M.size());
+	 tasksHV= (minheap**)malloc(sizeof(minheap*) * J.size());
 
 	
 
 
-}/*
+}
  void print_summary() {
 	 int sum = 0;
 	 int minTask=J.at(0).time, maxTask= J.at(0).time;
@@ -347,7 +347,7 @@ void init_machines() {
  bool LevelZero() {
 	 /*TODO :to optimize we can use any sort of nlogn so each time we check two machine by
 	 o(1) instide of o(n) bcz we only need maximum
-	 and also we can change the waywe give initial slolothion *//*
+	 and also we can change the waywe give initial slolothion */
 	 bool flag=true;
 	 bool result = true;
 	 while (flag) {
@@ -383,12 +383,7 @@ void init_machines() {
 				 SwapmTasks(NxMcom1Best, i * 2, NxMcom2Best, (i * 2 + offset) % M.size());
 				 flag = flag && GetBestOfNxMbool;
 
-				 /*
-			 GetBestOfNxM((i * 2 + offset) % M.size() , n, i * 2, m, 0, d, 0, true);
-			 if (!GetBestOfNxMbool)
-				 SwapmTasks(NxMcom1Best, (i * 2 + offset) % M.size()  , NxMcom2Best, i * 2);
-			 flag = flag && GetBestOfNxMbool;*/
-/*
+
 			 }
 		 }
 
@@ -399,11 +394,6 @@ void init_machines() {
 				 if (!GetBestOfNxMbool)
 					 SwapmTasks(NxMcom1Best, offset, NxMcom2Best, i );
 				 flag = flag && GetBestOfNxMbool;
-
-				 /* GetBestOfNxM(i, n, offset, m, 0, d, 0, true);
-				 if (!GetBestOfNxMbool)
-					 SwapmTasks(NxMcom1Best, i, NxMcom2Best, offset);
-				 flag = flag && GetBestOfNxMbool;*//*
 			 }
 		 }
 
@@ -419,7 +409,7 @@ void init_machines() {
 	 of them have changed  so we can hold type of ReadyQueue that hold all the machines that
 	 was changed and check them with other machines and stop we we have empty ready queue that mean
 	 we pass over all compantion of two machines and there no two machine that we can optimize his time
-	 *//*
+	 */
 	 while(flag){
 		 for (int offset = 1; offset < M.size(); offset++) {
 			 for (int i = 0; i < M.size() / 2; i++) {
@@ -438,8 +428,6 @@ void init_machines() {
 	 while (flag) {
 		  
 		 flag = flag && LevelZero();
-		 //flag = flag && LevelOne();
-		 //Todo we should update the way we calc level for example 2->2 take time more time than 1->3 
 		 for (int i = 1; i <= maxLevelSearch; i++) {
 			 for (int j = i; j <= maxLevelSearch; j++) {
 				 if (j == 1 && i == 1) {
@@ -475,11 +463,7 @@ void init_machines() {
 				 
 			 }
 		 }
-		// flag = flag && LocalSearchNxM(1, 1); 
-		// flag = flag && LocalSearchNxM(1, 2);
-
-		  
-		//  
+	
 		
 
  		 flag = !flag;
@@ -515,7 +499,7 @@ void init_machines() {
 		/* if(max(a,b)<MaxNxM)
 			 WE HAVE an better sol save it and continue....
 			 //ToDo Later*/
-/*
+
 
 		 return;
 	 }
@@ -586,64 +570,42 @@ void init_machines() {
 			 printf("%d,%d|", i, TasksTable[i][k]);
 		 }
 	 }
- }*/
-void print_report() {
-	std::ofstream myfile("../output/report.txt");
-	myfile << "Report\n";
-
-
-	myfile << "______________________________________________________________________________________________________________________\n";
-	int j = 0;
-	for (int i = 0; i < M.size(); i++) {
-		myfile << "______________________________________________________________________________________________________________________\n";
-		myfile << "##########################\n";
-		myfile << "machine SPEED : ";  myfile << M.at(i).speed; myfile << '\n';
-		myfile << "machine index : "; myfile << M.at(i).index; myfile << '\n';
-		myfile << "tasks total time: "; myfile << (float)M.at(i).TasksTime / 4; myfile << '\n';
-		myfile << "##########################\n";
-		std::map<int, Node>::iterator it;
-		for (it = M.at(i).Tasks.begin(); it != M.at(i).Tasks.end(); ++it) {
-			//for (int k = 0; k < M.at(i).Tasks.size(); k++) {
-			if (j == 3) {
-				myfile << '\n';
-				j = 0;
-			}
-			myfile << "| task index: "; myfile << it->second.index; myfile << " \\ task time: "; myfile << it->second.time; myfile << " |";
-			j++;
-		}
-		myfile << '\n';
-	}
-	myfile.close();
-}
-void insert_soulution(BBNode* survival) {
-	int i = J.size() - 1;
-	while (survival->father != NULL) {
-		M.at(survival->machine_index).Tasks.insert(std::pair<int,Node>(survival->machine_index, J.at(i)));
-		i--;
-		survival = survival->father;
-	}
-
-}
- void Branch_and_Bound() {
-	// std::vector<Node> M = J;
-	 BBNode A = BBNode(J, M); 
- 	 insert_soulution(A.ServiverPath);
-	 //next go from leaf to root on servivel path and insert tasks into machines 
-  }
-
+ }
 int main()
 {
 	auto start = high_resolution_clock::now();
-	
+	//std:://qDebug() << "printing value: " << std::QString(MY_VAR);
+	/*minheap s = minheap(2, 5);
+	minheap v= minheap(3, 4);
+	s.insert(&s, &v);
+	minheap v2 = minheap(1, 1);
+	s.insert(&s, &v2);
+	minheap v3 = minheap(21, 12);
+	s.insert(&s, &v3);
+	minheap v4 = minheap(13, 13);
+	s.insert(&s, &v4);
+	minheap k = s;*/
 	//int sum = 0;
 	
 	init_data();
 	 
+	init_machines();
 	
-	Branch_and_Bound();
+	init_TasksTable();
+	swapCount = (int**)malloc((maxLevelSearch+1) * sizeof(int*));
+	for(int i=0;i< (maxLevelSearch + 1);i++)
+		swapCount[i]= (int*)malloc((maxLevelSearch + 1) * sizeof(int));
+	for (int i = 0; i < (maxLevelSearch + 1); i++)
+		for (int j = 0; j < (maxLevelSearch + 1); j++)
+			swapCount[i][j] = 0;
+
+	//GetBestOfNxM(3, 1, 1, 1, 0, temp, 0, true);
+	//SwapmTasks(NxMcom1Best, 3, NxMcom2Best, 1);//have error should chose two tasks 
+	LocalSearch();
+	 
+	printf("local search done write report\n");
 	print_report();
-//	print_report();
-	//print_summary();
+	print_summary();
 	auto stop = high_resolution_clock::now();
 	auto duration = duration_cast<microseconds>(stop - start);
 	std::cout << duration.count()/1000000.0 << std::endl;

@@ -1,5 +1,5 @@
 cmake_minimum_required (VERSION 3.11)
-project (EkSch C CXX)
+project (Ek_LocalSearch C CXX)
 # Turn on the ability to create folders to organize projects (.vcproj)
 # It creates "CMakePredefinedTargets" folder by default and adds CMake
 # defined projects like INSTALL.vcproj and ZERO_CHECK.vcproj
@@ -24,11 +24,11 @@ endif ()
 
 
 file (GLOB HEADER_FILES
-      "Viewer/include/*.h")
+      "code/include/*.h")
  
 # Collect sources into the variable SOURCE_FILES
 file (GLOB SOURCE_FILES
-      "Viewer/src/*.cpp")
+      "code/src/*.cpp")
 
 # Create named folders for the sources within the .vcproj
 # Empty name lists them directly under the .vcproj
@@ -37,17 +37,17 @@ source_group("Source Files" FILES ${SOURCE_FILES})
 source_group("Header Files" FILES ${HEADER_FILES})
 
  # Properties->C/C++->General->Additional Include Directories
-include_directories ("Viewer/include" )
+include_directories ("code/include" )
 # Set Properties->General->Configuration Type to Application(.exe)
 # Creates app.exe with the listed sources (main.cpp)
 # Adds sources to the Solution Explorer
-add_executable(${PROJECT_NAME} ${SOURCE_FILES} ${HEADER_FILES} ${SHADER_FILES})
+add_executable(${PROJECT_NAME} ${SOURCE_FILES} ${HEADER_FILES} )
 # Creates a folder "MeshViewer" and adds target 
 # project (app.vcproj) under it
 set_property(TARGET ${PROJECT_NAME} PROPERTY FOLDER ${PROJECT_NAME})
 
 # link subprojects	 
-target_link_libraries(${PROJECT_NAME} ${OPENGL_LIBRARIES})
+##target_link_libraries(${PROJECT_NAME} )
 # Turn on the ability to create folders to organize projects (.vcproj)
 # It creates "CMakePredefinedTargets" folder by default and adds CMake
 # defined projects like INSTALL.vcproj and ZERO_CHECK.vcproj

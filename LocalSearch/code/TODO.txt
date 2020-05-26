@@ -1,0 +1,14 @@
+ //Todo we should update the way we calc level for example 2->2 take time more time than 1->3 IN FUNCTION LocalSearch
+בעצם בכדי 
+לשפר זמנים אני מתחיל לחשוב על להוריד חלק מהחפושים שאני חושב שההסתברות שלהם לתקן קטנה למשל הסיכוי של 2->2 לתקן הוא קתן כי רוב הפתרונות פתרנו בהחלפה מסוג 1->1 כלומר אם יש לנו שתי משימות שסכומם
+ מול שתי משימות אחרות ממכונה אחרת משפר בסיכוי גדול יהיה מקרה נתן לחלק אותם למשמה מול משימה משפרת פעמים ובסיכוי קתן לא ובמיוחד שאם יש החלפה מגדילה הפער והחלפה לא בעצם היה יותר
+ כדאי ללכת על פתרון מסוג 1->2 לכן בעצם אנחנו לא צריכים כל הקומפנציות החלפה מסוג 2->2 לוקחת המון זמן למשל אם כל מכונה יש 40 משימות ויש 100 משימות אז לוקח 40*39*40*39*100*99 אטרציות 
+
+****!important*****-> 
+swap the condition 
+from :
+max{A,B}<max{X,Y}
+TO:
+  max{A,B}<max{X,Y}  or ( max{A,B}=max{X,Y}  and (A+B)<(X+Y))
+
+*where A,B the time of machines Mi,Mj after task swap and X,Y time of machines Mi,Mj Befor task swap

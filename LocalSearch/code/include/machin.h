@@ -13,8 +13,8 @@ public:
 	std::map<int,Node> Tasks;
 
 	
-
-
+private:
+	int later;
 
 };
 
