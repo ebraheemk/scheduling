@@ -1,0 +1,5 @@
+*we calculate lower bound wrong its not tasktime+(remind tasks time / machines speed time) becuze tasktime is the worst machine time and 
+we can enter another tasks to other machines thate have time less than taskstime
+
+*to solve memory problem we can hold array of vectors where each vector hold the tasks for machine k and once we call all the node son we
+can remove it
