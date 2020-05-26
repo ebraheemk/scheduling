@@ -617,8 +617,8 @@ void print_report() {
 }
 void insert_soulution(BBNode* survival) {
 	int i = J.size() - 1;
-	while (survival->father != NULL) {
-		M.at(survival->machine_index).Tasks.insert(std::pair<int,Node>(survival->machine_index, J.at(i)));
+	while (i>=0) {
+		M.at(survival->machine_index).Tasks.insert(std::pair<int,Node>(i, J.at(i)));
 		i--;
 		survival = survival->father;
 	}
