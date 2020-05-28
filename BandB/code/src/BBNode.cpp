@@ -1,7 +1,7 @@
 #include "BBNode.h"
  
 BBNode::BBNode(std::vector<std::pair<int, int> > tasks, std::vector<machin> M, int i , BBNode* cbn, BBNode* root ) {
-	int temp;
+	int temp, totaltasktime = 0;
 	if (i < tasks.size()) {
 		
 
@@ -9,26 +9,37 @@ BBNode::BBNode(std::vector<std::pair<int, int> > tasks, std::vector<machin> M, i
 		cbn->ntaskidx = tasks.at(i).second;
 		for (int k = 0; k < M.size(); k++)
 		{ 
+
 			cbn->machines[k] = (BBNode*)malloc(sizeof(BBNode));
 			cbn->machines[k]->father = cbn;
 			cbn->machines[k]->machine_index = M.at(k).index;
 			cbn->machines[k]->machine_speed = M.at(k).speed;
 		
 			cbn->machines[k]->machinesTime = (int*)malloc(sizeof(int)*M.size());
-			for (int i = 0; i < k; i++)
-				cbn->machines[k]->machinesTime[i] = cbn->machinesTime[i];
-			for (int i = k + 1; i < M.size(); i++)
-				cbn->machines[k]->machinesTime[i] = cbn->machinesTime[i];
-			cbn->machines[k]->machinesTime[k] = cbn->machinesTime[k]+(tasks.at(i).first) / M.at(k).speed;
-
+			totaltasktime = 0;
+			cbn->machines[k]->machinesTime[k] = cbn->machinesTime[k] + (tasks.at(i).first) / M.at(k).speed;
 			cbn->machines[k]->taskstime = fmax(cbn->machines[k]->machinesTime[k], cbn->taskstime);
-			 temp = (int)((tasks.size() - i - 1) / M.size());
-			if (temp < 1)
-				temp = 1;
+			totaltasktime += (cbn->machines[k]->taskstime - cbn->machines[k]->machinesTime[k])*M.at(k).speed;
+
+			for (int i = 0; i < k; i++) {
+				cbn->machines[k]->machinesTime[i] = cbn->machinesTime[i];
+				totaltasktime += (cbn->machines[k]->taskstime - cbn->machines[k]->machinesTime[i])*M.at(i).speed;
+			}
+			for (int i = k + 1; i < M.size(); i++) {
+				cbn->machines[k]->machinesTime[i] = cbn->machinesTime[i];
+				totaltasktime += (cbn->machines[k]->taskstime - cbn->machines[k]->machinesTime[i])*M.at(i).speed;
+
+			}
+ 
+ 			 temp = (int)((tasks.size() - i - 1) / M.size());
+			//if (temp < 1)
+			//	temp = 1;
 			cbn->machines[k]->taskMachineRatio = (double)temp / root->mxms;
 			cbn->machines[k]->Tsum = cbn->Tsum - tasks.at(i).first;
 			cbn->machines[k]->MinTask = cbn->MinTask;//TASKS sorted from the bigest to the smallest so the minumum will did not changed
-			cbn->machines[k]->BestTiming = cbn->machines[k]->taskstime+(int)fmax((cbn->machines[k]->Tsum / root->Msum), (cbn->machines[k]->MinTask*cbn->machines[k]->taskMachineRatio)/*should add div max machine speed*/);
+			
+			cbn->machines[k]->BestTiming = cbn->machines[k]->taskstime+(int)fmax(((cbn->machines[k]->Tsum- totaltasktime) / root->Msum), (cbn->machines[k]->MinTask*cbn->machines[k]->taskMachineRatio)/*should add div max machine speed*/);
+			//cbn->machines[k]->BestTiming = cbn->machines[k]->BestTiming - (totaltasktime / root->Msum);
 			cbn->machines[k]->worstTiming = cbn->machines[k]->taskstime+(cbn->machines[k]->Tsum / root->mms);
 			if (cbn->machines[k]->worstTiming < root->MinWorst)
 				root->MinWorst = cbn->machines[k]->worstTiming;
