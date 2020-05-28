@@ -1,6 +1,7 @@
 #include "BBNode.h"
 int BBNode::UpperBound(std::vector<Node> J, std::vector<machin> M) {
 	int i;
+	
 	std::vector<machin> Mcopy;
 	for (int i = 0; i < M.size(); i++)
 		Mcopy.push_back(M.at(i));
@@ -87,6 +88,7 @@ int BBNode::UpperBound(std::vector<Node> J, std::vector<machin> M) {
  }
 BBNode::BBNode(std::vector<std::pair<int, int> > tasks, std::vector<machin> M, int i , BBNode* cbn, BBNode* root ,int upBound ) {
 	int temp, totaltasktime = 0;
+	root->nodesc++;
 	if (i < tasks.size()) {
 		
 
@@ -220,8 +222,8 @@ BBNode::BBNode(std::vector<Node> J,  std::vector<machin> M)
 	 }
 	 min = min + 0;
 
-	
-
+	 printf("\n posible path is %d \n", leafs.size());
+	 printf("nodes count %d\n", this->nodesc);
 }
 
 

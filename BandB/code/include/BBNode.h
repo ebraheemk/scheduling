@@ -17,6 +17,7 @@ public:
 	int Msum;
 	int MinTask;
 	int mms;
+	int nodesc=0;
 	int MinWorst;
 	int mxms;
 	int ntaskidx;
@@ -29,6 +30,7 @@ public:
 	int UpperBound(std::vector<Node> J, std::vector<machin> M);
 	BBNode** machines;
 	std::vector<BBNode*> leafs;
+	std::vector<machin> Mi;to continue from here 
 	~BBNode();
 private:
 	int later;
