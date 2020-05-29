@@ -90,6 +90,7 @@ BBNode::BBNode(std::vector<std::pair<int, int> > tasks, std::vector<machin> M, i
 	int temp, totaltasktime = 0;
 	root->nodesc++;
 	if (i < tasks.size()) {
+	
 		
 
 		cbn->machines = (BBNode**)malloc(sizeof(BBNode*)*M.size());
@@ -130,6 +131,13 @@ BBNode::BBNode(std::vector<std::pair<int, int> > tasks, std::vector<machin> M, i
 			cbn->machines[k]->worstTiming = cbn->machines[k]->taskstime+(cbn->machines[k]->Tsum / root->mms);
 			if (cbn->machines[k]->worstTiming < root->MinWorst)
 				root->MinWorst = cbn->machines[k]->worstTiming;
+
+
+			cbn->machines[k]->Mi = new std::vector<std::pair<int, int>>;
+			for (int e = 0; e < cbn->Mi->size(); e++)
+				cbn->machines[k]->Mi->push_back(std::pair<int, int>(0, 0));
+
+		//	cbn->machines[k]->Mi.push_back(std::pair<int, int>(0, 0));
 		}
 		if (i == tasks.size() - 1) {
 			root->leafs.push_back(cbn);
@@ -172,6 +180,8 @@ BBNode::BBNode(std::vector<Node> J,  std::vector<machin> M)
 		if (M.at(i).speed > tempmax)
 			tempmax = M.at(i).speed;
 	}
+	this->Mi = new std::vector<std::pair<int, int>>;
+	this->Mi->push_back(std::pair<int, int>(-1, -1));
 	this->father = NULL;
 	this ->machine_index =-1;
 	this->machine_speed =-1;

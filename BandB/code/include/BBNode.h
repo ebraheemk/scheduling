@@ -30,7 +30,7 @@ public:
 	int UpperBound(std::vector<Node> J, std::vector<machin> M);
 	BBNode** machines;
 	std::vector<BBNode*> leafs;
-	std::vector<machin> Mi;to continue from here 
+	std::vector<std::pair<int,int>>* Mi;//<machine_index,task_index>
 	~BBNode();
 private:
 	int later;
