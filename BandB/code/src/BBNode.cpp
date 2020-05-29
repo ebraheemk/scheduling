@@ -135,17 +135,21 @@ BBNode::BBNode(std::vector<std::pair<int, int> > tasks, std::vector<machin> M, i
 
 			cbn->machines[k]->Mi = new std::vector<std::pair<int, int>>;
 			for (int e = 0; e < cbn->Mi->size(); e++)
-				cbn->machines[k]->Mi->push_back(std::pair<int, int>(0, 0));
+				cbn->machines[k]->Mi->push_back(cbn->Mi->at(e));
 
-		//	cbn->machines[k]->Mi.push_back(std::pair<int, int>(0, 0));
+			cbn->machines[k]->Mi->push_back(std::pair<int, int>(M.at(k).index, tasks.at(i).second));
 		}
 		if (i == tasks.size() - 1) {
 			root->leafs.push_back(cbn);
 		}
+		if (cbn->father != NULL)
+			delete cbn->father;
 		for (int k = 0; k < M.size(); k++)//we need to check all brother befor start new level for this reson we have two loops
 		{
 			if (cbn->machines[k]->BestTiming <= fmin(root->MinWorst, upBound))
-				BBNode(tasks, M, i + 1, cbn->machines[k], root, upBound);
+ 				BBNode(tasks, M, i + 1, cbn->machines[k], root, upBound);
+			
+
 		}
 		 
 		 
@@ -181,7 +185,7 @@ BBNode::BBNode(std::vector<Node> J,  std::vector<machin> M)
 			tempmax = M.at(i).speed;
 	}
 	this->Mi = new std::vector<std::pair<int, int>>;
-	this->Mi->push_back(std::pair<int, int>(-1, -1));
+	//this->Mi->push_back(std::pair<int, int>(-1, -1));
 	this->father = NULL;
 	this ->machine_index =-1;
 	this->machine_speed =-1;
