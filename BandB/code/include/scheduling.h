@@ -43,6 +43,12 @@ void print_summary();
 //std::vector<minheap*> machinesHV;
 minheap** machinesHV;
 //minheap* machinesROOT;
+
+int UpperBound( );
+void buildBBtree(std::vector<std::pair<int, int> > tasks, std::vector<machin> M, int i, BBNode* cbn, BBNode* root, int upBound);
+
+
+
 int MaxNxM;
 int Max1xM;
 std::vector<int> NxMcom1Best;

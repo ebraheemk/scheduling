@@ -4,10 +4,12 @@
 #include "machin.h"
 #include "maxheap.h"
 #include "minheap.h"
+#include <queue>          // std::queue
 
 class BBNode
 {
 public:
+	int deapth;
 	int taskstime;
 	int machine_index;
 	int machine_speed;
@@ -29,6 +31,10 @@ public:
 	BBNode(std::vector<std::pair<int, int> > tasks, std::vector<machin> M, int i, BBNode* cbn, BBNode* root,int upBound);
 	int UpperBound(std::vector<Node> J, std::vector<machin> M);
 	BBNode** machines;
+	//std::vector<BBNode*> machines;
+	std::queue<BBNode*> m;
+	std::queue<BBNode*> todelete;
+
 	std::vector<BBNode*> leafs;
 	std::vector<std::pair<int,int>>* Mi;//<machine_index,task_index>
 	~BBNode();

@@ -87,75 +87,101 @@ int BBNode::UpperBound(std::vector<Node> J, std::vector<machin> M) {
 	return maxm;
  }
 BBNode::BBNode(std::vector<std::pair<int, int> > tasks, std::vector<machin> M, int i , BBNode* cbn, BBNode* root ,int upBound ) {
+	if (!root->todelete.empty()) {
+		delete root->todelete.front();
+	}
+
 	int temp, totaltasktime = 0;
 	root->nodesc++;
-	if (i < tasks.size()) {
+	if (cbn->deapth == tasks.size()-1 ) {
+		root->leafs.push_back(cbn);
+	}
+	if (cbn->deapth < tasks.size()) {
 	
 		
 
-		cbn->machines = (BBNode**)malloc(sizeof(BBNode*)*M.size());
-		cbn->ntaskidx = tasks.at(i).second;
+		//cbn->machines = (BBNode**)malloc(sizeof(BBNode*)*M.size());
+		cbn->ntaskidx = tasks.at(cbn->deapth).second;
 		for (int k = 0; k < M.size(); k++)
 		{ 
-
-			cbn->machines[k] = (BBNode*)malloc(sizeof(BBNode));
-			cbn->machines[k]->father = cbn;
-			cbn->machines[k]->machine_index = M.at(k).index;
-			cbn->machines[k]->machine_speed = M.at(k).speed;
-		
-			cbn->machines[k]->machinesTime = (int*)malloc(sizeof(int)*M.size());
+			BBNode* ek = (BBNode*)malloc(sizeof(BBNode));
+		//	ek = (BBNode*)malloc(sizeof(BBNode));
+			//cbn->machines[k]->father = cbn;
+			ek->machine_index = M.at(k).index;
+			ek->machine_speed = M.at(k).speed;
+			ek->deapth = cbn->deapth + 1;
+			ek->machinesTime = (int*)malloc(sizeof(int)*M.size());
 			totaltasktime = 0;
-			cbn->machines[k]->machinesTime[k] = cbn->machinesTime[k] + (tasks.at(i).first) / M.at(k).speed;
-			cbn->machines[k]->taskstime = fmax(cbn->machines[k]->machinesTime[k], cbn->taskstime);
-			totaltasktime += (cbn->machines[k]->taskstime - cbn->machines[k]->machinesTime[k])*M.at(k).speed;
+			ek->machinesTime[k] = cbn->machinesTime[k] + (tasks.at(cbn->deapth).first) / M.at(k).speed;
+			ek->taskstime = fmax(ek->machinesTime[k], cbn->taskstime);
+			totaltasktime += (ek->taskstime - ek->machinesTime[k])*M.at(k).speed;
 
 			for (int i = 0; i < k; i++) {
-				cbn->machines[k]->machinesTime[i] = cbn->machinesTime[i];
-				totaltasktime += (cbn->machines[k]->taskstime - cbn->machines[k]->machinesTime[i])*M.at(i).speed;
+				ek->machinesTime[i] = cbn->machinesTime[i];
+				totaltasktime += (ek->taskstime - ek->machinesTime[i])*M.at(i).speed;
 			}
 			for (int i = k + 1; i < M.size(); i++) {
-				cbn->machines[k]->machinesTime[i] = cbn->machinesTime[i];
-				totaltasktime += (cbn->machines[k]->taskstime - cbn->machines[k]->machinesTime[i])*M.at(i).speed;
+				ek->machinesTime[i] = cbn->machinesTime[i];
+				totaltasktime += (ek->taskstime - ek->machinesTime[i])*M.at(i).speed;
 
 			}
  
- 			 temp = (int)((tasks.size() - i - 1) / M.size());
+ 			 temp = (int)((tasks.size() - cbn->deapth - 1) / M.size());
 			//if (temp < 1)
 			//	temp = 1;
-			cbn->machines[k]->taskMachineRatio = (double)temp / root->mxms;
-			cbn->machines[k]->Tsum = cbn->Tsum - tasks.at(i).first;
-			cbn->machines[k]->MinTask = cbn->MinTask;//TASKS sorted from the bigest to the smallest so the minumum will did not changed
+			 ek->taskMachineRatio = (double)temp / root->mxms;
+			 ek->Tsum = cbn->Tsum - tasks.at(cbn->deapth).first;
+			 ek->MinTask = cbn->MinTask;//TASKS sorted from the bigest to the smallest so the minumum will did not changed
 			
-			cbn->machines[k]->BestTiming = cbn->machines[k]->taskstime+(int)fmax(((cbn->machines[k]->Tsum- totaltasktime) / root->Msum), (cbn->machines[k]->MinTask*cbn->machines[k]->taskMachineRatio)/*should add div max machine speed*/);
+			 ek->BestTiming = ek->taskstime+(int)fmax(((ek->Tsum- totaltasktime) / root->Msum), (ek->MinTask*ek->taskMachineRatio)/*should add div max machine speed*/);
 			//cbn->machines[k]->BestTiming = cbn->machines[k]->BestTiming - (totaltasktime / root->Msum);
-			cbn->machines[k]->worstTiming = cbn->machines[k]->taskstime+(cbn->machines[k]->Tsum / root->mms);
-			if (cbn->machines[k]->worstTiming < root->MinWorst)
-				root->MinWorst = cbn->machines[k]->worstTiming;
+			 ek->worstTiming = ek->taskstime+(ek->Tsum / root->mms);
+			if (ek->worstTiming < root->MinWorst)
+				root->MinWorst = ek->worstTiming;
 
 
-			cbn->machines[k]->Mi = new std::vector<std::pair<int, int>>;
+			ek->Mi = new std::vector<std::pair<int, int>>;
 			for (int e = 0; e < cbn->Mi->size(); e++)
-				cbn->machines[k]->Mi->push_back(cbn->Mi->at(e));
+				ek->Mi->push_back(cbn->Mi->at(e));
 
-			cbn->machines[k]->Mi->push_back(std::pair<int, int>(M.at(k).index, tasks.at(i).second));
+			ek->Mi->push_back(std::pair<int, int>(M.at(k).index, tasks.at(cbn->deapth).second));
+			root->m.push(ek);
 		}
-		if (i == tasks.size() - 1) {
-			root->leafs.push_back(cbn);
-		}
-		if (cbn->father != NULL)
-			delete cbn->father;
-		for (int k = 0; k < M.size(); k++)//we need to check all brother befor start new level for this reson we have two loops
-		{
-			if (cbn->machines[k]->BestTiming <= fmin(root->MinWorst, upBound))
- 				BBNode(tasks, M, i + 1, cbn->machines[k], root, upBound);
+		 
+		
+		 
+		 
 			
+	//	for (int k = 0; k < M.size(); k++)//we need to check all brother befor start new level for this reson we have two loops
+		//{
+		//	if (cbn->machines[k] != NULL) {
+		bool roro = true;
+		BBNode* nextcall;
+		while (roro) {
+			nextcall = root->m.front();
+			root->m.pop();
+			if (nextcall->BestTiming <= fmin(root->MinWorst, upBound))
+				roro = false;
+			else
+				root->todelete.push(nextcall);
+			
+				 
+		}
+			       
+					BBNode(tasks, M, i + 1, nextcall, root, upBound);
+				
+					root->todelete.push(nextcall);
+			}
+			 
 
 		}
 		 
-		 
-	}
 
-}
+		 
+		 
+	//}
+
+
 
 
 BBNode::BBNode(std::vector<Node> J,  std::vector<machin> M)
@@ -187,6 +213,7 @@ BBNode::BBNode(std::vector<Node> J,  std::vector<machin> M)
 	this->Mi = new std::vector<std::pair<int, int>>;
 	//this->Mi->push_back(std::pair<int, int>(-1, -1));
 	this->father = NULL;
+	this->deapth = 0;
 	this ->machine_index =-1;
 	this->machine_speed =-1;
 	this->taskstime = 0;
@@ -223,7 +250,7 @@ BBNode::BBNode(std::vector<Node> J,  std::vector<machin> M)
 	tasks.push_back(std::pair<int, int>(mxhp.value,mxhp.index));
 
 	 BBNode(tasks, M, 0,this,this,up);
-	 int min = leafs.at(0)->machines[0]->taskstime;
+/*	 int min = leafs.at(0)->machines[0]->taskstime;
 	 ServiverPath = leafs.at(0)->machines[0];
 	 int mmtime;
 	 for (int i = 0; i < leafs.size(); i++) {
@@ -234,7 +261,7 @@ BBNode::BBNode(std::vector<Node> J,  std::vector<machin> M)
 			 }
 		 }
 	 }
-	 min = min + 0;
+	 min = min + 0;*/
 
 	 printf("\n posible path is %d \n", leafs.size());
 	 printf("nodes count %d\n", this->nodesc);
@@ -243,5 +270,16 @@ BBNode::BBNode(std::vector<Node> J,  std::vector<machin> M)
 
 BBNode::~BBNode()
 {
+
+	if (machinesTime != NULL) {
+		 
+		printf("fuck");
+		 
+
+ }
+ 
+	//for (int i = 0; i < this->machinesTime->size(); i++) {
+
+	
 }
  

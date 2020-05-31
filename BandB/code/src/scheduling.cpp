@@ -587,6 +587,178 @@ void init_machines() {
 		 }
 	 }
  }*/
+
+int UpperBound( ) {
+	int i;
+
+	std::vector<machin> Mcopy;
+	for (int i = 0; i < M.size(); i++)
+		Mcopy.push_back(M.at(i));
+
+	minheap tasks = minheap(J.at(0).time * 4, 0);
+	minheap* copy = &tasks;
+	for (i = 1; i < J.size(); i++) {
+		tasks.insert(copy, new minheap(J.at(i).time * 4, i));
+	}
+
+
+	int j = 0, k = 0, z = 0;
+	std::pair<int, int> p;
+
+	for (i = 0; i < J.size(); ) {
+		if (j == M.size())
+			j = 0;
+
+		for (k = 0; k < M.at(j).speed && i < J.size(); k++, i++) {
+			minheap* copy = &tasks;
+			if (i != J.size() - 1)
+				p = tasks.pop(copy);
+			else {
+				p.first = tasks.value;
+				p.second = tasks.index;
+			}
+
+			M.at(j).TasksTime += p.first / M.at(j).speed;
+			M.at(j).Tasks.insert(std::pair<int, Node>(p.second, Node(p.first / 4, p.second)));
+			z++;
+
+		}
+		j++;
+	}
+
+	int minm, maxm;
+	minm = M.at(0).TasksTime;
+	maxm = M.at(0).TasksTime;
+	for (i = 0; i < M.size(); i++) {
+		if (M.at(i).TasksTime < minm)
+			minm = M.at(i).TasksTime;
+		if (M.at(i).TasksTime > maxm)
+			maxm = M.at(i).TasksTime;
+	}
+	printf("minmum1 hmdan m %d", minm);
+	maxheap tasks2 = maxheap(J.at(0).time * 4, 0);
+	maxheap* copy2 = &tasks2;
+	for (i = 1; i < J.size(); i++) {
+		tasks2.insert(copy2, new maxheap(J.at(i).time * 4, i));
+	}
+	for (int i = 0; i < M.size(); i++)
+		Mcopy.push_back(M.at(i));
+
+	for (i = 0; i < J.size(); ) {
+		if (j == M.size())
+			j = 0;
+
+		for (k = 0; k < M.at(j).speed && i < J.size(); k++, i++) {
+			maxheap* copy2 = &tasks2;
+			if (i != J.size() - 1)
+				p = tasks2.pop(copy2);
+			else {
+				p.first = tasks2.value;
+				p.second = tasks2.index;
+			}
+
+			M.at(j).TasksTime += p.first / M.at(j).speed;
+			M.at(j).Tasks.insert(std::pair<int, Node>(p.second, Node(p.first / 4, p.second)));
+			z++;
+
+		}
+		j++;
+	}
+
+	for (i = 0; i < M.size(); i++) {
+
+		if (M.at(i).TasksTime > minm)
+			minm = M.at(i).TasksTime;
+	}
+	maxm = fmin(minm, maxm);//minm now is maxmum not minmum
+	printf("maximum hmdan m %d", maxm);
+
+	return maxm;
+}
+
+
+
+
+
+void buildBBtree(std::vector<std::pair<int, int> > tasks, std::vector<machin> M, int i, BBNode* cbn, BBNode* root, int upBound) {
+	int temp, totaltasktime = 0;
+	root->nodesc++;
+	if (i < tasks.size()) {
+
+
+
+		cbn->machines = (BBNode**)malloc(sizeof(BBNode*)*M.size());
+		cbn->ntaskidx = tasks.at(i).second;
+		for (int k = 0; k < M.size(); k++)
+		{
+
+			cbn->machines[k] = (BBNode*)malloc(sizeof(BBNode));
+			cbn->machines[k]->father = cbn;
+			cbn->machines[k]->machine_index = M.at(k).index;
+			cbn->machines[k]->machine_speed = M.at(k).speed;
+
+			cbn->machines[k]->machinesTime = (int*)malloc(sizeof(int)*M.size());
+			totaltasktime = 0;
+			cbn->machines[k]->machinesTime[k] = cbn->machinesTime[k] + (tasks.at(i).first) / M.at(k).speed;
+			cbn->machines[k]->taskstime = fmax(cbn->machines[k]->machinesTime[k], cbn->taskstime);
+			totaltasktime += (cbn->machines[k]->taskstime - cbn->machines[k]->machinesTime[k])*M.at(k).speed;
+
+			for (int i = 0; i < k; i++) {
+				cbn->machines[k]->machinesTime[i] = cbn->machinesTime[i];
+				totaltasktime += (cbn->machines[k]->taskstime - cbn->machines[k]->machinesTime[i])*M.at(i).speed;
+			}
+			for (int i = k + 1; i < M.size(); i++) {
+				cbn->machines[k]->machinesTime[i] = cbn->machinesTime[i];
+				totaltasktime += (cbn->machines[k]->taskstime - cbn->machines[k]->machinesTime[i])*M.at(i).speed;
+
+			}
+
+			temp = (int)((tasks.size() - i - 1) / M.size());
+			//if (temp < 1)
+			//	temp = 1;
+			cbn->machines[k]->taskMachineRatio = (double)temp / root->mxms;
+			cbn->machines[k]->Tsum = cbn->Tsum - tasks.at(i).first;
+			cbn->machines[k]->MinTask = cbn->MinTask;//TASKS sorted from the bigest to the smallest so the minumum will did not changed
+
+			cbn->machines[k]->BestTiming = cbn->machines[k]->taskstime + (int)fmax(((cbn->machines[k]->Tsum - totaltasktime) / root->Msum), (cbn->machines[k]->MinTask*cbn->machines[k]->taskMachineRatio)/*should add div max machine speed*/);
+			//cbn->machines[k]->BestTiming = cbn->machines[k]->BestTiming - (totaltasktime / root->Msum);
+			cbn->machines[k]->worstTiming = cbn->machines[k]->taskstime + (cbn->machines[k]->Tsum / root->mms);
+			if (cbn->machines[k]->worstTiming < root->MinWorst)
+				root->MinWorst = cbn->machines[k]->worstTiming;
+
+
+			cbn->machines[k]->Mi = new std::vector<std::pair<int, int>>;
+			for (int e = 0; e < cbn->Mi->size(); e++)
+				cbn->machines[k]->Mi->push_back(cbn->Mi->at(e));
+
+			cbn->machines[k]->Mi->push_back(std::pair<int, int>(M.at(k).index, tasks.at(i).second));
+		}
+		if (i == tasks.size() - 1) {
+			root->leafs.push_back(cbn);
+		}
+
+
+
+
+		for (int k = 0; k < M.size(); k++)//we need to check all brother befor start new level for this reson we have two loops
+		{
+			 
+			if (cbn->machines[k]->BestTiming <= fmin(root->MinWorst, upBound))
+				buildBBtree(tasks, M, i + 1, cbn->machines[k], root, upBound);
+			else
+				free(cbn->machines[k]);
+
+			
+		}
+
+
+
+
+	}
+
+}
+
+
 void print_report() {
 	std::ofstream myfile("../output/report.txt");
 	myfile << "Report\n";
@@ -630,8 +802,27 @@ void insert_soulution(BBNode* survival) {
 }
  void Branch_and_Bound() {
 	// std::vector<Node> M = J;
-	 BBNode A = BBNode(J, M); 
- 	 insert_soulution(A.ServiverPath);
+	 int up = UpperBound();
+	 //BBNode A = BBNode(J, M,up); 
+	 BBNode A = BBNode(J, M);
+
+	/* std::vector<std::pair<int, int> > tasks;
+	 std::pair<int, int> p1;
+	 maxheap mxhp = maxheap(J.at(0).time * 4, 0);
+	 for (int i = 1; i < J.size(); i++) {
+		 mxhp.insert(&mxhp, new maxheap(J.at(i).time * 4, i));
+	 }
+
+	 while (mxhp.GetRight() != NULL || mxhp.GetLeft() != NULL) {
+		 p1 = mxhp.pop(&mxhp);
+		 tasks.push_back(p1);
+	 }
+	 tasks.push_back(std::pair<int, int>(mxhp.value, mxhp.index));
+
+
+
+	 buildBBtree(tasks, M, 0, &A, &A, up);*/
+ 	 //insert_soulution(A.ServiverPath);
 	 //next go from leaf to root on servivel path and insert tasks into machines 
   }
 
