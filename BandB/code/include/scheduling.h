@@ -43,9 +43,9 @@ void print_summary();
 //std::vector<minheap*> machinesHV;
 minheap** machinesHV;
 //minheap* machinesROOT;
-
+std::vector<std::pair<int, int> > tasks;
 int UpperBound( );
-void buildBBtree(std::vector<std::pair<int, int> > tasks, std::vector<machin> M, int i, BBNode* cbn, BBNode* root, int upBound);
+void buildBBtree( int i, std::shared_ptr<BBNode> cbn, std::shared_ptr<BBNode>  root, int upBound);
 
 
 
@@ -62,6 +62,7 @@ int * d_nm;
 int ** TasksTable;//we have on map index as key but on GetBestOfNxM we need elment on place i not with key i so we make array hold task key in place i for each machine
 //for report
 int ** swapCount;
-
-std::vector<BBNode*> leafs;
+std::queue<std::shared_ptr<BBNode>> m;
+std::queue<std::shared_ptr<BBNode>> todelete;
+std::vector<std::shared_ptr<BBNode>> leafs;
  

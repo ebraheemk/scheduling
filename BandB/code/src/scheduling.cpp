@@ -680,84 +680,103 @@ int UpperBound( ) {
 
 
 
-/*void buildBBtree(std::vector<std::pair<int, int> > tasks, std::vector<machin> M, int i, BBNode* cbn, BBNode* root, int upBound) {
+void buildBBtree( int i, std::shared_ptr<BBNode>  cbn, std::shared_ptr<BBNode>  root, int upBound) {
+	while (!todelete.empty()) {
+		//std::shared_ptr<BBNode> dd = todelete.front();
+		//if (cbn->deapth > dd->deapth) {
+//		delete dd->Mi;
+	//	delete[] dd->machinesTime;
+		//delete dd;
+		//delete todelete.front()
+		todelete.pop();
+		//}
+	}
+
 	int temp, totaltasktime = 0;
 	root->nodesc++;
-	if (i < tasks.size()) {
+	if (cbn->deapth == tasks.size() - 1) {
+		leafs.push_back(cbn);
+	}
+	if (cbn->deapth < tasks.size()) {
 
 
 
-		cbn->machines = (BBNode**)malloc(sizeof(BBNode*)*M.size());
-		cbn->ntaskidx = tasks.at(i).second;
+		//cbn->machines = (BBNode**)malloc(sizeof(BBNode*)*M.size());
+		cbn->ntaskidx = tasks.at(cbn->deapth).second;
 		for (int k = 0; k < M.size(); k++)
 		{
-
-			cbn->machines[k] = (BBNode*)malloc(sizeof(BBNode));
-		//	cbn->machines[k]->father = cbn;
-			cbn->machines[k]->machine_index = M.at(k).index;
-			cbn->machines[k]->machine_speed = M.at(k).speed;
-
-			cbn->machines[k]->machinesTime = (int*)malloc(sizeof(int)*M.size());
+			std::shared_ptr<BBNode> ek ( new BBNode);
+			//	ek = (BBNode*)malloc(sizeof(BBNode));
+				//cbn->machines[k]->father = cbn;
+			ek->machine_index = M.at(k).index;
+			ek->machine_speed = M.at(k).speed;
+			ek->deapth = cbn->deapth + 1;
+			ek->machinesTime = (int*)malloc(sizeof(int)*M.size());
 			totaltasktime = 0;
-			cbn->machines[k]->machinesTime[k] = cbn->machinesTime[k] + (tasks.at(i).first) / M.at(k).speed;
-			cbn->machines[k]->taskstime = fmax(cbn->machines[k]->machinesTime[k], cbn->taskstime);
-			totaltasktime += (cbn->machines[k]->taskstime - cbn->machines[k]->machinesTime[k])*M.at(k).speed;
+			ek->machinesTime[k] = cbn->machinesTime[k] + (tasks.at(cbn->deapth).first) / M.at(k).speed;
+			ek->taskstime = fmax(ek->machinesTime[k], cbn->taskstime);
+			totaltasktime += (ek->taskstime - ek->machinesTime[k])*M.at(k).speed;
 
 			for (int i = 0; i < k; i++) {
-				cbn->machines[k]->machinesTime[i] = cbn->machinesTime[i];
-				totaltasktime += (cbn->machines[k]->taskstime - cbn->machines[k]->machinesTime[i])*M.at(i).speed;
+				ek->machinesTime[i] = cbn->machinesTime[i];
+				totaltasktime += (ek->taskstime - ek->machinesTime[i])*M.at(i).speed;
 			}
 			for (int i = k + 1; i < M.size(); i++) {
-				cbn->machines[k]->machinesTime[i] = cbn->machinesTime[i];
-				totaltasktime += (cbn->machines[k]->taskstime - cbn->machines[k]->machinesTime[i])*M.at(i).speed;
+				ek->machinesTime[i] = cbn->machinesTime[i];
+				totaltasktime += (ek->taskstime - ek->machinesTime[i])*M.at(i).speed;
 
 			}
 
-			temp = (int)((tasks.size() - i - 1) / M.size());
+			temp = (int)((tasks.size() - cbn->deapth - 1) / M.size());
 			//if (temp < 1)
 			//	temp = 1;
-			cbn->machines[k]->taskMachineRatio = (double)temp / root->mxms;
-			cbn->machines[k]->Tsum = cbn->Tsum - tasks.at(i).first;
-			cbn->machines[k]->MinTask = cbn->MinTask;//TASKS sorted from the bigest to the smallest so the minumum will did not changed
+			ek->taskMachineRatio = (double)temp / root->mxms;
+			ek->Tsum = cbn->Tsum - tasks.at(cbn->deapth).first;
+			ek->MinTask = cbn->MinTask;//TASKS sorted from the bigest to the smallest so the minumum will did not changed
 
-			//cbn->machines[k]->BestTiming = cbn->machines[k]->taskstime + (int)fmax(((cbn->machines[k]->Tsum - totaltasktime) / root->Msum), (cbn->machines[k]->MinTask*cbn->machines[k]->taskMachineRatio)/*should add div max machine speed*///);
+			ek->BestTiming = ek->taskstime + (int)fmax(((ek->Tsum - totaltasktime) / root->Msum), (ek->MinTask*ek->taskMachineRatio)/*should add div max machine speed*/);
 			//cbn->machines[k]->BestTiming = cbn->machines[k]->BestTiming - (totaltasktime / root->Msum);
-		/*	cbn->machines[k]->worstTiming = cbn->machines[k]->taskstime + (cbn->machines[k]->Tsum / root->mms);
-			if (cbn->machines[k]->worstTiming < root->MinWorst)
-				root->MinWorst = cbn->machines[k]->worstTiming;
+			ek->worstTiming = ek->taskstime + (ek->Tsum / root->mms);
+			if (ek->worstTiming < root->MinWorst)
+				root->MinWorst = ek->worstTiming;
 
 
-			cbn->machines[k]->Mi = new std::vector<std::pair<int, int>>;
+			ek->Mi = new std::vector<std::pair<int, int>>;
 			for (int e = 0; e < cbn->Mi->size(); e++)
-				cbn->machines[k]->Mi->push_back(cbn->Mi->at(e));
+				ek->Mi->push_back(cbn->Mi->at(e));
 
-			cbn->machines[k]->Mi->push_back(std::pair<int, int>(M.at(k).index, tasks.at(i).second));
-		}
-		if (i == tasks.size() - 1) {
-			root->leafs.push_back(cbn);
+			ek->Mi->push_back(std::pair<int, int>(M.at(k).index, tasks.at(cbn->deapth).second));
+			m.push(ek);
 		}
 
 
 
 
-		for (int k = 0; k < M.size(); k++)//we need to check all brother befor start new level for this reson we have two loops
-		{
-			 
-			if (cbn->machines[k]->BestTiming <= fmin(root->MinWorst, upBound))
-				buildBBtree(tasks, M, i + 1, cbn->machines[k], root, upBound);
+
+		//	for (int k = 0; k < M.size(); k++)//we need to check all brother befor start new level for this reson we have two loops
+			//{
+			//	if (cbn->machines[k] != NULL) {
+		bool roro = true;
+		std::shared_ptr<BBNode> nextcall;
+		while (roro && (!m.empty())) {
+			nextcall = m.front();
+			m.pop();
+			if (nextcall->BestTiming <= fmin(root->MinWorst, upBound))
+				roro = false;
 			else
-				free(cbn->machines[k]);
+				todelete.push(nextcall);
 
-			
+
 		}
 
+		buildBBtree( i + 1, nextcall, root, upBound);
 
-
-
+		todelete.push(nextcall);
+		//todo no recurseve constructor move to shechdulier
 	}
 
 }
-*/
+/**/
 
 void print_report() {
 	std::ofstream myfile("../output/report.txt");
@@ -803,10 +822,10 @@ void insert_soulution(BBNode* survival) {
  void Branch_and_Bound() {
 	// std::vector<Node> M = J;
 	 int up = UpperBound();
-	 BBNode A = BBNode(J, M,up); 
+	// BBNode A = BBNode(J, M,up); 
+	 std::shared_ptr<BBNode>A(new BBNode(J, M, up));
 	 //BBNode A = BBNode(J, M);
 
-	/* std::vector<std::pair<int, int> > tasks;
 	 std::pair<int, int> p1;
 	 maxheap mxhp = maxheap(J.at(0).time * 4, 0);
 	 for (int i = 1; i < J.size(); i++) {
@@ -821,7 +840,8 @@ void insert_soulution(BBNode* survival) {
 
 
 
-	 buildBBtree(tasks, M, 0, &A, &A, up);*/
+	 buildBBtree( 0, A, A, up);
+	 printf("\n&&%d&&&\n",leafs.size());
  	 //insert_soulution(A.ServiverPath);
 	 //next go from leaf to root on servivel path and insert tasks into machines 
   }
