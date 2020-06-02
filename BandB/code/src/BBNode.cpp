@@ -86,9 +86,15 @@ int BBNode::UpperBound(std::vector<Node> J, std::vector<machin> M) {
 
 	return maxm;
  }
+
+BBNode::BBNode(){}
 BBNode::BBNode(std::vector<std::pair<int, int> > tasks, std::vector<machin> M, int i , BBNode* cbn, BBNode* root ,int upBound ) {
-	if (!root->todelete.empty()) {
-		delete root->todelete.front();
+	while (!root->todelete.empty()) {
+		BBNode * dd= root->todelete.front();
+		//if (cbn->deapth > dd->deapth) {
+		delete dd;
+			root->todelete.pop();
+		//}
 	}
 
 	int temp, totaltasktime = 0;
@@ -104,7 +110,7 @@ BBNode::BBNode(std::vector<std::pair<int, int> > tasks, std::vector<machin> M, i
 		cbn->ntaskidx = tasks.at(cbn->deapth).second;
 		for (int k = 0; k < M.size(); k++)
 		{ 
-			BBNode* ek = (BBNode*)malloc(sizeof(BBNode));
+			BBNode* ek =  new BBNode();
 		//	ek = (BBNode*)malloc(sizeof(BBNode));
 			//cbn->machines[k]->father = cbn;
 			ek->machine_index = M.at(k).index;
@@ -157,7 +163,7 @@ BBNode::BBNode(std::vector<std::pair<int, int> > tasks, std::vector<machin> M, i
 		//	if (cbn->machines[k] != NULL) {
 		bool roro = true;
 		BBNode* nextcall;
-		while (roro) {
+		while (roro &&(!root->m.empty())) {
 			nextcall = root->m.front();
 			root->m.pop();
 			if (nextcall->BestTiming <= fmin(root->MinWorst, upBound))
@@ -171,6 +177,7 @@ BBNode::BBNode(std::vector<std::pair<int, int> > tasks, std::vector<machin> M, i
 					BBNode(tasks, M, i + 1, nextcall, root, upBound);
 				
 					root->todelete.push(nextcall);
+					//todo no recurseve constructor move to shechdulier
 			}
 			 
 
@@ -184,9 +191,9 @@ BBNode::BBNode(std::vector<std::pair<int, int> > tasks, std::vector<machin> M, i
 
 
 
-BBNode::BBNode(std::vector<Node> J,  std::vector<machin> M)
+BBNode::BBNode(std::vector<Node> J,  std::vector<machin> M,int up)
 {
-	int up=UpperBound(J, M);
+	//int up=UpperBound(J, M);
 	int Tsum = 0,mmspeed,Msum;
 	int maxTask= J.at(0).time;
 	int minTask= J.at(0).time;
@@ -212,7 +219,7 @@ BBNode::BBNode(std::vector<Node> J,  std::vector<machin> M)
 	}
 	this->Mi = new std::vector<std::pair<int, int>>;
 	//this->Mi->push_back(std::pair<int, int>(-1, -1));
-	this->father = NULL;
+	//this->father = NULL;
 	this->deapth = 0;
 	this ->machine_index =-1;
 	this->machine_speed =-1;
@@ -270,16 +277,10 @@ BBNode::BBNode(std::vector<Node> J,  std::vector<machin> M)
 
 BBNode::~BBNode()
 {
-
-	if (machinesTime != NULL) {
-		 
-		printf("fuck");
-		 
-
- }
+	if(Mi!= nullptr)
+	delete[] Mi;
+  }
  
 	//for (int i = 0; i < this->machinesTime->size(); i++) {
 
 	
-}
- 

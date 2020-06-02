@@ -680,7 +680,7 @@ int UpperBound( ) {
 
 
 
-void buildBBtree(std::vector<std::pair<int, int> > tasks, std::vector<machin> M, int i, BBNode* cbn, BBNode* root, int upBound) {
+/*void buildBBtree(std::vector<std::pair<int, int> > tasks, std::vector<machin> M, int i, BBNode* cbn, BBNode* root, int upBound) {
 	int temp, totaltasktime = 0;
 	root->nodesc++;
 	if (i < tasks.size()) {
@@ -693,7 +693,7 @@ void buildBBtree(std::vector<std::pair<int, int> > tasks, std::vector<machin> M,
 		{
 
 			cbn->machines[k] = (BBNode*)malloc(sizeof(BBNode));
-			cbn->machines[k]->father = cbn;
+		//	cbn->machines[k]->father = cbn;
 			cbn->machines[k]->machine_index = M.at(k).index;
 			cbn->machines[k]->machine_speed = M.at(k).speed;
 
@@ -720,9 +720,9 @@ void buildBBtree(std::vector<std::pair<int, int> > tasks, std::vector<machin> M,
 			cbn->machines[k]->Tsum = cbn->Tsum - tasks.at(i).first;
 			cbn->machines[k]->MinTask = cbn->MinTask;//TASKS sorted from the bigest to the smallest so the minumum will did not changed
 
-			cbn->machines[k]->BestTiming = cbn->machines[k]->taskstime + (int)fmax(((cbn->machines[k]->Tsum - totaltasktime) / root->Msum), (cbn->machines[k]->MinTask*cbn->machines[k]->taskMachineRatio)/*should add div max machine speed*/);
+			//cbn->machines[k]->BestTiming = cbn->machines[k]->taskstime + (int)fmax(((cbn->machines[k]->Tsum - totaltasktime) / root->Msum), (cbn->machines[k]->MinTask*cbn->machines[k]->taskMachineRatio)/*should add div max machine speed*///);
 			//cbn->machines[k]->BestTiming = cbn->machines[k]->BestTiming - (totaltasktime / root->Msum);
-			cbn->machines[k]->worstTiming = cbn->machines[k]->taskstime + (cbn->machines[k]->Tsum / root->mms);
+		/*	cbn->machines[k]->worstTiming = cbn->machines[k]->taskstime + (cbn->machines[k]->Tsum / root->mms);
 			if (cbn->machines[k]->worstTiming < root->MinWorst)
 				root->MinWorst = cbn->machines[k]->worstTiming;
 
@@ -757,7 +757,7 @@ void buildBBtree(std::vector<std::pair<int, int> > tasks, std::vector<machin> M,
 	}
 
 }
-
+*/
 
 void print_report() {
 	std::ofstream myfile("../output/report.txt");
@@ -791,20 +791,20 @@ void insert_soulution(BBNode* survival) {
 	int i = J.size() - 1;
 	while (i>=0) {
 
-		M.at(survival->machine_index).Tasks.insert(std::pair<int,Node>(survival->father->ntaskidx, J.at(survival->father->ntaskidx)));
+//		M.at(survival->machine_index).Tasks.insert(std::pair<int,Node>(survival->father->ntaskidx, J.at(survival->father->ntaskidx)));
 		//we multiplay with 4 becouse in print report we divide by 4
 		//worng J.at(i) not sorted 
-		M.at(survival->machine_index).TasksTime = M.at(survival->machine_index).TasksTime + ((J.at(survival->father->ntaskidx).time*4) / M.at(survival->machine_index).speed);
+		//M.at(survival->machine_index).TasksTime = M.at(survival->machine_index).TasksTime + ((J.at(survival->father->ntaskidx).time*4) / M.at(survival->machine_index).speed);
 		i--;
-		survival = survival->father;
+		//survival = survival->father;
 	}
 
 }
  void Branch_and_Bound() {
 	// std::vector<Node> M = J;
 	 int up = UpperBound();
-	 //BBNode A = BBNode(J, M,up); 
-	 BBNode A = BBNode(J, M);
+	 BBNode A = BBNode(J, M,up); 
+	 //BBNode A = BBNode(J, M);
 
 	/* std::vector<std::pair<int, int> > tasks;
 	 std::pair<int, int> p1;

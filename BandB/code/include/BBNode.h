@@ -25,13 +25,12 @@ public:
 	int ntaskidx;
 	int * machinesTime;
 	double taskMachineRatio;
-	BBNode* ServiverPath;
-	BBNode* father;
-	BBNode(std::vector<Node> J,  std::vector<machin> M);
+	BBNode();
+
+	BBNode(std::vector<Node> J,  std::vector<machin> M,int up);
 	BBNode(std::vector<std::pair<int, int> > tasks, std::vector<machin> M, int i, BBNode* cbn, BBNode* root,int upBound);
 	int UpperBound(std::vector<Node> J, std::vector<machin> M);
-	BBNode** machines;
-	//std::vector<BBNode*> machines;
+
 	std::queue<BBNode*> m;
 	std::queue<BBNode*> todelete;
 
