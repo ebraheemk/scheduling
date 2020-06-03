@@ -27,14 +27,13 @@ public:
 	double taskMachineRatio;
 	BBNode();
 
-	BBNode(std::vector<Node> J,  std::vector<machin> M,int up);
+	BBNode(int dep, int midx, int ms, int tmratio, int ttime, int btime, int tsm, int msm, int mms, int mint, int mxms,int msize);
 
 	 
 
-	std::vector<std::pair<int,int>>* Mi;//<machine_index,task_index>
-	~BBNode();
-private:
-	int later;
-	
+	std::vector<std::pair<int,int>> Mi;//<machine_index,task_index>
+	virtual ~BBNode();
+
+
 };
 

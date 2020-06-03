@@ -680,11 +680,11 @@ int UpperBound( ) {
 
 
 
-void buildBBtree( int i, std::shared_ptr<BBNode>  cbn, std::shared_ptr<BBNode>  root, int upBound) {
+void buildBBtree( int i, BBNode*  cbn, BBNode*  root, int upBound) {
 	while (!todelete.empty()) {
-		//std::shared_ptr<BBNode> dd = todelete.front();
+		BBNode* dd = todelete.front();
 		//if (cbn->deapth > dd->deapth) {
-//		delete dd->Mi;
+		//delete dd->Mi;
 	//	delete[] dd->machinesTime;
 		//delete dd;
 		//delete todelete.front()
@@ -705,7 +705,7 @@ void buildBBtree( int i, std::shared_ptr<BBNode>  cbn, std::shared_ptr<BBNode>  
 		cbn->ntaskidx = tasks.at(cbn->deapth).second;
 		for (int k = 0; k < M.size(); k++)
 		{
-			std::shared_ptr<BBNode> ek ( new BBNode);
+			BBNode* ek = new BBNode();
 			//	ek = (BBNode*)malloc(sizeof(BBNode));
 				//cbn->machines[k]->father = cbn;
 			ek->machine_index = M.at(k).index;
@@ -741,11 +741,10 @@ void buildBBtree( int i, std::shared_ptr<BBNode>  cbn, std::shared_ptr<BBNode>  
 				root->MinWorst = ek->worstTiming;
 
 
-			ek->Mi = new std::vector<std::pair<int, int>>;
-			for (int e = 0; e < cbn->Mi->size(); e++)
-				ek->Mi->push_back(cbn->Mi->at(e));
+			for (int e = 0; e < cbn->Mi.size(); e++)
+				ek->Mi.push_back(cbn->Mi.at(e));
 
-			ek->Mi->push_back(std::pair<int, int>(M.at(k).index, tasks.at(cbn->deapth).second));
+			ek->Mi.push_back(std::pair<int, int>(M.at(k).index, tasks.at(cbn->deapth).second));
 			m.push(ek);
 		}
 
@@ -757,7 +756,7 @@ void buildBBtree( int i, std::shared_ptr<BBNode>  cbn, std::shared_ptr<BBNode>  
 			//{
 			//	if (cbn->machines[k] != NULL) {
 		bool roro = true;
-		std::shared_ptr<BBNode> nextcall;
+	    BBNode* nextcall;
 		while (roro && (!m.empty())) {
 			nextcall = m.front();
 			m.pop();
@@ -776,6 +775,9 @@ void buildBBtree( int i, std::shared_ptr<BBNode>  cbn, std::shared_ptr<BBNode>  
 	}
 
 }
+
+
+
 /**/
 
 void print_report() {
@@ -822,9 +824,42 @@ void insert_soulution(BBNode* survival) {
  void Branch_and_Bound() {
 	// std::vector<Node> M = J;
 	 int up = UpperBound();
+
+
+
+	 int Tsum = 0, mmspeed, Msum;
+	 int maxTask = J.at(0).time;
+	 int minTask = J.at(0).time;
+	 for (int i = 0; i < J.size(); i++) {
+		 Tsum += J.at(i).time;
+		 if (J.at(i).time > maxTask)
+			 maxTask = J.at(i).time;
+		 if (J.at(i).time < minTask)
+			 minTask = J.at(i).time;
+	 }
+	 minTask = minTask * 4;
+	 maxTask = maxTask * 4;
+	 Tsum = Tsum * 4;
+	 mmspeed = M.at(0).speed;
+	 int tempmax = M.at(0).speed;
+	 Msum = M.at(0).speed;
+	 for (int i = 1; i < M.size(); i++) {
+		 Msum = Msum + M.at(i).speed;
+		 if (M.at(i).speed < mmspeed)
+			 mmspeed = M.at(i).speed;
+		 if (M.at(i).speed > tempmax)
+			 tempmax = M.at(i).speed;
+	 }
+	 int temp = (int)(J.size() / M.size());
+	 if (temp < 1)
+		 temp = 1;
+	 int bt = fmax((Tsum / Msum), (int)(minTask*(double)(temp / tempmax)));
+	BBNode A =  BBNode(0, -1, -1, (double)temp / tempmax, 0, bt, Tsum, Msum, mmspeed, minTask, tempmax, M.size());
+
+
+
 	// BBNode A = BBNode(J, M,up); 
-	 std::shared_ptr<BBNode>A(new BBNode(J, M, up));
-	 //BBNode A = BBNode(J, M);
+ 	 //BBNode A = BBNode(J, M);
 
 	 std::pair<int, int> p1;
 	 maxheap mxhp = maxheap(J.at(0).time * 4, 0);
@@ -840,7 +875,7 @@ void insert_soulution(BBNode* survival) {
 
 
 
-	 buildBBtree( 0, A, A, up);
+	 buildBBtree( 0, &A, &A, up);
 	 printf("\n&&%d&&&\n",leafs.size());
  	 //insert_soulution(A.ServiverPath);
 	 //next go from leaf to root on servivel path and insert tasks into machines 
