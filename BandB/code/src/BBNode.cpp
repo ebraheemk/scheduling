@@ -3,24 +3,16 @@
 
 
 
-BBNode::BBNode(){}
-
-BBNode::BBNode(int dep,int midx,int ms,int tmratio,int ttime,int btime,int tsm,int msm,int mms,int mint,int mxms,int msize)
+ 
+BBNode::BBNode(int dep,int tmratio,int ttime,int btime,int tsm,int mms,int msize)
 {
 	
  	this->deapth = dep;//0
-	this ->machine_index =midx;//-1
-	this->machine_speed =ms;//-1
 	this->taskstime = ttime;
  	this->taskMachineRatio = tmratio;
 	this->BestTiming = btime;
 	this->worstTiming = tsm/mms;
-	this->MinTask = mint;
 	this->Tsum = tsm;
-	this->Msum = msm;
-	this->mms = mms;
-	this->mxms = mxms;
-	this->MinWorst = this->worstTiming;
 	this->machinesTime = (int*)malloc(sizeof(int)*msize);
 	for (int i = 0; i < msize; i++)
 		this->machinesTime[i] = 0;
@@ -50,8 +42,7 @@ BBNode::BBNode(int dep,int midx,int ms,int tmratio,int ttime,int btime,int tsm,i
 
 BBNode::~BBNode()
 {
-	if(&Mi!=NULL)
-	delete &Mi;
+	
 	//delete machinesTime;
 	
   }

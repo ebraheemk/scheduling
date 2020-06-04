@@ -11,23 +11,14 @@ class BBNode
 public:
 	int deapth;
 	int taskstime;
-	int machine_index;
-	int machine_speed;
 	int worstTiming;
 	int BestTiming;
 	int Tsum;
-	int Msum;
-	int MinTask;
-	int mms;
-	int nodesc=0;
-	int MinWorst;
-	int mxms;
-	int ntaskidx;
-	int * machinesTime;
+ 	int * machinesTime;
 	double taskMachineRatio;
-	BBNode();
+	BBNode() {}
 
-	BBNode(int dep, int midx, int ms, int tmratio, int ttime, int btime, int tsm, int msm, int mms, int mint, int mxms,int msize);
+	BBNode(int dep, int tmratio, int ttime, int btime, int tsm, int mms, int msize);//(int dep, int midx, int ms, int tmratio, int ttime, int btime, int tsm, int msm, int mms, int mint, int mxms,int msize);
 
 	 
 

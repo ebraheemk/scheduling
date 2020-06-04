@@ -693,8 +693,7 @@ void buildBBtree( int i, BBNode*  cbn, BBNode*  root, int upBound) {
 	}
 
 	int temp, totaltasktime = 0;
-	root->nodesc++;
-	if (cbn->deapth == tasks.size() - 1) {
+	if (cbn->deapth == tasks.size() ) {
 		leafs.push_back(cbn);
 	}
 	if (cbn->deapth < tasks.size()) {
@@ -702,20 +701,17 @@ void buildBBtree( int i, BBNode*  cbn, BBNode*  root, int upBound) {
 
 
 		//cbn->machines = (BBNode**)malloc(sizeof(BBNode*)*M.size());
-		cbn->ntaskidx = tasks.at(cbn->deapth).second;
 		for (int k = 0; k < M.size(); k++)
 		{
 			BBNode* ek = new BBNode();
 			//	ek = (BBNode*)malloc(sizeof(BBNode));
 				//cbn->machines[k]->father = cbn;
-			ek->machine_index = M.at(k).index;
-			ek->machine_speed = M.at(k).speed;
+			
 			ek->deapth = cbn->deapth + 1;
 			ek->machinesTime = (int*)malloc(sizeof(int)*M.size());
 			totaltasktime = 0;
 			ek->machinesTime[k] = cbn->machinesTime[k] + (tasks.at(cbn->deapth).first) / M.at(k).speed;
 			ek->taskstime = fmax(ek->machinesTime[k], cbn->taskstime);
-			totaltasktime += (ek->taskstime - ek->machinesTime[k])*M.at(k).speed;
 
 			for (int i = 0; i < k; i++) {
 				ek->machinesTime[i] = cbn->machinesTime[i];
@@ -730,15 +726,15 @@ void buildBBtree( int i, BBNode*  cbn, BBNode*  root, int upBound) {
 			temp = (int)((tasks.size() - cbn->deapth - 1) / M.size());
 			//if (temp < 1)
 			//	temp = 1;
-			ek->taskMachineRatio = (double)temp / root->mxms;
+			ek->taskMachineRatio = (double)temp / mxms;
 			ek->Tsum = cbn->Tsum - tasks.at(cbn->deapth).first;
-			ek->MinTask = cbn->MinTask;//TASKS sorted from the bigest to the smallest so the minumum will did not changed
+			//ek->MinTask = cbn->MinTask;//TASKS sorted from the bigest to the smallest so the minumum will did not changed
 
-			ek->BestTiming = ek->taskstime + (int)fmax(((ek->Tsum - totaltasktime) / root->Msum), (ek->MinTask*ek->taskMachineRatio)/*should add div max machine speed*/);
+			ek->BestTiming = ek->taskstime + (int)fmax(((ek->Tsum - totaltasktime) / Msum), (MinTask*ek->taskMachineRatio)/*should add div max machine speed*/);
 			//cbn->machines[k]->BestTiming = cbn->machines[k]->BestTiming - (totaltasktime / root->Msum);
-			ek->worstTiming = ek->taskstime + (ek->Tsum / root->mms);
-			if (ek->worstTiming < root->MinWorst)
-				root->MinWorst = ek->worstTiming;
+			ek->worstTiming = ek->taskstime + (ek->Tsum / mms);
+			if (ek->worstTiming <MinWorst)
+				MinWorst = ek->worstTiming;
 
 
 			for (int e = 0; e < cbn->Mi.size(); e++)
@@ -760,7 +756,7 @@ void buildBBtree( int i, BBNode*  cbn, BBNode*  root, int upBound) {
 		while (roro && (!m.empty())) {
 			nextcall = m.front();
 			m.pop();
-			if (nextcall->BestTiming <= fmin(root->MinWorst, upBound))
+			if (nextcall->BestTiming <= fmin(MinWorst, upBound))
 				roro = false;
 			else
 				todelete.push(nextcall);
@@ -827,7 +823,7 @@ void insert_soulution(BBNode* survival) {
 
 
 
-	 int Tsum = 0, mmspeed, Msum;
+	 int Tsum = 0, mmspeed;
 	 int maxTask = J.at(0).time;
 	 int minTask = J.at(0).time;
 	 for (int i = 0; i < J.size(); i++) {
@@ -838,6 +834,7 @@ void insert_soulution(BBNode* survival) {
 			 minTask = J.at(i).time;
 	 }
 	 minTask = minTask * 4;
+	 MinTask = minTask;
 	 maxTask = maxTask * 4;
 	 Tsum = Tsum * 4;
 	 mmspeed = M.at(0).speed;
@@ -850,11 +847,19 @@ void insert_soulution(BBNode* survival) {
 		 if (M.at(i).speed > tempmax)
 			 tempmax = M.at(i).speed;
 	 }
+	 mxms = tempmax;
+	 mms=mmspeed;
 	 int temp = (int)(J.size() / M.size());
 	 if (temp < 1)
 		 temp = 1;
 	 int bt = fmax((Tsum / Msum), (int)(minTask*(double)(temp / tempmax)));
-	BBNode A =  BBNode(0, -1, -1, (double)temp / tempmax, 0, bt, Tsum, Msum, mmspeed, minTask, tempmax, M.size());
+	 MinWorst = bt;
+	// (int dep, int tmratio, int ttime, int btime, int tsm, int mms, int msize);
+	 //(int dep, int midx, int ms, int tmratio, int ttime, int btime, int tsm, int msm, int mms, int mint, int mxms,int msize);
+
+
+
+	BBNode A =  BBNode(0, (double)temp / tempmax, 0, bt, Tsum, mmspeed, M.size());
 
 
 
@@ -877,6 +882,7 @@ void insert_soulution(BBNode* survival) {
 
 	 buildBBtree( 0, &A, &A, up);
 	 printf("\n&&%d&&&\n",leafs.size());
+	//to continue from here
  	 //insert_soulution(A.ServiverPath);
 	 //next go from leaf to root on servivel path and insert tasks into machines 
   }

@@ -45,7 +45,7 @@ minheap** machinesHV;
 //minheap* machinesROOT;
 std::vector<std::pair<int, int> > tasks;
 int UpperBound( );
-void buildBBtree( int i, std::shared_ptr<BBNode> cbn, std::shared_ptr<BBNode>  root, int upBound);
+void buildBBtree( int i, BBNode* cbn, BBNode*  root, int upBound);
 
 
 
@@ -66,3 +66,9 @@ std::queue<BBNode*> m;
 std::queue<BBNode*> todelete;
 std::vector<BBNode*> leafs;
  
+//extend to class
+int MinTask;
+int MinWorst;
+int mxms;//max machine speed
+int Msum;
+int mms; //max machine speed
