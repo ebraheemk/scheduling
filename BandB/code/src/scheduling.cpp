@@ -609,7 +609,7 @@ int UpperBound( ) {
 		if (j == M.size())
 			j = 0;
 
-		for (k = 0; k < M.at(j).speed && i < J.size(); k++, i++) {
+		for (k = 0; k < Mcopy.at(j).speed && i < J.size(); k++, i++) {
 			minheap* copy = &tasks;
 			if (i != J.size() - 1)
 				p = tasks.pop(copy);
@@ -618,22 +618,23 @@ int UpperBound( ) {
 				p.second = tasks.index;
 			}
 
-			M.at(j).TasksTime += p.first / M.at(j).speed;
-			M.at(j).Tasks.insert(std::pair<int, Node>(p.second, Node(p.first / 4, p.second)));
+			Mcopy.at(j).TasksTime += p.first / Mcopy.at(j).speed;
+			Mcopy.at(j).Tasks.insert(std::pair<int, Node>(p.second, Node(p.first / 4, p.second)));
 			z++;
 
 		}
 		j++;
 	}
+	std::vector<machin> Mcopy2;
 
 	int minm, maxm;
-	minm = M.at(0).TasksTime;
-	maxm = M.at(0).TasksTime;
+	minm = Mcopy.at(0).TasksTime;
+	maxm = Mcopy.at(0).TasksTime;
 	for (i = 0; i < M.size(); i++) {
-		if (M.at(i).TasksTime < minm)
-			minm = M.at(i).TasksTime;
-		if (M.at(i).TasksTime > maxm)
-			maxm = M.at(i).TasksTime;
+		if (Mcopy.at(i).TasksTime < minm)
+			minm = Mcopy.at(i).TasksTime;
+		if (Mcopy.at(i).TasksTime > maxm)
+			maxm = Mcopy.at(i).TasksTime;
 	}
 	printf("minmum1 hmdan m %d", minm);
 	maxheap tasks2 = maxheap(J.at(0).time * 4, 0);
@@ -642,13 +643,13 @@ int UpperBound( ) {
 		tasks2.insert(copy2, new maxheap(J.at(i).time * 4, i));
 	}
 	for (int i = 0; i < M.size(); i++)
-		Mcopy.push_back(M.at(i));
+		Mcopy2.push_back(M.at(i));
 
 	for (i = 0; i < J.size(); ) {
 		if (j == M.size())
 			j = 0;
 
-		for (k = 0; k < M.at(j).speed && i < J.size(); k++, i++) {
+		for (k = 0; k < Mcopy2.at(j).speed && i < J.size(); k++, i++) {
 			maxheap* copy2 = &tasks2;
 			if (i != J.size() - 1)
 				p = tasks2.pop(copy2);
@@ -657,8 +658,8 @@ int UpperBound( ) {
 				p.second = tasks2.index;
 			}
 
-			M.at(j).TasksTime += p.first / M.at(j).speed;
-			M.at(j).Tasks.insert(std::pair<int, Node>(p.second, Node(p.first / 4, p.second)));
+			Mcopy2.at(j).TasksTime += p.first / Mcopy2.at(j).speed;
+			Mcopy2.at(j).Tasks.insert(std::pair<int, Node>(p.second, Node(p.first / 4, p.second)));
 			z++;
 
 		}
@@ -667,8 +668,8 @@ int UpperBound( ) {
 
 	for (i = 0; i < M.size(); i++) {
 
-		if (M.at(i).TasksTime > minm)
-			minm = M.at(i).TasksTime;
+		if (Mcopy2.at(i).TasksTime > minm)
+			minm = Mcopy2.at(i).TasksTime;
 	}
 	maxm = fmin(minm, maxm);//minm now is maxmum not minmum
 	printf("maximum hmdan m %d", maxm);
@@ -681,16 +682,16 @@ int UpperBound( ) {
 
 
 void buildBBtree( int i, BBNode*  cbn, BBNode*  root, int upBound) {
-	while (!todelete.empty()) {
-		BBNode* dd = todelete.front();
+	//while (!todelete.empty()) {
+	//	BBNode* dd = todelete.front();
 		//if (cbn->deapth > dd->deapth) {
 		//delete dd->Mi;
 	//	delete[] dd->machinesTime;
 		//delete dd;
 		//delete todelete.front()
-		todelete.pop();
+	//	todelete.pop();
 		//}
-	}
+	//}
 
 	int temp, totaltasktime = 0;
 	if (cbn->deapth == tasks.size() ) {
@@ -763,10 +764,12 @@ void buildBBtree( int i, BBNode*  cbn, BBNode*  root, int upBound) {
 
 
 		}
+		if(cbn!=root)
+			todelete.push(cbn);
+ 		buildBBtree( i + 1, nextcall, root, upBound);
+		 
 
-		buildBBtree( i + 1, nextcall, root, upBound);
-
-		todelete.push(nextcall);
+		 
 		//todo no recurseve constructor move to shechdulier
 	}
 
@@ -819,6 +822,7 @@ void insert_soulution(BBNode* survival) {
 }
  void Branch_and_Bound() {
 	// std::vector<Node> M = J;
+
 	 int up = UpperBound();
 
 
@@ -850,16 +854,15 @@ void insert_soulution(BBNode* survival) {
 	 mxms = tempmax;
 	 mms=mmspeed;
 	 int temp = (int)(J.size() / M.size());
-	 if (temp < 1)
-		 temp = 1;
+
 	 int bt = fmax((Tsum / Msum), (int)(minTask*(double)(temp / tempmax)));
-	 MinWorst = bt;
+	 MinWorst = Tsum/mms;
 	// (int dep, int tmratio, int ttime, int btime, int tsm, int mms, int msize);
 	 //(int dep, int midx, int ms, int tmratio, int ttime, int btime, int tsm, int msm, int mms, int mint, int mxms,int msize);
 
 
 
-	BBNode A =  BBNode(0, (double)temp / tempmax, 0, bt, Tsum, mmspeed, M.size());
+	BBNode A =  BBNode(0, (double)temp / (double)tempmax, 0, bt, Tsum, mmspeed, M.size());
 
 
 
@@ -882,7 +885,25 @@ void insert_soulution(BBNode* survival) {
 
 	 buildBBtree( 0, &A, &A, up);
 	 printf("\n&&%d&&&\n",leafs.size());
-	//to continue from here
+
+	 ///find servival path
+	 BBNode* ServiverPath;
+	 int min = leafs.at(0)->taskstime;
+	 ServiverPath = leafs.at(0);
+	 int mmtime;
+	 for (int i = 0; i < leafs.size(); i++) {
+			 if (leafs.at(i)->taskstime < min) {
+				 min = leafs.at(i)->taskstime;
+				 ServiverPath = leafs.at(i);
+			 }
+		 
+	 }
+
+	 //insert from servival path to machines
+	 for (int i = 0; i < ServiverPath->Mi.size(); i++)
+	 {
+		 M.at(ServiverPath->Mi.at(i).first).Tasks.insert(std::pair<int, Node>(ServiverPath->Mi.at(i).second, J.at(ServiverPath->Mi.at(i).second)));
+	 }
  	 //insert_soulution(A.ServiverPath);
 	 //next go from leaf to root on servivel path and insert tasks into machines 
   }

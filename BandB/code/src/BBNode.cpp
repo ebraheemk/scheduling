@@ -4,7 +4,7 @@
 
 
  
-BBNode::BBNode(int dep,int tmratio,int ttime,int btime,int tsm,int mms,int msize)
+BBNode::BBNode(int dep,double tmratio,int ttime,int btime,int tsm,int mms,int msize)
 {
 	
  	this->deapth = dep;//0
