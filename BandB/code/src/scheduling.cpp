@@ -682,7 +682,7 @@ int UpperBound( ) {
 
 
 
-void buildBBtree( int i, BBNode*  cbn, BBNode*  root, int upBound) {
+void buildBBtree( int gg, BBNode*  cbn, BBNode*  root, int upBound) {
 	while (!todelete.empty()) {
 		BBNode* dd = todelete.front();
 		//if (cbn->deapth > dd->deapth) {
@@ -711,19 +711,25 @@ void buildBBtree( int i, BBNode*  cbn, BBNode*  root, int upBound) {
 			
 			ek->deapth = cbn->deapth + 1;
 			ek->machinesTime = (int*)malloc(sizeof(int)*M.size());
-			totaltasktime = 0;
-			ek->machinesTime[k] = cbn->machinesTime[k] + (tasks.at(cbn->deapth).first) / M.at(k).speed;
-			ek->taskstime = fmax(ek->machinesTime[k], cbn->taskstime);
 
+			 
+			 
 			for (int i = 0; i < k; i++) {
 				ek->machinesTime[i] = cbn->machinesTime[i];
-				totaltasktime += (ek->taskstime - ek->machinesTime[i])*M.at(i).speed;
-			}
+ 			}
+			ek->machinesTime[k] = cbn->machinesTime[k] + ((tasks.at(cbn->deapth).first) / M.at(k).speed);
 			for (int i = k + 1; i < M.size(); i++) {
-				ek->machinesTime[i] = cbn->machinesTime[i];
-				totaltasktime += (ek->taskstime - ek->machinesTime[i])*M.at(i).speed;
+						ek->machinesTime[i] = cbn->machinesTime[i];
+ 
+				}
+			 
+			int x = ek->machinesTime[k];
+			ek->taskstime = fmax(ek->machinesTime[k], cbn->taskstime);
+			totaltasktime = 0;
+			for(int i=0;i<M.size();i++)
+				totaltasktime = totaltasktime + ((ek->taskstime - ek->machinesTime[i])*M.at(i).speed);
 
-			}
+	
 
 			temp = (int)((tasks.size() - cbn->deapth - 1) / M.size());
 			//if (temp < 1)
@@ -733,7 +739,7 @@ void buildBBtree( int i, BBNode*  cbn, BBNode*  root, int upBound) {
 			
 			//ek->MinTask = cbn->MinTask;//TASKS sorted from the bigest to the smallest so the minumum will did not changed
 
-			ek->BestTiming = ek->taskstime + (ek->Tsum - totaltasktime) / Msum/*should add div max machine speed*/;
+			ek->BestTiming = ek->taskstime +fmax( ((ek->Tsum - totaltasktime) / Msum),0);/*should add div max machine speed*/;
 			//cbn->machines[k]->BestTiming = cbn->machines[k]->BestTiming - (totaltasktime / root->Msum);
 			ek->worstTiming = ek->taskstime + (ek->Tsum / mms);
 			if (ek->worstTiming <MinWorst)
@@ -759,7 +765,7 @@ void buildBBtree( int i, BBNode*  cbn, BBNode*  root, int upBound) {
 			nextcall = cbn->m.front();
 			cbn->m.pop();
 			if (nextcall->BestTiming <= fmin(MinWorst, upBound))
-				buildBBtree(i + 1, nextcall, root, upBound);
+				buildBBtree(gg + 1, nextcall, root, upBound);
 			else
 				todelete.push(nextcall);
 
@@ -832,7 +838,7 @@ void insert_soulution(BBNode* survival) {
 	 int maxTask = J.at(0).time;
 	 int minTask = J.at(0).time;
 	 for (int i = 0; i < J.size(); i++) {
-		 Tsum += J.at(i).time*4;
+		 Tsum += J.at(i).time;
 		 if (J.at(i).time > maxTask)
 			 maxTask = J.at(i).time;
 		 if (J.at(i).time < minTask)
@@ -886,7 +892,7 @@ void insert_soulution(BBNode* survival) {
 
 	 buildBBtree( 0, &A, &A, up);
 	 printf("\n&&%d&&&\n",leafs.size());
-
+	// task time worng
 	 ///find servival path
 	 BBNode* ServiverPath;
 	 int min = leafs.at(0)->taskstime;
