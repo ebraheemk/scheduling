@@ -5,3 +5,6 @@ we can enter another tasks to other machines thate have time less than taskstime
 can remove it
 
 *build the search as bfs so we can remove each time the last level nodes
+
+0506-2020
+in bfs we have save leafs evrey time and we have many if we go in dfs is best and we only save the best path

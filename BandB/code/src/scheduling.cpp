@@ -14,6 +14,7 @@ void PassTask(int task, int machine1, int machine2) {
 	std::map<int, Node>::iterator it1;
 	it1 = M.at(machine1).Tasks.find(task);
 
+	
 	std::pair<int, Node> temp1 = std::pair<int, Node>(it1->first, it1->second);
 	M.at(machine1).TasksTime -= (it1->second.time * 4) / M.at(machine1).speed;
 	M.at(machine1).Tasks.erase(it1);
@@ -682,15 +683,15 @@ int UpperBound( ) {
 
 
 void buildBBtree( int i, BBNode*  cbn, BBNode*  root, int upBound) {
-	//while (!todelete.empty()) {
-	//	BBNode* dd = todelete.front();
+	while (!todelete.empty()) {
+		BBNode* dd = todelete.front();
 		//if (cbn->deapth > dd->deapth) {
-		//delete dd->Mi;
+		delete dd;
 	//	delete[] dd->machinesTime;
 		//delete dd;
 		//delete todelete.front()
-	//	todelete.pop();
-		//}
+		todelete.pop();
+		}
 	//}
 
 	int temp, totaltasktime = 0;
@@ -727,11 +728,12 @@ void buildBBtree( int i, BBNode*  cbn, BBNode*  root, int upBound) {
 			temp = (int)((tasks.size() - cbn->deapth - 1) / M.size());
 			//if (temp < 1)
 			//	temp = 1;
-			ek->taskMachineRatio = (double)temp / mxms;
+			ek->taskMachineRatio = (double)temp / Msum;
 			ek->Tsum = cbn->Tsum - tasks.at(cbn->deapth).first;
+			
 			//ek->MinTask = cbn->MinTask;//TASKS sorted from the bigest to the smallest so the minumum will did not changed
 
-			ek->BestTiming = ek->taskstime + (int)fmax(((ek->Tsum - totaltasktime) / Msum), (MinTask*ek->taskMachineRatio)/*should add div max machine speed*/);
+			ek->BestTiming = ek->taskstime + (ek->Tsum - totaltasktime) / Msum/*should add div max machine speed*/;
 			//cbn->machines[k]->BestTiming = cbn->machines[k]->BestTiming - (totaltasktime / root->Msum);
 			ek->worstTiming = ek->taskstime + (ek->Tsum / mms);
 			if (ek->worstTiming <MinWorst)
@@ -742,7 +744,7 @@ void buildBBtree( int i, BBNode*  cbn, BBNode*  root, int upBound) {
 				ek->Mi.push_back(cbn->Mi.at(e));
 
 			ek->Mi.push_back(std::pair<int, int>(M.at(k).index, tasks.at(cbn->deapth).second));
-			m.push(ek);
+			cbn->m.push(ek);
 		}
 
 
@@ -752,21 +754,20 @@ void buildBBtree( int i, BBNode*  cbn, BBNode*  root, int upBound) {
 		//	for (int k = 0; k < M.size(); k++)//we need to check all brother befor start new level for this reson we have two loops
 			//{
 			//	if (cbn->machines[k] != NULL) {
-		bool roro = true;
 	    BBNode* nextcall;
-		while (roro && (!m.empty())) {
-			nextcall = m.front();
-			m.pop();
+		while (!cbn->m.empty()) {
+			nextcall = cbn->m.front();
+			cbn->m.pop();
 			if (nextcall->BestTiming <= fmin(MinWorst, upBound))
-				roro = false;
+				buildBBtree(i + 1, nextcall, root, upBound);
 			else
 				todelete.push(nextcall);
 
-
+			 
 		}
 		if(cbn!=root)
-			todelete.push(cbn);
- 		buildBBtree( i + 1, nextcall, root, upBound);
+	       todelete.push(cbn);
+ 		 
 		 
 
 		 
@@ -831,7 +832,7 @@ void insert_soulution(BBNode* survival) {
 	 int maxTask = J.at(0).time;
 	 int minTask = J.at(0).time;
 	 for (int i = 0; i < J.size(); i++) {
-		 Tsum += J.at(i).time;
+		 Tsum += J.at(i).time*4;
 		 if (J.at(i).time > maxTask)
 			 maxTask = J.at(i).time;
 		 if (J.at(i).time < minTask)
@@ -903,6 +904,8 @@ void insert_soulution(BBNode* survival) {
 	 for (int i = 0; i < ServiverPath->Mi.size(); i++)
 	 {
 		 M.at(ServiverPath->Mi.at(i).first).Tasks.insert(std::pair<int, Node>(ServiverPath->Mi.at(i).second, J.at(ServiverPath->Mi.at(i).second)));
+		 M.at(ServiverPath->Mi.at(i).first).TasksTime +=  ((J.at(ServiverPath->Mi.at(i).second).time * 4) / M.at(ServiverPath->Mi.at(i).first).speed);
+
 	 }
  	 //insert_soulution(A.ServiverPath);
 	 //next go from leaf to root on servivel path and insert tasks into machines 
@@ -919,7 +922,7 @@ int main()
 	
 	Branch_and_Bound();
 	print_report();
-//	print_report();
+	print_report();
 	//print_summary();
 	auto stop = high_resolution_clock::now();
 	auto duration = duration_cast<microseconds>(stop - start);

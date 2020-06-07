@@ -20,7 +20,8 @@ public:
 
 	BBNode(int dep, double tmratio, int ttime, int btime, int tsm, int mms, int msize);//(int dep, int midx, int ms, int tmratio, int ttime, int btime, int tsm, int msm, int mms, int mint, int mxms,int msize);
 
-	 
+	std::queue<BBNode*> m;
+
 
 	std::vector<std::pair<int,int>> Mi;//<machine_index,task_index>
 	virtual ~BBNode();
