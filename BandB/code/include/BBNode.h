@@ -15,7 +15,7 @@ public:
 	int BestTiming;
 	int Tsum;
  	int * machinesTime;
-	double taskMachineRatio;
+	int taskMachineRatio;
 	BBNode() {}
 
 	BBNode(int dep, double tmratio, int ttime, int btime, int tsm, int mms, int msize);//(int dep, int midx, int ms, int tmratio, int ttime, int btime, int tsm, int msm, int mms, int mint, int mxms,int msize);
