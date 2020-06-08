@@ -209,13 +209,20 @@ void buildBBtree(  BBNode*  cbn, int upBound) {
 
 	int temp, totaltasktime = 0;
 	if (cbn->deapth == tasks.size() ) {
-		if (first)
+		if (first) {
 			survival = cbn;
-		else {
-			if (cbn->taskstime < survival->taskstime)
-				survival = cbn;
+			first = false;
 		}
-		delete cbn;
+		else {
+			if (cbn->taskstime < survival->taskstime) {
+				delete survival;
+				survival = cbn;
+			}
+			else
+				delete cbn;
+
+		}
+		//delete cbn;
 		//leafs.push_back(cbn);
 	}
 	else if (cbn->deapth < tasks.size()) {
@@ -248,10 +255,11 @@ void buildBBtree(  BBNode*  cbn, int upBound) {
 			ek->Tsum = cbn->Tsum - tasks.at(cbn->deapth).first;
 
 			 sum = 0;
-			 for (int i = (tasks.size() - ek->taskMachineRatio); i < tasks.size(); i++)
+			 for (int i = (tasks.size() - ek->taskMachineRatio+1); i < tasks.size(); i++)
 				 sum = sum + tasks.at(i).first;
 			 tmf = fmax(((ek->Tsum - totaltasktime) / Msum), 0);
-			ek->BestTiming = ek->taskstime +fmax( tmf, sum);/*should add div max machine speed*/;
+			ek->BestTiming = ek->taskstime +tmf;/*should add div max machine speed*/;
+			ek->BestTiming = fmax(ek->BestTiming, sum);
 			ek->worstTiming = ek->taskstime + (ek->Tsum / mms);
 			if (ek->worstTiming <MinWorst)
 				MinWorst = ek->worstTiming;
@@ -270,7 +278,7 @@ void buildBBtree(  BBNode*  cbn, int upBound) {
 		while (!cbn->m.empty()) {
 			nextcall = cbn->m.front();
 			cbn->m.pop();
-			if (nextcall->BestTiming < fmin(MinWorst, upBound))
+			if (nextcall->BestTiming <= fmin(MinWorst, upBound))
 				buildBBtree( nextcall, upBound);
 			else
 				todelete.push(nextcall);
@@ -388,7 +396,7 @@ void print_report() {
 			 }
 		 
 	 }*/
-
+	 printf("servival");
 	 //insert from servival path to machines
 	 for (int i = 0; i < survival->Mi.size(); i++)
 	 {
