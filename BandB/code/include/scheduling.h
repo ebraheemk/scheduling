@@ -41,9 +41,15 @@ std::queue<BBNode*> todelete;
 //std::vector<BBNode*> leafs;
 BBNode* survival;
 bool first = true;
+bool dontstop;
+int optimalsol;
 //extend to class
 int MinTask;
+int nodescount = 0;
+std::ofstream mm("../output/tport.txt");
 int MinWorst;
 int mxms;//max machine speed
 int Msum;
 int mms; //max machine speed
+std::vector<int> uniqe;
+std::vector<int>::iterator it;

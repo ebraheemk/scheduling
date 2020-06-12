@@ -9,6 +9,7 @@ BBNode::BBNode(int dep,double tmratio,int ttime,int btime,int tsm,int mms,int ms
 	
  	this->deapth = dep;//0
 	this->taskstime = ttime;
+
  	this->taskMachineRatio = tmratio;
 	this->BestTiming = btime;
 	this->worstTiming = tsm/mms;

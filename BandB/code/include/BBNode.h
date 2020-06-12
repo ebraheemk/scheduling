@@ -11,7 +11,7 @@ class BBNode
 public:
 	int deapth;
 	int taskstime;
-	int worstTiming;
+ 	int worstTiming;
 	int BestTiming;
 	int Tsum;
  	int * machinesTime;
