@@ -326,6 +326,7 @@ void init_machines() {
 		 CopyJ.erase(CopyJ.begin() + rtmp);
 
 	 }
+	 return res;
  }
  void init_first_gen() {
 	 int rtmp;
@@ -342,12 +343,13 @@ void init_machines() {
 			 for (int k = 0; k < temp.size(); k++) {
 				 a->Mchnz.at(j).Tasks.insert(std::pair<int,Node>(temp.at(k).index,temp.at(k)));
 			 }
-			 temp.clear();
+ 			 temp.clear();
 
 		 }
 
 		// CopyJ.clear();
 
+		 Gen.push_back(a);
 
 
 	 }
@@ -642,7 +644,7 @@ int main()
 	
 	init_data();
 	 
-
+	init_first_gen();
 	
 	
 

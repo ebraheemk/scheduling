@@ -62,4 +62,4 @@ std::vector<Node> ChooseRandomKtasks(int k);
 std::vector<Node> CopyJ;
 
 void init_first_gen();
-std::vector<Chromosome> Gen;
+std::vector<Chromosome*> Gen;
