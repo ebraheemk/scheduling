@@ -338,6 +338,12 @@ void init_machines() {
 			 CopyJ.push_back(Node(J.at(j).time, J.at(j).index));
 		 for (int j = 0; j < dist.size(); j++) {
 			 std::vector<Node> temp= ChooseRandomKtasks(dist.at(j));
+			 a->Mchnz.push_back(machin(M.at(j).speed, M.at(j).index));
+			 for (int k = 0; k < temp.size(); k++) {
+				 a->Mchnz.at(j).Tasks.insert(std::pair<int,Node>(temp.at(k).index,temp.at(k)));
+			 }
+			 temp.clear();
+
 		 }
 
 		// CopyJ.clear();

@@ -6,7 +6,7 @@ class Chromosome
 {
 public:
 	int index;
-	std::vector<Node> Tsx;
+	//std::vector<Node> Tsx;
 	std::vector<machin> Mchnz;
 	Chromosome();
 	~Chromosome();
