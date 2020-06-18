@@ -316,9 +316,33 @@ void init_machines() {
 	 }
 	 
  }
+ std::vector<Node> ChooseRandomKtasks(int k) {
+	 std::vector<Node> res;
+	 int rtmp;
+	 for (int i = 0; i < k; i++)
+	 {
+		 rtmp = rand() % CopyJ.size();
+		 res.push_back(CopyJ.at(rtmp));
+		 CopyJ.erase(CopyJ.begin() + rtmp);
+
+	 }
+ }
  void init_first_gen() {
+	 int rtmp;
 	 for (int i = 0; i < population; i++)
 	 {
+		 Chromosome* a = new	Chromosome();
+		 a->index = i;
+		 std::vector<int> dist = GetrandomDistribution();
+		 for (int j = 0; j < J.size(); j++)
+			 CopyJ.push_back(Node(J.at(j).time, J.at(j).index));
+		 for (int j = 0; j < dist.size(); j++) {
+			 std::vector<Node> temp= ChooseRandomKtasks(dist.at(j));
+		 }
+
+		// CopyJ.clear();
+
+
 
 	 }
  }

@@ -9,7 +9,7 @@
 #include <string>
 #include <maxheap.h>
 #include <Chromosome.h>
-#define population 100;
+#define population 100
 
 #define maxLevelSearch 2
 int speeds [3] = { 1,2,4 };
@@ -58,5 +58,8 @@ int ** swapCount;
 
 //for genitic
 std::vector<int> GetrandomDistribution();
+std::vector<Node> ChooseRandomKtasks(int k);
+std::vector<Node> CopyJ;
+
 void init_first_gen();
 std::vector<Chromosome> Gen;
