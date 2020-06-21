@@ -11,6 +11,7 @@ public:
 	int TasksTime;
 	int index;
 	std::map<int,Node> Tasks;
+	std::vector<int> tasksidx;
 
 	
 private:

@@ -45,40 +45,44 @@ void SwapTasks(int task1, int machine1, int task2, int machine2) {
 	update_TasksTable(machine1);
 	update_TasksTable(machine2);
 }
-void SwapmTasks(std::vector<int> t1, int m1, std::vector<int>t2, int m2) {
+void SwapmTasks(std::vector<int> t1, machin *m1, std::vector<int>t2, machin* m2) {
 	std::map<int, Node>::iterator it1, it2;
 	std::vector<std::pair<int, Node>>temp1;
 	std::vector<std::pair<int, Node>>temp2;
-	swapCount[t1.size()][t2.size()]++;
+	//swapCount[t1.size()][t2.size()]++;
 	int task,i;
 	for ( i = 0; i < t1.size(); i++) {
 		task = t1.at(i);
-		it1 = M.at(m1).Tasks.find(task);
+		it1 = m1->Tasks.find(task);
 		temp1.push_back(std::pair<int, Node>(it1->first, it1->second));
-		M.at(m1).TasksTime -= (it1->second.time * 4) / M.at(m1).speed;
-		M.at(m1).Tasks.erase(it1);
+		m1->TasksTime -= (it1->second.time * 4) / m1->speed;
+		m1->Tasks.erase(it1);
 	}
 
 
 	for (i = 0; i < t2.size(); i++) {
 		task = t2.at(i); 
-		it2 = M.at(m2).Tasks.find(task);
+		it2 = m2->Tasks.find(task);
 		temp2.push_back(std::pair<int, Node>(it2->first, it2->second));
-		M.at(m2).TasksTime -= (it2->second.time * 4) / M.at(m2).speed;
-		M.at(m2).Tasks.erase(it2);
+		m2->TasksTime -= (it2->second.time * 4) / m2->speed;
+		m2->Tasks.erase(it2);
 	}
 
 	for (i = 0; i < temp2.size(); i++) {
-		M.at(m1).Tasks.insert(temp2.at(i));
-		M.at(m1).TasksTime += (temp2.at(i).second.time * 4) / M.at(m1).speed;
+		m1->Tasks.insert(temp2.at(i));
+		m1->tasksidx.push_back(temp2.at(i).first);
+
+		m1->TasksTime += (temp2.at(i).second.time * 4) / m1->speed;
 	}
 
 	for (i = 0; i < temp1.size(); i++) {
-		M.at(m2).Tasks.insert(temp1.at(i));
-		M.at(m2).TasksTime += (temp1.at(i).second.time * 4) / M.at(m2).speed;
+		m2->Tasks.insert(temp1.at(i));
+		m2->tasksidx.push_back(temp1.at(i).first);
+
+		m2->TasksTime += (temp1.at(i).second.time * 4) / m2->speed;
 	}
-	update_TasksTable(m1);
-	update_TasksTable(m2);
+	//update_TasksTable(m1);
+	//update_TasksTable(m2);
 
 }
 int GetBestThrow(int machine1, int  machine2) {
@@ -328,6 +332,32 @@ void init_machines() {
 	 }
 	 return res;
  }
+ std::vector<int> ChooseRandomKtasks(int k, machin mch) {
+	 std::vector<int> res;
+	 int rtmp;
+	 for (int i = 0; i < k; i++)
+	 {
+		 rtmp = rand() % mch.tasksidx.size();
+		 res.push_back(mch.tasksidx.at(rtmp));
+		 mch.tasksidx.erase(mch.tasksidx.begin() + rtmp);
+
+	 }
+	 return res;
+ }
+ void Pairing(Chromosome* cm1 , Chromosome* cm2, int m1, int m2) {
+	 int k,m;
+	 Chromosome* res = new	Chromosome();
+	 machin mch1 = cm1->Mchnz.at(m1);
+	 machin mch2 = cm1->Mchnz.at(m1);
+	 k = (rand() % (mch1.tasksidx.size() - 2)) + 1;
+	 m = (rand() % (mch2.tasksidx.size() - 2)) + 1;
+
+	 std::vector<int>t1 = ChooseRandomKtasks(k, mch1);
+	 std::vector<int>t2 = ChooseRandomKtasks(m, mch2);
+	 SwapmTasks(t1, &mch1, t2, &mch2);
+
+
+ }
  void init_first_gen() {
 	 int rtmp;
 	 for (int i = 0; i < population; i++)
@@ -342,6 +372,7 @@ void init_machines() {
 			 a->Mchnz.push_back(machin(M.at(j).speed, M.at(j).index));
 			 for (int k = 0; k < temp.size(); k++) {
 				 a->Mchnz.at(j).Tasks.insert(std::pair<int,Node>(temp.at(k).index,temp.at(k)));
+				 a->Mchnz.at(j).tasksidx.push_back(temp.at(k).index); 
 			 }
  			 temp.clear();
 
@@ -353,6 +384,7 @@ void init_machines() {
 
 
 	 }
+	 Pairing(Gen.at(0), Gen.at(1), 0, 0);
  }
  std::vector<int> GetrandomDistribution()
  {
@@ -399,132 +431,8 @@ void init_machines() {
 	 }
 	 myfile.close();
  }
- bool LevelZero() {
-	 /*TODO :to optimize we can use any sort of nlogn so each time we check two machine by
-	 o(1) instide of o(n) bcz we only need maximum
-	 and also we can change the waywe give initial slolothion */
-	 bool flag=true;
-	 bool result = true;
-	 while (flag) {
-		 for (int offset = 1; offset < M.size(); offset++) {
-			 for (int i = 0; i < M.size() / 2; i++) {
-				 flag = flag && M1ToM2Throw(i * 2, (i * 2 + offset) % M.size());
 
-			 }
-		 }
-		 for (int offset = 0; offset < M.size(); offset++) {
-			 for (int i = 0; i < M.size(); i++) {
-				 flag = flag && M1ToM2Throw(i ,offset);
-
-			 }
-
-		 }
-		 result = result && flag;
-		 flag = !flag;
-
-	 }
-	 return result;
- }
- bool LocalSearchNxM(int n, int m) {
-	 bool flag = true;
-	 bool result = true;
-	 int* d = new int[n];
-	 while (flag) {
-		 for (int offset = 1; offset < M.size(); offset++) {
-			 for (int i = 0; i < M.size() / 2; i++) {
-				  
-				 GetBestOfNxM(i * 2, n, (i * 2 + offset) % M.size(), m, 0, d, 0, true);
-				 if(!GetBestOfNxMbool)
-				 SwapmTasks(NxMcom1Best, i * 2, NxMcom2Best, (i * 2 + offset) % M.size());
-				 flag = flag && GetBestOfNxMbool;
-
-
-			 }
-		 }
-
-		 for (int offset = 0; offset < M.size(); offset++) {
-			 for (int i = 0; i < M.size() ; i++) {
-				
-				 GetBestOfNxM(offset, n, i, m, 0, d, 0, true);
-				 if (!GetBestOfNxMbool)
-					 SwapmTasks(NxMcom1Best, offset, NxMcom2Best, i );
-				 flag = flag && GetBestOfNxMbool;
-			 }
-		 }
-
-		 result = result && flag;
-		 flag = !flag;
-	 }
-	 return result;
- }
- bool LevelOne() {
-	 bool flag = true;
-	 bool result=true;
-	 /*TODO later we dont need to check all pairs of machines only pairs that one one machine
-	 of them have changed  so we can hold type of ReadyQueue that hold all the machines that
-	 was changed and check them with other machines and stop we we have empty ready queue that mean
-	 we pass over all compantion of two machines and there no two machine that we can optimize his time
-	 */
-	 while(flag){
-		 for (int offset = 1; offset < M.size(); offset++) {
-			 for (int i = 0; i < M.size() / 2; i++) {
-				flag=flag && TwoMachineLocalSearch(i * 2, (i * 2 + offset) % M.size());
-			 }
-		 }
-		 result = result && flag;
-		flag = !flag;
-
-	 }
-	 return result;
- }
- void LocalSearch() {
-	 bool flag = true;
-	 bool temp;
-	 while (flag) {
-		  
-		 flag = flag && LevelZero();
-		 for (int i = 1; i <= maxLevelSearch; i++) {
-			 for (int j = i; j <= maxLevelSearch; j++) {
-				 if (j == 1 && i == 1) {
-					 temp = LocalSearchNxM(i, j);
-					 if (temp) {
-						 i = 4; j = 4;
-					 }
-					 flag = flag && temp;
-				 }
-				 else {
-
-					 if (j == 1) {
-						 if(TasksTable[i-1][maxLevelSearch]>0)
-							 temp = LocalSearchNxM(i, j);
-						 if (temp) {
-							 i = 4; j = 4;
-						 }
-						 flag = flag && temp;
-					 }
-					 else {
-						 if (TasksTable[i][j-1] > 0)
-							 temp = LocalSearchNxM(i, j);
-						 if (temp) {
-							 i = 4; j = 4;
-						 }
-						 flag = flag && temp;
-					 }
-				 }
-
-
-
-
-				 
-			 }
-		 }
-	
-		
-
- 		 flag = !flag;
-
-	 }
- }
+ 
  void GetBestOf1xM(int m1Comp[], int m1, int m2, int m2tasksNo, int index, int comb[], int i,bool firsttime ) {
 	 if (firsttime) {
 		 Max1xM=std::fmax(M.at(m1).TasksTime, M.at(m2).TasksTime);//TODO later we can optimize uzing MaxNxM

@@ -30,7 +30,7 @@ int GetBestThrow(int machine1, int  machine2);
 bool LevelOne();
 bool LevelZero();
 void LocalSearch();
-void SwapmTasks(std::vector<int> t1, int m1, std::vector<int>t2, int m2);
+void SwapmTasks(std::vector<int> t1, machin* m1, std::vector<int>t2, machin* m2);
 void GetBestOf1xM(int m1Comp[],int m1,int m2,int m2tasksNo, int index, int comb[], int i, bool firsttime);/*given compination of machine1 finde the bes compination of M tasks that
 give best solution if we swap given compinatin from machine1 and the M tasks from machine2  */
 void GetBestOfNxM(int m1,int m1tasksNo ,int m2,int m2tasksNo,int index,int * comb,int i,bool firsttime);/*we want to do local search NxM first we go over N compenation of machine1
@@ -63,3 +63,5 @@ std::vector<Node> CopyJ;
 
 void init_first_gen();
 std::vector<Chromosome*> Gen;
+void Pairing(Chromosome*, Chromosome*,int,int);
+std::vector<int> ChooseRandomKtasks(int k, machin mch);
