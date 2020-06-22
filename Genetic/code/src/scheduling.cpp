@@ -55,7 +55,7 @@ void SwapmTasks(std::vector<int> t1, machin *m1, std::vector<int>t2, machin* m2)
 		task = t1.at(i);
 		it1 = m1->Tasks.find(task);
 		temp1.push_back(std::pair<int, Node>(it1->first, it1->second));
-		m1->TasksTime -= (it1->second.time * 4) / m1->speed;
+		m1->TasksTime -= (it1->second.time ) / m1->speed;
 		m1->Tasks.erase(it1);
 	}
 
@@ -64,7 +64,7 @@ void SwapmTasks(std::vector<int> t1, machin *m1, std::vector<int>t2, machin* m2)
 		task = t2.at(i); 
 		it2 = m2->Tasks.find(task);
 		temp2.push_back(std::pair<int, Node>(it2->first, it2->second));
-		m2->TasksTime -= (it2->second.time * 4) / m2->speed;
+		m2->TasksTime -= (it2->second.time ) / m2->speed;
 		m2->Tasks.erase(it2);
 	}
 
@@ -72,14 +72,14 @@ void SwapmTasks(std::vector<int> t1, machin *m1, std::vector<int>t2, machin* m2)
 		m1->Tasks.insert(temp2.at(i));
 		m1->tasksidx.push_back(temp2.at(i).first);
 
-		m1->TasksTime += (temp2.at(i).second.time * 4) / m1->speed;
+		m1->TasksTime += (temp2.at(i).second.time ) / m1->speed;
 	}
 
 	for (i = 0; i < temp1.size(); i++) {
 		m2->Tasks.insert(temp1.at(i));
 		m2->tasksidx.push_back(temp1.at(i).first);
 
-		m2->TasksTime += (temp1.at(i).second.time * 4) / m2->speed;
+		m2->TasksTime += (temp1.at(i).second.time ) / m2->speed;
 	}
 	//update_TasksTable(m1);
 	//update_TasksTable(m2);
@@ -326,20 +326,20 @@ void init_machines() {
 	 for (int i = 0; i < k; i++)
 	 {
 		 rtmp = rand() % CopyJ.size();
-		 res.push_back(CopyJ.at(rtmp));
+		 res.push_back(Node( CopyJ.at(rtmp).time*4, CopyJ.at(rtmp).index));
 		 CopyJ.erase(CopyJ.begin() + rtmp);
 
 	 }
 	 return res;
  }
- std::vector<int> ChooseRandomKtasks(int k, machin mch) {
+ std::vector<int> ChooseRandomKtasks(int k, machin* mch) {
 	 std::vector<int> res;
 	 int rtmp;
 	 for (int i = 0; i < k; i++)
 	 {
-		 rtmp = rand() % mch.tasksidx.size();
-		 res.push_back(mch.tasksidx.at(rtmp));
-		 mch.tasksidx.erase(mch.tasksidx.begin() + rtmp);
+		 rtmp = rand() % mch->tasksidx.size();
+		 res.push_back(mch->tasksidx.at(rtmp));
+		 mch->tasksidx.erase(mch->tasksidx.begin() + rtmp);
 
 	 }
 	 return res;
@@ -348,12 +348,12 @@ void init_machines() {
 	 int k,m;
 	 Chromosome* res = new	Chromosome();
 	 machin mch1 = cm1->Mchnz.at(m1);
-	 machin mch2 = cm1->Mchnz.at(m1);
+	 machin mch2 = cm2->Mchnz.at(m2);
 	 k = (rand() % (mch1.tasksidx.size() - 2)) + 1;
 	 m = (rand() % (mch2.tasksidx.size() - 2)) + 1;
 
-	 std::vector<int>t1 = ChooseRandomKtasks(k, mch1);
-	 std::vector<int>t2 = ChooseRandomKtasks(m, mch2);
+	 std::vector<int>t1 = ChooseRandomKtasks(k, &mch1);
+	 std::vector<int>t2 = ChooseRandomKtasks(m, &mch2);
 	 SwapmTasks(t1, &mch1, t2, &mch2);
 
 
@@ -372,6 +372,8 @@ void init_machines() {
 			 a->Mchnz.push_back(machin(M.at(j).speed, M.at(j).index));
 			 for (int k = 0; k < temp.size(); k++) {
 				 a->Mchnz.at(j).Tasks.insert(std::pair<int,Node>(temp.at(k).index,temp.at(k)));
+				 a->Mchnz.at(j).TasksTime += temp.at(k).time / a->Mchnz.at(j).speed;
+
 				 a->Mchnz.at(j).tasksidx.push_back(temp.at(k).index); 
 			 }
  			 temp.clear();

@@ -64,4 +64,4 @@ std::vector<Node> CopyJ;
 void init_first_gen();
 std::vector<Chromosome*> Gen;
 void Pairing(Chromosome*, Chromosome*,int,int);
-std::vector<int> ChooseRandomKtasks(int k, machin mch);
+std::vector<int> ChooseRandomKtasks(int k, machin* mch);
