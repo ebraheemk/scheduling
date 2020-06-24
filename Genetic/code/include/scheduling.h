@@ -9,7 +9,7 @@
 #include <string>
 #include <maxheap.h>
 #include <Chromosome.h>
-#define population 100
+#define population 100 //should be even number
 
 #define maxLevelSearch 2
 int speeds [3] = { 1,2,4 };
@@ -63,5 +63,12 @@ std::vector<Node> CopyJ;
 
 void init_first_gen();
 std::vector<Chromosome*> Gen;
-void Pairing(Chromosome*, Chromosome*,int,int);
+std::vector<Chromosome*> NextGen;
+
+void Pairing(Chromosome*, Chromosome* );
 std::vector<int> ChooseRandomKtasks(int k, machin* mch);
+int bestSol=-1;
+int worsSol = -1;
+int PeakRandomIndex( std::vector<double>,double);
+
+Chromosome* survival;

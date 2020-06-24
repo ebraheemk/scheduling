@@ -344,22 +344,81 @@ void init_machines() {
 	 }
 	 return res;
  }
- void Pairing(Chromosome* cm1 , Chromosome* cm2, int m1, int m2) {
+ void Pairing(Chromosome* cm1 , Chromosome* cm2) {
 	 int k,m;
-	 Chromosome* res = new	Chromosome();
-	 machin mch1 = cm1->Mchnz.at(m1);
-	 machin mch2 = cm2->Mchnz.at(m2);
-	 k = (rand() % (mch1.tasksidx.size() - 2)) + 1;
-	 m = (rand() % (mch2.tasksidx.size() - 2)) + 1;
+	 int m1, m2, tmp;
+	 Chromosome* res1 = new	Chromosome();
+	 Chromosome* res2 = new	Chromosome();
 
-	 std::vector<int>t1 = ChooseRandomKtasks(k, &mch1);
-	 std::vector<int>t2 = ChooseRandomKtasks(m, &mch2);
-	 SwapmTasks(t1, &mch1, t2, &mch2);
+ 
+	 std::vector<int> m1s;
+	 std::vector<int> m2s;
+
+	 for (int i = 0; i < cm2->Mchnz.size(); i++) {
+		 m1s.push_back(i);
+		 m2s.push_back(i);
+
+
+	 }
+	 int x, y, tmep;
+	 while (m1s.size() > 1) {
+		 x = rand() % m1s.size();
+		 tmep = m1s.at(x);
+		 m1s.erase(m1s.begin() + x);
+		 x = tmep;
+
+		 y = rand() % m2s.size();
+		 tmep = m2s.at(y);
+		 m2s.erase(m2s.begin() + y);
+		 y = tmep;
+		 machin mch1 = cm1->Mchnz.at(x);
+		 machin mch2 = cm2->Mchnz.at(y);
+		 k = (rand() % (mch1.tasksidx.size() - 2)) + 1;
+		 m = (rand() % (mch2.tasksidx.size() - 2)) + 1;
+		 std::vector<int>t1 = ChooseRandomKtasks(k, &mch1);
+		 std::vector<int>t2 = ChooseRandomKtasks(m, &mch2);
+		 SwapmTasks(t1, &mch1, t2, &mch2);
+		 res1->Mchnz.push_back(mch1);
+		 res2->Mchnz.push_back(mch2);
+
+		// Pairing(Gen.at(x), Gen.at(y));
+	 }
+	// machin mch1 = cm1->Mchnz.at(m1);
+	// machin mch2 = cm2->Mchnz.at(m2);
+//	 k = (rand() % (mch1.tasksidx.size() - 2)) + 1;
+//	 m = (rand() % (mch2.tasksidx.size() - 2)) + 1;
+
+	  
 
 
  }
+ int PeakRandomIndex(std::vector<double> fm, double max) {
+	 double x = ((double)rand() / (RAND_MAX)) + 1;
+	 x = x * max;
+	 int index = fm.size() / 2;
+	 int low = 0;
+	 int hight = fm.size();
+	 bool con = true;
+	 while (con) {
+		 if(((x<=fm.at(index))&& (x > fm.at(index-1)))||((hight-low)>1))
+			 return index;
+		 if (x > fm.at(index)) {
+			 low = index;
+			 index = (low + hight) / 2;
+		 }
+		 else
+		 {
+			 hight = index;
+			 index = (low + hight) / 2;
+		 }
+
+		 
+	 }
+ }
+
  void init_first_gen() {
-	 int rtmp;
+	 int rtmp  ;
+	 float total = 0;
 	 for (int i = 0; i < population; i++)
 	 {
 		 Chromosome* a = new	Chromosome();
@@ -376,17 +435,73 @@ void init_machines() {
 
 				 a->Mchnz.at(j).tasksidx.push_back(temp.at(k).index); 
 			 }
+			 if (a->Mchnz.at(j).TasksTime > a->SolTime)
+				 a->SolTime = a->Mchnz.at(j).TasksTime;
+
  			 temp.clear();
 
 		 }
 
 		// CopyJ.clear();
+		 if (bestSol == -1 || (a->SolTime < bestSol)) {
+			 bestSol = a->SolTime;
+			 survival = a;
+		 }
+		 if (a->SolTime > worsSol)
+			 worsSol = a->SolTime;
 
 		 Gen.push_back(a);
 
 
 	 }
-	 Pairing(Gen.at(0), Gen.at(1), 0, 0);
+	 float t;
+	 for (int i = 0; i < Gen.size(); i++) {
+		 t = (1 - ((float)Gen.at(i)->SolTime / (float)worsSol));
+		 total = total + (1 - (t*t));
+
+	 }
+ 
+	 std::vector<double> rind;
+	 for (int i = 0; i < Gen.size(); i++) {
+		 t = (1 - ((double)Gen.at(i)->SolTime / (double)worsSol));
+		 rind.push_back((1 - (t*t))/ total);
+	 }
+	 for (int i = 1; i < Gen.size(); i++)
+		 rind.at(i) = rind.at(i) + rind.at(i-1);
+	 int x, y,tmp;
+	 double max = 1;
+	 double factor;
+	 while (rind.size() > 1) {
+		 x = PeakRandomIndex(rind,max);
+		 tmp = rind.at(x);
+		 factor = rind.at(x) + rind.at(x - 1);
+		 rind.erase(rind.begin() + x);
+		 for (int ri = x; ri < rind.size(); ri++)
+			 rind.at(ri) -= factor;
+		 max = max - factor;
+		 x = tmp;
+
+		 y = PeakRandomIndex(rind, max);
+		 tmp = rind.at(y);
+		 factor = rind.at(y) + rind.at(y - 1);
+		 rind.erase(rind.begin() + y);
+		 for (int ri = y; ri < rind.size(); ri++)
+			 rind.at(ri) -= factor;
+		 max = max - factor;
+		 y = tmp;
+
+		/* y = rand() % rind.size();
+		 tmp = rind.at(y);
+		 rind.erase(rind.begin() + y);
+		 y = tmp;*/
+		 
+
+		 Pairing(Gen.at(x), Gen.at(y) );
+	 }
+
+	 
+
+ 	 
  }
  std::vector<int> GetrandomDistribution()
  {
