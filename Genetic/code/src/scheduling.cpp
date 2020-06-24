@@ -360,8 +360,8 @@ void init_machines() {
 
 
 	 }
-	 int x, y, tmep;
-	 while (m1s.size() > 1) {
+	 int x, y, tmep,cc=0;
+	 while (m1s.size() > 0) {
 		 x = rand() % m1s.size();
 		 tmep = m1s.at(x);
 		 m1s.erase(m1s.begin() + x);
@@ -373,16 +373,22 @@ void init_machines() {
 		 y = tmep;
 		 machin mch1 = cm1->Mchnz.at(x);
 		 machin mch2 = cm2->Mchnz.at(y);
-		 k = (rand() % (mch1.tasksidx.size() - 2)) + 1;
-		 m = (rand() % (mch2.tasksidx.size() - 2)) + 1;
+		 k = (rand() % (mch1.tasksidx.size()  )) + 1;
+		 m = (rand() % (mch2.tasksidx.size()  )) + 1;
 		 std::vector<int>t1 = ChooseRandomKtasks(k, &mch1);
 		 std::vector<int>t2 = ChooseRandomKtasks(m, &mch2);
 		 SwapmTasks(t1, &mch1, t2, &mch2);
 		 res1->Mchnz.push_back(mch1);
-		 res2->Mchnz.push_back(mch2);
-
+ 		 res2->Mchnz.push_back(mch2);
+ 
 		// Pairing(Gen.at(x), Gen.at(y));
 	 }
+	 res1->index = ccindex++;
+	 res2->index = ccindex++;
+
+	 NextGen.push_back(res1);
+	 NextGen.push_back(res2);
+
 	// machin mch1 = cm1->Mchnz.at(m1);
 	// machin mch2 = cm2->Mchnz.at(m2);
 //	 k = (rand() % (mch1.tasksidx.size() - 2)) + 1;
@@ -453,7 +459,8 @@ void init_machines() {
 		 Gen.push_back(a);
 
 
-	 }
+	 }first gen has error
+		 we should enter all tasks to all cromosome 
 	 float t;
 	 for (int i = 0; i < Gen.size(); i++) {
 		 t = (1 - ((float)Gen.at(i)->SolTime / (float)worsSol));
@@ -474,7 +481,7 @@ void init_machines() {
 	 while (rind.size() > 1) {
 		 x = PeakRandomIndex(rind,max);
 		 tmp = rind.at(x);
-		 factor = rind.at(x) + rind.at(x - 1);
+		 factor = rind.at(x) - rind.at(x - 1);
 		 rind.erase(rind.begin() + x);
 		 for (int ri = x; ri < rind.size(); ri++)
 			 rind.at(ri) -= factor;

@@ -72,3 +72,4 @@ int worsSol = -1;
 int PeakRandomIndex( std::vector<double>,double);
 
 Chromosome* survival;
+int ccindex=0;
