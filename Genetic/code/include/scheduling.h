@@ -20,7 +20,7 @@ void init_machines();
 void print_report();
 int MinMachineTime, MaxMachineTime;
 void SwapTasks(int task1, int machine1, int task2, int machine2);
-void PassTask(int task, int machine1, int machine2);
+void PassTask(Chromosome*,int task, int machine1, int machine2);
 minheap** tasksHV;
 bool TwoMachineLocalSearch(int machine1, int  machine2);
 bool M1ToM2Throw(int machine1, int  machine2);
@@ -73,3 +73,4 @@ int PeakRandomIndex( std::vector<double>,double);
 
 Chromosome* survival;
 int ccindex=0;
+void pmx(Chromosome*, Chromosome*, int, int);

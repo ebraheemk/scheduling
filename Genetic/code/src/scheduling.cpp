@@ -9,19 +9,19 @@
 #include <chrono> 
 using namespace std::chrono;
 #define getcwd _getcwd
-void PassTask(int task, int machine1, int machine2) {
+void PassTask(Chromosome* a,int task, int machine1, int machine2) {
 	std::map<int, Node>::iterator it1;
-	it1 = M.at(machine1).Tasks.find(task);
+	it1 = a->Mchnz.at(machine1).Tasks.find(task);
 
 	std::pair<int, Node> temp1 = std::pair<int, Node>(it1->first, it1->second);
-	M.at(machine1).TasksTime -= (it1->second.time * 4) / M.at(machine1).speed;
-	M.at(machine1).Tasks.erase(it1);
+	a->Mchnz.at(machine1).TasksTime -= (it1->second.time  ) / M.at(machine1).speed;
+	a->Mchnz.at(machine1).Tasks.erase(it1);
 
-	M.at(machine2).Tasks.insert(temp1);
-	M.at(machine2).TasksTime += (temp1.second.time * 4) / M.at(machine2).speed;
-	swapCount[1][0]++;
-	update_TasksTable(machine1);
-	update_TasksTable(machine2);
+	a->Mchnz.at(machine2).Tasks.insert(temp1);
+	a->Mchnz.at(machine2).TasksTime += (temp1.second.time  ) / M.at(machine2).speed;
+	//swapCount[1][0]++;
+	//update_TasksTable(machine1);
+	//update_TasksTable(machine2);
 }
 void SwapTasks(int task1, int machine1, int task2, int machine2) {
 	 std::map<int, Node>::iterator it1,it2;
@@ -68,7 +68,7 @@ void SwapmTasks(std::vector<int> t1, machin *m1, std::vector<int>t2, machin* m2)
 		m2->Tasks.erase(it2);
 	}
 
-	for (i = 0; i < temp2.size(); i++) {//tasks sould be unique
+	for (i = 0; i < temp2.size(); i++) {//ftasks sould be unique
 		m1->Tasks.insert(temp2.at(i));
 		m1->tasksidx.push_back(temp2.at(i).first);
 
@@ -139,17 +139,7 @@ std::pair<int, int> GetBestSolOfTwo(int machine1, int  machine2) {
 
 	return std::pair<int, int>(t1, t2); 
 }
-bool M1ToM2Throw(int machine1, int  machine2) {
-	bool result = true;
-	int best = GetBestThrow(machine1, machine2);
-	while (best != -1 ) {
-		result = false;
-		PassTask(best, machine1, machine2);
-		best = GetBestThrow(machine1, machine2);
-	}
-	return result;
-
-}
+ 
 bool TwoMachineLocalSearch(int machine1, int  machine2) {
 	bool result = true;
 	std::pair<int, int>best = GetBestSolOfTwo(machine1, machine2);
@@ -344,50 +334,43 @@ void init_machines() {
 	 }
 	 return res;
  }
+
+
+void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
+	 std::map<int, int>::iterator it1, it2;
+	 int m1, m2;
+	 for (int i = k; i <= m; i++) {
+		 it1 = c1->Tsx.find(i);// M.at(m1).Tasks.find(m1Comp[j]);
+		 it2 = c2->Tsx.find(i);
+		 m1 = it1->second;
+		 m2 = it2->second;
+
+		 PassTask(c1, i, m1, m2);
+		 PassTask(c2, i, m2, m1);
+		 it1->second = m2;
+		 it2->second = m1;
+	 }
+ }
  void Pairing(Chromosome* cm1 , Chromosome* cm2) {
 	 int k,m;
 	 int m1, m2, tmp;
-	 Chromosome* res1 = new	Chromosome();
-	 Chromosome* res2 = new	Chromosome();
-
- 
-	 std::vector<int> m1s;
-	 std::vector<int> m2s;
-
-	 for (int i = 0; i < cm2->Mchnz.size(); i++) {
-		 m1s.push_back(i);
-		 m2s.push_back(i);
-
-
+	// Chromosome* res1 = new	Chromosome();
+	 //Chromosome* res2 = new	Chromosome();
+	 k = (rand() % (J.size()-2)) + 1;
+	 m = (rand() % (J.size() - 2)) + 1;
+	 if (m < k)
+	 {
+		 tmp = k;
+		 k = m;
+		 m = tmp;
 	 }
-	 int x, y, tmep,cc=0;
-	 while (m1s.size() > 0) {
-		 x = rand() % m1s.size();
-		 tmep = m1s.at(x);
-		 m1s.erase(m1s.begin() + x);
-		 x = tmep;
-
-		 y = rand() % m2s.size();
-		 tmep = m2s.at(y);
-		 m2s.erase(m2s.begin() + y);
-		 y = tmep;
-		 machin mch1 = cm1->Mchnz.at(x);
-		 machin mch2 = cm2->Mchnz.at(y);
-		 k = (rand() % (mch1.tasksidx.size()  )) + 1;
-		 m = (rand() % (mch2.tasksidx.size()  )) + 1;
-		 std::vector<int>t1 = ChooseRandomKtasks(k, &mch1);
-		 std::vector<int>t2 = ChooseRandomKtasks(m, &mch2);
-		 SwapmTasks(t1, &mch1, t2, &mch2);
-		 res1->Mchnz.push_back(mch1);
- 		 res2->Mchnz.push_back(mch2);
  
-		// Pairing(Gen.at(x), Gen.at(y));
-	 }
-	 res1->index = ccindex++;
-	 res2->index = ccindex++;
+	 pmx(cm1, cm2, k, m);
+	// res1->index = ccindex++;
+	// res2->index = ccindex++;
 
-	 NextGen.push_back(res1);
-	 NextGen.push_back(res2);
+	// NextGen.push_back(res1);
+	// NextGen.push_back(res2);
 
 	// machin mch1 = cm1->Mchnz.at(m1);
 	// machin mch2 = cm2->Mchnz.at(m2);
@@ -437,6 +420,7 @@ void init_machines() {
 			 a->Mchnz.push_back(machin(M.at(j).speed, M.at(j).index));
 			 for (int k = 0; k < temp.size(); k++) {
 				 a->Mchnz.at(j).Tasks.insert(std::pair<int,Node>(temp.at(k).index,temp.at(k)));
+				 a->Tsx.insert(std::pair<int, int>(temp.at(k).index, j));
 				 a->Mchnz.at(j).TasksTime += temp.at(k).time / a->Mchnz.at(j).speed;
 
 				 a->Mchnz.at(j).tasksidx.push_back(temp.at(k).index); 
