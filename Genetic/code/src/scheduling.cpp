@@ -350,6 +350,19 @@ void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
 		 it1->second = m2;
 		 it2->second = m1;
 	 }
+	 c1->SolTime = c1->Mchnz.at(0).TasksTime;
+	 c2->SolTime = c2->Mchnz.at(0).TasksTime;
+	 for (int i = 1; i < c1->Mchnz.size();i++) {
+		 if (c1->Mchnz.at(i).TasksTime > c1->SolTime)
+			 c1->SolTime = c1->Mchnz.at(i).TasksTime;
+
+		 if (c2->Mchnz.at(i).TasksTime > c2->SolTime)
+			 c2->SolTime = c2->Mchnz.at(i).TasksTime;
+		
+		
+	 }
+
+
  }
  void Pairing(Chromosome* cm1 , Chromosome* cm2) {
 	 int k,m;
