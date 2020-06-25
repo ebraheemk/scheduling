@@ -9,6 +9,7 @@ public:
 	int SolTime=0;
 	//std::vector<Node> Tsx;
 	std::vector<machin> Mchnz;
+	std::map<int, int> Tsx;//task index, machine index
 	Chromosome();
 	~Chromosome();
 };

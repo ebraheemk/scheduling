@@ -57,7 +57,7 @@ void SwapmTasks(std::vector<int> t1, machin *m1, std::vector<int>t2, machin* m2)
 		temp1.push_back(std::pair<int, Node>(it1->first, it1->second));
 		m1->TasksTime -= (it1->second.time ) / m1->speed;
 		m1->Tasks.erase(it1);
-	}
+ 	}
 
 
 	for (i = 0; i < t2.size(); i++) {
@@ -68,7 +68,7 @@ void SwapmTasks(std::vector<int> t1, machin *m1, std::vector<int>t2, machin* m2)
 		m2->Tasks.erase(it2);
 	}
 
-	for (i = 0; i < temp2.size(); i++) {
+	for (i = 0; i < temp2.size(); i++) {//tasks sould be unique
 		m1->Tasks.insert(temp2.at(i));
 		m1->tasksidx.push_back(temp2.at(i).first);
 
@@ -459,8 +459,8 @@ void init_machines() {
 		 Gen.push_back(a);
 
 
-	 }first gen has error
-		 we should enter all tasks to all cromosome 
+	 }
+		 
 	 float t;
 	 for (int i = 0; i < Gen.size(); i++) {
 		 t = (1 - ((float)Gen.at(i)->SolTime / (float)worsSol));
@@ -475,27 +475,33 @@ void init_machines() {
 	 }
 	 for (int i = 1; i < Gen.size(); i++)
 		 rind.at(i) = rind.at(i) + rind.at(i-1);
+	 rind.at(Gen.size() - 1) = 1;
 	 int x, y,tmp;
 	 double max = 1;
 	 double factor;
 	 while (rind.size() > 1) {
 		 x = PeakRandomIndex(rind,max);
-		 tmp = rind.at(x);
-		 factor = rind.at(x) - rind.at(x - 1);
+	//	 tmp = rind.at(x);
+		 factor = rind.at(x);
+		 if(x>0)
+		 factor = factor - rind.at(x - 1);
+		 
 		 rind.erase(rind.begin() + x);
 		 for (int ri = x; ri < rind.size(); ri++)
 			 rind.at(ri) -= factor;
 		 max = max - factor;
-		 x = tmp;
+		// x = tmp;
 
 		 y = PeakRandomIndex(rind, max);
-		 tmp = rind.at(y);
-		 factor = rind.at(y) + rind.at(y - 1);
+		// tmp = rind.at(y);
+		 factor = rind.at(y);
+		 if (y > 0)
+			 factor = factor - rind.at(y - 1);		 
 		 rind.erase(rind.begin() + y);
 		 for (int ri = y; ri < rind.size(); ri++)
 			 rind.at(ri) -= factor;
 		 max = max - factor;
-		 y = tmp;
+		// y = tmp;
 
 		/* y = rand() % rind.size();
 		 tmp = rind.at(y);
@@ -514,7 +520,7 @@ void init_machines() {
  {
 	 int x = J.size(),temp;
 	 std::vector<int> res;
-	 for (int i = 0; i < M.size(); i++) {
+	 for (int i = 0; i < M.size()-1; i++) {
 		 if (x > 0)
 			 temp = rand() % x;
 		 else
@@ -525,6 +531,11 @@ void init_machines() {
 
 
 	 }
+	 if(x>0)
+		 res.push_back(x);
+	 else
+		 res.push_back(0);
+
 	 return res;
  }
  void print_report() {
