@@ -336,7 +336,8 @@ void init_machines() {
  }
 
 
-void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
+void pmx(Chromosome*ck1, Chromosome*c2, int k, int m){
+	Chromosome* c1 = new Chromosome(*ck1);
 	 std::map<int, int>::iterator it1, it2;
 	 int m1, m2;
 	 for (int i = k; i <= m; i++) {
@@ -379,18 +380,8 @@ void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
 	 }
  
 	 pmx(cm1, cm2, k, m);
-	// res1->index = ccindex++;
-	// res2->index = ccindex++;
 
-	// NextGen.push_back(res1);
-	// NextGen.push_back(res2);
 
-	// machin mch1 = cm1->Mchnz.at(m1);
-	// machin mch2 = cm2->Mchnz.at(m2);
-//	 k = (rand() % (mch1.tasksidx.size() - 2)) + 1;
-//	 m = (rand() % (mch2.tasksidx.size() - 2)) + 1;
-
-	  
 
 
  }
