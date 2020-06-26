@@ -7,6 +7,7 @@
 #include <fstream>
 #include <string>
 #include <chrono> 
+#include <ctime>
 using namespace std::chrono;
 #define getcwd _getcwd
 void PassTask(Chromosome* a,int task, int machine1, int machine2) {
@@ -410,14 +411,16 @@ void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
 
  }
  int PeakRandomIndex(std::vector<double> fm, double max) {
-	 double x = ((double)rand() / (RAND_MAX)) + 1;
+	 double x = ((double)rand() / (RAND_MAX + 1)) ;
 	 x = x * max;
 	 int index = fm.size() / 2;
 	 int low = 0;
 	 int hight = fm.size();
 	 bool con = true;
 	 while (con) {
-		 if(((x<=fm.at(index))&& (x > fm.at(index-1)))||((hight-low)>1))
+		 if ((hight - low) <= 1)
+			 return index;
+		 if((x<=fm.at(index))&& (x > fm.at(index-1)))
 			 return index;
 		 if (x > fm.at(index)) {
 			 low = index;
@@ -432,7 +435,7 @@ void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
 		 
 	 }
  }
- void BuildNewGen(Chromosome* G) { 
+ void BuildNewGen() { 
 	 //build PROBABILITY Table
 	 std::vector<double> rind;
 	 double t, total=0;
@@ -533,58 +536,8 @@ void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
 
 	 }
 		 
-	 double t;
-	 for (int i = 0; i < Gen.size(); i++) {
-		 t = (1 - ((double)Gen.at(i)->SolTime / (double)worsSol));
-		 total = total + (1 - (t*t));
-
-	 }
- 
-	 std::vector<double> rind;
-	 for (int i = 0; i < Gen.size(); i++) {
-		 t = (1 - ((double)Gen.at(i)->SolTime / (double)worsSol));
-		 rind.push_back((1 - (t*t))/ total);
-	 }
-	 for (int i = 1; i < Gen.size(); i++)
-		 rind.at(i) = rind.at(i) + rind.at(i-1);
-	 rind.at(Gen.size() - 1) = 1;
-	 int x, y,tmp;
-	 double max = 1;
-	 double factor;
-	 while (rind.size() > 1) {
-		 x = PeakRandomIndex(rind,max);
-	//	 tmp = rind.at(x);
-		 factor = rind.at(x);
-		 if(x>0)
-		 factor = factor - rind.at(x - 1);
-		 
-		 rind.erase(rind.begin() + x);
-		 for (int ri = x; ri < rind.size(); ri++)
-			 rind.at(ri) -= factor;
-		 max = max - factor;
-		// x = tmp;
-
-		 y = PeakRandomIndex(rind, max);
-		// tmp = rind.at(y);
-		 factor = rind.at(y);
-		 if (y > 0)
-			 factor = factor - rind.at(y - 1);		 
-		 rind.erase(rind.begin() + y);
-		 for (int ri = y; ri < rind.size(); ri++)
-			 rind.at(ri) -= factor;
-		 max = max - factor;
-		// y = tmp;
-
-		/* y = rand() % rind.size();
-		 tmp = rind.at(y);
-		 rind.erase(rind.begin() + y);
-		 y = tmp;*/
-		 
-
-		 Pairing(Gen.at(x), Gen.at(y) );
-	 }
-
-	 
+	 for (int i = 0; i < 40; i++)
+		 BuildNewGen();
 
  	 
  }
@@ -756,7 +709,7 @@ int main()
 	s.insert(&s, &v4);
 	minheap k = s;*/
 	//int sum = 0;
-	
+	srand((unsigned)time(NULL));
 	init_data();
 	 
 	init_first_gen();

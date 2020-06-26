@@ -75,4 +75,4 @@ int PeakRandomIndex( std::vector<double>,double);
 Chromosome* survival;
 int ccindex=0;
 void pmx(Chromosome*, Chromosome*, int, int);
-void BuildNewGen(Chromosome*);
+void BuildNewGen( );
