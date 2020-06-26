@@ -536,7 +536,7 @@ void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
 
 	 }
 		 
-	 for (int i = 0; i < 40; i++)
+	 for (int i = 0; i < GenNo; i++)
 		 BuildNewGen();
 
  	 
@@ -570,21 +570,22 @@ void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
 
 	 myfile << "______________________________________________________________________________________________________________________\n";
 	 int j = 0;
-	 for(int i=0;i<M.size();i++){ 
+	  
+	 for(int i=0;i< survival->Mchnz.size();i++){
 	 myfile << "______________________________________________________________________________________________________________________\n";
 	 myfile << "##########################\n";
-	 myfile << "machine SPEED : ";  myfile << M.at(i).speed; myfile << '\n';
-	 myfile << "machine index : "; myfile << M.at(i).index; myfile << '\n';
-	 myfile << "tasks total time: "; myfile << (float)M.at(i).TasksTime/4; myfile << '\n';
+	 myfile << "machine SPEED : ";  myfile << survival->Mchnz.at(i).speed; myfile << '\n';
+	 myfile << "machine index : "; myfile << survival->Mchnz.at(i).index; myfile << '\n';
+	 myfile << "tasks total time: "; myfile << (float)survival->Mchnz.at(i).TasksTime/4; myfile << '\n';
 	 myfile << "##########################\n";
 	 std::map<int, Node>::iterator it;
-	 for (it = M.at(i).Tasks.begin(); it != M.at(i).Tasks.end(); ++it){
+	 for (it = survival->Mchnz.at(i).Tasks.begin(); it != survival->Mchnz.at(i).Tasks.end(); ++it){
 	 //for (int k = 0; k < M.at(i).Tasks.size(); k++) {
 		 if (j == 3) {
 			 myfile << '\n';
 			 j = 0;
 		 }
-		 myfile << "| task index: "; myfile << it->second.index; myfile << " \\ task time: "; myfile << it->second.time; myfile << " |";
+		 myfile << "| task index: "; myfile << it->second.index; myfile << " \\ task time: "; myfile << it->second.time/4; myfile << " |";
 		 j++;
 	 }
 	 myfile << '\n';
@@ -714,7 +715,7 @@ int main()
 	 
 	init_first_gen();
 	
-	
+	print_report();
 
 	auto stop = high_resolution_clock::now();
 	auto duration = duration_cast<microseconds>(stop - start);
