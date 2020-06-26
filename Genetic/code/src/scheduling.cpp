@@ -336,8 +336,8 @@ void init_machines() {
  }
 
 
-void pmx(Chromosome*ck1, Chromosome*c2, int k, int m){
-	Chromosome* c1 = new Chromosome(*ck1);
+void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
+	//Chromosome* c1 = new Chromosome(*ck1);
 	 std::map<int, int>::iterator it1, it2;
 	 int m1, m2;
 	 for (int i = k; i <= m; i++) {
@@ -353,6 +353,8 @@ void pmx(Chromosome*ck1, Chromosome*c2, int k, int m){
 	 }
 	 c1->SolTime = c1->Mchnz.at(0).TasksTime;
 	 c2->SolTime = c2->Mchnz.at(0).TasksTime;
+
+	 //update sol time
 	 for (int i = 1; i < c1->Mchnz.size();i++) {
 		 if (c1->Mchnz.at(i).TasksTime > c1->SolTime)
 			 c1->SolTime = c1->Mchnz.at(i).TasksTime;
@@ -362,6 +364,28 @@ void pmx(Chromosome*ck1, Chromosome*c2, int k, int m){
 		
 		
 	 }
+
+	 //update survival ,lower/upper bound
+
+	 if (  (c1->SolTime < bestSol)) {
+		 bestSol = c1->SolTime;
+		 delete survival;
+		 survival = new Chromosome(*c1);
+	 }
+	 if (c1->SolTime > newworsSol)
+		 newworsSol = c1->SolTime;
+
+	  
+
+	 if ((c2->SolTime < bestSol)) {
+		 bestSol = c2->SolTime;
+		 delete survival;
+		 survival = new Chromosome(*c2);
+	 }
+	 if (c2->SolTime > newworsSol)
+		 newworsSol = c2->SolTime;
+
+
 
 
  }
@@ -408,10 +432,69 @@ void pmx(Chromosome*ck1, Chromosome*c2, int k, int m){
 		 
 	 }
  }
+ void BuildNewGen(Chromosome* G) { 
+	 //build PROBABILITY Table
+	 std::vector<double> rind;
+	 double t, total=0;
+	 for (int i = 0; i < Gen.size(); i++) {
+		 t = (1 - ((double)Gen.at(i)->SolTime / (double)worsSol));
+		 total = total + (1 - (t*t));
 
+	 }
+	 for (int i = 0; i < Gen.size(); i++) {
+		 t = (1 - ((double)Gen.at(i)->SolTime / (double)worsSol));
+		 rind.push_back((1 - (t*t)) / total);
+	 }
+	 for (int i = 1; i < Gen.size(); i++)
+		 rind.at(i) = rind.at(i) + rind.at(i - 1);
+	 rind.at(Gen.size() - 1) = 1;
+
+
+	 int x, y, tmp;
+	 double max = 1;
+	 double factor;
+	// while (rind.size() > 1) {
+	 for(int i=0;i< (population/2);i++){
+		 x = PeakRandomIndex(rind, max);
+		  
+		 //we want with repeat
+		/* factor = rind.at(x); 
+		 if (x > 0)
+			 factor = factor - rind.at(x - 1);
+
+		 rind.erase(rind.begin() + x);
+		 for (int ri = x; ri < rind.size(); ri++)
+			 rind.at(ri) -= factor;
+		 max = max - factor;*/
+		 // x = tmp;
+
+		 y = PeakRandomIndex(rind, max);
+
+		 //we want with repeat
+		 // tmp = rind.at(y);
+		/* factor = rind.at(y);
+		 if (y > 0)
+			 factor = factor - rind.at(y - 1);
+		 rind.erase(rind.begin() + y);
+		 for (int ri = y; ri < rind.size(); ri++)
+			 rind.at(ri) -= factor;
+		 max = max - factor;*/
+		 // y = tmp;
+
+		 /* y = rand() % rind.size();
+		  tmp = rind.at(y);
+		  rind.erase(rind.begin() + y);
+		  y = tmp;*/
+
+
+		 Pairing(Gen.at(x), Gen.at(y));
+	 }
+	 worsSol = newworsSol;
+
+ }
  void init_first_gen() {
 	 int rtmp  ;
-	 float total = 0;
+	 double total = 0;
 	 for (int i = 0; i < population; i++)
 	 {
 		 Chromosome* a = new	Chromosome();
@@ -439,7 +522,8 @@ void pmx(Chromosome*ck1, Chromosome*c2, int k, int m){
 		// CopyJ.clear();
 		 if (bestSol == -1 || (a->SolTime < bestSol)) {
 			 bestSol = a->SolTime;
-			 survival = a;
+			 delete survival;
+			 survival = new Chromosome(*a);
 		 }
 		 if (a->SolTime > worsSol)
 			 worsSol = a->SolTime;
@@ -449,9 +533,9 @@ void pmx(Chromosome*ck1, Chromosome*c2, int k, int m){
 
 	 }
 		 
-	 float t;
+	 double t;
 	 for (int i = 0; i < Gen.size(); i++) {
-		 t = (1 - ((float)Gen.at(i)->SolTime / (float)worsSol));
+		 t = (1 - ((double)Gen.at(i)->SolTime / (double)worsSol));
 		 total = total + (1 - (t*t));
 
 	 }

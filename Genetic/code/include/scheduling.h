@@ -69,8 +69,10 @@ void Pairing(Chromosome*, Chromosome* );
 std::vector<int> ChooseRandomKtasks(int k, machin* mch);
 int bestSol=-1;
 int worsSol = -1;
+int newworsSol = -1;
 int PeakRandomIndex( std::vector<double>,double);
 
 Chromosome* survival;
 int ccindex=0;
 void pmx(Chromosome*, Chromosome*, int, int);
+void BuildNewGen(Chromosome*);
