@@ -53,3 +53,5 @@ int Msum;
 int mms; //max machine speed
 std::vector<int> uniqe;
 std::vector<int>::iterator it;
+int * MachTemp;
+int CalcWorstTime(BBNode*);

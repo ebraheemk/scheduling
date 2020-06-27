@@ -194,8 +194,36 @@ int UpperBound( ) {
 
 
 
+bool sortbyfir(const std::pair<int, BBNode*> &a,
+	const std::pair<int, BBNode*> &b)
+{
+	return (a.first < b.first);
+}
 
 
+int CalcWorstTime(BBNode* ek) {
+	int minIdx,max;
+	for (int i = 0; i < M.size(); i++)
+		MachTemp[i] = ek->machinesTime[i];
+	//((tasks.at(cbn->deapth).first) / M.at(k).speed)
+	int tt;
+	for (int i = ek->deapth; i < tasks.size(); i++) {
+		//find minmum machine
+		tt = tasks.at(i).first;
+		minIdx = 0;
+		for (int j = 1; j < M.size(); j++) {
+			if ((MachTemp[j]+(tt/M.at(j).speed)) < (MachTemp[minIdx]+ (tt / M.at(minIdx).speed)))
+				minIdx = j;
+			 
+		}
+		MachTemp[minIdx] += (tt / M.at(minIdx).speed);
+	}
+	max = MachTemp[0];
+	for (int i = 1; i < M.size(); i++)
+		if (MachTemp[i] > max)
+			max = MachTemp[i];
+	return max;
+}
 void buildBBtree(  BBNode*  cbn, int upBound) {
 	nodescount++;
 	int sum, tmf,minMt;
@@ -210,6 +238,12 @@ void buildBBtree(  BBNode*  cbn, int upBound) {
 
 	int temp, totaltasktime = 0;
 	if (cbn->deapth == tasks.size() ) {
+		mm << "\nsol task time : "; mm << cbn->taskstime / 4; mm << "\n";
+		for (int i = 0; i < cbn->Mi.size(); i++)
+		{
+			mm << "| M = "; mm << cbn->Mi.at(i).first; mm << " task index= "; mm << cbn->Mi.at(i).second; mm << "|";
+		}
+
 		if (first) {
 			survival = cbn;
 			first = false;
@@ -229,14 +263,10 @@ void buildBBtree(  BBNode*  cbn, int upBound) {
 			MinWorst = survival->taskstime;
 		if (survival->taskstime <= optimalsol)
 			dontstop = false;
-		mm << "\nsol task time : "; mm << survival->taskstime/4; mm << "\n";
-		for (int i = 0; i < survival->Mi.size(); i++)
-		{
-			mm << "| M = "; mm << survival->Mi.at(i).first; mm << " task index= "; mm << survival->Mi.at(i).second; mm << "|";
-		}
+		 
 	}
 	else if ((cbn->deapth < tasks.size())&& dontstop) {
-		 
+		std::vector<std::pair<int, BBNode*>> tempo;
 		for (int k = 0; k < M.size(); k++)
 		{
 			BBNode* ek = new BBNode();
@@ -277,19 +307,22 @@ void buildBBtree(  BBNode*  cbn, int upBound) {
 			 tmf = fmax(((ek->Tsum - totaltasktime) / Msum), 0);
 			ek->BestTiming = ek->taskstime +tmf;/*should add div max machine speed*/;
 			ek->BestTiming = fmax(ek->BestTiming, (sum+ minMt));
-			ek->worstTiming = ek->taskstime + (ek->Tsum / mms);
-			if (ek->worstTiming <MinWorst)
-				MinWorst = ek->worstTiming;
+		 
 
 
 			for (int e = 0; e < cbn->Mi.size(); e++)
 				ek->Mi.push_back(cbn->Mi.at(e));
 			  
 			ek->Mi.push_back(std::pair<int, int>(M.at(k).index, tasks.at(cbn->deapth).second));
+
+			ek->worstTiming = CalcWorstTime(ek);
+ 			if (ek->worstTiming < MinWorst)
+				MinWorst = ek->worstTiming;
 			int toto = ek->machinesTime[k] * 10 + M.at(k).speed;
 			it = find(uniqe.begin(), uniqe.end(), toto);
 			if (it == uniqe.end() || uniqe.empty()) {
-				cbn->m.push(ek);
+			//	cbn->m.push(ek);
+				tempo.push_back(std::pair<int, BBNode*>(ek->taskstime, ek));
 				uniqe.push_back(toto);
 			}
 			else
@@ -297,14 +330,16 @@ void buildBBtree(  BBNode*  cbn, int upBound) {
 		}
 		uniqe.clear();
 		//uniqe.shrink_to_fit();
-
+		std::sort(tempo.begin(), tempo.end(), sortbyfir);
+		for (int h = 0; h < tempo.size(); h++)
+			cbn->m.push(tempo.at(h).second);
 
 	    BBNode* nextcall;
 		while (!cbn->m.empty()) {
 			nextcall = cbn->m.front();
 			cbn->m.pop();
 			int lolo = fmin(MinWorst, upBound)+1;
-			if (survival != NULL)
+			if (!first)
 				lolo = survival->taskstime;
 			if ((nextcall->BestTiming <= fmin(MinWorst, upBound))&&(nextcall->BestTiming<lolo))
 				buildBBtree( nextcall, upBound);
@@ -316,7 +351,7 @@ void buildBBtree(  BBNode*  cbn, int upBound) {
 		 
 	       todelete.push(cbn);
  		 
-		 
+		  
 
 	}
 
@@ -448,7 +483,7 @@ int main()
 	
 	init_data();
 	 
-	
+	MachTemp = new int[M.size()];
 	Branch_and_Bound();
 	print_report();
 	//print_summary();
