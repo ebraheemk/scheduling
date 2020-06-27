@@ -536,11 +536,27 @@ void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
 
 	 }
 		 
-	 for (int i = 0; i < GenNo; i++)
+	 for (int i = 0; i < GenNo; i++) {
+
 		 BuildNewGen();
 
+		 if ((i % 40) == 0)
+		 {
+			 ff << "-----------------------------------------------------------------\n";
+			 ff << "#################### GEN "; ff << i; ff << "######################\n";
+			 ff << "-----------------------------------------------------------------\n";
+
+			 ff << "survival time : "; ff << survival->SolTime; ff << "\n";
+			 for (int j = 0; j < Gen.size(); j++)
+			 {
+				 ff << "Cromozom "; ff << j; ff << "time : "; ff << Gen.at(j)->SolTime; ff << "\n";
+			 }
+
+		 }
+	 }
+
  	 
- }
+  }
  std::vector<int> GetrandomDistribution()
  {
 	 int x = J.size(),temp;

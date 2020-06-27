@@ -10,7 +10,7 @@
 #include <maxheap.h>
 #include <Chromosome.h>
 #define population 100 //should be even number
-#define GenNo 70000
+#define GenNo 1000
 #define maxLevelSearch 2
 int speeds [3] = { 1,2,4 };
 std::vector<Node> J;
@@ -76,3 +76,4 @@ Chromosome* survival;
 int ccindex=0;
 void pmx(Chromosome*, Chromosome*, int, int);
 void BuildNewGen( );
+std::ofstream ff ("../output/gen.txt");
