@@ -494,12 +494,33 @@ void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
 		 Y = Gen.at(i)->SolTime;
 		 return 1 / sqrtf(Y - XX + 1);
 		 break;
+
 	 case 11:
-		 double t =  ((double)Gen.at(i)->SolTime / (double)worsSol);
-		 return 1-powf(t,3.0)  ;
-
-
+	 {
+		 double t = ((double)Gen.at(i)->SolTime / (double)worsSol);
+		 return (1.0 - powf(t, 3.0));
 		 break;
+	 }
+
+
+	 case 12:
+	 {
+		 Y = Gen.at(i)->SolTime;
+		 double temp = 1 - (1 / (Y - XX));
+		 return temp;
+		 break;
+
+	 }
+
+	 case 13:
+	 {
+		 Y = Gen.at(i)->SolTime;
+		 double temp =  (1 / (Y - XX));
+		 return 1 - powf(temp, 12);
+		 break;
+
+	 }
+
 	 }
  }
  void BuildNewGen() { 
@@ -508,12 +529,12 @@ void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
 	 double t, total=0;
 	 for (int i = 0; i < Gen.size(); i++) {
 		 //t = (1 - ((double)Gen.at(i)->SolTime / (double)worsSol));
-		 total = total + TargetFunction(5, i);
+		 total = total + TargetFunction(13, i);
 
 	 }
 	 for (int i = 0; i < Gen.size(); i++) {
 		 t = (1 - ((double)Gen.at(i)->SolTime / (double)worsSol));
-		 rind.push_back(TargetFunction(5, i) / total);
+		 rind.push_back(TargetFunction(13, i) / total);
 	 }
 	 for (int i = 1; i < Gen.size(); i++)
 		 rind.at(i) = rind.at(i) + rind.at(i - 1);
