@@ -435,18 +435,85 @@ void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
 		 
 	 }
  }
+ double TargetFunction(int x,int i) {
+	 int j;
+	 double Y;
+	 switch (x) {
+	 case 1: 
+		 Y = Gen.at(i)->SolTime;
+			 return 1 / Y;
+
+
+		 break;
+	 case 2:
+		 Y = Gen.at(i)->SolTime;
+		 return 1 / (Y*Y);
+
+
+		 break;
+	 case 3:
+		 Y = Gen.at(i)->SolTime;
+		 return 1 / sqrtf(Y);
+
+
+		 break;
+	 case 4:
+		 Y = Gen.at(i)->SolTime;
+		 return 1 / powf(Y,3.0);
+		 break;
+	 case 5:
+		 Y = Gen.at(i)->SolTime;
+		 return 1 / (2 * Y - XX);
+		 break;
+		// 6.  f(Y)= 1/(Y-X+1)
+	 case 6:
+		 Y = Gen.at(i)->SolTime;
+		 return 1 / (Y - XX+1);
+		 break;
+
+//7.  f(Y)=1/(3*Y-2*X)
+	 case 7:
+		 Y = Gen.at(i)->SolTime;
+		 return 1 / ((3*Y) - (2*XX) );
+		 break;
+		 //8. f(Y)= 1/(Y-X+1)^2
+
+	 case 8:
+		 Y = Gen.at(i)->SolTime;
+		 return 1 / powf((Y - XX + 1),2.0);
+		 break;
+	 case 9:
+		 // 9.  f(Y)=1/(Y-X+1)^3
+		 Y = Gen.at(i)->SolTime;
+		 return 1 / powf((Y - XX + 1), 3.0);
+		 break;
+ 
+//10.  f(Y)=1/(Y-X+1)^0.5
+
+	 case 10:
+		 Y = Gen.at(i)->SolTime;
+		 return 1 / sqrtf(Y - XX + 1);
+		 break;
+	 case 11:
+		 double t =  ((double)Gen.at(i)->SolTime / (double)worsSol);
+		 return 1-powf(t,3.0)  ;
+
+
+		 break;
+	 }
+ }
  void BuildNewGen() { 
 	 //build PROBABILITY Table
 	 std::vector<double> rind;
 	 double t, total=0;
 	 for (int i = 0; i < Gen.size(); i++) {
-		 t = (1 - ((double)Gen.at(i)->SolTime / (double)worsSol));
-		 total = total + (1 - (t*t));
+		 //t = (1 - ((double)Gen.at(i)->SolTime / (double)worsSol));
+		 total = total + TargetFunction(5, i);
 
 	 }
 	 for (int i = 0; i < Gen.size(); i++) {
 		 t = (1 - ((double)Gen.at(i)->SolTime / (double)worsSol));
-		 rind.push_back((1 - (t*t)) / total);
+		 rind.push_back(TargetFunction(5, i) / total);
 	 }
 	 for (int i = 1; i < Gen.size(); i++)
 		 rind.at(i) = rind.at(i) + rind.at(i - 1);
@@ -728,7 +795,13 @@ int main()
 	//int sum = 0;
 	srand((unsigned)time(NULL));
 	init_data();
-	 
+	tsum = 0;
+	msum = 0;
+	for (int i = 0; i < J.size(); i++)
+		tsum += J.at(i).time*4;
+	for (int i = 0; i < M.size(); i++)
+		msum += M.at(i).speed;
+	XX = (double)tsum / (double)msum;
 	init_first_gen();
 	
 	print_report();
