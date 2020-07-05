@@ -226,7 +226,7 @@ int CalcWorstTime(BBNode* ek) {
 }
 void buildBBtree(  BBNode*  cbn, int upBound) {
 	nodescount++;
-	printf("%d\n",cbn->deapth);
+	//printf("%d\n",cbn->deapth);
 	int sum, tmf,minMt;
 	//free memory
 	while (!todelete.empty()) {
@@ -354,8 +354,8 @@ void buildBBtree(  BBNode*  cbn, int upBound) {
 #endif // BadFirst
 			tempo.clear();
 
-			if (cbn->deapth == 7)
-				printf("hello");
+			//if (cbn->deapth == 7)
+				//printf("hello");
 			BBNode* nextcall;
 			while (!cbn->m.empty()) {
 				nextcall = cbn->m.front();
@@ -455,6 +455,7 @@ void print_report() {
 
 	optimalsol = bt;
 	 std::pair<int, int> p1;
+#ifdef _WithSort
 	 maxheap mxhp = maxheap(J.at(0).time * 4, 0);
 	 for (int i = 1; i < J.size(); i++) {
 		 mxhp.insert(&mxhp, new maxheap(J.at(i).time * 4, i));
@@ -465,7 +466,16 @@ void print_report() {
 		 tasks.push_back(p1);
 	 }
 	 tasks.push_back(std::pair<int, int>(mxhp.value, mxhp.index));
+#else
+	 for (int i = 0; i < J.size(); i++) {
+		 tasks.push_back(std::pair<int, int>(J.at(i).time * 4, i));
 
+		// mxhp.insert(&mxhp, new maxheap(J.at(i).time * 4, i));
+ }
+
+#endif // _WithSort
+
+	 
 
 	 dontstop = true;
 	  

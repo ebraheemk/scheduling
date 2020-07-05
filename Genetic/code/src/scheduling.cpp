@@ -521,20 +521,29 @@ void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
 
 	 }
 
+	 case 14:
+	 {//how many machines far from the best sol in abs (calc the distribution) if they far we give it good greade
+		 
+		 int sum = 0;
+		 for (int j = 0; j < Gen.at(i)->Mchnz.size(); j++)
+			 sum += powf((Gen.at(i)->Mchnz.at(j).TasksTime- XX), 2.0);
+		 return 1 - (1.0 / sum);
+	 }
+
 	 }
  }
- void BuildNewGen() { 
+ void BuildNewGen(int xo) { 
 	 //build PROBABILITY Table
 	 std::vector<double> rind;
 	 double t, total=0;
 	 for (int i = 0; i < Gen.size(); i++) {
 		 //t = (1 - ((double)Gen.at(i)->SolTime / (double)worsSol));
-		 total = total + TargetFunction(13, i);
+		 total = total + TargetFunction(xo, i);
 
 	 }
 	 for (int i = 0; i < Gen.size(); i++) {
 		 t = (1 - ((double)Gen.at(i)->SolTime / (double)worsSol));
-		 rind.push_back(TargetFunction(13, i) / total);
+		 rind.push_back(TargetFunction(xo, i) / total);
 	 }
 	 for (int i = 1; i < Gen.size(); i++)
 		 rind.at(i) = rind.at(i) + rind.at(i - 1);
@@ -585,7 +594,10 @@ void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
  }
  void init_first_gen() {
 	 int rtmp  ;
-	 double total = 0;
+	  
+	 for (int j = 1; j <= 14; j++) {
+		 double total = 0;
+		 Gen.clear();
 	 for (int i = 0; i < population; i++)
 	 {
 		 Chromosome* a = new	Chromosome();
@@ -623,26 +635,29 @@ void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
 
 
 	 }
-		 
-	 for (int i = 0; i < GenNo; i++) {
+	 
+		 std::string s = "../output/gen_func-" + std::to_string(j) + ".txt";
 
-		 BuildNewGen();
+		 std::ofstream ff(s);
+		 for (int i = 0; i < GenNo; i++) {
 
-		 if ((i % 40) == 0)
-		 {
-			 ff << "-----------------------------------------------------------------\n";
-			 ff << "#################### GEN "; ff << i; ff << "######################\n";
-			 ff << "-----------------------------------------------------------------\n";
+			 BuildNewGen(j);
 
-			 ff << "survival time : "; ff << survival->SolTime; ff << "\n";
-			 for (int j = 0; j < Gen.size(); j++)
+			 if ((i % 40) == 0)
 			 {
-				 ff << "Cromozom "; ff << j; ff << "time : "; ff << Gen.at(j)->SolTime; ff << "\n";
-			 }
+				 ff << "-----------------------------------------------------------------\n";
+				 ff << "#################### GEN "; ff << i; ff << "######################\n";
+				 ff << "-----------------------------------------------------------------\n";
 
+				 ff << "survival time : "; ff << survival->SolTime; ff << "\n";
+				 for (int j = 0; j < Gen.size(); j++)
+				 {
+					 ff << "Cromozom "; ff << j; ff << "time : "; ff << Gen.at(j)->SolTime; ff << "\n";
+				 }
+
+			 }
 		 }
 	 }
-
  	 
   }
  std::vector<int> GetrandomDistribution()

@@ -9,8 +9,9 @@
 #include <string>
 #include <maxheap.h>
 #include "BBNode.h"
- #define _old
-//#define BadFirst
+ //#define _old
+#define BadFirst
+#define _WithSort
  
 #define maxLevelSearch 2
 int speeds [3] = { 1,2,4 };
