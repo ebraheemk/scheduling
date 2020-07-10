@@ -7,8 +7,8 @@ Chromosome::Chromosome(Chromosome& old)
 	this->index = old.index;
 	this->SolTime = old.SolTime;
 	for (i = 0; i < old.Mchnz.size(); i++) {
-		machin * c = new  machin(old.Mchnz.at(i));
-		this->Mchnz.push_back(*c);
+		machin * c = new  machin(*old.Mchnz.at(i));
+		this->Mchnz.push_back(c);
 	}
 	this->Tsx = old.Tsx;
 }
@@ -22,9 +22,9 @@ Chromosome::~Chromosome()
 {
 	//if(Mchnz!=NULL)
 		//delete[] &Mchnz;
-	
-//	delete &Mchnz;
-	Tsx.clear(
+	for(int i=0;i< Mchnz.size();i++)
+		delete Mchnz.at(i);
+	Tsx.clear();
 	Mchnz.clear();
 	Mchnz.shrink_to_fit();
 

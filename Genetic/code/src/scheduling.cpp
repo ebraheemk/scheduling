@@ -12,14 +12,14 @@ using namespace std::chrono;
 #define getcwd _getcwd
 void PassTask(Chromosome* a,int task, int machine1, int machine2) {
 	std::map<int, Node>::iterator it1;
-	it1 = a->Mchnz.at(machine1).Tasks.find(task);
+	it1 = a->Mchnz.at(machine1)->Tasks.find(task);
 
 	std::pair<int, Node> temp1 = std::pair<int, Node>(it1->first, it1->second);
-	a->Mchnz.at(machine1).TasksTime -= (it1->second.time  ) / M.at(machine1).speed;
-	a->Mchnz.at(machine1).Tasks.erase(it1);
+	a->Mchnz.at(machine1)->TasksTime -= (it1->second.time  ) / M.at(machine1).speed;
+	a->Mchnz.at(machine1)->Tasks.erase(it1);
 
-	a->Mchnz.at(machine2).Tasks.insert(temp1);
-	a->Mchnz.at(machine2).TasksTime += (temp1.second.time  ) / M.at(machine2).speed;
+	a->Mchnz.at(machine2)->Tasks.insert(temp1);
+	a->Mchnz.at(machine2)->TasksTime += (temp1.second.time  ) / M.at(machine2).speed;
 	//swapCount[1][0]++;
 	//update_TasksTable(machine1);
 	//update_TasksTable(machine2);
@@ -370,12 +370,12 @@ void init_machines() {
 		 PassTask(ccc, i, m1, m2);
  		 it1->second = m2;
  	 }
-	 ccc->SolTime = ccc->Mchnz.at(0).TasksTime;
+	 ccc->SolTime = ccc->Mchnz.at(0)->TasksTime;
  
 	 //update sol time
 	 for (int i = 1; i < ccc->Mchnz.size(); i++) {
-		 if (ccc->Mchnz.at(i).TasksTime > ccc->SolTime)
-			 ccc->SolTime = ccc->Mchnz.at(i).TasksTime;
+		 if (ccc->Mchnz.at(i)->TasksTime > ccc->SolTime)
+			 ccc->SolTime = ccc->Mchnz.at(i)->TasksTime;
 	 }
 
 	 //update survival ,lower/upper bound
@@ -411,16 +411,16 @@ void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
 		 it1->second = m2;
 		 it2->second = m1;
 	 }
-	 ccc1->SolTime = ccc1->Mchnz.at(0).TasksTime;
-	 ccc2->SolTime = ccc2->Mchnz.at(0).TasksTime;
+	 ccc1->SolTime = ccc1->Mchnz.at(0)->TasksTime;
+	 ccc2->SolTime = ccc2->Mchnz.at(0)->TasksTime;
 
 	 //update sol time
 	 for (int i = 1; i < ccc1->Mchnz.size();i++) {
-		 if (ccc1->Mchnz.at(i).TasksTime > ccc1->SolTime)
-			 ccc1->SolTime = ccc1->Mchnz.at(i).TasksTime;
+		 if (ccc1->Mchnz.at(i)->TasksTime > ccc1->SolTime)
+			 ccc1->SolTime = ccc1->Mchnz.at(i)->TasksTime;
 
-		 if (ccc2->Mchnz.at(i).TasksTime > ccc2->SolTime)
-			 ccc2->SolTime = ccc2->Mchnz.at(i).TasksTime;
+		 if (ccc2->Mchnz.at(i)->TasksTime > ccc2->SolTime)
+			 ccc2->SolTime = ccc2->Mchnz.at(i)->TasksTime;
 		
 		
 	 }
@@ -592,7 +592,7 @@ void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
 		 
 		 int sum = 0;
 		 for (int j = 0; j < Gen.at(i)->Mchnz.size(); j++)
-			 sum += powf((Gen.at(i)->Mchnz.at(j).TasksTime- XX), 2.0);
+			 sum += powf((Gen.at(i)->Mchnz.at(j)->TasksTime- XX), 2.0);
 		 return 1 - (1.0 / sum);
 	 }
 
@@ -658,16 +658,16 @@ void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
 			 CopyJ.push_back(Node(J.at(j).time, J.at(j).index));
 		 for (int j = 0; j < dist.size(); j++) {
 			 std::vector<Node> temp= ChooseRandomKtasks(dist.at(j));
-			 a->Mchnz.push_back(machin(M.at(j).speed, M.at(j).index));
+			 a->Mchnz.push_back(new machin(M.at(j).speed, M.at(j).index));
 			 for (int k = 0; k < temp.size(); k++) {
-				 a->Mchnz.at(j).Tasks.insert(std::pair<int,Node>(temp.at(k).index,temp.at(k)));
+				 a->Mchnz.at(j)->Tasks.insert(std::pair<int,Node>(temp.at(k).index,temp.at(k)));
 				 a->Tsx.insert(std::pair<int, int>(temp.at(k).index, j));
-				 a->Mchnz.at(j).TasksTime += temp.at(k).time / a->Mchnz.at(j).speed;
+				 a->Mchnz.at(j)->TasksTime += temp.at(k).time / a->Mchnz.at(j)->speed;
 
-				 a->Mchnz.at(j).tasksidx.push_back(temp.at(k).index); 
+				 a->Mchnz.at(j)->tasksidx.push_back(temp.at(k).index); 
 			 }
-			 if (a->Mchnz.at(j).TasksTime > a->SolTime)
-				 a->SolTime = a->Mchnz.at(j).TasksTime;
+			 if (a->Mchnz.at(j)->TasksTime > a->SolTime)
+				 a->SolTime = a->Mchnz.at(j)->TasksTime;
 
  			 temp.clear();
 
@@ -744,12 +744,12 @@ void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
 	 for(int i=0;i< survival->Mchnz.size();i++){
 	 myfile << "______________________________________________________________________________________________________________________\n";
 	 myfile << "##########################\n";
-	 myfile << "machine SPEED : ";  myfile << survival->Mchnz.at(i).speed; myfile << '\n';
-	 myfile << "machine index : "; myfile << survival->Mchnz.at(i).index; myfile << '\n';
-	 myfile << "tasks total time: "; myfile << (float)survival->Mchnz.at(i).TasksTime/4; myfile << '\n';
+	 myfile << "machine SPEED : ";  myfile << survival->Mchnz.at(i)->speed; myfile << '\n';
+	 myfile << "machine index : "; myfile << survival->Mchnz.at(i)->index; myfile << '\n';
+	 myfile << "tasks total time: "; myfile << (float)survival->Mchnz.at(i)->TasksTime/4; myfile << '\n';
 	 myfile << "##########################\n";
 	 std::map<int, Node>::iterator it;
-	 for (it = survival->Mchnz.at(i).Tasks.begin(); it != survival->Mchnz.at(i).Tasks.end(); ++it){
+	 for (it = survival->Mchnz.at(i)->Tasks.begin(); it != survival->Mchnz.at(i)->Tasks.end(); ++it){
 	 //for (int k = 0; k < M.at(i).Tasks.size(); k++) {
 		 if (j == 3) {
 			 myfile << '\n';
