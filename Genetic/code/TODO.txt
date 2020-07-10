@@ -12,3 +12,8 @@ TO:
   max{A,B}<max{X,Y}  or ( max{A,B}=max{X,Y}  and (A+B)<(X+Y))
 
 *where A,B the time of machines Mi,Mj after task swap and X,Y time of machines Mi,Mj Befor task swap
+
+
+
+***
+we should make new gen and dont change on the gen 

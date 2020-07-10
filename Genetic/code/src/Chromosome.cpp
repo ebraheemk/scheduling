@@ -14,9 +14,20 @@ Chromosome::Chromosome(Chromosome& old)
 }
 Chromosome::Chromosome()
 {
+	 
 }
 
 
 Chromosome::~Chromosome()
 {
+	//if(Mchnz!=NULL)
+		//delete[] &Mchnz;
+	
+//	delete &Mchnz;
+	Tsx.clear(
+	Mchnz.clear();
+	Mchnz.shrink_to_fit();
+
+//	for (std::map<int, int>::iterator it = Tsx.begin(); it != Tsx.end(); it++)
+	//	Tsx.erase(it);
 }

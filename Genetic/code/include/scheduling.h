@@ -9,8 +9,11 @@
 #include <string>
 #include <maxheap.h>
 #include <Chromosome.h>
+#define _dontChangeAll
+#define _pairXdifY
 #define population 100 //should be even number
-#define GenNo 100000
+#define mutationNo 2//should be even number
+#define GenNo 10000
 #define maxLevelSearch 2
 int speeds [3] = { 1,2,4 };
 std::vector<Node> J;
@@ -81,3 +84,5 @@ double TargetFunction(int,int);
 int tsum;
 int msum;
 double XX;
+void mutation(Chromosome*);
+int peak_machine(int);

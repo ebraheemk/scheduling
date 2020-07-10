@@ -335,58 +335,118 @@ void init_machines() {
 	 }
 	 return res;
  }
+ int peak_machine(int m) {
+	 int k = m;
+	 while (k == m) {
+		 k = (rand() % (M.size() - 1));
+	 }
+	 return k;
+ }
+ void mutation(Chromosome* c1) {
+	 Chromosome* ccc = new Chromosome(*c1) ;
+	 int k,m;
+	 int m1, m2, tmp;
+	 std::map<int, int>::iterator it1;
+	 k = (rand() % (J.size() )) ;
+ 	 m = (rand() % (J.size() )) ;
+	 if (m < k)
+	 {
+		 tmp = k;
+		 k = m;
+		 m = tmp;
+	 }
+#ifdef _dontChangeAll
+	 if ((m - k) == (J.size() - 1))// we dont want to change all
+	 {
+		 k++;
+		 m--;
+	 }
+#endif
+	 for (int i =k; i <= k; i++) {
+		 it1 = ccc->Tsx.find(i);// M.at(m1).Tasks.find(m1Comp[j]);
 
+		 m1 = it1->second;
+		 m2 = peak_machine(m1);
+		 PassTask(ccc, i, m1, m2);
+ 		 it1->second = m2;
+ 	 }
+	 ccc->SolTime = ccc->Mchnz.at(0).TasksTime;
+ 
+	 //update sol time
+	 for (int i = 1; i < ccc->Mchnz.size(); i++) {
+		 if (ccc->Mchnz.at(i).TasksTime > ccc->SolTime)
+			 ccc->SolTime = ccc->Mchnz.at(i).TasksTime;
+	 }
+
+	 //update survival ,lower/upper bound
+
+	 if ((ccc->SolTime < bestSol)) {
+		 bestSol = ccc->SolTime;
+		 delete survival;
+		 survival = new Chromosome(*ccc);
+	 }
+	 if (ccc->SolTime > newworsSol)
+		 newworsSol = ccc->SolTime;
+	 NextGen.push_back(ccc);
+	 
+
+ }
 
 void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
 	//Chromosome* c1 = new Chromosome(*ck1);
+	Chromosome* ccc1 = new Chromosome(*c1);
+
+	Chromosome* ccc2 = new Chromosome(*c2);
+
 	 std::map<int, int>::iterator it1, it2;
 	 int m1, m2;
 	 for (int i = k; i <= m; i++) {
-		 it1 = c1->Tsx.find(i);// M.at(m1).Tasks.find(m1Comp[j]);
-		 it2 = c2->Tsx.find(i);
+		 it1 = ccc1->Tsx.find(i);// M.at(m1).Tasks.find(m1Comp[j]);
+		 it2 = ccc2->Tsx.find(i);
 		 m1 = it1->second;
 		 m2 = it2->second;
 
-		 PassTask(c1, i, m1, m2);
-		 PassTask(c2, i, m2, m1);
+		 PassTask(ccc1, i, m1, m2);
+		 PassTask(ccc2, i, m2, m1);
 		 it1->second = m2;
 		 it2->second = m1;
 	 }
-	 c1->SolTime = c1->Mchnz.at(0).TasksTime;
-	 c2->SolTime = c2->Mchnz.at(0).TasksTime;
+	 ccc1->SolTime = ccc1->Mchnz.at(0).TasksTime;
+	 ccc2->SolTime = ccc2->Mchnz.at(0).TasksTime;
 
 	 //update sol time
-	 for (int i = 1; i < c1->Mchnz.size();i++) {
-		 if (c1->Mchnz.at(i).TasksTime > c1->SolTime)
-			 c1->SolTime = c1->Mchnz.at(i).TasksTime;
+	 for (int i = 1; i < ccc1->Mchnz.size();i++) {
+		 if (ccc1->Mchnz.at(i).TasksTime > ccc1->SolTime)
+			 ccc1->SolTime = ccc1->Mchnz.at(i).TasksTime;
 
-		 if (c2->Mchnz.at(i).TasksTime > c2->SolTime)
-			 c2->SolTime = c2->Mchnz.at(i).TasksTime;
+		 if (ccc2->Mchnz.at(i).TasksTime > ccc2->SolTime)
+			 ccc2->SolTime = ccc2->Mchnz.at(i).TasksTime;
 		
 		
 	 }
 
 	 //update survival ,lower/upper bound
 
-	 if (  (c1->SolTime < bestSol)) {
-		 bestSol = c1->SolTime;
+	 if (  (ccc1->SolTime < bestSol)) {
+		 bestSol = ccc1->SolTime;
 		 delete survival;
-		 survival = new Chromosome(*c1);
+		 survival = new Chromosome(*ccc1);
 	 }
-	 if (c1->SolTime > newworsSol)
-		 newworsSol = c1->SolTime;
+	 if (ccc1->SolTime > newworsSol)
+		 newworsSol = ccc1->SolTime;
 
 	  
 
-	 if ((c2->SolTime < bestSol)) {
-		 bestSol = c2->SolTime;
+	 if ((ccc2->SolTime < bestSol)) {
+		 bestSol = ccc2->SolTime;
 		 delete survival;
-		 survival = new Chromosome(*c2);
+		 survival = new Chromosome(*ccc2);
 	 }
-	 if (c2->SolTime > newworsSol)
-		 newworsSol = c2->SolTime;
+	 if (ccc2->SolTime > newworsSol)
+		 newworsSol = ccc2->SolTime;
 
-
+	 NextGen.push_back(ccc1);
+	 NextGen.push_back(ccc2);
 
 
  }
@@ -395,18 +455,24 @@ void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
 	 int m1, m2, tmp;
 	// Chromosome* res1 = new	Chromosome();
 	 //Chromosome* res2 = new	Chromosome();
-	 k = (rand() % (J.size()-2)) + 1;
-	 m = (rand() % (J.size() - 2)) + 1;
+	 k = (rand() % (J.size())) ;
+	 m = (rand() % (J.size() )) ;
 	 if (m < k)
 	 {
 		 tmp = k;
 		 k = m;
 		 m = tmp;
 	 }
- 
+#ifdef _dontChangeAll
+	 if ((m - k) == (J.size() - 1))// we dont want to change all
+	 {
+		 k++;
+		 m--;
+	 }
+#endif
 	 pmx(cm1, cm2, k, m);
 
-
+	  
 
 
  }
@@ -553,43 +619,28 @@ void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
 	 int x, y, tmp;
 	 double max = 1;
 	 double factor;
+	
 	// while (rind.size() > 1) {
-	 for(int i=0;i< (population/2);i++){
+	 for (int i = 0; i < mutationNo; i++) {
 		 x = PeakRandomIndex(rind, max);
-		  
-		 //we want with repeat
-		/* factor = rind.at(x); 
-		 if (x > 0)
-			 factor = factor - rind.at(x - 1);
-
-		 rind.erase(rind.begin() + x);
-		 for (int ri = x; ri < rind.size(); ri++)
-			 rind.at(ri) -= factor;
-		 max = max - factor;*/
-		 // x = tmp;
-
+		 mutation(Gen.at(x));
+	 }
+	 for(int i=0;i< ((population- mutationNo)/2);i++){
+		 x = PeakRandomIndex(rind, max);
 		 y = PeakRandomIndex(rind, max);
-
-		 //we want with repeat
-		 // tmp = rind.at(y);
-		/* factor = rind.at(y);
-		 if (y > 0)
-			 factor = factor - rind.at(y - 1);
-		 rind.erase(rind.begin() + y);
-		 for (int ri = y; ri < rind.size(); ri++)
-			 rind.at(ri) -= factor;
-		 max = max - factor;*/
-		 // y = tmp;
-
-		 /* y = rand() % rind.size();
-		  tmp = rind.at(y);
-		  rind.erase(rind.begin() + y);
-		  y = tmp;*/
-
-
+		 #ifdef _pairXdifY
+		 while(y==x)
+			 y = PeakRandomIndex(rind, max);
+		#endif
 		 Pairing(Gen.at(x), Gen.at(y));
 	 }
 	 worsSol = newworsSol;
+	 for (int i = 0; i < population; i++)
+		 delete Gen.at(i);
+	 Gen.clear();
+	 for (int i = 0; i < population; i++)
+		 Gen.push_back(NextGen.at(i));
+	 NextGen.clear();
 
  }
  void init_first_gen() {

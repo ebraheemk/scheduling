@@ -15,4 +15,7 @@ machin::machin(const machin& old) {
 
 machin::~machin()
 {
+	 
+	Tasks.clear();
+	tasksidx.clear();
 }
