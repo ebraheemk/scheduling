@@ -86,3 +86,4 @@ int msum;
 double XX;
 void mutation(Chromosome*);
 int peak_machine(int);
+std::vector<int> timeTemp;

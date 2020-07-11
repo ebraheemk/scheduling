@@ -595,6 +595,55 @@ void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
 			 sum += powf((Gen.at(i)->Mchnz.at(j)->TasksTime- XX), 2.0);
 		 return 1 - (1.0 / sum);
 	 }
+	 case 15:
+	 {//how many machines far from the best sol in abs (calc the distribution) if they far we give it less greade
+
+		 int sum = 0;
+		 for (int j = 0; j < Gen.at(i)->Mchnz.size(); j++)
+			 sum += powf((Gen.at(i)->Mchnz.at(j)->TasksTime - XX), 2.0);
+		 return  (1.0 / sum);
+	 }
+	
+	 case 16:
+	 {//how many machines far from the best sol in abs (calc the distribution) if they far we give it less greade
+		 double a, b, c,d;
+		 int min, max;
+		 min = Gen.at(i)->Mchnz.at(0)->TasksTime;
+		 max = Gen.at(i)->Mchnz.at(0)->TasksTime;
+		 for (int j = 0; j < Gen.at(i)->Mchnz.size(); j++) {
+			 if (Gen.at(i)->Mchnz.at(j)->TasksTime < min)
+				 min = Gen.at(i)->Mchnz.at(j)->TasksTime;
+			 if (Gen.at(i)->Mchnz.at(j)->TasksTime > max)
+				 max = Gen.at(i)->Mchnz.at(j)->TasksTime;
+		 }
+		 //a hold median
+		 for (int j = 0; j < Gen.at(i)->Mchnz.size(); j++)
+			 timeTemp.push_back(Gen.at(i)->Mchnz.at(j)->TasksTime/max);
+		 a = timeTemp.at((Gen.at(i)->Mchnz.size()) / 2);
+		 b = 0;//b hold normilaizd norm2 dist from median 
+		 for (int j = 0; j < Gen.at(i)->Mchnz.size(); j++)
+			 b += powf((timeTemp.at(j) - a), 2.0);
+		 //C hold how many distance bettwen ratio
+		 c = powf(((max - min) / (worsSol - XX)), 2.0);
+
+		 Y = Gen.at(i)->SolTime;
+		 d= 1 / powf((Y - XX + 1), 2.0);
+		 a = sqrtf(b * c);
+		 a = 0.3*a + 0.7*d;
+		// a=  (1.0 / sum);
+		 timeTemp.clear();
+		 return a;
+	 }
+
+	 case 17:
+	 {
+		 double a, b, c;
+		 int sum = 0;
+		 for (int j = 0; j < Gen.at(i)->Mchnz.size(); j++)
+			 sum += (powf((Gen.at(i)->Mchnz.at(j)->TasksTime), 2.0) - powf(XX, 2.0));
+		 a = (1.0 / sum);
+		 return a;
+	 }
 
 	 }
  }
@@ -646,7 +695,7 @@ void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
  void init_first_gen() {
 	 int rtmp  ;
 	  
-	 for (int j = 1; j <= 14; j++) {
+	 for (int j = 16; j <= 16; j++) {
 		 double total = 0;
 		 Gen.clear();
 	 for (int i = 0; i < population; i++)
