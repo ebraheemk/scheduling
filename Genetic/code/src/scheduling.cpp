@@ -623,22 +623,24 @@ void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
 		 b = 0;//b hold normilaizd norm2 dist from median 
 		 for (int j = 0; j < Gen.at(i)->Mchnz.size(); j++)
 			 b += powf((timeTemp.at(j) - a), 2.0);
+		 b = b / Gen.at(i)->Mchnz.size();
 		 //C hold how many distance bettwen ratio
 		 c = powf(((max - min) / (worsSol - XX)), 2.0);
-
+		 c = 1 - c;
 		 Y = Gen.at(i)->SolTime;
 		 d= 1 / powf((Y - XX + 1), 2.0);
-		 a = sqrtf(b * c);
-		 a = 0.3*a + 0.7*d;
+		 a = 0.2*b + 0.8*c;
+		 a = 0.1*a + 0.9*d;
 		// a=  (1.0 / sum);
 		 timeTemp.clear();
-		 return a;
+		 return pow(2,c);
 	 }
 
 	 case 17:
 	 {
 		 double a, b, c;
 		 int sum = 0;
+
 		 for (int j = 0; j < Gen.at(i)->Mchnz.size(); j++)
 			 sum += (powf((Gen.at(i)->Mchnz.at(j)->TasksTime), 2.0) - powf(XX, 2.0));
 		 a = (1.0 / sum);
