@@ -362,7 +362,7 @@ void init_machines() {
 		 m--;
 	 }
 #endif
-	 for (int i =k; i <= k; i++) {
+	 for (int i =k; i <= m; i++) {
 		 it1 = ccc->Tsx.find(i);// M.at(m1).Tasks.find(m1Comp[j]);
 
 		 m1 = it1->second;
@@ -505,9 +505,9 @@ void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
 	 int j;
 	 double Y;
 	 switch (x) {
-	 case 1: 
+	 case 1:
 		 Y = Gen.at(i)->SolTime;
-			 return 1 / Y;
+		 return 1 / Y;
 
 
 		 break;
@@ -525,36 +525,36 @@ void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
 		 break;
 	 case 4:
 		 Y = Gen.at(i)->SolTime;
-		 return 1 / powf(Y,3.0);
+		 return 1 / powf(Y, 3.0);
 		 break;
 	 case 5:
 		 Y = Gen.at(i)->SolTime;
 		 return 1 / (2 * Y - XX);
 		 break;
-		// 6.  f(Y)= 1/(Y-X+1)
+		 // 6.  f(Y)= 1/(Y-X+1)
 	 case 6:
 		 Y = Gen.at(i)->SolTime;
-		 return 1 / (Y - XX+1);
+		 return 1 / (Y - XX + 1);
 		 break;
 
-//7.  f(Y)=1/(3*Y-2*X)
+		 //7.  f(Y)=1/(3*Y-2*X)
 	 case 7:
 		 Y = Gen.at(i)->SolTime;
-		 return 1 / ((3*Y) - (2*XX) );
+		 return 1 / ((3 * Y) - (2 * XX));
 		 break;
 		 //8. f(Y)= 1/(Y-X+1)^2
 
 	 case 8:
 		 Y = Gen.at(i)->SolTime;
-		 return 1 / powf((Y - XX + 1),2.0);
+		 return 1 / powf((Y - XX + 1), 2.0);
 		 break;
 	 case 9:
 		 // 9.  f(Y)=1/(Y-X+1)^3
 		 Y = Gen.at(i)->SolTime;
 		 return 1 / powf((Y - XX + 1), 3.0);
 		 break;
- 
-//10.  f(Y)=1/(Y-X+1)^0.5
+
+		 //10.  f(Y)=1/(Y-X+1)^0.5
 
 	 case 10:
 		 Y = Gen.at(i)->SolTime;
@@ -581,7 +581,7 @@ void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
 	 case 13:
 	 {
 		 Y = Gen.at(i)->SolTime;
-		 double temp =  (1 / (Y - XX));
+		 double temp = (1 / (Y - XX));
 		 return 1 - powf(temp, 12);
 		 break;
 
@@ -589,10 +589,10 @@ void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
 
 	 case 14:
 	 {//how many machines far from the best sol in abs (calc the distribution) if they far we give it good greade
-		 
+
 		 int sum = 0;
 		 for (int j = 0; j < Gen.at(i)->Mchnz.size(); j++)
-			 sum += powf((Gen.at(i)->Mchnz.at(j)->TasksTime- XX), 2.0);
+			 sum += powf((Gen.at(i)->Mchnz.at(j)->TasksTime - XX), 2.0);
 		 return 1 - (1.0 / sum);
 	 }
 	 case 15:
@@ -603,14 +603,17 @@ void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
 			 sum += powf((Gen.at(i)->Mchnz.at(j)->TasksTime - XX), 2.0);
 		 return  (1.0 / sum);
 	 }
-	
+
 	 case 16:
 	 {//how many machines far from the best sol in abs (calc the distribution) if they far we give it less greade
-		 double a, b, c,d;
-		 int min, max;
+		 double a, b, c, d, e, res;
+		 int min, max, minM;
+		 minM = Gen.at(i)->Mchnz.at(0)->speed;
 		 min = Gen.at(i)->Mchnz.at(0)->TasksTime;
 		 max = Gen.at(i)->Mchnz.at(0)->TasksTime;
 		 for (int j = 0; j < Gen.at(i)->Mchnz.size(); j++) {
+			 if (Gen.at(i)->Mchnz.at(j)->speed < minM)
+				 minM = Gen.at(i)->Mchnz.at(j)->speed;
 			 if (Gen.at(i)->Mchnz.at(j)->TasksTime < min)
 				 min = Gen.at(i)->Mchnz.at(j)->TasksTime;
 			 if (Gen.at(i)->Mchnz.at(j)->TasksTime > max)
@@ -618,36 +621,72 @@ void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
 		 }
 		 //a hold median
 		 for (int j = 0; j < Gen.at(i)->Mchnz.size(); j++)
-			 timeTemp.push_back(Gen.at(i)->Mchnz.at(j)->TasksTime/max);
+			 timeTemp.push_back((double)Gen.at(i)->Mchnz.at(j)->TasksTime / max);
+		 std::sort(timeTemp.begin(), timeTemp.end());
 		 a = timeTemp.at((Gen.at(i)->Mchnz.size()) / 2);
 		 b = 0;//b hold normilaizd norm2 dist from median 
 		 for (int j = 0; j < Gen.at(i)->Mchnz.size(); j++)
-			 b += powf((timeTemp.at(j) - a), 2.0);
-		 b = b / Gen.at(i)->Mchnz.size();
+			 b += powf((timeTemp.at(j) - a), 2.0);//0.02 moution
+		 b = Gen.at(i)->Mchnz.size() / b;
 		 //C hold how many distance bettwen ratio
-		 c = powf(((max - min) / (worsSol - XX)), 2.0);
-		 c = 1 - c;
+		// c = powf(((max - min) / ((tsum/minM) - XX)), 2.0);
+		//c = (max - min) / ((tsum / minM) - XX);
+		 c = 1 / powf((((tsum / minM) - XX) - (max - min) + 1), 2.0);
 		 Y = Gen.at(i)->SolTime;
-		 d= 1 / powf((Y - XX + 1), 2.0);
-		 a = 0.2*b + 0.8*c;
-		 a = 0.1*a + 0.9*d;
-		// a=  (1.0 / sum);
+		 d = 1 / powf((Y - XX + 1), 2.0);
+		 e = 1 / powf(((a*max) - XX + 1), 2.0);
+		 res = e * 0.4 + d * 0.3 + c * 0.00 + b * 0.3;
+		 // res = 0.2*b + 0.8*c;
+		 // res = 0.1*a + 0.9*d;
+		 // a=  (1.0 / sum);
 		 timeTemp.clear();
-		 return pow(2,c);
+		 return  res;
 	 }
 
-	 case 17:
-	 {
-		 double a, b, c;
-		 int sum = 0;
+	 case 17: {
+		 Y = Gen.at(i)->SolTime;
+		 return 1 / powf((Y - XX + 1), 2.0);
+		 break;
+	 }
+	 case 18: {
 
+		 //how many machines far from the best sol in abs (calc the distribution) if they far we give it less greade
+		 double b, a;
+		 int max = Gen.at(i)->Mchnz.at(0)->TasksTime;
+		 for (int j = 0; j < Gen.at(i)->Mchnz.size(); j++) {
+			  
+			 if (Gen.at(i)->Mchnz.at(j)->TasksTime > max)
+				 max = Gen.at(i)->Mchnz.at(j)->TasksTime;
+		 }
+		 //a hold median
 		 for (int j = 0; j < Gen.at(i)->Mchnz.size(); j++)
-			 sum += (powf((Gen.at(i)->Mchnz.at(j)->TasksTime), 2.0) - powf(XX, 2.0));
-		 a = (1.0 / sum);
-		 return a;
-	 }
+			 timeTemp.push_back((double)Gen.at(i)->Mchnz.at(j)->TasksTime / max);
+		 std::sort(timeTemp.begin(), timeTemp.end());
+		 a = timeTemp.at((Gen.at(i)->Mchnz.size()) / 2);
+		 b = 0;//b hold normilaizd norm2 dist from median 
+		 for (int j = 0; j < Gen.at(i)->Mchnz.size(); j++)
+			 b += powf((timeTemp.at(j) - a), 2.0);//0.02 moution
+		 b = Gen.at(i)->Mchnz.size() / b;
+		 return b;
 
 	 }
+	 case 19: {
+
+		 //how many machines far from the best sol in abs (calc the distribution) if they far we give it less greade
+		 double b, a;
+
+		 //a hold median
+		 for (int j = 0; j < Gen.at(i)->Mchnz.size(); j++)
+			 timeTemp.push_back((double)Gen.at(i)->Mchnz.at(j)->TasksTime);
+		 std::sort(timeTemp.begin(), timeTemp.end());
+		 a = timeTemp.at((Gen.at(i)->Mchnz.size()) / 2);
+		 b = 1 / powf((a - XX + 1), 2.0);
+
+		 return b;
+
+	 }
+	 }
+
  }
  void BuildNewGen(int xo) { 
 	 //build PROBABILITY Table
@@ -697,7 +736,7 @@ void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
  void init_first_gen() {
 	 int rtmp  ;
 	  
-	 for (int j = 16; j <= 16; j++) {
+	 for (int j = Bf; j <= Ef; j++) {
 		 double total = 0;
 		 Gen.clear();
 	 for (int i = 0; i < population; i++)

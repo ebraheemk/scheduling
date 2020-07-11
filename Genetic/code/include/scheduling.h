@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <algorithm>    // std::sort
 #include "Node.h"
 #include "machin.h"
 #include "minheap.h"
@@ -12,8 +13,10 @@
 #define _dontChangeAll
 #define _pairXdifY
 #define population 100 //should be even number
-#define mutationNo 2//should be even number
-#define GenNo 10000
+#define mutationNo 4//should be even number
+#define GenNo 20000
+#define Bf 16
+#define Ef 19
 #define maxLevelSearch 2
 int speeds [3] = { 1,2,4 };
 std::vector<Node> J;
@@ -86,4 +89,4 @@ int msum;
 double XX;
 void mutation(Chromosome*);
 int peak_machine(int);
-std::vector<int> timeTemp;
+std::vector<double> timeTemp;
