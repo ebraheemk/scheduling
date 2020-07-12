@@ -12,11 +12,12 @@
 #include <Chromosome.h>
 #define _dontChangeAll
 #define _pairXdifY
+#define print_first 40
 #define population 100 //should be even number
 #define mutationNo 4//should be even number
-#define GenNo 20000
+#define GenNo 2000
 #define Bf 16
-#define Ef 19
+#define Ef 17
 #define maxLevelSearch 2
 int speeds [3] = { 1,2,4 };
 std::vector<Node> J;
@@ -83,6 +84,8 @@ int ccindex=0;
 void pmx(Chromosome*, Chromosome*, int, int);
 void BuildNewGen( int);
  std::ofstream ff ;
+ std::ofstream allfirst;
+
 double TargetFunction(int,int);
 int tsum;
 int msum;

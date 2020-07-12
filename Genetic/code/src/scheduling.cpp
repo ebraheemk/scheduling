@@ -336,9 +336,18 @@ void init_machines() {
 	 return res;
  }
  int peak_machine(int m) {
-	 int k = m;
-	 while (k == m) {
-		 k = (rand() % (M.size() - 1));
+	 int k   = (rand() % (M.size()));
+	 int j = rand() % 2;
+	 if (j == 0)
+		 j = -1;
+	 if (k == m) {
+		 k = k + j;
+		 if (k == M.size())
+			 k--;
+		 if (k == m)
+			 k--;
+		 if (k < 0)
+			 k++;
 	 }
 	 return k;
  }
@@ -795,6 +804,9 @@ void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
 				 {
 					 ff << "Cromozom "; ff << j; ff << "time : "; ff << Gen.at(j)->SolTime; ff << "\n";
 				 }
+
+			 }
+			 if (i < print_first) {
 
 			 }
 		 }
