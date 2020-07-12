@@ -16,8 +16,8 @@
 #define population 100 //should be even number
 #define mutationNo 4//should be even number
 #define GenNo 2000
-#define Bf 16
-#define Ef 19
+#define Bf 17
+#define Ef 18 
 #define maxLevelSearch 2
 int speeds [3] = { 1,2,4 };
 std::vector<Node> J;
@@ -87,6 +87,8 @@ void pmx(Chromosome*, Chromosome*, int, int);
 void BuildNewGen( int);
  std::ofstream ff ;
  std::ofstream allfirst;
+ std::ofstream Pair("../output/Pairing_mutation_report.txt");
+
 
 double TargetFunction(int,int);
 int tsum;
@@ -96,3 +98,4 @@ void mutation(Chromosome*);
 void print_Gen(int,int);
 int peak_machine(int);
 std::vector<double> timeTemp;
+bool printc;

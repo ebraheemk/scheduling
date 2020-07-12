@@ -728,6 +728,9 @@ void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
 	// while (rind.size() > 1) {
 	 for (int i = 0; i < mutationNo; i++) {
 		 x = PeakRandomIndex(rind, max);
+		 if (printc) {
+			 Pair << "mutation <-- ";	Pair << x;	 Pair << "\n";
+		 }
 		 mutation(Gen.at(x));
 	 }
 	 for(int i=0;i< ((population- mutationNo)/2);i++){
@@ -753,6 +756,9 @@ void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
 			 }
 		 
 		#endif
+		 if (printc) {
+			 Pair << "Pairing"; Pair << x; Pair << " <--> "; Pair << y; Pair << "\n";
+		 }
 		 Pairing(Gen.at(x), Gen.at(y));
 	 }
 	 worsSol = newworsSol;
@@ -811,10 +817,26 @@ void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
 		 std::string s = "../output/gen_func-" + std::to_string(j) + ".txt";
 
 		 std::ofstream ff(s);
+
+		 
+
+
 		 for (int i = 0; i < GenNo; i++) {
 			 if (i < print_first) {
 				 print_Gen(i, j);
+				 Pair << "_-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-_\n";
+				 Pair << "_-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-_\n\n";
+				 Pair << "function : "; Pair << j; Pair << "\n";
+				 Pair << "Gen :"; Pair << i; Pair << "\n";
+				 Pair << "_________________________________________________________________________\n";
+				 Pair << "_________________________________________________________________________\n";
+				 printc = true;
 			 }
+			 else
+				 printc = false;
+
+			 
+
 			 BuildNewGen(j);
 
 			 if ((i % 40) == 0)
@@ -860,8 +882,8 @@ void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
 	 return res;
  }
  void print_Gen(int g,int fun) {
-	 std::string s = "../output/gen_func-" + std::to_string(fun)+"_gen_"+ std::to_string(g) + ".txt";
-
+	 std::string s = "../output/full_func-" + std::to_string(fun)+"_gen_"+ std::to_string(g) + ".txt";
+	 
 	 std::ofstream print_Chromosome(s);
 	 print_Chromosome << "Report\n";
 	 for (int k = 0; k < population; k++)
