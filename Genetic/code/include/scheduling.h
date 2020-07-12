@@ -12,12 +12,12 @@
 #include <Chromosome.h>
 #define _dontChangeAll
 #define _pairXdifY
-#define print_first 40
+#define print_first 5
 #define population 100 //should be even number
 #define mutationNo 4//should be even number
 #define GenNo 2000
 #define Bf 16
-#define Ef 17
+#define Ef 19
 #define maxLevelSearch 2
 int speeds [3] = { 1,2,4 };
 std::vector<Node> J;
@@ -25,6 +25,8 @@ std::vector<machin> M;
 void init_data();
 void init_machines(); 
 void print_report();
+ 
+
 int MinMachineTime, MaxMachineTime;
 void SwapTasks(int task1, int machine1, int task2, int machine2);
 void PassTask(Chromosome*,int task, int machine1, int machine2);
@@ -91,5 +93,6 @@ int tsum;
 int msum;
 double XX;
 void mutation(Chromosome*);
+void print_Gen(int,int);
 int peak_machine(int);
 std::vector<double> timeTemp;

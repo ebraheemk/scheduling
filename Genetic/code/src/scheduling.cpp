@@ -141,16 +141,7 @@ std::pair<int, int> GetBestSolOfTwo(int machine1, int  machine2) {
 	return std::pair<int, int>(t1, t2); 
 }
  
-bool TwoMachineLocalSearch(int machine1, int  machine2) {
-	bool result = true;
-	std::pair<int, int>best = GetBestSolOfTwo(machine1, machine2);
-	while (best.first != -1 && best.second != -1) {
-		result = false;
-		SwapTasks(best.first, machine1, best.second, machine2); 
-		best = GetBestSolOfTwo(machine1, machine2);
-	}
-	return result;
-}
+
 void init_machines() {
 	int i;
 	 
@@ -611,6 +602,8 @@ void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
 		 for (int j = 0; j < Gen.at(i)->Mchnz.size(); j++)
 			 sum += powf((Gen.at(i)->Mchnz.at(j)->TasksTime - XX), 2.0);
 		 return  (1.0 / sum);
+		 break;
+
 	 }
 
 	 case 16:
@@ -636,7 +629,7 @@ void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
 		 b = 0;//b hold normilaizd norm2 dist from median 
 		 for (int j = 0; j < Gen.at(i)->Mchnz.size(); j++)
 			 b += powf((timeTemp.at(j) - a), 2.0);//0.02 moution
-		 b = Gen.at(i)->Mchnz.size() / b;
+		 b = b/Gen.at(i)->Mchnz.size()  ;
 		 //C hold how many distance bettwen ratio
 		// c = powf(((max - min) / ((tsum/minM) - XX)), 2.0);
 		//c = (max - min) / ((tsum / minM) - XX);
@@ -650,6 +643,8 @@ void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
 		 // a=  (1.0 / sum);
 		 timeTemp.clear();
 		 return  res;
+		 break;
+
 	 }
 
 	 case 17: {
@@ -657,13 +652,31 @@ void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
 		 return 1 / powf((Y - XX + 1), 2.0);
 		 break;
 	 }
+ 
 	 case 18: {
+
+		 //how many machines far from the best sol in abs (calc the distribution) if they far we give it less greade
+		 double b, a;
+
+		 //a hold median
+		 for (int j = 0; j < Gen.at(i)->Mchnz.size(); j++)
+			 timeTemp.push_back((double)Gen.at(i)->Mchnz.at(j)->TasksTime);
+		 std::sort(timeTemp.begin(), timeTemp.end());
+		 a = timeTemp.at((Gen.at(i)->Mchnz.size()) / 2);
+		 b = 1 / powf((a - XX + 1), 2.0);
+		 timeTemp.clear();
+
+		 return b;
+		 break;
+
+	 }
+	 case 19: {
 
 		 //how many machines far from the best sol in abs (calc the distribution) if they far we give it less greade
 		 double b, a;
 		 int max = Gen.at(i)->Mchnz.at(0)->TasksTime;
 		 for (int j = 0; j < Gen.at(i)->Mchnz.size(); j++) {
-			  
+
 			 if (Gen.at(i)->Mchnz.at(j)->TasksTime > max)
 				 max = Gen.at(i)->Mchnz.at(j)->TasksTime;
 		 }
@@ -675,23 +688,11 @@ void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
 		 b = 0;//b hold normilaizd norm2 dist from median 
 		 for (int j = 0; j < Gen.at(i)->Mchnz.size(); j++)
 			 b += powf((timeTemp.at(j) - a), 2.0);//0.02 moution
-		 b = Gen.at(i)->Mchnz.size() / b;
-		 return b;
-
-	 }
-	 case 19: {
-
-		 //how many machines far from the best sol in abs (calc the distribution) if they far we give it less greade
-		 double b, a;
-
-		 //a hold median
-		 for (int j = 0; j < Gen.at(i)->Mchnz.size(); j++)
-			 timeTemp.push_back((double)Gen.at(i)->Mchnz.at(j)->TasksTime);
-		 std::sort(timeTemp.begin(), timeTemp.end());
-		 a = timeTemp.at((Gen.at(i)->Mchnz.size()) / 2);
-		 b = 1 / powf((a - XX + 1), 2.0);
+		// b = b/ Gen.at(i)->Mchnz.size()  ;
+		 timeTemp.clear();
 
 		 return b;
+		 break;
 
 	 }
 	 }
@@ -703,11 +704,16 @@ void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
 	 double t, total=0;
 	 for (int i = 0; i < Gen.size(); i++) {
 		 //t = (1 - ((double)Gen.at(i)->SolTime / (double)worsSol));
+		 double d = TargetFunction(xo, i);
+		   d = TargetFunction(xo, i);
+
+
 		 total = total + TargetFunction(xo, i);
 
 	 }
 	 for (int i = 0; i < Gen.size(); i++) {
-		 t = (1 - ((double)Gen.at(i)->SolTime / (double)worsSol));
+		// t = (1 - ((double)Gen.at(i)->SolTime / (double)worsSol));
+		  double d = TargetFunction(xo, i);
 		 rind.push_back(TargetFunction(xo, i) / total);
 	 }
 	 for (int i = 1; i < Gen.size(); i++)
@@ -728,8 +734,24 @@ void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
 		 x = PeakRandomIndex(rind, max);
 		 y = PeakRandomIndex(rind, max);
 		 #ifdef _pairXdifY
-		 while(y==x)
+		 int coco = 0;
+		 while (y == x) {
 			 y = PeakRandomIndex(rind, max);
+			 if (coco >= 4) {
+				 int fj = rand() % 2;
+				 if (fj == 0)
+					 fj = -1;
+				  
+					 y = x + fj;
+					 if (y == rind.size())
+						 y--;
+					 if (y == x)
+						 y--;
+					 if (y < 0)
+						 y++;
+				 }
+			 }
+		 
 		#endif
 		 Pairing(Gen.at(x), Gen.at(y));
 	 }
@@ -790,7 +812,9 @@ void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
 
 		 std::ofstream ff(s);
 		 for (int i = 0; i < GenNo; i++) {
-
+			 if (i < print_first) {
+				 print_Gen(i, j);
+			 }
 			 BuildNewGen(j);
 
 			 if ((i % 40) == 0)
@@ -799,10 +823,10 @@ void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
 				 ff << "#################### GEN "; ff << i; ff << "######################\n";
 				 ff << "-----------------------------------------------------------------\n";
 
-				 ff << "survival time : "; ff << survival->SolTime; ff << "\n";
+				 ff << "survival time : "; ff << survival->SolTime/4; ff << "\n";
 				 for (int j = 0; j < Gen.size(); j++)
 				 {
-					 ff << "Cromozom "; ff << j; ff << "time : "; ff << Gen.at(j)->SolTime; ff << "\n";
+					 ff << "Cromozom "; ff << j; ff << "time : "; ff << Gen.at(j)->SolTime/4; ff << "\n";
 				 }
 
 			 }
@@ -834,6 +858,50 @@ void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
 		 res.push_back(0);
 
 	 return res;
+ }
+ void print_Gen(int g,int fun) {
+	 std::string s = "../output/gen_func-" + std::to_string(fun)+"_gen_"+ std::to_string(g) + ".txt";
+
+	 std::ofstream print_Chromosome(s);
+	 print_Chromosome << "Report\n";
+	 for (int k = 0; k < population; k++)
+	 {
+		 print_Chromosome << "\n";
+		 print_Chromosome << "\n";
+		 print_Chromosome << "______________________________________________________________________________________________________________________\n";
+ 		 print_Chromosome << "______________________________________________________________________________________________________________________\n";
+		 print_Chromosome << "______________________________________________________________________________________________________________________\n";
+		 
+		 print_Chromosome << "################# Chromosome "; print_Chromosome << k; print_Chromosome << "\n";
+		 
+		 print_Chromosome << "______________________________________________________________________________________________________________________\n";
+		 print_Chromosome << "______________________________________________________________________________________________________________________\n";
+		 print_Chromosome << "______________________________________________________________________________________________________________________\n";
+		 print_Chromosome << "\n";
+		 print_Chromosome << "\n";
+		 int j = 0;
+
+		 for (int i = 0; i < Gen.at(k)->Mchnz.size(); i++) {
+			 print_Chromosome << "______________________________________________________________________________________________________________________\n";
+			 print_Chromosome << "##########################\n";
+			 print_Chromosome << "machine SPEED : ";  print_Chromosome << Gen.at(k)->Mchnz.at(i)->speed; print_Chromosome << '\n';
+			 print_Chromosome << "machine index : "; print_Chromosome << Gen.at(k)->Mchnz.at(i)->index; print_Chromosome << '\n';
+			 print_Chromosome << "tasks total time: "; print_Chromosome << (float)Gen.at(k)->Mchnz.at(i)->TasksTime / 4; print_Chromosome << '\n';
+			 print_Chromosome << "##########################\n";
+			 std::map<int, Node>::iterator it;
+			 for (it = Gen.at(k)->Mchnz.at(i)->Tasks.begin(); it != Gen.at(k)->Mchnz.at(i)->Tasks.end(); ++it) {
+				 //for (int k = 0; k < M.at(i).Tasks.size(); k++) {
+				 if (j == 3) {
+					 print_Chromosome << '\n';
+					 j = 0;
+				 }
+				 print_Chromosome << "| task index: "; print_Chromosome << it->second.index; print_Chromosome << " \\ task time: "; print_Chromosome << it->second.time / 4; print_Chromosome << " |";
+				 j++;
+			 }
+			 print_Chromosome << '\n';
+		 }
+	 }
+	 print_Chromosome.close();
  }
  void print_report() {
 	 std::ofstream myfile("../output/report.txt");
