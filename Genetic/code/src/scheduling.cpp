@@ -609,6 +609,7 @@ void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
 	 case 16:
 	 {//how many machines far from the best sol in abs (calc the distribution) if they far we give it less greade
 		 double a, b, c, d, e, res;
+		 std::vector<double> timeTemp;
 		 int min, max, minM;
 		 minM = Gen.at(i)->Mchnz.at(0)->speed;
 		 min = Gen.at(i)->Mchnz.at(0)->TasksTime;
@@ -642,6 +643,8 @@ void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
 		 // res = 0.1*a + 0.9*d;
 		 // a=  (1.0 / sum);
 		 timeTemp.clear();
+		 timeTemp.shrink_to_fit();
+
 		 return  res;
 		 break;
 
@@ -652,12 +655,23 @@ void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
 		 return 1 / powf((Y - XX + 1), 2.0);
 		 break;
 	 }
- 
-	 case 18: {
+	 case 18:
+		 // 9.  f(Y)=1/(Y-X+1)^3
+		 Y = Gen.at(i)->SolTime;
+		 return 1 / powf((Y - XX + 1), 3.0);
+		 break;
+
+		 //10.  f(Y)=1/(Y-X+1)^0.5
+
+	 case 19:
+		 Y = Gen.at(i)->SolTime;
+		 return 1 / sqrtf(Y - XX + 1);
+		 break;
+	 case 20: {
 
 		 //how many machines far from the best sol in abs (calc the distribution) if they far we give it less greade
 		 double b, a;
-
+		 std::vector<double> timeTemp;
 		 //a hold median
 		 for (int j = 0; j < Gen.at(i)->Mchnz.size(); j++)
 			 timeTemp.push_back((double)Gen.at(i)->Mchnz.at(j)->TasksTime);
@@ -665,15 +679,16 @@ void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
 		 a = timeTemp.at((Gen.at(i)->Mchnz.size()) / 2);
 		 b = 1 / powf((a - XX + 1), 2.0);
 		 timeTemp.clear();
-
+		 timeTemp.shrink_to_fit();
 		 return b;
 		 break;
 
 	 }
-	 case 19: {
+	 case 21: {
 
 		 //how many machines far from the best sol in abs (calc the distribution) if they far we give it less greade
 		 double b, a;
+		 std::vector<double> timeTemp;
 		 int max = Gen.at(i)->Mchnz.at(0)->TasksTime;
 		 for (int j = 0; j < Gen.at(i)->Mchnz.size(); j++) {
 
@@ -690,6 +705,7 @@ void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
 			 b += powf((timeTemp.at(j) - a), 2.0);//0.02 moution
 		// b = b/ Gen.at(i)->Mchnz.size()  ;
 		 timeTemp.clear();
+		 timeTemp.shrink_to_fit();
 
 		 return b;
 		 break;
@@ -757,7 +773,7 @@ void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
 		 
 		#endif
 		 if (printc) {
-			 Pair << "Pairing"; Pair << x; Pair << " <--> "; Pair << y; Pair << "\n";
+			 Pair << "Pairing "; Pair << x; Pair << " <--> "; Pair << y; Pair << "\n";
 		 }
 		 Pairing(Gen.at(x), Gen.at(y));
 	 }
@@ -926,7 +942,7 @@ void pmx(Chromosome*c1, Chromosome*c2, int k, int m){
 	 print_Chromosome.close();
  }
  void print_report() {
-	 std::ofstream myfile("../output/report.txt");
+	 std::ofstream myfile("../output/Result.txt");
 	 myfile << "Report\n";
 
 

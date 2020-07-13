@@ -15,9 +15,9 @@
 #define print_first 5
 #define population 100 //should be even number
 #define mutationNo 4//should be even number
-#define GenNo 2000
+#define GenNo 50000
 #define Bf 17
-#define Ef 18 
+#define Ef 19 
 #define maxLevelSearch 2
 int speeds [3] = { 1,2,4 };
 std::vector<Node> J;
@@ -97,5 +97,5 @@ double XX;
 void mutation(Chromosome*);
 void print_Gen(int,int);
 int peak_machine(int);
-std::vector<double> timeTemp;
+//std::vector<double> timeTemp;
 bool printc;
