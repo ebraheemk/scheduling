@@ -123,10 +123,19 @@ where job j has an integer processing time  $P_j > 0$ Machines speeds $s_i \in \
 \section{Local Search}
 The local search algorthim It consists of several steps we will Explain the algorithm step by step
 \subsection{pre preparing(initial solution)}
-to start running the local search algorthim  first we need initial solution. we have as input two file the first file is for tasks where we have on each line  task time (integer value) ,  the second file is for machines where each line contains machine speed    (integer 1,2,4). from the input we build two vectors the first one hold the tasks and the second hold machines . after we have data structure hold the tasks and the machines we should Hand out the tasks into  the machines and make initial soulation
-
-
-
+to start running the local search algorthim  first we need initial solution. we have as input two file the first file is for tasks where we have on each line  task time (integer value) ,  the second file is for machines where each line contains machine speed    (integer 1,2,4). from the input we build two vectors the first one hold the tasks and the second hold the machines . after having data structure hold the tasks and the machines we should Hand out the tasks into  the machines and make initial soulation , so we need  greedy algorithm  its not important how many the greedy algorthim is good. also if we hand out the task randomly at the end we will have the same result ,  so for convenience we insert the numbers to minmum heap  to sort the tasks and then we Turned on the tasks into machines In a fair way (In a circular) and on each time  we give the same amount tasks as the current machine speed value to the machine , for example if we have machine with speed 2 we will give it two task each time ,and if the machine speed 4 we will give it 4 tasks each time . we do that while we still have tasks, and when we hand out all the tasks
+we have an initial solution.
+\subsection{Local Search for two machines}
+on this subsection and on the next subsections we will solve small problems and then we will combine all of them together in the last subsection creating the full problem solution. \newline
+the current problem is given two machines $m_1$  and $m_2$ we want to find the best tasks from $m_1$  and $m_2$   that if we
+swap them bettwen  $m_1$  and $m_2$  we get the best Improvement to achive the Goal . so now we should define what is the goal that we want to achive.\newline
+givin two machines   $m_1$  and $m_2$ where the time of $m_1$ is X and the time of $m_2$ is Y . let assume that we chose $k$ tasks from $m_1$ and $r$ tasks from $m_2$  now we should evaluate the time after swapping the tasks (simulation) between the two machines by passing $k$ tasks from $m_1$ to $m_2$ and removing the $k$ tasks from $m_1$ ,and the same by passing $r$ tasks from $m_2$ to $m_1$ and removing the tasks from $m_2$. lets define the time of $m_1$ after the change is A and the time of $m_2$ after the change (swaping the tasks) is B . the our goal that we want to achive:\newline
+ (max\{A,B\}$<$max\{X,Y\} $ ||$ ( max\{A,B\}=max\{X,Y\}  and (A+B)$<$(X+Y))) \newline
+that measn if we save the best soulation and we find new soultion by swaping $k , r$ tasks bettwen $m_1$ and $m_2$ and that soulation  better than the best soulation for now, we save it as the best soulation and we save $r, k$ tasks and then we check the other $k, r$ compinition with the
+new best solution after we check all possible to choice  $r, k$ we have the best $r,k$ that by swaping them we achive our goal NOTE($k $ and $ r$ is constant).\newline
+the idea of adding ( max\{A,B\}=max\{X,Y\}  and (A+B)$<$(X+Y)) is to give priority to machines with high speed we want to fill machines with high speed also 
+if the final soulation still the same (max\{A,B\}), because that help us to find bigger task to swap in the future.
+\subsection{All posible combination of r,k}
 
 \bibliographystyle{plain}
  
