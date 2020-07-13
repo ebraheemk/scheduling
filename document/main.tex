@@ -1,0 +1,134 @@
+\documentclass[11pt,fullpage]{article}
+\usepackage{graphicx}
+\usepackage{fullpage}
+ 
+\usepackage{amsmath}
+\usepackage{mathtools}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=2pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=1
+}
+\lstset{style=mystyle}
+
+%\usepackage{afterpage}
+%\usepackage{fullpage}
+%
+% \usepackage{fancyhdr}
+% \pagestyle{fancy}
+% \rhead{Y.  Ben Asher  No.1438/17}
+% \lhead{}
+
+
+\begin{document}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \newtheorem{theorem}{Theorem}[section]
+ \newtheorem{corollary}{Corollary}[section]
+ \newtheorem{lemma}{Lemma}[section]
+ \newtheorem{exercise}{Exercise}
+ \newtheorem{claim}{Claim}[section]
+ \newtheorem{definition}{Definition}[section]
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ %\hsize=6in
+ %\vsAXe=9in
+ %indent=.25in
+ %skip=.080in
+ %\baselineskip=.05in
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def \n { \{1..n \} }
+\def\proof{\noindent{\bf Proof:~}}
+\def\Proof{\noindent{\bf Proof:~}}
+\def\blackslug{\hbox{\hskip 1pt \vrule width 4pt height 8pt
+    depth 1.5pt \hskip 1pt}}
+\def\QED{\quad\blackslug\lower 8.5pt\null\par}
+\def\mul {\times}
+\def \lr {\longrightarrow}
+\def \sr {\longrightarrow}
+\def \Lr {\longleftarrow}
+\def \dr {{\downarrow}}
+\def \bs {\backslash }
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand \nxt[1]{
+             \stackrel{#1}{\lr}
+}
+ 
+\newcommand \sss[1]{
+            \begin{array}[t]{l}
+             #1\stackrel{\mbox{\tiny no}}{\lr}\\
+             \dr
+            \end{array}
+}
+\newcommand {\spp}[1] {
+           \begin{picture}(30,30)
+           \put(10,20){\sequence(1,0){20}}
+           \put(10,20){\sequence(0,-1){20}}
+           \put(16,22){n}
+           \put(6,10){y}
+           \put(0,22){#1}
+           \end{picture}
+         }
+ 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\utrans}[3]{
+\begin{center}\tt
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|p{#3 mm}|}
+\hline
+\vspace*{-3ex}~\parbox{0pt}{\begin{tabbing} #1 \end{tabbing}} \\ \hline
+#2 \\
+\hline
+\end{tabular}
+\end{center}
+}
+
+%
+\title{Local Search for scheduling}
+\author{Ebrahim Kashkoush\\
+      }
+
+\date{}
+
+\maketitle
+
+\section{Abstract}
+
+in this project we try to solve scheduling problem using three Heuristics Local search,Branch and bound and genetic heuristic,we write three unattached projects in each one we use one heuristic,we can get better  and faster algorthim by Combine more than one heuristic or by using more complex algorthims like evaluate pairs of chromosomes instead of chromosomes ,and use more complex target function in genitic. but the main idea of the project was to learn the basic concept of the following heuristics.\newline
+
+The problem is Scheduling on restricted uniformly related machines. where the Input is An integer number of machines m $\geq$ 2. A set of n jobs J=\{1,2,...,n\} 
+where job j has an integer processing time  $P_j > 0$ Machines speeds $s_i \in \{1,2,4\}$  for i= 1,2,...,m , we solve the same problem in the three heuristics
+\section{Local Search}
+The local search algorthim It consists of several steps we will Explain the algorithm step by step
+\subsection{pre preparing(initial solution)}
+to start running the local search algorthim  first we need initial solution. we have as input two file the first file is for tasks where we have on each line  task time (integer value) ,  the second file is for machines where each line contains machine speed    (integer 1,2,4). from the input we build two vectors the first one hold the tasks and the second hold machines . after we have data structure hold the tasks and the machines we should Hand out the tasks into  the machines and make initial soulation
+
+
+
+
+\bibliographystyle{plain}
+ 
+\bibliography{pr}
+\end{document}
