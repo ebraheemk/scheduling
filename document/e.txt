@@ -1,6 +1,9 @@
 for (int offset = 1; offset < M.size(); offset++) {
 			 for (int i = 0; i < M.size() / 2; i++) {
-				  
+
+				  // the index of first machine i * 2
+				// the index of second machine (i * 2 + offset) % M.size()
+				//M.size() is number of machines
 				 GetBestOfNxM(i * 2, n, (i * 2 + offset) % M.size(), m, 0, d, 0, true);
 				 if(!GetBestOfNxMbool)
 				 SwapmTasks(NxMcom1Best, i * 2, NxMcom2Best, (i * 2 + offset) % M.size());
@@ -12,7 +15,10 @@ for (int offset = 1; offset < M.size(); offset++) {
 
 		 for (int offset = 0; offset < M.size(); offset++) {
 			 for (int i = 0; i < M.size() ; i++) {
-				
+
+				 // the index of first machine offset
+				// the index of second machine  i
+				//M.size() is number of machines
 				 GetBestOfNxM(offset, n, i, m, 0, d, 0, true);
 				 if (!GetBestOfNxMbool)
 					 SwapmTasks(NxMcom1Best, offset, NxMcom2Best, i );

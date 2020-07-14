@@ -8,3 +8,8 @@ can remove it
 
 0506-2020
 in bfs we have save leafs evrey time and we have many if we go in dfs is best and we only save the best path
+
+12.06
+*IF WE reach the optimal should stop
+
+* if we have two machins with the same taskstime and speed and new task we should call recursive only one of them

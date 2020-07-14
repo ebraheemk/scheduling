@@ -1,9 +1,9 @@
 # CMake generation dependency list for this directory.
-C:/kors/scheduling/CMakeLists.txt
-C:/kors/scheduling/build/CMakeFiles/3.16.0-rc3/CMakeCCompiler.cmake
-C:/kors/scheduling/build/CMakeFiles/3.16.0-rc3/CMakeCXXCompiler.cmake
-C:/kors/scheduling/build/CMakeFiles/3.16.0-rc3/CMakeRCCompiler.cmake
-C:/kors/scheduling/build/CMakeFiles/3.16.0-rc3/CMakeSystem.cmake
+C:/kors/scheduling/LocalSearch/CMakeLists.txt
+C:/kors/scheduling/LocalSearch/build/CMakeFiles/3.16.0-rc3/CMakeCCompiler.cmake
+C:/kors/scheduling/LocalSearch/build/CMakeFiles/3.16.0-rc3/CMakeCXXCompiler.cmake
+C:/kors/scheduling/LocalSearch/build/CMakeFiles/3.16.0-rc3/CMakeRCCompiler.cmake
+C:/kors/scheduling/LocalSearch/build/CMakeFiles/3.16.0-rc3/CMakeSystem.cmake
 D:/prog/cmake/share/cmake-3.16/Modules/CMakeCCompiler.cmake.in
 D:/prog/cmake/share/cmake-3.16/Modules/CMakeCCompilerABI.c
 D:/prog/cmake/share/cmake-3.16/Modules/CMakeCInformation.cmake

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\kors\scheduling\Genetic\build\CMakeFiles\bd6c206137bfe9c324e6b2e5b1d56785\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{917F7271-0389-359C-92EF-DA22D1025603}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
