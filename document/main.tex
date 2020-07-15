@@ -107,7 +107,9 @@
 
 %
 \title{Scheduling on restricted uniformly related machines.}
-\author{Ebrahim Kashkoush\\
+\author{Ebrahim Kashkoush   \\
+course Adviser Prof. leah epstein \\
+ University of Haifa
       }
 
 \date{}
@@ -165,7 +167,27 @@ our defulte Genetic algorithim have on each generation 100 Chromosome ,and we bu
 \subsection{first generation}
 we have function that build vector with size $m$ where $m$ is machines number and the sum of the values on the vector is $n$ where $n$ is the number of tasks, assume the name of the vector is $vec$ we give each $machin_j$ , $vec[j]$ tasks and on this way we have one solution and we build on Chromosome we repeat that 100 times making 100 Chromosomes (each time we build from scratch  $vec$ and handing out the tasks to the machines randomly) we make the survival Chromosome the best chrmosome  time
 \subsection{mutation}
+we peak random numbers $k,m$ where $k,m \leq n$ and $m-k <n$ where $n$ is the tasks number ,and in Chromosome class we have hashmap that have pairs $<$task index, machine index$>$ we use that hash map to change the machine for each $k\leq$ task index $\leq m$ for each task index we peak randomly a machine the defult is that new machine should be different than the old ,but there is an option to enable peak the same machine (it will be like to randomly choose who from this interval we change).\newline
+its ok that we  change   interval of sequence of indexs and we didn't  peak randomly tasks because the tasks it self random and doesn't sorted ,we change the machine index in the hash map and also pass the task from the old machine to the new one the we peak randomly.\newline
+ \subsection{pairing}
+as we saw in mutation we have hash map the same thing we peak randomly $k,m$ but here if we have $j$ where $k<j<m$ and in $Chromosome_1$  $task_j$ in machine $m_A$ and in $Chromosome_2$  $task_j$ in machine $m_C$ we swap bettwen the machines in the two Chromosomes that mean after the change we will find $task_j$ in $Chromosome_1$ at $m_C$ , and $task_j$ in $Chromosome_2$ at $m_A$
+\subsection{Fitness function} 
+for each Chromosome we call the fitness function and build probability vector see 4.5 ,we have 20 Fitness function that they combination of:\newline
+Y: Chromosome time (the time of maximum machine)\newline
+X:Optimal time (the sum of tasks dividing the sum of machines speed)\newline
+a : median time (the machine that have the median time on this Chromosome )
+worsGM : the worst machine in all the Chromosomes\newline
+min : the machin with the smallest time in the current Chromosomes (local)\newline
+max (the same Y) : the machin with the biggest time in the current Chromosomes (local) == Y\newline
 
+\subsection{randomly peaking Chromosome for mutation/pairing  }
+for each Chromosome we call the fitness function and enter the result into vector then we normalize the vector to probability  that the sum of all the cells on the vector is one $\sum\limits_{i=0}^{vector.size} vector.at(i) ==1$ now we have on $vector_i$ the probability of $Chromosome_i$ after that we applay to the vector that code
+\lstinputlisting[language=c]{com-f.c}
+ now we have monotonically increasing  vector bettwen zero to one we peak random number bettwen zero and one and find out where it fall in the vector and return the appropriate Chromosome\newline
+here the defult  repeating random but there is an option to enable non-repeating random
+ 
+  \subsection{ build new generation}
+ 
 \bibliographystyle{plain}
  
 \bibliography{pr}
