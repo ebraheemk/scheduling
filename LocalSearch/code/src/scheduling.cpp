@@ -433,7 +433,7 @@ void init_machines() {
 				 if (j == 1 && i == 1) {
 					 temp = LocalSearchNxM(i, j);
 					 if (temp) {
-						 i = 4; j = 4;
+						 i = maxLevelSearch+2; j = maxLevelSearch+2;
 					 }
 					 flag = flag && temp;
 				 }
@@ -443,7 +443,7 @@ void init_machines() {
 						 if(TasksTable[i-1][maxLevelSearch]>0)
 							 temp = LocalSearchNxM(i, j);
 						 if (temp) {
-							 i = 4; j = 4;
+							 i = maxLevelSearch+2; j = maxLevelSearch+2;
 						 }
 						 flag = flag && temp;
 					 }
@@ -451,7 +451,7 @@ void init_machines() {
 						 if (TasksTable[i][j-1] > 0)
 							 temp = LocalSearchNxM(i, j);
 						 if (temp) {
-							 i = 4; j = 4;
+							 i = maxLevelSearch+2; j = maxLevelSearch+2;
 						 }
 						 flag = flag && temp;
 					 }

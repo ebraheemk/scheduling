@@ -1,7 +1,0 @@
-
-sol task time : 215
-| M = 2 task index= 0|| M = 1 task index= 2|| M = 2 task index= 1|| M = 2 task index= 3|| M = 0 task index= 6|| M = 1 task index= 4|| M = 2 task index= 5|| M = 2 task index= 8|| M = 1 task index= 9|| M = 0 task index= 7|| M = 2 task index= 10|| M = 2 task index= 12|| M = 1 task index= 13|| M = 2 task index= 11|| M = 2 task index= 14|| M = 1 task index= 15|| M = 0 task index= 16|
-sol task time : 212
-| M = 2 task index= 0|| M = 1 task index= 2|| M = 2 task index= 1|| M = 2 task index= 3|| M = 0 task index= 6|| M = 1 task index= 4|| M = 2 task index= 5|| M = 2 task index= 8|| M = 1 task index= 9|| M = 1 task index= 7|| M = 0 task index= 10|| M = 2 task index= 12|| M = 2 task index= 13|| M = 2 task index= 11|| M = 0 task index= 14|| M = 2 task index= 15|| M = 1 task index= 16|
-sol task time : 210
-| M = 2 task index= 0|| M = 1 task index= 2|| M = 2 task index= 1|| M = 2 task index= 3|| M = 0 task index= 6|| M = 1 task index= 4|| M = 2 task index= 5|| M = 2 task index= 8|| M = 2 task index= 9|| M = 2 task index= 7|| M = 0 task index= 10|| M = 1 task index= 12|| M = 1 task index= 13|| M = 2 task index= 11|| M = 0 task index= 14|| M = 1 task index= 15|| M = 2 task index= 16|

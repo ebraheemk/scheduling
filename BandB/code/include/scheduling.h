@@ -49,7 +49,7 @@ int optimalsol;
 //extend to class
 int MinTask;
 int nodescount = 0;
-std::ofstream mm("../output/tport.txt");
+std::ofstream mm("../output/AllSol.txt");
 int MinWorst;
 int mxms;//max machine speed
 int Msum;

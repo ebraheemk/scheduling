@@ -1,0 +1,295 @@
+_-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-_
+_-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-_
+
+function : 17
+Gen :0
+_________________________________________________________________________
+_________________________________________________________________________
+mutation <-- 1
+mutation <-- 70
+mutation <-- 79
+mutation <-- 91
+Pairing 33 <--> 35
+Pairing 65 <--> 26
+Pairing 59 <--> 89
+Pairing 8 <--> 77
+Pairing 21 <--> 19
+Pairing 16 <--> 48
+Pairing 1 <--> 27
+Pairing 71 <--> 35
+Pairing 91 <--> 68
+Pairing 15 <--> 41
+Pairing 93 <--> 12
+Pairing 77 <--> 82
+Pairing 72 <--> 91
+Pairing 4 <--> 70
+Pairing 8 <--> 69
+Pairing 13 <--> 64
+Pairing 1 <--> 56
+Pairing 82 <--> 52
+Pairing 71 <--> 76
+Pairing 70 <--> 30
+Pairing 24 <--> 83
+Pairing 91 <--> 27
+Pairing 61 <--> 29
+Pairing 35 <--> 91
+Pairing 1 <--> 52
+Pairing 65 <--> 35
+Pairing 41 <--> 12
+Pairing 50 <--> 69
+Pairing 15 <--> 46
+Pairing 3 <--> 48
+Pairing 61 <--> 24
+Pairing 71 <--> 53
+Pairing 4 <--> 19
+Pairing 22 <--> 51
+Pairing 64 <--> 91
+Pairing 20 <--> 91
+Pairing 58 <--> 70
+Pairing 31 <--> 7
+Pairing 6 <--> 85
+Pairing 91 <--> 31
+Pairing 21 <--> 70
+Pairing 69 <--> 20
+Pairing 79 <--> 7
+Pairing 35 <--> 92
+Pairing 47 <--> 66
+Pairing 91 <--> 88
+Pairing 92 <--> 62
+Pairing 12 <--> 14
+_-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-_
+_-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-_
+
+function : 17
+Gen :1
+_________________________________________________________________________
+_________________________________________________________________________
+mutation <-- 50
+mutation <-- 71
+mutation <-- 3
+mutation <-- 55
+Pairing 11 <--> 48
+Pairing 56 <--> 11
+Pairing 29 <--> 65
+Pairing 26 <--> 50
+Pairing 8 <--> 69
+Pairing 73 <--> 31
+Pairing 2 <--> 22
+Pairing 48 <--> 1
+Pairing 67 <--> 3
+Pairing 46 <--> 88
+Pairing 2 <--> 12
+Pairing 82 <--> 89
+Pairing 60 <--> 3
+Pairing 80 <--> 45
+Pairing 71 <--> 28
+Pairing 2 <--> 38
+Pairing 66 <--> 73
+Pairing 51 <--> 3
+Pairing 74 <--> 31
+Pairing 26 <--> 51
+Pairing 45 <--> 1
+Pairing 45 <--> 80
+Pairing 56 <--> 35
+Pairing 29 <--> 51
+Pairing 75 <--> 77
+Pairing 57 <--> 32
+Pairing 3 <--> 56
+Pairing 57 <--> 73
+Pairing 55 <--> 15
+Pairing 0 <--> 71
+Pairing 0 <--> 73
+Pairing 26 <--> 90
+Pairing 3 <--> 32
+Pairing 34 <--> 69
+Pairing 2 <--> 97
+Pairing 58 <--> 11
+Pairing 10 <--> 1
+Pairing 68 <--> 72
+Pairing 75 <--> 33
+Pairing 73 <--> 29
+Pairing 2 <--> 22
+Pairing 59 <--> 26
+Pairing 3 <--> 47
+Pairing 3 <--> 73
+Pairing 86 <--> 79
+Pairing 56 <--> 72
+Pairing 99 <--> 3
+Pairing 35 <--> 82
+_-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-_
+_-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-_
+
+function : 17
+Gen :2
+_________________________________________________________________________
+_________________________________________________________________________
+mutation <-- 54
+mutation <-- 91
+mutation <-- 93
+mutation <-- 37
+Pairing 81 <--> 21
+Pairing 45 <--> 10
+Pairing 52 <--> 38
+Pairing 80 <--> 29
+Pairing 84 <--> 86
+Pairing 59 <--> 97
+Pairing 17 <--> 80
+Pairing 68 <--> 55
+Pairing 91 <--> 84
+Pairing 6 <--> 81
+Pairing 69 <--> 77
+Pairing 54 <--> 53
+Pairing 18 <--> 5
+Pairing 91 <--> 43
+Pairing 14 <--> 97
+Pairing 82 <--> 77
+Pairing 97 <--> 3
+Pairing 44 <--> 45
+Pairing 3 <--> 51
+Pairing 38 <--> 15
+Pairing 86 <--> 24
+Pairing 68 <--> 64
+Pairing 15 <--> 24
+Pairing 87 <--> 90
+Pairing 78 <--> 96
+Pairing 31 <--> 77
+Pairing 76 <--> 78
+Pairing 55 <--> 59
+Pairing 29 <--> 83
+Pairing 88 <--> 99
+Pairing 59 <--> 69
+Pairing 69 <--> 54
+Pairing 65 <--> 46
+Pairing 78 <--> 88
+Pairing 39 <--> 58
+Pairing 52 <--> 77
+Pairing 86 <--> 21
+Pairing 56 <--> 45
+Pairing 52 <--> 41
+Pairing 39 <--> 94
+Pairing 77 <--> 59
+Pairing 97 <--> 43
+Pairing 39 <--> 15
+Pairing 91 <--> 0
+Pairing 37 <--> 3
+Pairing 3 <--> 39
+Pairing 56 <--> 59
+Pairing 3 <--> 78
+_-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-_
+_-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-_
+
+function : 17
+Gen :3
+_________________________________________________________________________
+_________________________________________________________________________
+mutation <-- 82
+mutation <-- 11
+mutation <-- 87
+mutation <-- 25
+Pairing 17 <--> 93
+Pairing 17 <--> 70
+Pairing 51 <--> 40
+Pairing 65 <--> 98
+Pairing 5 <--> 85
+Pairing 17 <--> 93
+Pairing 20 <--> 3
+Pairing 96 <--> 57
+Pairing 93 <--> 42
+Pairing 63 <--> 31
+Pairing 58 <--> 69
+Pairing 82 <--> 19
+Pairing 90 <--> 87
+Pairing 24 <--> 96
+Pairing 88 <--> 22
+Pairing 23 <--> 37
+Pairing 93 <--> 42
+Pairing 66 <--> 98
+Pairing 95 <--> 0
+Pairing 65 <--> 64
+Pairing 97 <--> 3
+Pairing 36 <--> 1
+Pairing 19 <--> 51
+Pairing 95 <--> 30
+Pairing 4 <--> 30
+Pairing 93 <--> 12
+Pairing 63 <--> 40
+Pairing 72 <--> 66
+Pairing 37 <--> 12
+Pairing 32 <--> 1
+Pairing 72 <--> 24
+Pairing 31 <--> 77
+Pairing 34 <--> 79
+Pairing 51 <--> 3
+Pairing 3 <--> 96
+Pairing 94 <--> 69
+Pairing 93 <--> 37
+Pairing 66 <--> 77
+Pairing 36 <--> 66
+Pairing 88 <--> 9
+Pairing 77 <--> 63
+Pairing 85 <--> 67
+Pairing 4 <--> 1
+Pairing 84 <--> 79
+Pairing 35 <--> 93
+Pairing 10 <--> 0
+Pairing 93 <--> 75
+Pairing 72 <--> 79
+_-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-_
+_-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-__-_-_-_-_
+
+function : 17
+Gen :4
+_________________________________________________________________________
+_________________________________________________________________________
+mutation <-- 47
+mutation <-- 93
+mutation <-- 49
+mutation <-- 14
+Pairing 87 <--> 74
+Pairing 40 <--> 60
+Pairing 33 <--> 93
+Pairing 40 <--> 96
+Pairing 47 <--> 40
+Pairing 94 <--> 96
+Pairing 88 <--> 4
+Pairing 6 <--> 64
+Pairing 37 <--> 4
+Pairing 40 <--> 50
+Pairing 82 <--> 37
+Pairing 81 <--> 5
+Pairing 17 <--> 26
+Pairing 55 <--> 14
+Pairing 18 <--> 44
+Pairing 18 <--> 61
+Pairing 69 <--> 55
+Pairing 78 <--> 93
+Pairing 76 <--> 60
+Pairing 25 <--> 21
+Pairing 12 <--> 75
+Pairing 74 <--> 4
+Pairing 72 <--> 93
+Pairing 9 <--> 74
+Pairing 3 <--> 94
+Pairing 84 <--> 21
+Pairing 29 <--> 35
+Pairing 57 <--> 88
+Pairing 79 <--> 73
+Pairing 18 <--> 52
+Pairing 39 <--> 84
+Pairing 76 <--> 44
+Pairing 18 <--> 26
+Pairing 89 <--> 74
+Pairing 14 <--> 59
+Pairing 76 <--> 42
+Pairing 14 <--> 47
+Pairing 80 <--> 30
+Pairing 70 <--> 0
+Pairing 14 <--> 7
+Pairing 36 <--> 2
+Pairing 25 <--> 60
+Pairing 60 <--> 89
+Pairing 76 <--> 17
+Pairing 74 <--> 72
+Pairing 46 <--> 0
+Pairing 68 <--> 56
+Pairing 22 <--> 96

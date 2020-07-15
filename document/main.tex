@@ -171,6 +171,7 @@ we peak random numbers $k,m$ where $k,m \leq n$ and $m-k <n$ where $n$ is the ta
 its ok that we  change   interval of sequence of indexs and we didn't  peak randomly tasks because the tasks it self random and doesn't sorted ,we change the machine index in the hash map and also pass the task from the old machine to the new one the we peak randomly.\newline
  \subsection{pairing}
 as we saw in mutation we have hash map the same thing we peak randomly $k,m$ but here if we have $j$ where $k<j<m$ and in $Chromosome_1$  $task_j$ in machine $m_A$ and in $Chromosome_2$  $task_j$ in machine $m_C$ we swap bettwen the machines in the two Chromosomes that mean after the change we will find $task_j$ in $Chromosome_1$ at $m_C$ , and $task_j$ in $Chromosome_2$ at $m_A$
+there is two option of pairing the defult that $Chromosome_1$ $\neq$  $Chromosome_1$ (we can't pair Chromosome with it self) the second option allow that as kind of mutation
 \subsection{Fitness function} 
 for each Chromosome we call the fitness function and build probability vector see 4.5 ,we have 20 Fitness function that they combination of:\newline
 Y: Chromosome time (the time of maximum machine)\newline
@@ -187,7 +188,7 @@ for each Chromosome we call the fitness function and enter the result into vecto
 here the defult  repeating random but there is an option to enable non-repeating random
  
   \subsection{ build new generation}
- 
+ as we said above we build it by 4 mutation and 48 pairing.
 \bibliographystyle{plain}
  
 \bibliography{pr}

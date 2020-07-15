@@ -1,0 +1,37 @@
+Report
+______________________________________________________________________________________________________________________
+______________________________________________________________________________________________________________________
+##########################
+machine SPEED : 1
+machine index : 0
+tasks total time: 300
+##########################
+| task index: 3 \ task time: 60 || task index: 10 \ task time: 37 || task index: 11 \ task time: 29 |
+| task index: 17 \ task time: 75 || task index: 20 \ task time: 99 |
+______________________________________________________________________________________________________________________
+##########################
+machine SPEED : 1
+machine index : 1
+tasks total time: 295
+##########################
+| task index: 4 \ task time: 31 |
+| task index: 5 \ task time: 32 || task index: 7 \ task time: 34 || task index: 9 \ task time: 36 |
+| task index: 13 \ task time: 61 || task index: 18 \ task time: 3 || task index: 19 \ task time: 98 |
+______________________________________________________________________________________________________________________
+##########################
+machine SPEED : 1
+machine index : 2
+tasks total time: 302
+##########################
+
+| task index: 1 \ task time: 58 || task index: 6 \ task time: 33 || task index: 8 \ task time: 35 |
+| task index: 12 \ task time: 30 || task index: 14 \ task time: 72 || task index: 16 \ task time: 74 |
+______________________________________________________________________________________________________________________
+##########################
+machine SPEED : 1
+machine index : 3
+tasks total time: 289
+##########################
+
+| task index: 0 \ task time: 57 || task index: 2 \ task time: 59 || task index: 15 \ task time: 73 |
+| task index: 21 \ task time: 100 |
