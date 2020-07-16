@@ -42,65 +42,7 @@ using namespace std::chrono;
 
 
 }
- void print_summary() {
-	 int sum = 0;
-	 int minTask=J.at(0).time, maxTask= J.at(0).time;
-	 std::ofstream myfile("../output/summary.txt");
-	 myfile << "summary\n";
-	 myfile << "Tasks Count : "; myfile << J.size(); myfile << "\n";
-
-	 for (int i = 0; i < J.size(); i++) {
-		 sum += J.at(i).time;
-		 if (J.at(i).time > maxTask)
-			 maxTask = J.at(i).time;
-		 if (J.at(i).time < minTask)
-			 minTask = J.at(i).time;
-	 }
-	 myfile << "Total tasks time : "; myfile << sum; myfile << "\n";
-	 myfile << "Task time average    : "; myfile << sum / (float)J.size(); myfile << "\n";
-	 myfile << "machines count  :"; myfile << M.size(); myfile << "\n";
-	 float taskssum = sum;
-	 sum = 0;
-	 for (int i = 0; i < M.size(); i++)
-		 sum += M.at(i).speed;
-	 myfile << "machines speed avg "; myfile << sum /(float) M.size(); myfile << '\n';
-
-	 myfile << "max task time : "; myfile << maxTask; myfile << "\n";
-	 myfile << "min task time : "; myfile << minTask; myfile << "\n";
-	 float optimal = taskssum / (float)sum;
-	 myfile << "optimal timing if tasks count > 4xmachine count :  "; myfile << fmax(optimal, minTask); myfile << "\n";
-
-
-	 float worst = (float)M.at(0).TasksTime / 4;
-	 for (int i = 1; i < M.size(); i++)
-	 {
-		 if (((float)M.at(i).TasksTime / 4) > worst)
-			 worst = (float)M.at(i).TasksTime / 4;
-	 }
-	 myfile << "Worst Machine Timing result  :  "; myfile << worst; myfile << '\n';
-	 for (int i = 0; i < (maxLevelSearch + 1); i++) {
-		 for (int j = 0; j < (maxLevelSearch + 1); j++) {
-			 myfile << "swap "; myfile << i; myfile << "->"; myfile << j; myfile << "Count "; myfile << swapCount[i][j]; myfile << '\n';
-
-		 }
-	 }
-	 myfile << "______________________________________________________________________________________________________________________\n";
-	 myfile << "______________________________________________________________________________________________________________________\n";
-	 myfile << "tasks:\n"; 
-	 int k = 0;
-	 for (int i = 0; i < J.size(); i++) {
-		 if (k == 3) {
-			 k = 0;
-			 myfile << "\n";
-
-		 }
-		 myfile << "| task index: "; myfile << J.at(i).index; myfile << " \\ task time: "; myfile << J.at(i).time; myfile << " |";
-		 
-		  
-		 k++;
-	 }
-	 
- }
+  
 
 
 int UpperBound( ) {

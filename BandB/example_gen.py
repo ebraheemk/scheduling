@@ -1,7 +1,7 @@
 import random
 MaxTaskRange =40
 MinTaskRange =11
-TaskNum=30
+TaskNum=15
 speeds=[1,2,4]
 MachineNum=3
 f= open("./build/tasks.txt","w+")

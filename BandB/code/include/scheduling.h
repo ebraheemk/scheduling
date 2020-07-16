@@ -13,8 +13,7 @@
 #define BadFirst
 #define _WithSort
  
-#define maxLevelSearch 2
-int speeds [3] = { 1,2,4 };
+ int speeds [3] = { 1,2,4 };
 std::vector<Node> J;
 std::vector<machin> M;
 void init_data();

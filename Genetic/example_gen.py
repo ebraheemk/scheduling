@@ -1,10 +1,9 @@
 import random
-MaxTaskRange =11
-MinTaskRange =11
-TaskNum=100
-#speeds=[1,2,4]
-speeds=[1,1,1]
-MachineNum=100
+MaxTaskRange =111
+MinTaskRange =0
+TaskNum=15
+speeds=[1,2,4] 
+MachineNum=3
 f= open("./build/tasks.txt","w+")
 for i in range(0,TaskNum):
 	x=random.randint(MinTaskRange, MaxTaskRange);
