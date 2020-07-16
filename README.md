@@ -6,7 +6,7 @@ After that we should build the project on each folder we have another folder wit
 
 For example if we want to build LocalSearch we set the LocalSearch location as source and choose the build folder as the build see the picture:
 
-1. ![](https://drive.google.com/drive/folders/1XCI1l01SgVWmZEcqQ0IipkiaO6A1M3eP)
+1. ![](https://raw.githubusercontent.com/ebraheemk/imges/master/pic1.png)
 2. After that we choose this option (also visual studio 2017) and win32
 3. then We press on configure
 
