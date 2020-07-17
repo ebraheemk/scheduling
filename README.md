@@ -1,6 +1,6 @@
 
 ## Scheduling on restricted uniformly related machines
-1. ![](https://raw.githubusercontent.com/ebraheemk/imges/master/ddd.PNG)
+  ![](https://raw.githubusercontent.com/ebraheemk/imges/master/ddd.PNG)
 
 We have three folders BandB/Genetic/LocalSearch on each folder we have project (we have three different projects) each project we should compile and run separately to compile the project you must download cmake
 
