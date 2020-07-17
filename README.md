@@ -1,3 +1,7 @@
+##Scheduling on restricted uniformly related machines
+The problem is Scheduling on restricted uniformly related machines, where the Input is An integer number of machines m $\geq$ 2. A set of n jobs J=\{1,2,...,n\} 
+where job j has an integer processing time  $P_j > 0$ Machines speeds $s_i \in \{1,2,4\}$  for i= 1,2,...,m , we solve the same problem in the three heuristics
+
 We have three folders BandB/Genetic/LocalSearch on each folder we have project (we have three different projects) each project we should compile and run separately to compile the project you must download cmake
 
 To download and install cmake :[https://cmake.org/download/](https://cmake.org/download/)
