@@ -1,5 +1,5 @@
 
-## Scheduling on restricted uniformly related machines##
+## Scheduling on restricted uniformly related machines
 The problem is Scheduling on restricted uniformly related machines, where the Input is An integer number of machines m $\geq$ 2. A set of n jobs J=\{1,2,...,n\} 
 where job j has an integer processing time  $P_j > 0$ Machines speeds $s_i \in \{1,2,4\}$  for i= 1,2,...,m , we solve the same problem in the three heuristics
 
